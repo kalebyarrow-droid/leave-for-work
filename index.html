@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#15283f">
-<title>Leave for Work</title>
+<title>Leave for Work — v9</title>
 <style>
 :root{color-scheme:light dark;--bg:#f3f6fa;--card:#fff;--ink:#15283f;--muted:#637184;--line:#dce3eb;--accent:#176b87;--soft:#e9f4f7;--danger:#b13e3e}
 @media(prefers-color-scheme:dark){:root{--bg:#101820;--card:#1a2632;--ink:#edf4fb;--muted:#aab8c6;--line:#344454;--accent:#72c7df;--soft:#203a46;--danger:#ff9b9b}}
@@ -81,10 +81,12 @@ header{display:flex;justify-content:space-between;align-items:center;gap:12px;ma
 <div class="field"><label for="homeAddress">Starting address (saved only on this device)</label><input id="homeAddress" type="text" autocomplete="street-address" placeholder="Enter your home address"></div>
 <div class="field" style="margin-top:12px"><label for="destination">Destination</label><input id="destination" type="text" value="Melbourne Airport"></div>
 <div class="fields" style="margin-top:12px">
-<div class="field"><label for="homeTransport">Drive time (minutes) — manual override</label><input id="homeTransport" type="number" min="0" max="600" step="1" value="90" inputmode="numeric"></div>
+<div class="field"><label for="homeTransport">Drive time (minutes) — visible / editable</label><input id="homeTransport" type="number" min="0" max="600" step="1" value="90" inputmode="numeric"></div>
 <div class="field"><label for="airportAllowance">Security and gate allowance (minutes)</label><input id="airportAllowance" type="number" min="0" max="180" step="1" value="25" inputmode="numeric"></div>
 </div>
-<p class="note" id="trafficStatus">Traffic API: not connected yet. Drive time is currently manual; no live or predicted traffic is being retrieved. A protected API connection is needed before automatic estimates can work.</p>
+<div class="row stack-mobile" style="margin-top:12px"><button type="button" class="btn primary" id="getTraffic">Get predicted drive time</button><button type="button" class="btn" id="useManual">Use manual drive time</button></div>
+<p class="note" id="trafficStatus" aria-live="polite">Manual drive time selected. Tap “Get predicted drive time” to request TomTom traffic prediction for arrival 25 minutes before sign-on.</p>
+<p class="note">Initial route uses approximate Crib Point coordinates, <strong>not your exact home address</strong>. Address fields are saved locally but not yet used for routing. Predictions are estimates, not 90th-percentile guarantees.</p>
 <p class="note">Your addresses and settings are saved locally on this device, not published in your GitHub source file.</p>
 </div>
 </section>
@@ -99,12 +101,14 @@ header{display:flex;justify-content:space-between;align-items:center;gap:12px;ma
 <p class="note">The sign on date and time are used exactly as entered, including for future planning. The countdown is relative to the current local time. Times use your device's local time zone.</p>
 <p class="note">Hotel transport times can be saved and updated. This prototype saves them in the browser's local storage; downloaded-file previews may not retain settings. A hosted version can make saving more reliable across sessions and devices.</p>
 </section>
-<footer class="note" style="text-align:center;padding:8px 10px">Version 8 • Home traffic integration pending • No account required</footer>
+<footer class="note" style="text-align:center;padding:8px 10px">Version 9 • TomTom traffic beta • No account required</footer>
 </main>
 <script>
 (() => {
  const $ = id => document.getElementById(id);
  const STORAGE_KEY='leaveForWorkHotelsV3', HOME_KEY='leaveForWorkHomeV8';
+ const WORKER='https://leave-for-work-api.kalebyarrow.workers.dev/';
+ let trafficRequestId=0, trafficMode='manual';
  let mode='hotel', customMode=false;
  const todayISO=()=>{const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`};
  $('workDate').value=todayISO(); $('scriptStatus').textContent='✓ Interactive code running — hotel selection will update transport automatically.'; $('scriptStatus').style.borderColor='#32875b';
@@ -205,6 +209,47 @@ header{display:flex;justify-content:space-between;align-items:center;gap:12px;ma
  });
  ['workDate','departure','transport','checkout','homeTransport','airportAllowance'].forEach(id=>$(id).addEventListener('input',()=>render()));
  try { const settings=JSON.parse(localStorage.getItem(HOME_KEY)||'null'); if(settings){ ['homeAddress','destination','homeTransport','airportAllowance'].forEach(id=>{if(settings[id]!==undefined) $(id).value=settings[id]}); }} catch(e){}
+ function melbourneOffset(date){
+   const parts=new Intl.DateTimeFormat('en-AU',{timeZone:'Australia/Melbourne',timeZoneName:'shortOffset'}).formatToParts(date);
+   let value=(parts.find(x=>x.type==='timeZoneName')?.value||'').replace('GMT','');
+   const match=value.match(/^([+-])(\d{1,2})(?::(\d{2}))?$/);
+   if(!match) throw Error('Unable to determine Melbourne time zone');
+   return match[1]+match[2].padStart(2,'0')+':'+(match[3]||'00');
+ }
+ function targetISO(){
+   // The sign-on date and time are Melbourne-local, regardless of the phone time zone.
+   const [y,m,d]=($('workDate').value||todayISO()).split('-').map(Number);
+   const [h,mi]=($('departure').value||'06:30').split(':').map(Number);
+   const wallUTC=new Date(Date.UTC(y,m-1,d,h,mi-mins('airportAllowance'),0));
+   // Determine DST offset at the requested date (not the current date).
+   let offset=melbourneOffset(wallUTC);
+   const hours=Number(offset.slice(0,3)), minutes=Number(offset.slice(4,6));
+   const instant=new Date(wallUTC.getTime()-(hours*60+Math.sign(hours)*minutes)*60000);
+   offset=melbourneOffset(instant);
+   const hh=Number(offset.slice(0,3)), mm=Number(offset.slice(4,6));
+   const finalInstant=new Date(wallUTC.getTime()-(hh*60+Math.sign(hh)*mm)*60000);
+   const localWall=new Date(finalInstant.getTime()+(hh*60+Math.sign(hh)*mm)*60000);
+   return localWall.toISOString().slice(0,19)+offset;
+ }
+ $('getTraffic').addEventListener('click',async()=>{
+   const id=++trafficRequestId;
+   const btn=$('getTraffic'); btn.disabled=true;
+   $('trafficStatus').textContent='Requesting predicted drive time from TomTom…';
+   try {
+     const arriveAt=targetISO();
+     const response=await fetch(WORKER,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify({origin:[-38.35,145.20],destination:[-37.669,144.842],arriveAt})});
+     const data=await response.json();
+     if(!response.ok||!Number.isFinite(data.driveMinutes))throw Error(data.error||'HTTP '+response.status);
+     if(id!==trafficRequestId)return;
+     $('homeTransport').value=String(data.driveMinutes); trafficMode='tomtom';
+     $('trafficStatus').textContent=`TomTom estimate: ${data.driveMinutes} minutes for arrival ${arriveAt.replace('T',' ').slice(0,16)} (Melbourne time). Editable if needed. Approximate Crib Point start.`;
+     saveHome();render();
+   }catch(err){if(id===trafficRequestId)$('trafficStatus').textContent='Prediction unavailable: '+err.message+'. Manual drive time retained.';}
+   finally{if(id===trafficRequestId)btn.disabled=false;}
+ });
+ $('useManual').addEventListener('click',()=>{++trafficRequestId;$('getTraffic').disabled=false;trafficMode='manual';$('trafficStatus').textContent='Manual drive time selected. You can edit the minutes above.';render()});
+ $('homeTransport').addEventListener('input',()=>{++trafficRequestId;$('getTraffic').disabled=false;trafficMode='manual';$('trafficStatus').textContent='Manual override active. Tap “Get predicted drive time” to refresh TomTom estimate.';});
+ ['workDate','departure','airportAllowance'].forEach(id=>$(id).addEventListener('change',()=>{if(trafficMode==='tomtom'){$('trafficStatus').textContent='Sign-on or allowance changed. Refresh the TomTom estimate for the new arrival time.';trafficMode='manual';}}));
  function saveHome(){try{const data={};['homeAddress','destination','homeTransport','airportAllowance'].forEach(id=>data[id]=$(id).value);localStorage.setItem(HOME_KEY,JSON.stringify(data))}catch(e){}}
  ['homeAddress','destination','homeTransport','airportAllowance'].forEach(id=>$(id).addEventListener('input',saveHome));
  populateHotels();if(hotels[0])$('transport').value=String(hotels[0].minutes);$('transport').readOnly=true;$('customToggle').textContent='Edit transport time';render();setInterval(render,1000);
