@@ -787,7 +787,7 @@ $('dashboardNextDuty').addEventListener('click',()=>{
  if(!next){alert('No later duty in the imported roster.');return;}
  followRoster=false;rosterCursor=duties.findIndex(d=>d.id===next.id);renderRoster();if(!$('dutyReviewDialog').open)$('dutyReviewDialog').showModal();
 });
-$('openDashboardMenu').addEventListener('click',()=>$('dashboardMenuDialog').showModal());
+// Legacy dashboard popup trigger removed: navigation now uses the Dashboard page.
 $('closeDashboardMenu').addEventListener('click',()=>$('dashboardMenuDialog').close());
 $('openRosterImport').addEventListener('click',()=>{if($('dashboardMenuDialog').open)$('dashboardMenuDialog').close();if($('dutyReviewDialog').open)$('dutyReviewDialog').close();$('rosterImportPanel').open=true;$('rosterImportDialog').showModal();});
 $('closeRosterImport').addEventListener('click',()=>$('rosterImportDialog').close());
