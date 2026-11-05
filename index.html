@@ -30,6 +30,7 @@ dialog{width:min(100%,600px);max-width:100vw;max-height:94dvh;border:1px solid v
 .calendar-issue{border:1px solid var(--line);border-radius:12px;padding:10px;margin-bottom:8px}.calendar-issue p{margin:0 0 7px}
 .sector-line.completed-sector{text-decoration-line:line-through;text-decoration-color:#c83232;text-decoration-thickness:1px;text-decoration-skip-ink:none}
 .turnaround-port{background:#ffebae;color:inherit;border-radius:3px;box-shadow:0 0 0 2px #ffebae}
+.focus-checks{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:15px 0 22px}.focus-check{display:flex;align-items:center;gap:8px;font-size:13px!important}.focus-check input{width:18px;height:18px;flex-shrink:0}
 </style>
 <style>
 :root{--bg:#f3f5f7;--card:#fff;--ink:#14283f;--accent:#146e7b;--soft:#e9f4f3;--muted:#657486}
@@ -55,15 +56,15 @@ main{max-width:620px;padding-top:calc(20px + env(safe-area-inset-top))}main>head
 
 
 <header><div><h1>Crew App</h1><p class="sub">Your day, organised.</p></div><span class="pill" id="dayLabel">Local time</span></header>
-<nav class="crew-tabs" aria-label="Main navigation"><button class="crew-tab selected" data-page="home" type="button">⌂ Home</button><button class="crew-tab" data-page="duty" type="button">◷ Duty</button><button class="crew-tab" data-page="tools" type="button">▦ Tools</button><button class="crew-tab" data-page="settings" type="button">⚙ Settings</button></nav>
+<nav class="crew-tabs" aria-label="Main navigation"><button class="crew-tab selected" data-page="home" type="button">Focus</button><button class="crew-tab" data-page="tools" type="button">Dashboard</button></nav>
 <section id="crewHome" class="crew-page">
+<div class="crew-panel"><div class="crew-kicker">CURRENT FOCUS <span id="focusModeBadge" class="crew-status">Automatic</span></div><h2 id="focusName">Departure planning</h2><p class="note" id="focusDesc">Review duty times, route and alarms.</p><div class="crew-home-actions"><button type="button" class="btn primary" id="focusOpen">Open focus</button><button type="button" class="btn" id="homeAllTools">Dashboard</button></div></div>
 <div class="crew-panel"><div class="crew-kicker">CURRENT DUTY <span id="homeAccepted" class="crew-status">Needs review</span></div><h2 id="homeDutyTitle">Ready when you are</h2><p id="homeDutyDate" class="note"></p><p id="homeDutyTime" class="crew-time"></p><div class="crew-home-actions"><button type="button" class="btn primary" id="homeOpenDuty">View duty &amp; departure times</button><button type="button" class="btn" id="homeReview">Review</button></div><hr class="crew-rule"><div class="crew-kicker">NEXT DUTY</div><p id="homeNextDuty" class="crew-next">No upcoming duty loaded</p><button type="button" class="text-button" id="homeViewNext">View next duty →</button></div>
-<div class="crew-panel"><div class="crew-kicker">TODAY'S FOCUS</div><div class="crew-focus-row"><div><strong id="focusName">Departure planning</strong><p class="note" id="focusDesc">Review duty times, route and alarms.</p></div><button type="button" class="btn primary" id="focusOpen">Open</button></div><label class="crew-small-label" for="focusChoice">Change focus</label><select id="focusChoice"><option value="duty">Departure planning</option><option value="flight">Flight preparation</option><option value="commuter">Commuter</option><option value="hotel">Hotel &amp; transport</option><option value="packing">Trip preparation</option></select></div>
-<div class="crew-section-heading">Quick access <button type="button" class="text-button" id="homeAllTools">All tools →</button></div><div class="crew-quick"><button type="button" data-go="duty">◷<span>Duty</span></button><button type="button" data-go="tools">▦<span>Tools</span></button><button type="button" id="homeCalendar">▣<span>Calendar</span></button><button type="button" id="homeImport">⇧<span>Import</span></button></div>
 </section>
-<section id="crewTools" class="crew-page hidden"><h2 class="crew-page-title">Crew tools</h2><p class="note">Available tools open immediately. Planned features will be enabled as we build them.</p><div class="crew-tool-grid">
-<button class="crew-tile" data-tool="duty"><span>▤</span><strong>Roster &amp; Duty</strong><small>Available</small></button><button class="crew-tile" data-tool="drive"><span>🚗</span><strong>Drive Times</strong><small>Available</small></button><button class="crew-tile" data-tool="calendar"><span>▣</span><strong>Export to Calendar</strong><small>Available</small></button><button class="crew-tile" data-tool="import"><span>⇧</span><strong>Import Roster</strong><small>Available</small></button><button class="crew-tile" data-tool="help"><span>◷</span><strong>Alarms &amp; Help</strong><small>Available</small></button><button class="crew-tile" data-tool="flight"><span>✈</span><strong>Flight Planning</strong><small>Planned</small></button><button class="crew-tile" data-tool="commuter"><span>🛫</span><strong>Commuter</strong><small>Planned</small></button><button class="crew-tile" data-tool="hotels"><span>▥</span><strong>Hotels &amp; CATS</strong><small>Planned</small></button><button class="crew-tile" data-tool="eba"><span>⚖</span><strong>EBA &amp; Rest</strong><small>Planned</small></button><button class="crew-tile" data-tool="pay"><span>$</span><strong>Pay Calculator</strong><small>Planned</small></button><button class="crew-tile" data-tool="packing"><span>▣</span><strong>Trip Checklist</strong><small>Planned</small></button><button class="crew-tile" data-tool="aircraft"><span>✈</span><strong>Aircraft Tracking</strong><small>Planned</small></button></div><p class="note" id="toolMessage" role="status"></p></section>
-<section id="crewSettings" class="crew-page hidden"><h2 class="crew-page-title">Preferences</h2><div class="crew-panel"><label for="crewRole">Crew role</label><select id="crewRole"><option value="fc">Flight crew</option><option value="cc">Cabin crew</option></select><p class="note">Future tools will adapt to your crew role.</p><label for="crewAirline">Airline</label><select id="crewAirline"><option value="va">Virgin Australia</option><option value="qf">Qantas (planned)</option><option value="jq">Jetstar (planned)</option></select><p class="note">Only the existing roster and planning functions are supported today.</p><button type="button" class="btn" id="settingsPlan">Edit addresses &amp; transport</button></div></section>
+<section id="crewTools" class="crew-page hidden"><div class="crew-section-heading"><h2 class="crew-page-title">Dashboard</h2><button class="btn small" type="button" id="dashBack">← Focus</button></div><p class="note">Choose a tool or change your current focus.</p><div class="crew-panel"><label for="focusChoice">Current focus</label><select id="focusChoice"><option value="duty">Departure planning</option><option value="flight">Flight preparation</option><option value="commuter">Commuter</option><option value="hotel">Hotel &amp; transport</option><option value="packing">Trip preparation</option><option value="off">Days off</option></select><div class="crew-home-actions"><button type="button" class="btn primary" id="setManualFocus">Set manual focus</button><button type="button" class="btn" id="setAutoFocus">Use automatic</button></div><p class="note" id="focusSettingStatus"></p></div><div class="crew-tool-grid">
+<button class="crew-tile" data-tool="duty"><span>▤</span><strong>Roster &amp; Duty</strong><small>Available</small></button><button class="crew-tile" data-tool="drive"><span>🚗</span><strong>Drive Times</strong><small>Available</small></button><button class="crew-tile" data-tool="calendar"><span>▣</span><strong>Export to Calendar</strong><small>Available</small></button><button class="crew-tile" data-tool="import"><span>⇧</span><strong>Import Roster</strong><small>Available</small></button><button class="crew-tile" data-tool="help"><span>◷</span><strong>Alarms &amp; Help</strong><small>Available</small></button><button class="crew-tile" data-tool="flight"><span>✈</span><strong>Flight Planning</strong><small>Planned</small></button><button class="crew-tile" data-tool="commuter"><span>🛫</span><strong>Commuter</strong><small>Planned</small></button><button class="crew-tile" data-tool="hotels"><span>▥</span><strong>Hotels &amp; CATS</strong><small>Planned</small></button><button class="crew-tile" data-tool="eba"><span>⚖</span><strong>EBA &amp; Rest</strong><small>Planned</small></button><button class="crew-tile" data-tool="pay"><span>$</span><strong>Pay Calculator</strong><small>Planned</small></button><button class="crew-tile" data-tool="packing"><span>▣</span><strong>Trip Checklist</strong><small>Planned</small></button><button class="crew-tile" data-tool="aircraft"><span>✈</span><strong>Aircraft Tracking</strong><small>Planned</small></button></div><div class="crew-home-actions"><button class="btn" type="button" id="dashSettings">⚙ Settings</button></div></section>
+<section id="crewSettings" class="crew-page hidden"><div class="crew-section-heading"><h2 class="crew-page-title">Settings</h2><button class="btn small" type="button" id="settingsBack">← Dashboard</button></div><div class="crew-panel"><label for="crewRole">Crew role</label><select id="crewRole"><option value="fc">Flight crew</option><option value="cc">Cabin crew</option></select><label for="crewAirline">Airline</label><select id="crewAirline"><option value="va">Virgin Australia</option><option value="qf">Qantas (planned)</option><option value="jq">Jetstar (planned)</option></select><p class="note">Enable the pages that automatic Focus may choose. Planned pages show a placeholder until developed.</p><div id="focusEnabledOptions" class="focus-checks"></div><button type="button" class="btn" id="settingsPlan">Edit addresses &amp; transport</button></div></section>
+<section id="crewPlaceholder" class="crew-page hidden"><div class="crew-section-heading"><h2 class="crew-page-title" id="placeholderTitle">Coming soon</h2><button class="btn small" type="button" id="placeholderBack">← Dashboard</button></div><div class="crew-panel"><p class="note" id="placeholderText">This module is planned.</p></div></section>
 <section id="crewDuty" class="crew-page hidden"><div class="crew-section-heading"><h2 class="crew-page-title">Duty &amp; departure</h2><button type="button" class="text-button" id="dutyHome">Home →</button></div><section class="duty-summary"><div class="duty-heading"><p class="eyebrow" id="dashboardBadge">WHAT’S ON TODAY</p><button type="button" class="text-button" id="openPlan">Adjust plan</button></div><h2 id="dashboardTitle">Ready when you are</h2><p id="dashboardDate" class="duty-date"></p><div id="dashboardSignOn" class="sign-on"></div><p id="dashboardLocation" class="duty-location"></p><div class="summary-actions"><button type="button" class="btn primary" id="dashboardReview">Next duty</button><button type="button" class="btn small hidden" id="dashboardComplete">Duty completed</button><button type="button" class="btn small hidden" id="dashboardNextDuty">Next Duty</button></div></section><section id="dashboardIntro" class="empty-day"><p>Review your next duty to see when to leave and set your alarms.</p><button type="button" class="text-button" id="manualPlan">Or enter a plan manually</button></section><section class="card hidden full-duty-card" id="dashboardFullDuty"></section><div id="dashboardTimes" class="hidden"><section class="timehero" aria-live="polite">
 <div class="muted">LOCAL TIME</div><div class="clock" id="clock">--:--:--</div>
 <div class="countdown" id="countdown">Calculating time remaining…</div>
@@ -741,7 +742,7 @@ function rememberAccepted(d=null){
  acceptedPlan=d?{kind:'roster',id:d.id,signature:planSignature(d)}:{kind:'manual'};
  try{localStorage.setItem('leaveForWorkAcceptedV26',JSON.stringify(acceptedPlan));}catch(e){}
 }
-function acceptedRosterDuty(){return acceptedPlan?.kind==='roster'?roster.find(d=>d.id===acceptedPlan.id&&planSignature(d)===acceptedPlan.signature&&d.confirmed&&!dutyIsFinished(d,Date.now())):null;}
+function acceptedRosterDuty(){return acceptedPlan?.kind==='roster'?roster.find(d=>d.id===acceptedPlan.id&&planSignature(d)===acceptedPlan.signature&&d.confirmed&&!d.completedAt):null;}
 function dashboardReady(){return acceptedPlan?.kind==='manual'||!!acceptedRosterDuty();}
 function syncDashboard(){
  const ready=dashboardReady(),d=acceptedRosterDuty(),next=dutyOrder()[nextDutyIndex(dutyOrder(),todayISO())];
@@ -771,9 +772,8 @@ function openDutyReview(preferAccepted=false){
 function showNextDutyPrompt(){
  if(!roster.length||$('dutyReviewDialog').open||$('rosterImportDialog').open||$('planDialog').open||$('alarmHelp').open)return;
  const next=dutyOrder()[nextDutyIndex(dutyOrder(),todayISO())];if(!next)return;
- if(acceptedPlan?.kind==='manual')return;
- if(acceptedPlan?.kind==='roster'&&acceptedPlan.signature===planSignature(next)&&next.confirmed)return;
- acceptedPlan=null;syncDashboard();openDutyReview();
+ if(acceptedPlan?.kind==='manual'||acceptedRosterDuty())return;
+ openDutyReview();
 }
 function acceptLoadedDuty(d){
  rememberAccepted(d);if($('dutyReviewDialog').open)$('dutyReviewDialog').close();if($('rosterImportDialog').open)$('rosterImportDialog').close();syncDashboard();window.scrollTo?.({top:0,behavior:'smooth'});
@@ -900,8 +900,16 @@ $('calendarDownload').addEventListener('click',()=>{const duties=calendarCandida
  selectionsReady=true;syncAddressCards();syncLabels();syncSliders();setMode(mode);setInterval(render,1000);handleAlarmReturn();syncDashboard();handleCalendarReturn();
 })();
 
-// Crew App modular navigation: legacy duty calculations and dialogs are retained.
-const crewPages={home:'crewHome',duty:'crewDuty',tools:'crewTools',settings:'crewSettings'};
+// Dialogs must live outside hidden navigation pages: otherwise Safari cannot show them.
+// Move the existing nodes (not copies) so all original event handlers and saved data survive.
+for(const dialog of document.querySelectorAll('#crewDuty dialog')) document.body.appendChild(dialog);
+// V15 navigation: original roster, calendar, route and alarm logic remains intact.
+const crewPages={home:'crewHome',duty:'crewDuty',tools:'crewTools',settings:'crewSettings',placeholder:'crewPlaceholder'};
+const crewFocusInfo={duty:['Departure planning','Review duty times, route and alarms.'],flight:['Flight preparation','OFP and fuel tools are planned.'],commuter:['Commuter','Live flight search is planned.'],hotel:['Hotel & transport','Review hotel and transport arrangements.'],packing:['Trip preparation','Custom checklists are planned.'],off:['Days off','Your next duty is shown below.']};
+const focusOrder=['duty','flight','commuter','hotel','packing','off'];
+let focusConfig={mode:'auto',manual:'duty',enabled:['duty','flight','commuter','hotel','packing','off']};
+try{const stored=JSON.parse(localStorage.getItem('crewAppFocusV15')||'null');if(stored&&typeof stored==='object'){focusConfig={...focusConfig,...stored};}}catch(e){}
+function saveFocus(){try{localStorage.setItem('crewAppFocusV15',JSON.stringify(focusConfig));}catch(e){}}
 function crewNavigate(page){if(!crewPages[page])return;Object.entries(crewPages).forEach(([key,id])=>$(id).classList.toggle('hidden',key!==page));document.querySelectorAll('.crew-tab').forEach(b=>{const active=b.dataset.page===page;b.classList.toggle('selected',active);b.setAttribute('aria-current',active?'page':'false');});if(page==='home')crewRefreshHome();window.scrollTo(0,0);}
 function crewRefreshHome(){
  const d=acceptedRosterDuty(),ready=dashboardReady(),ordered=dutyOrder(),next=d?ordered.slice(ordered.findIndex(x=>x.id===d.id)+1).find(x=>!x.completedAt):ordered[nextDutyIndex(ordered,todayISO())];
@@ -910,27 +918,51 @@ function crewRefreshHome(){
  $('homeDutyDate').textContent=d?d.date:ready?fmtDate(selectedDateTime()):'Review your roster to load a duty';
  $('homeDutyTime').textContent=ready?'Sign-on '+fmtTime(selectedDateTime()):'';
  $('homeNextDuty').textContent=next?(next.date+' · '+(next.port||'Duty')+' · Sign-on '+(next.time||'to confirm')):'No later duty in your roster';
- $('homeReview').textContent=ready?'Review current duty':'Review next duty';
+ crewRenderFocus();
 }
+function autoFocus(){
+ const enabled=focusConfig.enabled.filter(x=>crewFocusInfo[x]);
+ const choose=(x)=>enabled.includes(x)?x:(enabled.includes('duty')?'duty':enabled[0]||'duty');
+ const d=acceptedRosterDuty(),ordered=dutyOrder(),next=d||ordered[nextDutyIndex(ordered,todayISO())];
+ if(!next)return choose('off');
+ // Conservative rule: pre-duty departure planning, flight preparation near sign-on,
+ // overnight hotel when hotel mode; otherwise departure planning. No auto navigation.
+ const stamp=new Date(next.date+'T'+(next.time||'00:00')+':00');
+ const minutes=(stamp.getTime()-Date.now())/60000;
+ if(!Number.isFinite(minutes))return choose('duty');
+ if(minutes>1440)return choose('off');
+ if(minutes>=-90&&minutes<=120&&enabled.includes('flight'))return 'flight';
+ if(minutes< -120&&mode==='hotel'&&enabled.includes('hotel'))return 'hotel';
+ return choose('duty');
+}
+function activeFocus(){return focusConfig.mode==='manual'?focusConfig.manual:autoFocus();}
+function crewRenderFocus(){const value=activeFocus(),info=crewFocusInfo[value]||crewFocusInfo.duty;$('focusName').textContent=info[0];$('focusDesc').textContent=info[1];$('focusModeBadge').textContent=focusConfig.mode==='manual'?'Manual':'Automatic';$('focusModeBadge').classList.toggle('accepted',focusConfig.mode==='manual');$('focusChoice').value=value;$('focusSettingStatus').textContent=focusConfig.mode==='manual'?'Manual focus stays until you choose automatic.':'Automatic focus follows roster timing and enabled pages; it never interrupts your current screen.';}
 function crewOpenNext(){const duties=dutyOrder(),d=acceptedRosterDuty();const next=d?duties.slice(duties.findIndex(x=>x.id===d.id)+1).find(x=>!x.completedAt):duties[nextDutyIndex(duties,todayISO())];if(!next){alert('No upcoming duty in the imported roster.');return;}followRoster=false;rosterCursor=duties.findIndex(x=>x.id===next.id);renderRoster();$('dutyReviewDialog').showModal();}
-const crewFocusInfo={duty:['Departure planning','Review duty times, route and alarms.'],flight:['Flight preparation','OFP and fuel tools are planned.'],commuter:['Commuter','Live flight search is planned.'],hotel:['Hotel & transport','Review your hotel transport in Duty.'],packing:['Trip preparation','Custom checklists are planned.']};
-function crewSetFocus(value){const info=crewFocusInfo[value]||crewFocusInfo.duty;$('focusName').textContent=info[0];$('focusDesc').textContent=info[1];try{localStorage.setItem('crewAppFocus',value);}catch(e){}}
-function crewTool(tool){$('toolMessage').textContent='';if(tool==='duty'||tool==='drive'){crewNavigate('duty');if(tool==='drive')$('planDialog').showModal();return;}if(tool==='calendar'){$('openCalendar').click();return;}if(tool==='import'){$('openRosterImport').click();return;}if(tool==='help'){$('openAlarmHelp').click();return;}$('toolMessage').textContent=tool.charAt(0).toUpperCase()+tool.slice(1)+' is planned — not available yet.';}
+function crewTool(tool){
+ if(tool==='duty'||tool==='drive'||tool==='hotel'){crewNavigate('duty');if(tool==='drive')$('planDialog').showModal();return;}
+ if(tool==='calendar'){$('openCalendar').click();return;}
+ if(tool==='import'){$('openRosterImport').click();return;}
+ if(tool==='help'){$('openAlarmHelp').click();return;}
+ const info=crewFocusInfo[tool]||[tool.charAt(0).toUpperCase()+tool.slice(1),'This feature is planned.'];
+ $('placeholderTitle').textContent=info[0];$('placeholderText').textContent=info[1]+' Existing roster and departure functions remain available through Dashboard.';crewNavigate('placeholder');
+}
 document.querySelectorAll('.crew-tab').forEach(b=>b.addEventListener('click',()=>crewNavigate(b.dataset.page)));
-document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>crewNavigate(b.dataset.go)));
 document.querySelectorAll('[data-tool]').forEach(b=>b.addEventListener('click',()=>crewTool(b.dataset.tool)));
 $('homeOpenDuty').addEventListener('click',()=>crewNavigate('duty'));
 $('homeReview').addEventListener('click',()=>openDutyReview(true));
 $('homeViewNext').addEventListener('click',crewOpenNext);
 $('homeAllTools').addEventListener('click',()=>crewNavigate('tools'));
-$('homeCalendar').addEventListener('click',()=>crewTool('calendar'));
-$('homeImport').addEventListener('click',()=>crewTool('import'));
-$('dutyHome').addEventListener('click',()=>crewNavigate('home'));
-$('focusChoice').addEventListener('change',e=>{crewSetFocus(e.target.value);});
-$('focusOpen').addEventListener('click',()=>{const f=$('focusChoice').value;if(f==='duty'||f==='hotel')crewNavigate('duty');else{crewNavigate('tools');crewTool(f==='flight'?'flight':f==='packing'?'packing':'commuter');}});
-$('settingsPlan').addEventListener('click',()=>{$('planDialog').showModal();});
+$('dashBack').addEventListener('click',()=>crewNavigate('home'));
+$('dashSettings').addEventListener('click',()=>crewNavigate('settings'));
+$('settingsBack').addEventListener('click',()=>crewNavigate('tools'));
+$('placeholderBack').addEventListener('click',()=>crewNavigate('tools'));
+$('dutyHome').textContent='← Dashboard';$('dutyHome').addEventListener('click',()=>crewNavigate('tools'));
+$('focusOpen').addEventListener('click',()=>{const f=activeFocus();if(f==='duty'||f==='hotel')crewNavigate('duty');else crewTool(f);});
+$('setManualFocus').addEventListener('click',()=>{focusConfig.mode='manual';focusConfig.manual=$('focusChoice').value;saveFocus();crewRenderFocus();crewNavigate('home');});
+$('setAutoFocus').addEventListener('click',()=>{focusConfig.mode='auto';saveFocus();crewRenderFocus();crewNavigate('home');});
+$('settingsPlan').addEventListener('click',()=>$('planDialog').showModal());
 for(const key of ['crewRole','crewAirline']){try{$(key).value=localStorage.getItem('crewApp_'+key)||$(key).value;}catch(e){}$(key).addEventListener('change',e=>{try{localStorage.setItem('crewApp_'+key,e.target.value);}catch(e){}});}
-try{$('focusChoice').value=localStorage.getItem('crewAppFocus')||'duty';}catch(e){}crewSetFocus($('focusChoice').value);
+for(const key of focusOrder){const line=document.createElement('label');line.className='focus-check';const check=document.createElement('input');check.type='checkbox';check.checked=focusConfig.enabled.includes(key);check.addEventListener('change',()=>{const chosen=new Set(focusConfig.enabled);if(check.checked)chosen.add(key);else chosen.delete(key);focusConfig.enabled=focusOrder.filter(x=>chosen.has(x));saveFocus();crewRenderFocus();});line.append(check,document.createTextNode(' '+crewFocusInfo[key][0]));$('focusEnabledOptions').appendChild(line);}
 const oldCrewSyncDashboard=syncDashboard;syncDashboard=function(){oldCrewSyncDashboard();crewRefreshHome();};
 crewNavigate('home');
 </script>
