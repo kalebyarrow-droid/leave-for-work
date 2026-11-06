@@ -406,6 +406,8 @@ function parseRoster(source,year,base){
   const flightLine=lines.find(l=>/^\*?\s*VA\s*\d+\s+\d{4}\s+[A-Z]{3}\s+[A-Z]{3}\s+\d{4}/i.test(l));
   const flight=flightLine?.match(/^(\*?)\s*VA\s*(\d+)\s+(\d{4})\s+([A-Z]{3})\s+([A-Z]{3})\s+(\d{4})/i);
   const layover=lines.map(l=>l.match(/^LO\s+0000\s+([A-Z]{3})\s+\1\s+(\d{4})/i)).find(Boolean);
+  const standbyLine=lines.map(l=>l.trim().match(/^(SBY\S*)\s+(\d{4})\s+([A-Z]{3})\s+\3\s+(\d{4})/i)).find(Boolean);
+  if(standbyLine){const port=standbyLine[3].toUpperCase(),time=hhmm(standbyLine[2]);return [{id:chunk.date+'-'+index,sourceDate:chunk.date,date:chunk.date,time,port,zone:portZones[port]||'',mode:'home',hotel:'',rule:'Standby (no departure planning)',flags:[],raw,standby:true,confirmed:false}];}
   const inactive=lines.every(l=>/^(DDO|BLANK|SICK|LO)\b/i.test(l));
   if(!flight&&inactive&&!layover)return [];
   if(!raw)return [];
@@ -456,7 +458,7 @@ function inferFinish(d){
 }
 function finishInstant(d){try{return d.finish?portInstant(d.finish.date,d.finish.time,d.finish.zone):NaN;}catch{return NaN;}}
 function dutyIsFinished(d,now){const end=finishInstant(d);return !!d.completedAt||(Number.isFinite(end)&&now>=end);}
-roster.forEach(d=>{if(!d.finish)d.finish=inferFinish(d);});
+roster.forEach(d=>{if(!d.finish)d.finish=inferFinish(d);if(/^SBY\S*\s+\d{4}\s+[A-Z]{3}/im.test(d.raw||''))d.standby=true;});
 
 let rosterCursor=null,rosterDay=todayISO(),followRoster=true;
 function dutyOrder(){return [...roster].sort((a,b)=>(a.date+'T'+a.time).localeCompare(b.date+'T'+b.time));}
@@ -501,7 +503,7 @@ function updateSectorCompletion(now=Date.now()){
 function reviewDate(d){return new Date(d.date+'T12:00:00Z').toLocaleDateString('en-AU',{timeZone:'UTC',weekday:'long',day:'numeric',month:'long'});}
 
 function renderRoster(){
- roster.forEach(d=>{if(!d.finish)d.finish=inferFinish(d);});
+ roster.forEach(d=>{if(!d.finish)d.finish=inferFinish(d);if(/^SBY\S*\s+\d{4}\s+[A-Z]{3}/im.test(d.raw||''))d.standby=true;});
  const duties=dutyOrder();if(rosterCursor===null)rosterCursor=nextDutyIndex(duties,todayISO());rosterCursor=Math.max(0,Math.min(rosterCursor,duties.length));
  $('rosterPrev').disabled=!duties.length||rosterCursor===0;
  $('rosterNext').disabled=!duties.length||rosterCursor>=duties.length-1;
@@ -512,7 +514,7 @@ function renderRoster(){
  $('rosterList').replaceChildren();
  duties.slice(rosterCursor,rosterCursor+1).forEach((d,index)=>{
   const card=document.createElement('div');card.className='roster-duty'+(acceptedPlan?.kind==='roster'&&acceptedPlan.id===d.id&&d.confirmed?' accepted-duty':'');
-  card.innerHTML=`${card.classList.contains('accepted-duty')?'<div class="accepted-duty-label">✓ ACCEPTED DUTY</div>':''}<strong>${escapeHTML(reviewDate(d))}</strong><div class="review-signon">Sign-on ${escapeHTML(d.time||'Confirm time')} · ${escapeHTML(d.port||'Confirm port')}</div><div class="review-hotel"><span>${d.mode==='hotel'?'Morning departure hotel':'Depart from'}</span><b>${escapeHTML(d.mode==='hotel'?(d.hotel||'Select hotel'):'Home')}</b></div><details><summary>Review details${d.confirmed?'':' · check before accepting'}</summary>${fullDutyHTML(d)}<div class="fields"><div class="field"><label>Date</label><input type="date" data-key="date" value="${escapeHTML(d.date)}"></div><div class="field"><label>Sign-on (port local)</label><input type="time" data-key="time" value="${escapeHTML(d.time)}"></div></div><label>Departure port</label><input data-key="port" maxlength="3" value="${escapeHTML(d.port)}"><label>Time zone</label><select data-key="zone">${$('scheduleZone').innerHTML}</select><h3>When this duty finishes</h3><p class="note">Used to advance to the next duty. Where no layover start is recorded, the default is final arrival plus 30 minutes; change it for your duty.</p><div class="fields"><div class="field"><label>Finish date</label><input type="date" data-finish="date" value="${escapeHTML(d.finish?.date||'')}"></div><div class="field"><label>Finish time (finish port local)</label><input type="time" data-finish="time" value="${escapeHTML(d.finish?.time||'')}"></div></div><label>Finish time zone</label><select data-finish="zone">${$('scheduleZone').innerHTML}</select><h3>Morning departure</h3><label>Leave from before sign-on</label><select data-key="mode"><option value="home">Home</option><option value="hotel">Hotel</option></select><label>Morning departure hotel</label><select data-key="hotel"><option value="">Select hotel</option>${hotels.map(h=>`<option value="${escapeHTML(h.name)}">${escapeHTML(h.name)}</option>`).join('')}</select><p class="note">For a missing hotel, add it using the calculator's custom hotel controls, then reopen this review. Confirm the roster date, sign-on allowance, time zone and hotel before continuing.</p><button class="btn" type="button" data-confirm>Accept duty</button></details><button class="btn primary" type="button" data-accept style="margin-top:12px;width:100%">Accept duty &amp; view times</button><button class="btn primary" type="button" data-load ${d.confirmed?'':'disabled'} style="margin-top:10px">Load duty</button><button class="btn" type="button" data-complete style="margin-top:10px">${d.completedAt?'Marked completed':'Duty completed — show next'}</button><p class="note" data-error role="status"></p>`;
+  card.innerHTML=`${card.classList.contains('accepted-duty')?'<div class="accepted-duty-label">✓ ACCEPTED DUTY</div>':''}<strong>${escapeHTML(reviewDate(d))}</strong><div class="review-signon">${d.standby?'Standby starts':'Sign-on'} ${escapeHTML(d.time||'Confirm time')} · ${escapeHTML(d.port||'Confirm port')}</div><div class="review-hotel ${d.standby?'hidden':''}"><span>${d.mode==='hotel'?'Morning departure hotel':'Depart from'}</span><b>${escapeHTML(d.mode==='hotel'?(d.hotel||'Select hotel'):'Home')}</b></div><details><summary>Review details${d.confirmed?'':' · check before accepting'}</summary>${fullDutyHTML(d)}<div class="fields"><div class="field"><label>Date</label><input type="date" data-key="date" value="${escapeHTML(d.date)}"></div><div class="field"><label>Sign-on (port local)</label><input type="time" data-key="time" value="${escapeHTML(d.time)}"></div></div><label>Departure port</label><input data-key="port" maxlength="3" value="${escapeHTML(d.port)}"><label>Time zone</label><select data-key="zone">${$('scheduleZone').innerHTML}</select><h3>When this duty finishes</h3><p class="note">Used to advance to the next duty. Where no layover start is recorded, the default is final arrival plus 30 minutes; change it for your duty.</p><div class="fields"><div class="field"><label>Finish date</label><input type="date" data-finish="date" value="${escapeHTML(d.finish?.date||'')}"></div><div class="field"><label>Finish time (finish port local)</label><input type="time" data-finish="time" value="${escapeHTML(d.finish?.time||'')}"></div></div><label>Finish time zone</label><select data-finish="zone">${$('scheduleZone').innerHTML}</select><div class="${d.standby?'hidden':''}"><h3>Morning departure</h3><label>Leave from before sign-on</label><select data-key="mode"><option value="home">Home</option><option value="hotel">Hotel</option></select><label>Morning departure hotel</label><select data-key="hotel"><option value="">Select hotel</option>${hotels.map(h=>`<option value="${escapeHTML(h.name)}">${escapeHTML(h.name)}</option>`).join('')}</select><p class="note">For a missing hotel, add it using the calculator's custom hotel controls, then reopen this review. Confirm the roster date, sign-on allowance, time zone and hotel before continuing.</p></div><button class="btn" type="button" data-confirm>Accept duty</button></details><button class="btn primary" type="button" data-accept style="margin-top:12px;width:100%">${d.standby?'Review & accept standby':'Accept duty & view times'}</button><button class="btn primary" type="button" data-load ${d.confirmed?'':'disabled'} style="margin-top:10px">Load duty</button><button class="btn" type="button" data-complete style="margin-top:10px">${d.completedAt?'Marked completed':'Duty completed — show next'}</button><p class="note" data-error role="status"></p>`;
   ['zone','mode','hotel'].forEach(key=>card.querySelector('[data-key='+key+']').value=d[key]);
   card.querySelector('[data-finish="zone"]').value=d.finish?.zone||d.zone||'';
   card.querySelectorAll('[data-finish]').forEach(el=>el.addEventListener('input',()=>{
@@ -525,14 +527,14 @@ function renderRoster(){
   });
   card.querySelectorAll('[data-key]').forEach(el=>el.addEventListener('input',()=>{d[el.dataset.key]=el.value;d.confirmed=false;saveRoster();card.querySelector('[data-load]').disabled=true;card.querySelector('strong').textContent=d.date+' · '+(d.port||'Unknown port')+' · Needs review';}));
   card.querySelector('[data-accept]').addEventListener('click',()=>{card.querySelector('[data-confirm]').click();if(!d.confirmed)card.querySelector('details').open=true;});
-  if(!d.time||!d.zone||!d.port||(d.mode==='hotel'&&!d.hotel))card.querySelector('details').open=true;
+  if(!d.time||!d.zone||!d.port||(!d.standby&&d.mode==='hotel'&&!d.hotel))card.querySelector('details').open=true;
   card.querySelector('[data-confirm]').addEventListener('click',()=>{
-   if(!/^\d{4}-\d\d-\d\d$/.test(d.date)||!hhmm(d.time)||!d.zone||!d.port|| (d.mode==='hotel'&&!hotels.some(h=>h.name===d.hotel))){card.querySelector('[data-error]').textContent='Complete date, sign-on, port, time zone and hotel (if needed).';return;}
+   if(!/^\d{4}-\d\d-\d\d$/.test(d.date)||!hhmm(d.time)||!d.zone||!d.port|| (!d.standby&&d.mode==='hotel'&&!hotels.some(h=>h.name===d.hotel))){card.querySelector('[data-error]').textContent='Complete date, sign-on, port, time zone and hotel (if needed).';return;}
    if(d.finish&&(!Number.isFinite(finishInstant(d))||finishInstant(d)<=portInstant(d.date,d.time,d.zone))){card.querySelector('[data-error]').textContent='Check the finish date, time and time zone: finish must be after sign-on.';return;}
-   d.confirmed=true;saveRoster();card.querySelector('[data-load]').disabled=false;card.querySelector('[data-load]').click();renderRoster();
+   d.confirmed=true;saveRoster();card.querySelector('[data-load]').disabled=false;if(!d.standby)card.querySelector('[data-load]').click();else {if($('dutyReviewDialog').open)$('dutyReviewDialog').close();crewRefreshHome();}renderRoster();
   });
   card.querySelector('[data-load]').addEventListener('click',()=>{
-   if(!d.confirmed)return;
+   if(!d.confirmed||d.standby)return;
    $('workDate').value=d.date;$('departure').value=d.time;$('scheduleZone').value=d.zone;
    if(d.mode==='hotel'){populateHotels(d.hotel);customMode=false;$('transport').readOnly=true;$('customFields').classList.add('hidden');$('customToggle').textContent='Edit transport time';}
    invalidateRoute();setMode(d.mode);saveSelections();$('rosterStatus').textContent='Loaded '+d.date+' '+d.time+' ('+d.zone+'). '+(d.mode==='home'?'Check Work is the correct airport and refresh drive time.':'Hotel: '+d.hotel+'.');if(d.mode==='home'&&routeAddress('homeAddress')&&routeAddress('destination'))$('getTraffic').click();acceptLoadedDuty(d);
@@ -743,7 +745,7 @@ function rememberAccepted(d=null){
  acceptedPlan=d?{kind:'roster',id:d.id,signature:planSignature(d)}:{kind:'manual'};
  try{localStorage.setItem('leaveForWorkAcceptedV26',JSON.stringify(acceptedPlan));}catch(e){}
 }
-function acceptedRosterDuty(){return acceptedPlan?.kind==='roster'?roster.find(d=>d.id===acceptedPlan.id&&planSignature(d)===acceptedPlan.signature&&d.confirmed&&!d.completedAt):null;}
+function acceptedRosterDuty(){return acceptedPlan?.kind==='roster'?roster.find(d=>!d.standby&&d.id===acceptedPlan.id&&planSignature(d)===acceptedPlan.signature&&d.confirmed&&!d.completedAt):null;}
 function dashboardReady(){return acceptedPlan?.kind==='manual'||!!acceptedRosterDuty();}
 function syncDashboard(){
  const ready=dashboardReady(),d=acceptedRosterDuty(),next=dutyOrder()[nextDutyIndex(dutyOrder(),todayISO())];
@@ -920,17 +922,17 @@ function crewRefreshHome(){
  $('homeNextPanel').classList.toggle('hidden',!next);
  if(current){
   $('homeAccepted').textContent=current.confirmed?'✓ Reviewed':'Needs review';$('homeAccepted').classList.toggle('accepted',!!current.confirmed);
-  $('homeDutyTitle').textContent=current.port||'Current duty';$('homeDutyDate').textContent=reviewDate(current);
+  $('homeDutyTitle').textContent=current.standby?'Standby · '+current.port:(current.port||'Current duty');$('homeDutyDate').textContent=reviewDate(current);
   $('homeDutyTime').textContent='';$('homeDutySectors').innerHTML=fullDutyHTML(current,now);
   $('homeReview').classList.toggle('hidden',!!current.confirmed);
-  $('homeOpenDuty').classList.toggle('hidden',acceptedRosterDuty()?.id!==current.id);
+  $('homeOpenDuty').classList.toggle('hidden',!!current.standby||acceptedRosterDuty()?.id!==current.id);
  }else if(manual){
   $('homeAccepted').textContent='✓ Plan accepted';$('homeAccepted').classList.add('accepted');
   $('homeDutyTitle').textContent='Departure plan';$('homeDutyDate').textContent=fmtDate(selectedDateTime());
   $('homeDutyTime').textContent='';$('homeDutySectors').innerHTML='';$('homeReview').classList.add('hidden');$('homeOpenDuty').classList.remove('hidden');
  }
  if(next){
-  $('homeNextDate').textContent=reviewDate(next);$('homeNextDuty').textContent=(next.port||'Duty')+' · Sign-on '+(next.time||'to confirm');
+  $('homeNextDate').textContent=reviewDate(next);$('homeNextDuty').textContent=next.standby?('Standby · '+next.port+' · '+(next.time||'Time to confirm')+(next.finish?.time?'–'+next.finish.time:'')):((next.port||'Duty')+' · Sign-on '+(next.time||'to confirm'));
   $('homeNextSectors').innerHTML=fullDutyHTML(next,now);
   $('homeNextStatus').textContent=next.confirmed?'✓ Reviewed':'Not reviewed';$('homeNextStatus').classList.toggle('accepted',!!next.confirmed);
   $('homeViewNext').classList.toggle('hidden',!!next.confirmed);
