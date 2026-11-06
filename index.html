@@ -389,6 +389,27 @@ let roster=[];try{const v=JSON.parse(localStorage.getItem(ROSTER_KEY)||'[]');if(
 function saveRoster(){try{localStorage.setItem(ROSTER_KEY,JSON.stringify(roster));}catch(e){$('rosterStatus').textContent='Roster could not be saved on this browser.';}}
 function hhmm(value){const t=String(value).replace(':','');return /^\d{4}$/.test(t)&&+t.slice(0,2)<24&&+t.slice(2)<60?t.slice(0,2)+':'+t.slice(2):'';}
 function beforeHour(date,time){const d=new Date(date+'T'+time+':00Z');d.setUTCHours(d.getUTCHours()-1);return {date:d.toISOString().slice(0,10),time:d.toISOString().slice(11,16)};}
+function standbyDetails(raw){
+ const lines=String(raw||'').split(/\n/).map(x=>x.trim());
+ for(const line of lines){
+  if(!/^(?:SBY\w*|STBY\w*|STANDBY)\b/i.test(line)&&!/^(?:SBY|STBY)[A-Z0-9]+(?=\s)/i.test(line))continue;
+  const tokens=line.split(/\s+/);const code=tokens.shift();
+  const times=tokens.filter(x=>/^\d{4}$/.test(x)&&hhmm(x));
+  const port=tokens.find(x=>/^[A-Z]{3}$/i.test(x)&&portZones[x.toUpperCase()]);
+  if(times.length>=2)return {code,port:(port||'').toUpperCase(),time:hhmm(times[0]),endTime:hhmm(times[times.length-1])};
+  if(times.length===1)return {code,port:(port||'').toUpperCase(),time:hhmm(times[0]),endTime:''};
+  return {code,port:(port||'').toUpperCase(),time:'',endTime:''};
+ }
+ return null;
+}
+function restoreStandby(d){
+ const sb=standbyDetails(d.raw);if(!sb)return;
+ d.standby=true;d.rule='Standby (no departure planning)';d.mode='home';
+ if(sb.port&&!d.port)d.port=sb.port;
+ if(sb.time&&(!d.time||d.rule==='Manual review'))d.time=sb.time;
+ if(d.port&&portZones[d.port]&&!d.zone)d.zone=portZones[d.port];
+ if(!d.finish&&sb.endTime&&d.zone){const date=sb.endTime<sb.time?shiftDay(d.sourceDate||d.date,1):(d.sourceDate||d.date);d.finish={date,time:sb.endTime,zone:d.zone,source:'Recorded standby end'};}
+}
 function parseRoster(source,year,base){
  const text=source.replace(/\r/g,'').replace(/\u00a0/g,' ');const months=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
  const chunks=[];let current;
@@ -406,8 +427,8 @@ function parseRoster(source,year,base){
   const flightLine=lines.find(l=>/^\*?\s*VA\s*\d+\s+\d{4}\s+[A-Z]{3}\s+[A-Z]{3}\s+\d{4}/i.test(l));
   const flight=flightLine?.match(/^(\*?)\s*VA\s*(\d+)\s+(\d{4})\s+([A-Z]{3})\s+([A-Z]{3})\s+(\d{4})/i);
   const layover=lines.map(l=>l.match(/^LO\s+0000\s+([A-Z]{3})\s+\1\s+(\d{4})/i)).find(Boolean);
-  const standbyLine=lines.map(l=>l.trim().match(/^(SBY\S*)\s+(\d{4})\s+([A-Z]{3})\s+\3\s+(\d{4})/i)).find(Boolean);
-  if(standbyLine){const port=standbyLine[3].toUpperCase(),time=hhmm(standbyLine[2]);return [{id:chunk.date+'-'+index,sourceDate:chunk.date,date:chunk.date,time,port,zone:portZones[port]||'',mode:'home',hotel:'',rule:'Standby (no departure planning)',flags:[],raw,standby:true,confirmed:false}];}
+  const standbyLine=standbyDetails(raw);
+  if(standbyLine){const port=standbyLine.port||base,time=standbyLine.time||'';return [{id:chunk.date+'-'+index,sourceDate:chunk.date,date:chunk.date,time,port,zone:portZones[port]||'',mode:'home',hotel:'',rule:'Standby (no departure planning)',flags:time?[]:['Confirm standby start time'],raw,standby:true,confirmed:false}];}
   const inactive=lines.every(l=>/^(DDO|BLANK|SICK|LO)\b/i.test(l));
   if(!flight&&inactive&&!layover)return [];
   if(!raw)return [];
@@ -452,13 +473,13 @@ function inferFinish(d){
   }
   return {...localParts(last+30*60000,endZone),zone:endZone,source:'Estimated: final arrival + 30 min. Edit if needed'};
  }
- const standby=lines.map(l=>l.match(/^SBY\S*\s+(\d{4})\s+([A-Z]{3})\s+\2\s+(\d{4})/i)).find(Boolean);
- if(standby&&hhmm(standby[3])&&portZones[standby[2]])return {date:standby[3]<standby[1]?shiftDay(sourceDate,1):sourceDate,time:hhmm(standby[3]),zone:portZones[standby[2]],source:'Recorded standby end'};
+ const standby=standbyDetails(d.raw);
+ if(standby?.endTime&&portZones[standby.port])return {date:standby.endTime<standby.time?shiftDay(sourceDate,1):sourceDate,time:standby.endTime,zone:portZones[standby.port],source:'Recorded standby end'};
  return null;
 }
 function finishInstant(d){try{return d.finish?portInstant(d.finish.date,d.finish.time,d.finish.zone):NaN;}catch{return NaN;}}
 function dutyIsFinished(d,now){const end=finishInstant(d);return !!d.completedAt||(Number.isFinite(end)&&now>=end);}
-roster.forEach(d=>{if(!d.finish)d.finish=inferFinish(d);if(/^SBY\S*\s+\d{4}\s+[A-Z]{3}/im.test(d.raw||''))d.standby=true;});
+roster.forEach(d=>{restoreStandby(d);if(!d.finish)d.finish=inferFinish(d);});
 
 let rosterCursor=null,rosterDay=todayISO(),followRoster=true;
 function dutyOrder(){return [...roster].sort((a,b)=>(a.date+'T'+a.time).localeCompare(b.date+'T'+b.time));}
@@ -503,7 +524,7 @@ function updateSectorCompletion(now=Date.now()){
 function reviewDate(d){return new Date(d.date+'T12:00:00Z').toLocaleDateString('en-AU',{timeZone:'UTC',weekday:'long',day:'numeric',month:'long'});}
 
 function renderRoster(){
- roster.forEach(d=>{if(!d.finish)d.finish=inferFinish(d);if(/^SBY\S*\s+\d{4}\s+[A-Z]{3}/im.test(d.raw||''))d.standby=true;});
+ roster.forEach(d=>{restoreStandby(d);if(!d.finish)d.finish=inferFinish(d);});
  const duties=dutyOrder();if(rosterCursor===null)rosterCursor=nextDutyIndex(duties,todayISO());rosterCursor=Math.max(0,Math.min(rosterCursor,duties.length));
  $('rosterPrev').disabled=!duties.length||rosterCursor===0;
  $('rosterNext').disabled=!duties.length||rosterCursor>=duties.length-1;
@@ -812,10 +833,8 @@ function calendarEscape(text){return String(text||'').replace(/\\/g,'\\\\').repl
 function calendarUTC(time){return new Date(time).toISOString().replace(/[-:]/g,'').replace(/\.\d{3}Z$/,'Z');}
 function foldCalendarLine(line){let result='',current='',size=0;const enc=new TextEncoder();for(const char of line){const n=enc.encode(char).length;if(size+n>75){result+=current+'\r\n';current=' ';size=1;}current+=char;size+=n;}return result+current;}
 function calendarStandby(d){
- const text=(d.raw||'').trim().replace(/\s+/g,' ');
- const m=text.match(/^SBY\S*\s+(\d{4})\s+([A-Z]{3})\s+\2\s+(\d{4})\s*$/i);
- if(!m||!hhmm(m[1])||!hhmm(m[3])||!portZones[m[2].toUpperCase()])return null;
- return {time:hhmm(m[1]),endTime:hhmm(m[3]),port:m[2].toUpperCase(),zone:portZones[m[2].toUpperCase()]};
+ const sb=standbyDetails(d.raw);if(!sb||!sb.time||!sb.endTime||!portZones[sb.port])return null;
+ return {time:sb.time,endTime:sb.endTime,port:sb.port,zone:portZones[sb.port]};
 }
 function calendarDutyTimes(d){try{
  const standby=calendarStandby(d);
