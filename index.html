@@ -898,7 +898,6 @@ $('calendarResetHistory').addEventListener('click',()=>{if(confirm('Check or rem
 $('calendarDownload').addEventListener('click',()=>{const duties=calendarCandidates();if(!duties.length){updateCalendarPreview();return;}downloadCalendar(new Blob([makeCalendar(duties)],{type:'text/calendar;charset=utf-8'}),'work-roster.ics');$('calendarStatus').textContent='Calendar file downloaded. Open it in a calendar app to import.';});
 
  selectionsReady=true;syncAddressCards();syncLabels();syncSliders();setMode(mode);setInterval(render,1000);handleAlarmReturn();syncDashboard();handleCalendarReturn();
-})();
 
 // Dialogs must live outside hidden navigation pages: otherwise Safari cannot show them.
 // Move the existing nodes (not copies) so all original event handlers and saved data survive.
@@ -965,5 +964,6 @@ for(const key of ['crewRole','crewAirline']){try{$(key).value=localStorage.getIt
 for(const key of focusOrder){const line=document.createElement('label');line.className='focus-check';const check=document.createElement('input');check.type='checkbox';check.checked=focusConfig.enabled.includes(key);check.addEventListener('change',()=>{const chosen=new Set(focusConfig.enabled);if(check.checked)chosen.add(key);else chosen.delete(key);focusConfig.enabled=focusOrder.filter(x=>chosen.has(x));saveFocus();crewRenderFocus();});line.append(check,document.createTextNode(' '+crewFocusInfo[key][0]));$('focusEnabledOptions').appendChild(line);}
 const oldCrewSyncDashboard=syncDashboard;syncDashboard=function(){oldCrewSyncDashboard();crewRefreshHome();};
 crewNavigate('home');
+})();
 </script>
 </body></html>
