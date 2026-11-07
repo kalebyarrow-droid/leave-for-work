@@ -1149,23 +1149,68 @@ let focusConfig={mode:'auto',manual:'duty',enabled:['duty','flight','commuter','
 try{const stored=JSON.parse(localStorage.getItem('crewAppFocusV15')||'null');if(stored&&typeof stored==='object'){focusConfig={...focusConfig,...stored};}}catch(e){}
 function saveFocus(){try{localStorage.setItem('crewAppFocusV15',JSON.stringify(focusConfig));}catch(e){}}
 function crewNavigate(page){if(!crewPages[page])return;Object.entries(crewPages).forEach(([key,id])=>$(id).classList.toggle('hidden',key!==page));document.querySelectorAll('.crew-tab').forEach(b=>{const active=b.dataset.page===page;b.classList.toggle('selected',active);b.setAttribute('aria-current',active?'page':'false');});if(page==='home')crewRefreshHome();window.scrollTo(0,0);}
-// Bidirectional horizontal swipe between Focus and Dashboard, with vertical scrolling preserved.
+// Interactive, finger-tracking iOS-style horizontal navigation between Focus and Dashboard.
 (function enableFocusDashboardSwipe(){
- let start=null;
- document.addEventListener('touchstart',event=>{
-  if(event.touches.length!==1||event.target.closest('input,textarea,select,[contenteditable="true"],dialog,[role="slider"]')){start=null;return;}
-  const page=!document.getElementById('crewHome').classList.contains('hidden')?'home':!document.getElementById('crewTools').classList.contains('hidden')?'tools':null;
-  if(!page){start=null;return;}
-  const t=event.touches[0];start={x:t.clientX,y:t.clientY,page};
+ const home=document.getElementById('crewHome'),dashboard=document.getElementById('crewTools');
+ let gesture=null,animation=false;
+ const interactive='input,textarea,select,button,a,summary,[contenteditable="true"],dialog,[role="slider"]';
+ function cleanup(){
+  for(const el of [home,dashboard]){el.style.removeProperty('transform');el.style.removeProperty('transition');el.style.removeProperty('position');el.style.removeProperty('top');el.style.removeProperty('left');el.style.removeProperty('width');el.style.removeProperty('z-index');el.style.removeProperty('will-change');el.style.removeProperty('pointer-events');}
+  document.body.style.removeProperty('overflow-x');
+  animation=false;gesture=null;
+ }
+ function setup(g){
+  const current=g.page==='home'?home:dashboard,other=g.page==='home'?dashboard:home;
+  g.current=current;g.other=other;g.width=document.documentElement.clientWidth;g.offset=g.page==='home'?g.width:-g.width;
+  g.top=current.getBoundingClientRect().top+window.scrollY;
+  other.classList.remove('hidden');
+  for(const el of [current,other]){el.style.position='relative';el.style.width='100%';el.style.willChange='transform';el.style.transition='none';}
+  // Overlay the incoming page without changing document height.
+  other.style.position='absolute';other.style.top=g.top+'px';other.style.left='0';other.style.width='100%';other.style.zIndex='3';
+  current.style.zIndex='4';
+  other.style.transform='translate3d('+g.offset+'px,0,0)';
+  document.body.style.overflowX='hidden';
+  g.active=true;
+ }
+ document.addEventListener('touchstart',e=>{
+  if(animation||e.touches.length!==1||e.target.closest(interactive)){gesture=null;return;}
+  const page=!home.classList.contains('hidden')?'home':!dashboard.classList.contains('hidden')?'tools':null;
+  if(!page){gesture=null;return;}
+  const t=e.touches[0];gesture={page,x:t.clientX,y:t.clientY,lastX:t.clientX,lastTime:performance.now(),velocity:0,active:false,blocked:false};
  },{passive:true});
- document.addEventListener('touchcancel',()=>{start=null;},{passive:true});
- document.addEventListener('touchend',event=>{
-  if(!start||event.changedTouches.length!==1){start=null;return;}
-  const t=event.changedTouches[0],dx=t.clientX-start.x,dy=t.clientY-start.y,page=start.page;start=null;
-  if(Math.abs(dx)<55||Math.abs(dx)<Math.abs(dy)*1.35)return;
-  if(page==='home'&&dx<0)crewNavigate('tools');
-  if(page==='tools'&&dx>0)crewNavigate('home');
- },{passive:true});
+ document.addEventListener('touchmove',e=>{
+  const g=gesture;if(!g||e.touches.length!==1||g.blocked)return;
+  const t=e.touches[0],dx=t.clientX-g.x,dy=t.clientY-g.y;
+  if(!g.active){
+   if(Math.abs(dx)<9&&Math.abs(dy)<9)return;
+   if(Math.abs(dy)>Math.abs(dx)*1.15){g.blocked=true;return;}
+   if((g.page==='home'&&dx>=0)||(g.page==='tools'&&dx<=0)){g.blocked=true;return;}
+   setup(g);
+  }
+  e.preventDefault();
+  const delta=Math.max(-g.width,Math.min(g.width,dx));
+  g.current.style.transform='translate3d('+delta+'px,0,0)';
+  g.other.style.transform='translate3d('+(g.offset+delta)+'px,0,0)';
+  const now=performance.now(),elapsed=Math.max(1,now-g.lastTime);g.velocity=(t.clientX-g.lastX)/elapsed;g.lastX=t.clientX;g.lastTime=now;
+ },{passive:false});
+ function finish(e,cancelled){
+  const g=gesture;if(!g)return;
+  if(!g.active){gesture=null;return;}
+  const dx=(e?.changedTouches?.[0]?.clientX??g.lastX)-g.x;
+  const completed=!cancelled&&(Math.abs(dx)>g.width*.28||(Math.abs(dx)>35&&Math.abs(g.velocity)>.45));
+  animation=true;
+  const target=completed?(g.page==='home'?-g.width:g.width):0;
+  const duration=Math.max(170,Math.min(330,Math.round(300*(1-Math.min(1,Math.abs(dx)/g.width)*.55))));
+  for(const el of [g.current,g.other])el.style.transition='transform '+duration+'ms cubic-bezier(.22,1,.36,1)';
+  g.current.style.transform='translate3d('+target+'px,0,0)';
+  g.other.style.transform='translate3d('+(g.offset+target)+'px,0,0)';
+  const end=()=>{g.current.removeEventListener('transitionend',end);if(completed){cleanup();crewNavigate(g.page==='home'?'tools':'home');}else{g.other.classList.add('hidden');cleanup();}};
+  g.current.addEventListener('transitionend',end,{once:true});
+  setTimeout(()=>{if(animation)end();},duration+90);
+  gesture=null;
+ }
+ document.addEventListener('touchend',e=>finish(e,false),{passive:true});
+ document.addEventListener('touchcancel',e=>finish(e,true),{passive:true});
 })();
 function crewRefreshHome(){
  const ordered=dutyOrder(),now=Date.now();
@@ -1247,9 +1292,20 @@ const $c=id=>document.getElementById(id), zone={MEL:'Australia/Melbourne',SYD:'A
 const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 for(const id of ['cbrBefore','cbrAfter']){for(let i=0;i<=16;i++){const o=document.createElement('option');o.value=i;o.textContent=i+' hours';$c(id).append(o)}let n=4;try{n=Number(localStorage.getItem('crewFocus_'+id)??4)}catch(e){}$c(id).value=String(n);$c(id).addEventListener('change',()=>{try{localStorage.setItem('crewFocus_'+id,$c(id).value)}catch(e){}})}
 $c('cbrDate').value=$c('flightDate').value;
-function addRow(a=['','','','','','']){const row=document.createElement('div');row.className='cbr-row';const fields=[['Flight','text'],['From','text'],['Departure','time'],['To','text'],['Arrival','time'],['Aircraft rego','text']];fields.forEach(([label,type],i)=>{const box=document.createElement('label');box.textContent=label;const input=document.createElement('input');input.type=type;input.value=a[i]||'';input.dataset.field=String(i);if(type==='text')input.autocapitalize='characters';box.append(input);row.append(box)});const b=document.createElement('button');b.className='btn small';b.type='button';b.textContent='Remove';b.onclick=()=>row.remove();row.append(b);$c('cbrRows').append(row)}
-$c('cbrAdd').onclick=()=>addRow();addRow();
+function addRow(a=['','','','','','']){const row=document.createElement('div');row.className='cbr-row';const fields=[['Flight','text'],['From','text'],['Departure','time'],['To','text'],['Arrival','time'],['Aircraft rego','text']];fields.forEach(([label,type],i)=>{const box=document.createElement('label');box.textContent=label;const input=document.createElement('input');input.type=type;input.value=a[i]||'';input.dataset.field=String(i);if(type==='text')input.autocapitalize='characters';box.append(input);row.append(box)});const b=document.createElement('button');b.className='btn small';b.type='button';b.textContent='Remove';b.onclick=()=>{row.remove();queueCBRSave();};row.append(b);$c('cbrRows').append(row)}
+$c('cbrAdd').onclick=()=>{addRow();queueCBRSave();};addRow();
 let cbrConfirmed=false;
+// Preserve imported CBR and user edits across GitHub file updates on the same site.
+const CBR_STORAGE='crewFocusCBRStateV1';
+let restoringCBR=false,saveCBRTimer;
+function saveCBR(){if(restoringCBR)return;try{
+ const data={date:$c('cbrDate').value,signon:$c('cbrSignon').value,signoff:$c('cbrSignoff').value,signoffPort:$c('cbrSignoffPort').value,text:$c('cbrText').value,rows:[...$c('cbrRows').children].map(r=>[...r.querySelectorAll('input')].map(i=>i.value)),confirmed:cbrConfirmed};
+ localStorage.setItem(CBR_STORAGE,JSON.stringify(data));
+ }catch(e){console.warn('CBR could not be saved',e)}}
+function queueCBRSave(){clearTimeout(saveCBRTimer);saveCBRTimer=setTimeout(saveCBR,250)}
+$c('cbrPanel').addEventListener('input',queueCBRSave);
+$c('cbrPanel').addEventListener('change',queueCBRSave);
+
 function markUnconfirmed(){cbrConfirmed=false;$c('cbrConfirm').textContent='Review & Confirm';$c('cbrConfirm').style.background='';}
 function parse(){
  const t=$c('cbrText').value.replace(/\u00a0/g,' ');markUnconfirmed();
@@ -1273,6 +1329,7 @@ function parse(){
  }
  if(parsed.length){$c('cbrRows').replaceChildren();parsed.forEach(addRow)}
  const missing=parsed.filter(x=>!x[5]).length;
+ queueCBRSave();
  $c('cbrStatus').textContent=parsed.length?parsed.length+' sectors extracted. '+(missing?missing+' registration(s) not shown/read. ':'')+'Check times, airports and regos, then tap Review & Confirm.':'No complete sectors recognised. Try a clearer screenshot or correct the extracted text.';
  if(parsed.length){
   const codes=[...new Set(parsed.flatMap(r=>[r[1],r[3]]))];
@@ -1289,8 +1346,8 @@ function parse(){
  return parsed.length;
 }
 $c('cbrParse').onclick=parse;
-$c('cbrConfirm').onclick=()=>{if(!rows().length||!$c('cbrDate').value){$c('cbrStatus').textContent='A duty date and at least one sector are required.';return;}cbrConfirmed=true;$c('cbrConfirm').textContent='✓ Reviewed';$c('cbrConfirm').style.background='#217a4a';$c('cbrStatus').textContent='CBR reviewed on this device. Missing aircraft registrations remain blank, not assumed.';preview()};
-$c('cbrRows').addEventListener('input',markUnconfirmed);
+$c('cbrConfirm').onclick=()=>{if(!rows().length||!$c('cbrDate').value){$c('cbrStatus').textContent='A duty date and at least one sector are required.';return;}cbrConfirmed=true;queueCBRSave();$c('cbrConfirm').textContent='✓ Reviewed';$c('cbrConfirm').style.background='#217a4a';$c('cbrStatus').textContent='CBR reviewed on this device. Missing aircraft registrations remain blank, not assumed.';preview()};
+$c('cbrRows').addEventListener('input',()=>{markUnconfirmed();queueCBRSave();});
 async function cbrScript(url){if(url.includes('tesseract')&&window.Tesseract)return;return new Promise((ok,bad)=>{const e=document.createElement('script');e.src=url;e.onload=ok;e.onerror=()=>bad(Error('Could not load image reader. Check internet connection.'));document.head.appendChild(e)})}
 async function cbrOCR(canvas){await cbrScript('https://cdn.jsdelivr.net/npm/tesseract.js@6.0.1/dist/tesseract.min.js');let worker;
  try{worker=await Tesseract.createWorker('eng',1,{workerPath:'https://cdn.jsdelivr.net/npm/tesseract.js@6.0.1/dist/worker.min.js',corePath:'https://cdn.jsdelivr.net/npm/tesseract.js-core@6.0.0',langPath:'https://tessdata.projectnaptha.com/4.0.0'});await worker.setParameters({tessedit_pageseg_mode:'6'});const r=await worker.recognize(canvas);return r.data.text||'';}finally{if(worker)await worker.terminate()}}
@@ -1354,6 +1411,17 @@ $c('cbrAirDrop').onclick=async()=>{
  finally{button.disabled=false;}
 };
 
+
+// Restore saved briefing on launch without re-running OCR or losing manual corrections.
+try{const saved=JSON.parse(localStorage.getItem(CBR_STORAGE)||'null');if(saved&&Array.isArray(saved.rows)){
+ restoringCBR=true;
+ for(const [id,key] of [['cbrDate','date'],['cbrSignon','signon'],['cbrSignoff','signoff'],['cbrSignoffPort','signoffPort'],['cbrText','text']])if(typeof saved[key]==='string')$c(id).value=saved[key];
+ $c('cbrRows').replaceChildren();saved.rows.forEach(addRow);if(!saved.rows.length)addRow();
+ cbrConfirmed=!!saved.confirmed;
+ if(cbrConfirmed){$c('cbrConfirm').textContent='✓ Reviewed';$c('cbrConfirm').style.background='#217a4a';}
+ $c('cbrStatus').textContent='Previous CBR restored from this device. '+(cbrConfirmed?'Reviewed.':'Review / modify if needed.');
+ restoringCBR=false;
+}}catch(e){restoringCBR=false;console.warn('Could not restore CBR',e)}
 })();
 </script>
 </body></html>
