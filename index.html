@@ -1154,6 +1154,23 @@ let focusConfig={mode:'auto',manual:'duty',enabled:['duty','flight','commuter','
 try{const stored=JSON.parse(localStorage.getItem('crewAppFocusV15')||'null');if(stored&&typeof stored==='object'){focusConfig={...focusConfig,...stored};}}catch(e){}
 function saveFocus(){try{localStorage.setItem('crewAppFocusV15',JSON.stringify(focusConfig));}catch(e){}}
 function crewNavigate(page){if(!crewPages[page])return;Object.entries(crewPages).forEach(([key,id])=>$(id).classList.toggle('hidden',key!==page));document.querySelectorAll('.crew-tab').forEach(b=>{const active=b.dataset.page===page;b.classList.toggle('selected',active);b.setAttribute('aria-current',active?'page':'false');});if(page==='home')crewRefreshHome();window.scrollTo(0,0);}
+// Swipe left on the Focus screen to open Dashboard. Vertical scrolling and form controls remain unaffected.
+(function enableFocusSwipe(){
+ const focus=document.getElementById('crewHome');
+ if(!focus)return;
+ let start=null;
+ focus.addEventListener('touchstart',event=>{
+  if(event.touches.length!==1 || event.target.closest('input,textarea,select,[contenteditable="true"],dialog')){start=null;return;}
+  const t=event.touches[0];start={x:t.clientX,y:t.clientY};
+ },{passive:true});
+ focus.addEventListener('touchcancel',()=>{start=null;},{passive:true});
+ focus.addEventListener('touchend',event=>{
+  if(!start||event.changedTouches.length!==1){start=null;return;}
+  const t=event.changedTouches[0],dx=t.clientX-start.x,dy=t.clientY-start.y;
+  start=null;
+  if(!focus.classList.contains('hidden') && dx < -75 && Math.abs(dx)>Math.abs(dy)*1.5)crewNavigate('tools');
+ },{passive:true});
+})();
 function crewRefreshHome(){
  const ordered=dutyOrder(),now=Date.now();
  const current=ordered.find(x=>!dutyIsFinished(x,now)&&Number.isFinite(portInstant(x.date,x.time,x.zone))&&portInstant(x.date,x.time,x.zone)<=now);
