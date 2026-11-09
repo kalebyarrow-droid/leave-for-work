@@ -5,7 +5,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <meta content="#15283f" name="theme-color"/>
-<title>CrewFocus — Version 67</title>
+<title>CrewFocus — Version 68</title>
 <style>
 :root{color-scheme:light dark;--bg:#f3f6fa;--card:#fff;--ink:#15283f;--muted:#637184;--line:#dce3eb;--accent:#176b87;--soft:#e9f4f7;--danger:#b13e3e}
 @media(prefers-color-scheme:dark){:root{--bg:#101820;--card:#1a2632;--ink:#edf4fb;--muted:#aab8c6;--line:#344454;--accent:#72c7df;--soft:#203a46;--danger:#ff9b9b}}
@@ -199,7 +199,7 @@ VA 1101 0705 NTL BNE 0720" rows="7"></textarea><p class="note">Check the year, d
 <h2>Calculation notes</h2>
 <p class="note">The sign on date and time are used exactly as entered, including for future planning. The countdown is relative to the current local time. Schedule times use the selected sign-on time zone; the live clock uses your device's local time zone. Your selections are remembered on this device. Past sign-on dates advance to today when reopening.</p>
 <p class="note">Hotel transport times can be saved and updated. This prototype saves them in the browser's local storage; downloaded-file previews may not retain settings. A hosted version can make saving more reliable across sessions and devices.</p>
-</section></details><p class="note" id="planApplyStatus" role="status"></p><button class="btn primary wide" id="applyPlan" type="button">Use this plan</button></div></dialog><dialog aria-labelledby="calendarTitle" id="calendarDialog"><div class="modal-shell"><header><h2 id="calendarTitle">Add to Calendar</h2><button class="btn small" id="closeCalendar" type="button">Close</button></header><label for="calendarScope">Include</label><select id="calendarScope"><option value="current">Accepted duty</option><option value="upcoming">Upcoming roster duties</option><option value="all">Whole roster</option></select><h3 id="calendarCount"></h3><p class="note" id="calendarSkipped" role="status"></p><div id="calendarIssues"></div><p class="note">One event per duty, with the original roster details. No hotels or reminders.</p><button class="btn primary wide" id="calendarExport" type="button">Add roster to Calendar</button><p class="note" id="calendarStatus" role="status"></p><details id="calendarSetup"><summary>One-time iPhone setup</summary><p class="note">Use a separate shortcut named <strong>Leave for Work Calendar</strong>. Your alarm shortcut stays separate. Shortcuts opens briefly during import and requests a return to this app. No downloading or Siri Suggestions is needed.</p><p class="note">One action at a time. Your progress is saved on this device. “What you should see” describes the checkpoint; if it differs, send that screen before continuing.</p><p class="note" id="calendarGuideProgress"></p><h3 id="calendarGuideTitle"></h3><div class="note" id="calendarGuideInstruction"></div><div class="calendar-issue"><strong>What you should see</strong><p class="note" id="calendarGuideExpected"></p></div><div class="row help-nav"><button class="btn" id="calendarGuideBack" type="button">Back</button><button class="btn primary" id="calendarGuideNext" type="button">Next step</button></div><button class="btn small" id="calendarGuideResume" type="button">Continue from my screenshot</button><p class="note">These controls can vary with iOS. The test checks your phone before sending a full roster. If Calendar opens an editor for every event, check the expanded Add New Event action and turn its compose screen off.</p><button class="btn wide" id="calendarTest" type="button">Test with one event</button><button class="btn wide" id="calendarSetupDone" type="button">I checked the test</button></details><details style="margin-top:16px"><summary>Other options &amp; roster changes</summary><p class="note">This makes a copy, not a live subscription. A completed import is remembered on this device to help prevent duplicates. Changed duties need their previous calendar events removed before you import them again. An interrupted shortcut can leave some events added: check Calendar before retrying.</p><button class="btn wide" id="calendarDownload" type="button">Download .ics file instead</button><p class="note">File import depends on the app opening the file; Safari and Files may only preview it. The shortcut above avoids that route.</p><button class="btn wide" id="calendarResetHistory" type="button">Allow a fresh import</button></details></div></dialog><dialog aria-labelledby="alarmHelpTitle" id="alarmHelp"><div class="help-shell"><header><h2 id="alarmHelpTitle">Set up iPhone alarms</h2><button class="btn small" id="closeAlarmHelp" type="button">Close</button></header><p class="note" id="alarmHelpProgress"></p><div id="alarmHelpContent"></div><p class="note" id="alarmHelpStatus" role="status"></p><div class="row help-nav"><button class="btn" id="alarmHelpBack" type="button">Back</button><button class="btn primary" id="alarmHelpNext" type="button">Next</button></div></div></dialog><footer class="note" style="text-align:center;padding:8px 10px">Version 67 · 09 Nov 2026</footer></main>
+</section></details><p class="note" id="planApplyStatus" role="status"></p><button class="btn primary wide" id="applyPlan" type="button">Use this plan</button></div></dialog><dialog aria-labelledby="calendarTitle" id="calendarDialog"><div class="modal-shell"><header><h2 id="calendarTitle">Add to Calendar</h2><button class="btn small" id="closeCalendar" type="button">Close</button></header><label for="calendarScope">Include</label><select id="calendarScope"><option value="current">Accepted duty</option><option value="upcoming">Upcoming roster duties</option><option value="all">Whole roster</option></select><h3 id="calendarCount"></h3><p class="note" id="calendarSkipped" role="status"></p><div id="calendarIssues"></div><p class="note">One event per duty, with the original roster details. No hotels or reminders.</p><button class="btn primary wide" id="calendarExport" type="button">Add roster to Calendar</button><p class="note" id="calendarStatus" role="status"></p><details id="calendarSetup"><summary>One-time iPhone setup</summary><p class="note">Use a separate shortcut named <strong>Leave for Work Calendar</strong>. Your alarm shortcut stays separate. Shortcuts opens briefly during import and requests a return to this app. No downloading or Siri Suggestions is needed.</p><p class="note">One action at a time. Your progress is saved on this device. “What you should see” describes the checkpoint; if it differs, send that screen before continuing.</p><p class="note" id="calendarGuideProgress"></p><h3 id="calendarGuideTitle"></h3><div class="note" id="calendarGuideInstruction"></div><div class="calendar-issue"><strong>What you should see</strong><p class="note" id="calendarGuideExpected"></p></div><div class="row help-nav"><button class="btn" id="calendarGuideBack" type="button">Back</button><button class="btn primary" id="calendarGuideNext" type="button">Next step</button></div><button class="btn small" id="calendarGuideResume" type="button">Continue from my screenshot</button><p class="note">These controls can vary with iOS. The test checks your phone before sending a full roster. If Calendar opens an editor for every event, check the expanded Add New Event action and turn its compose screen off.</p><button class="btn wide" id="calendarTest" type="button">Test with one event</button><button class="btn wide" id="calendarSetupDone" type="button">I checked the test</button></details><details style="margin-top:16px"><summary>Other options &amp; roster changes</summary><p class="note">This makes a copy, not a live subscription. A completed import is remembered on this device to help prevent duplicates. Changed duties need their previous calendar events removed before you import them again. An interrupted shortcut can leave some events added: check Calendar before retrying.</p><button class="btn wide" id="calendarDownload" type="button">Download .ics file instead</button><p class="note">File import depends on the app opening the file; Safari and Files may only preview it. The shortcut above avoids that route.</p><button class="btn wide" id="calendarResetHistory" type="button">Allow a fresh import</button></details></div></dialog><dialog aria-labelledby="alarmHelpTitle" id="alarmHelp"><div class="help-shell"><header><h2 id="alarmHelpTitle">Set up iPhone alarms</h2><button class="btn small" id="closeAlarmHelp" type="button">Close</button></header><p class="note" id="alarmHelpProgress"></p><div id="alarmHelpContent"></div><p class="note" id="alarmHelpStatus" role="status"></p><div class="row help-nav"><button class="btn" id="alarmHelpBack" type="button">Back</button><button class="btn primary" id="alarmHelpNext" type="button">Next</button></div></div></dialog><footer class="note" style="text-align:center;padding:8px 10px">Version 68 · 10 Nov 2026</footer></main>
 <script>
 (() => {
  const $ = id => document.getElementById(id);
@@ -1257,7 +1257,9 @@ function crewAircraftNotamReason(raw){
  // Exclusively for Code D/E/F aircraft; do not exclude a maximum permitted code.
  const exclusiveCode=/\b(?:CODE|CAT(?:EGORY)?)\s*([DEF])\s*(?:ACFT|AIRCRAFT)?\s*(?:ONLY|EXCLUSIVELY)\b|\b(?:ONLY|EXCLUSIVELY)\s+(?:FOR\s+)?(?:CODE|CAT(?:EGORY)?)\s*([DEF])\b|\b(?:RESTRICTIONS?\s+(?:APPLY|APPLIES)\s+TO|APPLICABLE\s+TO)\s+(?:CODE|CAT(?:EGORY)?)\s*([DEF])\b/;
  const codeMatch=text.match(exclusiveCode);
- if(codeMatch&&!/\b(?:AND\s+BLW|AND\s+BELOW|OR\s+BELOW|MAX(?:IMUM)?\s+CODE|UP\s+TO|CODE\s+C)\b/.test(text))return 'Code '+(codeMatch[1]||codeMatch[2]||codeMatch[3])+'-only restriction — selected aircraft is Code C';
+ // A condition explicitly restricted TO higher-code aircraft is not a general taxiway closure.
+ const restrictedToHigher=text.match(/\bRESTR(?:ICTED|ICTIONS?)?\s+TO\s+(?:ICAO\s+)?(?:CODE|CAT(?:EGORY)?)\s*([DEF])\s*(?:ACFT|AIRCRAFT)?\b/);
+ if((codeMatch||restrictedToHigher)&&!/\b(?:AND\s+BLW|AND\s+BELOW|OR\s+BELOW|MAX(?:IMUM)?\s+CODE|UP\s+TO|CODE\s+C|ALL\s+ACFT|ALL\s+AIRCRAFT)\b/.test(text))return 'Code '+(restrictedToHigher?.[1]||codeMatch?.[1]||codeMatch?.[2]||codeMatch?.[3])+'-only condition — selected aircraft is Code C';
  // Wingspan rules are assessed only when clearly restricting aircraft ABOVE a threshold.
  // Use conservative upper bound for 737 configurations; uncertain thresholds remain visible.
  const above=text.match(/\b(?:ACFT|AIRCRAFT)\s+(?:WITH\s+)?(?:WING\s*SPAN|WINGSPAN)\s*(?:GREATER\s+THAN|MORE\s+THAN|OVER|ABOVE|>)\s*(\d+(?:\.\d+)?)\s*M\b/);
@@ -1266,15 +1268,17 @@ function crewAircraftNotamReason(raw){
 }
 function crewNotamKeep(raw,code){return crewNotamStatus(raw,code)!=='excluded';}
 function crewNotamLowPriority(raw){
- const t=String(raw||'').toUpperCase();
- // Only clear, narrowly worded advisory categories. Never downrank a NOTAM
- // containing closures, unserviceable navigation aids or operational limitations.
- if(/\b(?:RWY|RUNWAY|TWY|TAXIWAY|APCH|APPROACH|ILS|VOR|DME|NDB|RNP|SID|STAR)\b/.test(t)&&/\b(?:CLSD|CLOSED|U\/S|UNSERVICEABLE|NOT AVBL|NOT AVAILABLE|RESTRICTED|PROHIBITED)\b/.test(t))return false;
- if(/\b(?:WILDLIFE|BIRD(?:S)?|FLYING FOX(?:ES)?)\b/.test(t)&&/\b(?:INCREASED|HAZARD|ACTIVITY)\b/.test(t))return true;
+ const t=String(raw||'').toUpperCase().replace(/\s+/g,' ');
+ // Never downgrade significant runway/taxiway closures, approach/navigation aid failures,
+ // procedural changes or other restrictions just because a low-priority keyword appears.
+ if(/\b(?:RWY|RUNWAY|TWY|TAXIWAY|APCH|APPROACH|ILS|VOR|DME|NDB|RNP|SID|STAR)\b/.test(t)&&/\b(?:CLSD|CLOSED|NOT AVBL|NOT AVAILABLE|RESTRICTED|PROHIBITED)\b/.test(t))return false;
+ if(/\b(?:ILS|VOR|DME|NDB|RNP|SID|STAR)\b/.test(t)&&/\b(?:U\/S|UNSERVICEABLE|AMD|CHANGED|WITHDRAWN)\b/.test(t))return false;
+ if(/\b(?:WILDLIFE|BIRDS?|FLYING FOX(?:ES)?)\b/.test(t)&&/\b(?:INCREASED|HAZARD|ACTIVITY)\b/.test(t))return true;
  if(/\b(?:UA OPS|UAS OPS|RPAS|REMOTELY PILOTED AIRCRAFT|UNCREWED AIRCRAFT)\b/.test(t))return true;
- if(/\b(?:OBST|OBSTACLE|CRANE|TREE(?:S)?)\b/.test(t)&&/\b(?:INFRING|ERECTED|OBSTACLE|CRANE|TREE)\b/.test(t))return true;
- if(/\b(?:STOP ?BAR|HOLDING POINT)\b/.test(t)&&/\b(?:LIGHT|LGT|NON.?COMPLIANT|STANDARD)\b/.test(t))return true;
- if(/\b(?:AD|AERODROME)\s+BEACON\b/.test(t)&&/\b(?:U\/S|NON.?OPERATIONAL|NOT OPERATIONAL|UNSERVICEABLE)\b/.test(t))return true;
+ if(/\b(?:OBST|OBSTACLE|CRANES?|TREES?)\b/.test(t)&&/\b(?:INFRING|ERECTED|OBSTACLE|CRANE|TREE|LIT)\b/.test(t))return true;
+ // Intermediate holding-point and stop-bar lighting deficiencies, including NAIPS abbreviations.
+ if(/\b(?:STOP\s*BAR|HOLD(?:ING|G)?\s*(?:POINT|PT)|IHP)\b/.test(t)&&/\b(?:LGT|LIGHTS?|NOT\s+TO\s+STD|U\/S|NON.?COMPLIANT|STANDARD)\b/.test(t))return true;
+ if(/\b(?:AD|AERODROME)\s+BEACON\b/.test(t)&&/\b(?:OPERATIONAL|NON.?OPERATIONAL|NOT OPERATIONAL|U\/S|UNSERVICEABLE|ALTN)\b/.test(t))return true;
  return false;
 }
 function flightRenderNaips(parsed){
@@ -1296,29 +1300,21 @@ function flightRenderNaips(parsed){
  }
  const info=crewNotamWindow();
  make('p','flight-source',info?('NOTAM screening window: '+info.label+'. Times UTC. HJ/HN uses calculated airport sunrise/sunset (approximate); uncertain validity remains amber.'): 'CBR duty times unavailable: NOTAMs are amber until the CBR times are confirmed.',sheet);
- make('div','flight-briefing-heading','CURRENT NOTAMS — PRIORITY',sheet);
+ make('div','flight-briefing-heading','CURRENT NOTAMS — BY AIRPORT',sheet);
+ make('p','flight-source','Black = priority; blue = lower priority. Both are current for the selected duty window. Blue entries follow black entries at each airport.',sheet);
  let currentCount=0,uncertainCount=0,excludedCount=0,lowCount=0;
  for(const code of parsed.order){
-  const airport=parsed.airports.get(code),entries=airport.notams.filter(raw=>!crewAircraftNotamReason(raw)&&crewNotamStatus(raw,code)==='current'&&!crewNotamLowPriority(raw));
-  if(!entries.length)continue;
+  const airport=parsed.airports.get(code);
+  const active=airport.notams.filter(raw=>!crewAircraftNotamReason(raw)&&crewNotamStatus(raw,code)==='current');
+  if(!active.length)continue;
   const block=document.createElement('section');block.className='flight-airport';
   make('h3','',airport.name+' ('+code+')',block);
-  for(const raw of entries)appendNotam(raw,block,'');
-  currentCount+=entries.length;sheet.append(block);
+  const priority=active.filter(raw=>!crewNotamLowPriority(raw));
+  const lower=active.filter(raw=>crewNotamLowPriority(raw));
+  for(const raw of priority)appendNotam(raw,block,'');
+  for(const raw of lower)appendNotam(raw,block,'low');
+  currentCount+=active.length;lowCount+=lower.length;sheet.append(block);
  }
- const low=document.createElement('section');low.className='flight-notam-low-section';
- make('div','flight-briefing-heading','CURRENT NOTAMS — LOWER PRIORITY',low);
- make('p','flight-source','Advisory categories shown in blue. These may still be operationally significant; review their full wording.',low);
- for(const code of parsed.order){
-  const airport=parsed.airports.get(code),entries=airport.notams.filter(raw=>!crewAircraftNotamReason(raw)&&crewNotamStatus(raw,code)==='current'&&crewNotamLowPriority(raw));
-  if(!entries.length)continue;
-  const block=document.createElement('section');block.className='flight-airport';
-  make('h3','',airport.name+' ('+code+')',block);
-  for(const raw of entries)appendNotam(raw,block,'low');
-  lowCount+=entries.length;sheet.append(block);
- }
- currentCount+=lowCount;
- if(lowCount)sheet.append(low);
  if(!currentCount)make('p','flight-missing','No NOTAMs currently match the screening window.',sheet);
  // Place uncertain NOTAMs between current and excluded, using amber text only.
  const uncertain=document.createElement('section');uncertain.className='flight-notam-uncertain-section';
@@ -1335,7 +1331,7 @@ function flightRenderNaips(parsed){
  if(uncertainCount)sheet.append(uncertain);
  const aircraftExcludedCount=parsed.order.reduce((n,code)=>n+parsed.airports.get(code).notams.filter(raw=>!!crewAircraftNotamReason(raw)).length,0);
  const shortlistStatus=document.getElementById('flightShortlistStatus');
- if(shortlistStatus){const window=crewNotamWindow();shortlistStatus.textContent=window?`${currentCount} current (${lowCount} lower priority, blue) / ${uncertainCount} uncertain (amber) / ${excludedCount||parsed.order.reduce((n,code)=>n+parsed.airports.get(code).notams.filter(raw=>!crewAircraftNotamReason(raw)).length,0)-currentCount-uncertainCount} outside-window (red) / ${aircraftExcludedCount} aircraft-specific (review). ${window.label}.`:`Duty window unavailable: ${uncertainCount} NOTAMs amber. Check CBR sign-on, sign-off, airport codes and saved date; then shortlist again.`;}
+ if(shortlistStatus){const window=crewNotamWindow();shortlistStatus.textContent=window?`${currentCount} current (${lowCount} lower priority, blue) / ${uncertainCount} uncertain (amber) / ${parsed.order.reduce((n,code)=>n+parsed.airports.get(code).notams.filter(raw=>!crewAircraftNotamReason(raw)&&crewNotamStatus(raw,code)==='excluded').length,0)} outside-window (red) / ${aircraftExcludedCount} aircraft-specific (review). ${window.label}.`:`Duty window unavailable: ${uncertainCount} NOTAMs amber. Check CBR sign-on, sign-off, airport codes and saved date; then shortlist again.`;}
  // Retain every screened-out NOTAM at the bottom, in red, for testing and verification.
  const excluded=document.createElement('section');excluded.className='flight-notam-excluded-section';
  make('div','flight-briefing-heading','EARLIER / OUTSIDE-WINDOW NOTAMS — REVIEW',excluded);
@@ -1353,13 +1349,13 @@ function flightRenderNaips(parsed){
  if(aircraftExcludedCount){
   const screened=document.createElement('details');screened.style.marginTop='18px';
   make('summary','','AIRCRAFT-SPECIFIC NOTAMS — SCREENED OUT ('+aircraftExcludedCount+')',screened);
-  make('p','flight-source','Screened out for the selected aircraft. Review the full wording and original NAIPS briefing before operational use. A maximum permitted code (e.g. Code E and below) still includes Code C.',screened);
+  make('p','flight-source','Aircraft-inapplicable entries (red / review). They are not deleted. Verify against the original NAIPS briefing; a maximum permitted code (e.g. Code E and below) still includes Code C.',screened);
   for(const code of parsed.order){
    const airport=parsed.airports.get(code),entries=airport.notams.filter(raw=>!!crewAircraftNotamReason(raw));
    if(!entries.length)continue;
    const block=document.createElement('section');block.className='flight-airport';
    make('h3','',airport.name+' ('+code+')',block);
-   for(const raw of entries){make('p','flight-source','Reason: '+crewAircraftNotamReason(raw),block);appendNotam(raw,block,'');}
+   for(const raw of entries){make('p','flight-source','Reason: '+crewAircraftNotamReason(raw),block);appendNotam(raw,block,'excluded');}
    screened.append(block);
   }
   sheet.append(screened);
