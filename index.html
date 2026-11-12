@@ -5,7 +5,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <meta content="#15283f" name="theme-color"/>
-<title>CrewFocus — Version 128</title>
+<title>CrewFocus — Version 129</title>
 <style>
 :root{color-scheme:light dark;--bg:#f3f6fa;--card:#fff;--ink:#15283f;--muted:#637184;--line:#dce3eb;--accent:#176b87;--soft:#e9f4f7;--danger:#b13e3e}
 @media(prefers-color-scheme:dark){:root{--bg:#101820;--card:#1a2632;--ink:#edf4fb;--muted:#aab8c6;--line:#344454;--accent:#72c7df;--soft:#203a46;--danger:#ff9b9b}}
@@ -397,7 +397,7 @@ VA 1101 0705 NTL BNE 0720" rows="7"></textarea><p class="note">Check the year, d
 <h2>Calculation notes</h2>
 <p class="note">The sign on date and time are used exactly as entered, including for future planning. The countdown is relative to the current local time. Schedule times use the selected sign-on time zone; the live clock uses your device's local time zone. Your selections are remembered on this device. Past sign-on dates advance to today when reopening.</p>
 <p class="note">Hotel transport times can be saved and updated. This prototype saves them in the browser's local storage; downloaded-file previews may not retain settings. A hosted version can make saving more reliable across sessions and devices.</p>
-</section></details><p class="note" id="planApplyStatus" role="status"></p><button class="btn primary wide" id="applyPlan" type="button">Use this plan</button></div></dialog><dialog aria-labelledby="calendarTitle" id="calendarDialog"><div class="modal-shell"><header><h2 id="calendarTitle">Add to Calendar</h2><button class="btn small" id="closeCalendar" type="button">Close</button></header><label for="calendarScope">Include</label><select id="calendarScope"><option value="current">Accepted duty</option><option value="upcoming">Upcoming roster duties</option><option value="all">Whole roster</option></select><h3 id="calendarCount"></h3><p class="note" id="calendarSkipped" role="status"></p><div id="calendarIssues"></div><p class="note">One event per duty, with the original roster details. No hotels or reminders.</p><button class="btn primary wide" id="calendarExport" type="button">Add roster to Calendar</button><p class="note" id="calendarStatus" role="status"></p><details id="calendarSetup"><summary>One-time iPhone setup</summary><p class="note">Use a separate shortcut named <strong>Leave for Work Calendar</strong>. Your alarm shortcut stays separate. Shortcuts opens briefly during import and requests a return to this app. No downloading or Siri Suggestions is needed.</p><p class="note">One action at a time. Your progress is saved on this device. “What you should see” describes the checkpoint; if it differs, send that screen before continuing.</p><p class="note" id="calendarGuideProgress"></p><h3 id="calendarGuideTitle"></h3><div class="note" id="calendarGuideInstruction"></div><div class="calendar-issue"><strong>What you should see</strong><p class="note" id="calendarGuideExpected"></p></div><div class="row help-nav"><button class="btn" id="calendarGuideBack" type="button">Back</button><button class="btn primary" id="calendarGuideNext" type="button">Next step</button></div><button class="btn small" id="calendarGuideResume" type="button">Continue from my screenshot</button><p class="note">These controls can vary with iOS. The test checks your phone before sending a full roster. If Calendar opens an editor for every event, check the expanded Add New Event action and turn its compose screen off.</p><button class="btn wide" id="calendarTest" type="button">Test with one event</button><button class="btn wide" id="calendarSetupDone" type="button">I checked the test</button></details><details style="margin-top:16px"><summary>Other options &amp; roster changes</summary><p class="note">This makes a copy, not a live subscription. A completed import is remembered on this device to help prevent duplicates. Changed duties need their previous calendar events removed before you import them again. An interrupted shortcut can leave some events added: check Calendar before retrying.</p><button class="btn wide" id="calendarDownload" type="button">Download .ics file instead</button><p class="note">File import depends on the app opening the file; Safari and Files may only preview it. The shortcut above avoids that route.</p><button class="btn wide" id="calendarResetHistory" type="button">Allow a fresh import</button></details></div></dialog><dialog aria-labelledby="alarmHelpTitle" id="alarmHelp"><div class="help-shell"><header><h2 id="alarmHelpTitle">Set up iPhone alarms</h2><button class="btn small" id="closeAlarmHelp" type="button">Close</button></header><p class="note" id="alarmHelpProgress"></p><div id="alarmHelpContent"></div><p class="note" id="alarmHelpStatus" role="status"></p><div class="row help-nav"><button class="btn" id="alarmHelpBack" type="button">Back</button><button class="btn primary" id="alarmHelpNext" type="button">Next</button></div></div></dialog><footer class="note" style="text-align:center;padding:8px 10px">Version 128 · 12 Nov 2026</footer></main>
+</section></details><p class="note" id="planApplyStatus" role="status"></p><button class="btn primary wide" id="applyPlan" type="button">Use this plan</button></div></dialog><dialog aria-labelledby="calendarTitle" id="calendarDialog"><div class="modal-shell"><header><h2 id="calendarTitle">Add to Calendar</h2><button class="btn small" id="closeCalendar" type="button">Close</button></header><label for="calendarScope">Include</label><select id="calendarScope"><option value="current">Accepted duty</option><option value="upcoming">Upcoming roster duties</option><option value="all">Whole roster</option></select><h3 id="calendarCount"></h3><p class="note" id="calendarSkipped" role="status"></p><div id="calendarIssues"></div><p class="note">One event per duty, with the original roster details. No hotels or reminders.</p><button class="btn primary wide" id="calendarExport" type="button">Add roster to Calendar</button><p class="note" id="calendarStatus" role="status"></p><details id="calendarSetup"><summary>One-time iPhone setup</summary><p class="note">Use a separate shortcut named <strong>Leave for Work Calendar</strong>. Your alarm shortcut stays separate. Shortcuts opens briefly during import and requests a return to this app. No downloading or Siri Suggestions is needed.</p><p class="note">One action at a time. Your progress is saved on this device. “What you should see” describes the checkpoint; if it differs, send that screen before continuing.</p><p class="note" id="calendarGuideProgress"></p><h3 id="calendarGuideTitle"></h3><div class="note" id="calendarGuideInstruction"></div><div class="calendar-issue"><strong>What you should see</strong><p class="note" id="calendarGuideExpected"></p></div><div class="row help-nav"><button class="btn" id="calendarGuideBack" type="button">Back</button><button class="btn primary" id="calendarGuideNext" type="button">Next step</button></div><button class="btn small" id="calendarGuideResume" type="button">Continue from my screenshot</button><p class="note">These controls can vary with iOS. The test checks your phone before sending a full roster. If Calendar opens an editor for every event, check the expanded Add New Event action and turn its compose screen off.</p><button class="btn wide" id="calendarTest" type="button">Test with one event</button><button class="btn wide" id="calendarSetupDone" type="button">I checked the test</button></details><details style="margin-top:16px"><summary>Other options &amp; roster changes</summary><p class="note">This makes a copy, not a live subscription. A completed import is remembered on this device to help prevent duplicates. Changed duties need their previous calendar events removed before you import them again. An interrupted shortcut can leave some events added: check Calendar before retrying.</p><button class="btn wide" id="calendarDownload" type="button">Download .ics file instead</button><p class="note">File import depends on the app opening the file; Safari and Files may only preview it. The shortcut above avoids that route.</p><button class="btn wide" id="calendarResetHistory" type="button">Allow a fresh import</button></details></div></dialog><dialog aria-labelledby="alarmHelpTitle" id="alarmHelp"><div class="help-shell"><header><h2 id="alarmHelpTitle">Set up iPhone alarms</h2><button class="btn small" id="closeAlarmHelp" type="button">Close</button></header><p class="note" id="alarmHelpProgress"></p><div id="alarmHelpContent"></div><p class="note" id="alarmHelpStatus" role="status"></p><div class="row help-nav"><button class="btn" id="alarmHelpBack" type="button">Back</button><button class="btn primary" id="alarmHelpNext" type="button">Next</button></div></div></dialog><footer class="note" style="text-align:center;padding:8px 10px">Version 129 · 12 Nov 2026</footer></main>
 <script>
 (() => {
  const $ = id => document.getElementById(id);
@@ -2272,6 +2272,57 @@ function crewWxTafAnalysis(raw){
  const assessed=groups.map(g=>({...g,applicable:window?g.start<window.finish&&g.end>window.start:null}));
  return {window,issued,validFrom,validTo,groups:assessed,points,warning:gaps.join(' · '),tempFound:temps.length===4,qnhFound:qnh.length===4};
 }
+// Select departure/arrival instants from the retained CBR without changing its contents.
+// The confirmed local duty override is authoritative for screening, not a replacement
+// for individual flight times. Unavailable sector times are never fabricated.
+function crewWxAirportEvents(code,window){
+ const out=[];
+ const airport=String(code||'').toUpperCase();
+ const alias={YMML:'MEL',YSSY:'SYD',YBBN:'BNE',YPAD:'ADL',YPPH:'PER',YSCB:'CBR',YMHB:'HBA',YBCG:'OOL',YBCS:'CNS',YPDN:'DRW'};
+ const port=alias[airport]||airport;
+ try{
+  const saved=JSON.parse(localStorage.getItem('crewFocusCBRStateV1')||'null')||{};
+  const current=typeof rows==='function'?rows():[];
+  const rs=(current.length?current:saved.rows||[]).filter(r=>r&&r.length>=5);
+  const manual=JSON.parse(localStorage.getItem(crewScreeningKey)||'null')||{};
+  const date=manual.enabled?manual.date:(typeof effectiveCBRDate==='function'?effectiveCBRDate():saved.date);
+  if(!date||!/^\d{4}-\d{2}-\d{2}$/.test(date))return out;
+  let previous=null;
+  for(let i=0;i<rs.length;i++){
+   const r=rs[i],flight=r[0]||('Sector '+(i+1));
+   for(const item of [{p:r[1],hm:r[2],type:'DEP'},{p:r[3],hm:r[4],type:'ARR'}]){
+    if(!item.p||!/^\d{1,2}:\d{2}$/.test(item.hm||''))continue;
+    let instant=null;
+    for(let shift=0;shift<=2;shift++){
+     const d=new Date(date+'T12:00:00Z');d.setUTCDate(d.getUTCDate()+shift);
+     const day=d.toISOString().slice(0,10);
+     const candidate=crewScreeningUTC(day,item.hm,item.p);
+     if(candidate&&(!previous||candidate>=previous)){instant=candidate;break;}
+    }
+    if(!instant)continue;
+    previous=instant;
+    if(String(item.p).toUpperCase()===port)out.push({time:instant,type:item.type,flight,port:item.p});
+   }
+  }
+  // A confirmed duty start/end can be shown when no sector timestamp exists.
+  if(!out.length&&manual.enabled&&window?.manualStart&&window?.manualFinish){
+   if(String(manual.startPort||'').toUpperCase()===port)out.push({time:window.manualStart,type:'DUTY START',port});
+   if(String(manual.endPort||'').toUpperCase()===port)out.push({time:window.manualFinish,type:'DUTY FINISH',port});
+  }
+ }catch(e){console.warn('Airport event extraction failed',e);}
+ return out;
+}
+function crewWxInterpolate(points,time){
+ if(points.length<2||time<points[0].time||time>points[points.length-1].time)return null;
+ for(let i=0;i<points.length-1;i++){
+  const a=points[i],b=points[i+1];
+  if(time>=a.time&&time<=b.time){
+   const f=(time-a.time)/(b.time-a.time);
+   return {temp:a.temp+(b.temp-a.temp)*f,qnh:a.qnh+(b.qnh-a.qnh)*f};
+  }
+ }
+ return null;
+}
 function crewWxMarkTaf(raw,parent,make){
  const a=crewWxTafAnalysis(raw);if(!a)return;
  const panel=make('div','crew-wx-assessment','',parent);
@@ -2284,11 +2335,26 @@ function crewWxMarkTaf(raw,parent,make){
   for(const g of a.groups)make('div',g.applicable===true?'crew-wx-group-active':'crew-wx-group-outside',(g.applicable===true?'● APPLICABLE  ':g.applicable===false?'○ Outside window  ':'◇ Duty not confirmed  ')+g.token+' ('+crewWxUTC(g.start)+' – '+crewWxUTC(g.end)+')',panel);
  }else make('p','flight-source','No timed change groups identified; prevailing conditions apply until a change.',panel);
  if(a.points.length){
-  make('p','flight-source','Forecast temperature / QNH (3-hour reference points):',panel);
-  for(const p of a.points)make('div','crew-wx-point',crewWxUTC(p.time)+'  '+p.temp+'°C  Q'+p.qnh,panel);
-  if(a.window&&(a.window.start<a.points[0].time||a.window.finish>a.points[a.points.length-1].time))make('p','crew-wx-warning','⚠ Temperature / QNH outside forecast period for part of the duty — values unavailable beyond supplied reference times. Update when amended.',panel);
+  const airport=(raw.match(/^\s*TAF(?:\s+(?:AMD|COR))?\s+([A-Z]{4})\b/i)||[])[1]||'';
+  const events=crewWxAirportEvents(airport,a.window);
+  make('p','flight-source','Temperature / QNH at applicable airport times:',panel);
+  if(events.length){
+   for(const e of events){
+    const value=crewWxInterpolate(a.points,e.time);
+    const label=e.type+' '+(e.flight?e.flight+' · ':'')+crewWxUTC(e.time)+' — ';
+    if(value){
+     make('div','crew-wx-point',label+Math.round(value.temp)+'°C  Q'+Math.round(value.qnh),panel);
+    }else{
+     make('div','crew-wx-point',label+'Temp —  QNH —',panel);
+     make('p','crew-wx-warning','⚠ Temperature / QNH outside forecast period at '+e.type.toLowerCase()+' time. Update when TAF amended.',panel);
+    }
+   }
+  }else{
+   make('p','flight-source','No matching departure/arrival times available for this airport. Reference values shown for verification:',panel);
+   for(const p of a.points)make('div','crew-wx-point',crewWxUTC(p.time)+'  '+p.temp+'°C  Q'+p.qnh,panel);
+  }
  }else make('p','crew-wx-warning','⚠ Temperature / QNH reference values incomplete or unrecognised — verify original TAF.',panel);
- // Individual departure/arrival values will be inserted when sector-based WX output is enabled.
+ // Original TAF text and all reference values remain available for pilot verification.
 }
 
 function flightRenderNaips(parsed){
