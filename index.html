@@ -5,7 +5,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <meta content="#15283f" name="theme-color"/>
-<title>CrewFocus — Version 135</title>
+<title>CrewFocus — Version 136</title>
 <style>
 :root{color-scheme:light dark;--bg:#f3f6fa;--card:#fff;--ink:#15283f;--muted:#637184;--line:#dce3eb;--accent:#176b87;--soft:#e9f4f7;--danger:#b13e3e}
 @media(prefers-color-scheme:dark){:root{--bg:#101820;--card:#1a2632;--ink:#edf4fb;--muted:#aab8c6;--line:#344454;--accent:#72c7df;--soft:#203a46;--danger:#ff9b9b}}
@@ -289,7 +289,7 @@ main{position:relative}
 .flight-compact-card:has(> #flightCBRArea:not([hidden])){scroll-margin-top:110px}
 .flight-compact-card{scroll-margin-top:110px}
 
-/* v135: compact drive summary, with the same sector lines as Focus. */
+/* v136: compact drive summary, with the same sector lines as Focus. */
 #crewDuty .duty-summary{padding:18px 20px!important}
 #crewDuty .duty-summary .duty-heading{margin-bottom:4px!important}
 #crewDuty .duty-summary h2{margin:4px 0 8px!important}
@@ -315,9 +315,7 @@ main{position:relative}
 <button class="crew-tile" data-tool="duty"><span>▤</span><strong>Roster &amp; Duty</strong><small>Available</small></button><button class="crew-tile" data-tool="drive"><span>🚗</span><strong>Drive Times</strong><small>Available</small></button><button class="crew-tile" data-tool="calendar"><span>▣</span><strong>Export to Calendar</strong><small>Available</small></button><button class="crew-tile" data-tool="import"><span>⇧</span><strong>Import Roster</strong><small>Available</small></button><button class="crew-tile" data-tool="help"><span>◷</span><strong>Alarms &amp; Help</strong><small>Available</small></button><button class="crew-tile" data-tool="flight"><span>✈</span><strong>Flight Planning</strong><small>Beta</small></button><button class="crew-tile" data-tool="commuter"><span>🛫</span><strong>Commuter</strong><small>Planned</small></button><button class="crew-tile" data-tool="hotels"><span>▥</span><strong>Hotels &amp; CATS</strong><small>Planned</small></button><button class="crew-tile" data-tool="eba"><span>⚖</span><strong>EBA &amp; Rest</strong><small>Planned</small></button><button class="crew-tile" data-tool="pay"><span>$</span><strong>Pay Calculator</strong><small>Planned</small></button><button class="crew-tile" data-tool="packing"><span>▣</span><strong>Trip Checklist</strong><small>Planned</small></button><button class="crew-tile" data-tool="aircraft"><span>✈</span><strong>Aircraft Tracking</strong><small>Planned</small></button></div><div class="crew-tool-grid crew-settings-grid"><button class="crew-tile" id="dashDocuments" type="button"><span>📁</span><strong>Document Library</strong><small>Available</small></button><button class="crew-tile" id="dashSettings" type="button"><span>⚙</span><strong>Settings</strong><small>Available</small></button></div></section>
 <section class="crew-page hidden" id="crewDocuments"><div class="crew-section-heading"><h2 class="crew-page-title">Aviation Document Library</h2><button class="btn small" id="documentsBack" type="button">← Dashboard</button></div><div class="crew-panel"><h3>Upload aviation documents</h3><p class="note">A central library for manuals, procedures, EBA documents, operational references and other aviation material. Files are stored locally in this browser on this device; they are not yet interpreted or applied to flight planning. Always verify against current approved sources.</p><div class="field"><label for="documentCategory">Document category</label><select id="documentCategory"><option value="Operations manuals">Operations manuals</option><option value="AIP and charts">AIP and charts</option><option value="Aircraft manuals">Aircraft manuals</option><option value="EBA and rostering">EBA and rostering</option><option value="Airport procedures">Airport procedures</option><option value="Other aviation references">Other aviation references</option></select></div><div class="field"><label for="documentFiles">Choose documents</label><input id="documentFiles" type="file" accept=".pdf,.txt,.doc,.docx,.html,.htm,.csv,.json,image/*" multiple></div><button class="btn primary" id="documentsSave" type="button">Save to document library</button><p class="note" id="documentsStatus" role="status">Choose one or more documents to save locally.</p></div><div class="crew-panel"><h3>Saved documents</h3><div id="documentsList" class="note">Loading library…</div></div></section><section class="crew-page hidden" id="crewSettings"><div class="crew-section-heading"><h2 class="crew-page-title">Settings</h2><button class="btn small" id="settingsBack" type="button">← Dashboard</button></div><details class="crew-panel crew-settings-subsection"><summary>General Settings</summary><div class="crew-settings-inner"><label for="crewRole">Crew role</label><select id="crewRole"><option value="fc">Flight crew</option><option value="cc">Cabin crew</option></select><label for="crewAirline">Airline</label><select id="crewAirline"><option value="va">Virgin Australia</option><option value="qf">Qantas (planned)</option><option value="jq">Jetstar (planned)</option></select><button class="btn" id="settingsPlan" type="button">Edit addresses &amp; transport</button></div></details><details class="crew-panel crew-settings-subsection"><summary>Focus settings</summary><div class="crew-settings-inner"><p class="note">Enable the pages that automatic Focus may choose. Planned pages show a placeholder until developed.</p><div class="focus-checks" id="focusEnabledOptions"></div><label for="focusChoice">Current focus</label><select id="focusChoice"><option value="duty">Departure planning</option><option value="flight">Flight preparation</option><option value="commuter">Commuter</option><option value="hotel">Hotel &amp; transport</option><option value="packing">Trip preparation</option><option value="off">Days off</option></select><div class="crew-home-actions"><button class="btn primary" id="setManualFocus" type="button">Set manual focus</button><button class="btn" id="setAutoFocus" type="button">Use automatic</button></div><p class="note" id="focusSettingStatus"></p></div></details><details class="crew-panel crew-settings-subsection"><summary>Flight Planning settings</summary><div class="crew-settings-inner"><div class="field"><label for="crewAircraftType">Aircraft type for NOTAM screening</label><select id="crewAircraftType"><option value="B738">Boeing 737-800 (B738)</option><option value="B38M">Boeing 737 MAX 8 (B38M)</option><option value="B3XM">Boeing 737 MAX 10 (B3XM)</option></select></div><p class="note" id="crewAircraftDetails"></p><p class="note">Aircraft reference code 4C. Wingspan varies with wingtip configuration; confirm the specific aircraft dimensions before applying a numeric wingspan exclusion. Only clearly aircraft-specific NOTAMs are screened out; all screened-out entries remain available for review.</p><p class="note">Adjustable hours either side of duty sign-on. The NOTAM shortlist uses duty times and progresses as sectors finish. Original briefing remains available.</p><div class="fields"><div class="field"><label for="cbrBefore">Hours before duty commencement</label><select id="cbrBefore"></select></div><div class="field"><label for="cbrAfter">Hours after duty completion</label><select id="cbrAfter"></select></div><div class="field"><label for="cbrSectorBefore">Hours before each sector departure</label><select id="cbrSectorBefore"><option value="0">0</option><option value="0.5">0.5</option><option value="1" selected>1</option><option value="1.5">1.5</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select></div><div class="field"><label for="cbrSectorAfter">Hours after each sector arrival</label><select id="cbrSectorAfter"><option value="0">0</option><option value="0.5">0.5</option><option value="1">1</option><option value="1.5">1.5</option><option value="2" selected>2</option><option value="3">3</option><option value="4">4</option></select></div></div></div></details></section>
 <section class="crew-page hidden" id="crewFlight"><p id="cbrModeNotice" class="cbr-mode-notice" hidden style="display:none!important"></p><div class="crew-section-heading"><h2 class="crew-page-title">Flight Planning</h2><button class="btn small" id="flightBack" type="button" hidden>← Dashboard</button></div><div id="flightCompactHome" class="flight-compact-home"><div class="crew-panel flight-duty-reference" id="flightDutyReference"><div class="flight-reference-title">Duty screening <span class="flight-compact-stamp">Reference for WX / NOTAMs</span></div><div id="flightDutyWindowText" class="note">Import or review a CBR to establish the UTC screening window.</div>
-<div class="crew-screening-mode" id="crewScreeningModePanel"><strong>Weather screening mode</strong><label><input type="radio" name="crewWxMode" value="cbr"> Imported CBR duty</label><label><input type="radio" name="crewWxMode" value="duty"> Manual duty override</label><label><input type="radio" name="crewWxMode" value="sector"> Single-sector test</label><p class="note" id="crewWxModeStatus" role="status">Select the source for weather screening. Saved times are retained when switching.</p></div><details id="flightManualDuty"><summary>Confirm / override duty times (local)</summary><p class="note">These times are used for weather and NOTAM screening only. The imported CBR remains unchanged. Enter local times at each airport; UTC is calculated automatically.</p>
-<div class="fields"><div class="field"><label for="manualDutyDate">Duty date</label><input id="manualDutyDate" type="date"></div><div class="field"><label for="manualDutyStartPort">Duty start airport</label><input id="manualDutyStartPort" maxlength="4" placeholder="MEL" autocapitalize="characters"></div><div class="field"><label for="manualDutyStart">Duty start (local)</label><input id="manualDutyStart" type="time"></div><div class="field"><label for="manualDutyEndPort">Duty finish airport</label><input id="manualDutyEndPort" maxlength="4" placeholder="SYD" autocapitalize="characters"></div><div class="field"><label for="manualDutyEndDate">Duty finish date (local)</label><input id="manualDutyEndDate" type="date"></div><div class="field"><label for="manualDutyEnd">Duty finish (local)</label><input id="manualDutyEnd" type="time"></div></div>
-<p class="note" id="manualDutyUTC" role="status">Enter the local duty times to preview UTC conversion.</p><div class="crew-home-actions"><button class="btn primary" id="manualDutyApply" type="button">Use these screening times</button><button class="btn" id="manualDutyClear" type="button">Use imported CBR times</button></div><div id="crewTestTimeline" class="card" style="margin-top:14px;padding:12px"><h3 style="margin:0 0 8px">Test duty sector timeline</h3><p class="note">Begin with one test sector. Add further sectors only when needed. Local airport times are converted to UTC; the imported CBR remains unchanged.</p><div id="crewTestTimelineRows"></div><button class="btn" id="crewTestTimelineAdd" type="button" style="margin-top:8px">+ Add Sector</button><p class="note" id="crewTestTimelineStatus" role="status"></p><button class="btn primary" id="crewTestTimelineSave" type="button">Confirm sector times</button><button class="btn" id="crewTestTimelineReset" type="button">Reset to first imported sector</button></div></details></div>
+<div class="crew-screening-mode" id="crewScreeningModePanel"><strong>Weather screening mode</strong><label><input type="radio" name="crewWxMode" value="cbr"> Imported CBR duty</label><label><input type="radio" name="crewWxMode" value="sector"> Single-sector test</label><p class="note" id="crewWxModeStatus" role="status">Select the source for weather screening. Saved times are retained when switching.</p></div><details id="flightManualDuty"><summary>Single Sector Test · airport times</summary><p class="note">Enter the departure and arrival airport, local date and time. Each airport is independently converted to UTC. The imported CBR is not changed.</p><div id="crewTestTimeline" class="card" style="margin-top:14px;padding:12px"><h3 style="margin:0 0 8px">Test sector</h3><div id="crewTestTimelineRows"></div><p class="note" id="crewTestTimelineStatus" role="status"></p><button class="btn primary" id="crewTestTimelineSave" type="button">Confirm test sector</button><button class="btn" id="crewTestTimelineReset" type="button">Reset test sector</button></div></details></div>
 <section class="crew-panel flight-compact-card" id="flightCBRCard"><h3>Crew Briefing Report (CBR) <span class="flight-arrow" aria-hidden="true">⌄</span></h3><div class="flight-summary-line"><span id="flightDutySummary">No CBR imported</span><span id="flightCbrUpdated" class="flight-compact-stamp">Not imported</span></div><div class="crew-home-actions"><button class="btn primary" type="button" id="flightOpenCBRReview">Update/Review CBR</button><button class="btn" type="button" id="flightOpenCBRView">View CBR</button></div></section>
 <section class="crew-panel flight-compact-card" id="flightWXCard"><h3>Weather and NOTAMs <span class="flight-arrow" aria-hidden="true">⌄</span></h3><p class="flight-compact-stamp" id="flightWxUpdated">Not imported</p><div class="crew-home-actions"><button class="btn primary" type="button" id="flightAutoImport">Auto Import</button><button class="btn" type="button" id="flightManualImport">Manual Import</button><button class="btn" type="button" id="flightCurrentWx">Current WX/NOTAMs</button></div><p class="note" id="flightAutoStatus" role="status" hidden></p></section>
 <section class="crew-panel flight-compact-card" id="flightOperationalCard"><button class="flight-operational-button" id="flightOperationalOpen" type="button"><span><strong>Operational</strong><small>Airport, aircraft and duty requirements</small></span><span aria-hidden="true">⌄</span></button></section>
@@ -410,7 +408,7 @@ VA 1101 0705 NTL BNE 0720" rows="7"></textarea><p class="note">Check the year, d
 <h2>Calculation notes</h2>
 <p class="note">The sign on date and time are used exactly as entered, including for future planning. The countdown is relative to the current local time. Schedule times use the selected sign-on time zone; the live clock uses your device's local time zone. Your selections are remembered on this device. Past sign-on dates advance to today when reopening.</p>
 <p class="note">Hotel transport times can be saved and updated. This prototype saves them in the browser's local storage; downloaded-file previews may not retain settings. A hosted version can make saving more reliable across sessions and devices.</p>
-</section></details><p class="note" id="planApplyStatus" role="status"></p><button class="btn primary wide" id="applyPlan" type="button">Use this plan</button></div></dialog><dialog aria-labelledby="calendarTitle" id="calendarDialog"><div class="modal-shell"><header><h2 id="calendarTitle">Add to Calendar</h2><button class="btn small" id="closeCalendar" type="button">Close</button></header><label for="calendarScope">Include</label><select id="calendarScope"><option value="current">Accepted duty</option><option value="upcoming">Upcoming roster duties</option><option value="all">Whole roster</option></select><h3 id="calendarCount"></h3><p class="note" id="calendarSkipped" role="status"></p><div id="calendarIssues"></div><p class="note">One event per duty, with the original roster details. No hotels or reminders.</p><button class="btn primary wide" id="calendarExport" type="button">Add roster to Calendar</button><p class="note" id="calendarStatus" role="status"></p><details id="calendarSetup"><summary>One-time iPhone setup</summary><p class="note">Use a separate shortcut named <strong>Leave for Work Calendar</strong>. Your alarm shortcut stays separate. Shortcuts opens briefly during import and requests a return to this app. No downloading or Siri Suggestions is needed.</p><p class="note">One action at a time. Your progress is saved on this device. “What you should see” describes the checkpoint; if it differs, send that screen before continuing.</p><p class="note" id="calendarGuideProgress"></p><h3 id="calendarGuideTitle"></h3><div class="note" id="calendarGuideInstruction"></div><div class="calendar-issue"><strong>What you should see</strong><p class="note" id="calendarGuideExpected"></p></div><div class="row help-nav"><button class="btn" id="calendarGuideBack" type="button">Back</button><button class="btn primary" id="calendarGuideNext" type="button">Next step</button></div><button class="btn small" id="calendarGuideResume" type="button">Continue from my screenshot</button><p class="note">These controls can vary with iOS. The test checks your phone before sending a full roster. If Calendar opens an editor for every event, check the expanded Add New Event action and turn its compose screen off.</p><button class="btn wide" id="calendarTest" type="button">Test with one event</button><button class="btn wide" id="calendarSetupDone" type="button">I checked the test</button></details><details style="margin-top:16px"><summary>Other options &amp; roster changes</summary><p class="note">This makes a copy, not a live subscription. A completed import is remembered on this device to help prevent duplicates. Changed duties need their previous calendar events removed before you import them again. An interrupted shortcut can leave some events added: check Calendar before retrying.</p><button class="btn wide" id="calendarDownload" type="button">Download .ics file instead</button><p class="note">File import depends on the app opening the file; Safari and Files may only preview it. The shortcut above avoids that route.</p><button class="btn wide" id="calendarResetHistory" type="button">Allow a fresh import</button></details></div></dialog><dialog aria-labelledby="alarmHelpTitle" id="alarmHelp"><div class="help-shell"><header><h2 id="alarmHelpTitle">Set up iPhone alarms</h2><button class="btn small" id="closeAlarmHelp" type="button">Close</button></header><p class="note" id="alarmHelpProgress"></p><div id="alarmHelpContent"></div><p class="note" id="alarmHelpStatus" role="status"></p><div class="row help-nav"><button class="btn" id="alarmHelpBack" type="button">Back</button><button class="btn primary" id="alarmHelpNext" type="button">Next</button></div></div></dialog><footer class="note" style="text-align:center;padding:8px 10px">Version 135 · 12 Nov 2026</footer></main>
+</section></details><p class="note" id="planApplyStatus" role="status"></p><button class="btn primary wide" id="applyPlan" type="button">Use this plan</button></div></dialog><dialog aria-labelledby="calendarTitle" id="calendarDialog"><div class="modal-shell"><header><h2 id="calendarTitle">Add to Calendar</h2><button class="btn small" id="closeCalendar" type="button">Close</button></header><label for="calendarScope">Include</label><select id="calendarScope"><option value="current">Accepted duty</option><option value="upcoming">Upcoming roster duties</option><option value="all">Whole roster</option></select><h3 id="calendarCount"></h3><p class="note" id="calendarSkipped" role="status"></p><div id="calendarIssues"></div><p class="note">One event per duty, with the original roster details. No hotels or reminders.</p><button class="btn primary wide" id="calendarExport" type="button">Add roster to Calendar</button><p class="note" id="calendarStatus" role="status"></p><details id="calendarSetup"><summary>One-time iPhone setup</summary><p class="note">Use a separate shortcut named <strong>Leave for Work Calendar</strong>. Your alarm shortcut stays separate. Shortcuts opens briefly during import and requests a return to this app. No downloading or Siri Suggestions is needed.</p><p class="note">One action at a time. Your progress is saved on this device. “What you should see” describes the checkpoint; if it differs, send that screen before continuing.</p><p class="note" id="calendarGuideProgress"></p><h3 id="calendarGuideTitle"></h3><div class="note" id="calendarGuideInstruction"></div><div class="calendar-issue"><strong>What you should see</strong><p class="note" id="calendarGuideExpected"></p></div><div class="row help-nav"><button class="btn" id="calendarGuideBack" type="button">Back</button><button class="btn primary" id="calendarGuideNext" type="button">Next step</button></div><button class="btn small" id="calendarGuideResume" type="button">Continue from my screenshot</button><p class="note">These controls can vary with iOS. The test checks your phone before sending a full roster. If Calendar opens an editor for every event, check the expanded Add New Event action and turn its compose screen off.</p><button class="btn wide" id="calendarTest" type="button">Test with one event</button><button class="btn wide" id="calendarSetupDone" type="button">I checked the test</button></details><details style="margin-top:16px"><summary>Other options &amp; roster changes</summary><p class="note">This makes a copy, not a live subscription. A completed import is remembered on this device to help prevent duplicates. Changed duties need their previous calendar events removed before you import them again. An interrupted shortcut can leave some events added: check Calendar before retrying.</p><button class="btn wide" id="calendarDownload" type="button">Download .ics file instead</button><p class="note">File import depends on the app opening the file; Safari and Files may only preview it. The shortcut above avoids that route.</p><button class="btn wide" id="calendarResetHistory" type="button">Allow a fresh import</button></details></div></dialog><dialog aria-labelledby="alarmHelpTitle" id="alarmHelp"><div class="help-shell"><header><h2 id="alarmHelpTitle">Set up iPhone alarms</h2><button class="btn small" id="closeAlarmHelp" type="button">Close</button></header><p class="note" id="alarmHelpProgress"></p><div id="alarmHelpContent"></div><p class="note" id="alarmHelpStatus" role="status"></p><div class="row help-nav"><button class="btn" id="alarmHelpBack" type="button">Back</button><button class="btn primary" id="alarmHelpNext" type="button">Next</button></div></div></dialog><footer class="note" style="text-align:center;padding:8px 10px">Version 136 · 12 Nov 2026</footer></main>
 <script>
 (() => {
  const $ = id => document.getElementById(id);
@@ -2137,28 +2135,25 @@ window.crewIpadDraft={init:ipadInit,render:ipadCBRRender,updateButtons:ipadUpdat
    Screening is advisory; original NAIPS reports are never modified. */
 /* v126 — persistent manual duty screening override, independent of CBR. */
 /* v127: confirmed screening window is the shared source for Wx/NOTAM review. */
-const crewWxModeKey='crewFocusWeatherScreeningModeV135';
-function crewWxMode(){
- try{const mode=localStorage.getItem(crewWxModeKey);if(['cbr','duty','sector'].includes(mode))return mode;
-  if(localStorage.getItem('crewFocusTestSectorTimelineV132'))return 'sector';
-  const duty=JSON.parse(localStorage.getItem('crewFocusManualDutyV126')||'null');return duty?.enabled?'duty':'cbr';
- }catch(e){return 'cbr';}
-}
+const crewWxModeKey='crewFocusWeatherScreeningModeV136';
+function crewWxMode(){try{return localStorage.getItem(crewWxModeKey)==='sector'?'sector':'cbr';}catch(e){return 'cbr';}}
 function crewWxSetMode(mode){
- if(!['cbr','duty','sector'].includes(mode))return;
+ if(!['cbr','sector'].includes(mode))return;
  try{localStorage.setItem(crewWxModeKey,mode);}catch(e){}
  document.querySelectorAll('input[name="crewWxMode"]').forEach(el=>el.checked=el.value===mode);
  const status=document.getElementById('crewWxModeStatus');
- if(status)status.textContent=mode==='sector'?'Single-sector test active. Only confirmed sector airport events are assessed; duty override is inactive.':mode==='duty'?'Manual duty override active. Sector test is inactive.':'Imported CBR duty active. Both manual overrides are inactive.';
+ if(status)status.textContent=mode==='sector'?'Single Sector Test: only the confirmed test airports and times are assessed.':'Imported CBR: weather uses imported sector airport times.';
  if(typeof crewScreeningRefreshWeather==='function')crewScreeningRefreshWeather();
 }
 function crewWxModeInit(){
+ // Retire all older override modes without erasing the original imported CBR.
+ try{const old=localStorage.getItem('crewFocusWeatherScreeningModeV135');if(!localStorage.getItem(crewWxModeKey)&&old==='sector')localStorage.setItem(crewWxModeKey,'sector');}catch(e){}
  document.querySelectorAll('input[name="crewWxMode"]').forEach(el=>el.addEventListener('change',()=>{if(el.checked)crewWxSetMode(el.value);}));
  const mode=crewWxMode();document.querySelectorAll('input[name="crewWxMode"]').forEach(el=>el.checked=el.value===mode);
- const status=document.getElementById('crewWxModeStatus');if(status)status.textContent=mode==='sector'?'Single-sector test active. Only confirmed sector events are assessed.':mode==='duty'?'Manual duty override active; sector test is inactive.':'Imported CBR duty active; overrides are inactive.';
+ const status=document.getElementById('crewWxModeStatus');if(status)status.textContent=mode==='sector'?'Single Sector Test: confirm departure and arrival times below.':'Imported CBR: using imported sector times.';
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',crewWxModeInit);else crewWxModeInit();
-const crewScreeningKey='crewFocusManualDutyV126';
+const crewScreeningKey='crewFocusManualDutyV126'; // Legacy data retained, never used for screening.
 function crewScreeningAirport(code){
  const aliases={YMML:'MEL',YSSY:'SYD',YBBN:'BNE',YPAD:'ADL',YPPH:'PER',YSCB:'CBR',YMHB:'HBA',YBCG:'OOL',YBCS:'CNS',YPDN:'DRW'};
  const value=String(code||'').trim().toUpperCase();return aliases[value]||value;
@@ -2179,18 +2174,7 @@ function crewScreeningUTC(date,time,port){
   return new Date(ms);
  }catch(e){console.warn('Manual duty UTC conversion failed',e);return null;}
 }
-function crewManualDutyWindow(){
- if(crewWxMode()!=='duty')return null;
- try{
-  const o=JSON.parse(localStorage.getItem(crewScreeningKey)||'null');
-  if(!o||!o.enabled)return null;
-  const start=crewScreeningUTC(o.date,o.start,o.startPort),finish=crewScreeningUTC(o.endDate||o.date,o.end,o.endPort);
-  if(!start||!finish||finish<=start)return null;
-  const before=Number(document.getElementById('cbrBefore')?.value??1);
-  const after=Number(document.getElementById('cbrAfter')?.value??4);
-  return {start:new Date(start.getTime()-before*3600000),finish:new Date(finish.getTime()+after*3600000),date:o.date,source:'confirmed local duty times',manualStart:start,manualFinish:finish};
- }catch(e){console.warn('Screening window read failed',e);return null;}
-}
+function crewManualDutyWindow(){return null;}
 function crewScreeningRefreshWeather(){
  const raw=(document.getElementById('flightPaste')?.value||'').trim()||localStorage.getItem('crewFocusNaipsBriefingV1')||'';
  if(raw&&typeof flightNaipsParse==='function'&&typeof flightRenderNaips==='function'){
@@ -2199,65 +2183,14 @@ function crewScreeningRefreshWeather(){
  }
  return false;
 }
-function crewManualDutyInit(){
- const ids=['Date','StartPort','Start','EndPort','EndDate','End'];
- const get=k=>document.getElementById('manualDuty'+k);
- const button=document.getElementById('manualDutyApply');
- const status=get('UTC');
- if(!button||!status)return;
- const stored=()=>{try{return JSON.parse(localStorage.getItem(crewScreeningKey)||'null')||{};}catch(e){return {};}};
- const saved=stored();
- for(const k of ids){const key=k.charAt(0).toLowerCase()+k.slice(1);if(get(k)&&saved[key])get(k).value=saved[key];}
- function values(){return Object.fromEntries(ids.map(k=>[k.charAt(0).toLowerCase()+k.slice(1),(get(k)?.value||'').trim().toUpperCase()]));}
- function validate(v){
-  const a=crewScreeningUTC(v.date,v.start,v.startPort),b=crewScreeningUTC(v.endDate||v.date,v.end,v.endPort);
-  if(!a||!b)return {error:'Could not convert '+(!a?'start':'finish')+' time. Check the date, HH:MM time and airport code (MEL, SYD etc.).'};
-  if(b<=a)return {error:'Duty finish must be later than duty start. Check the finish date.'};
-  return {a,b};
- }
- function format(d){return d.toISOString().slice(0,16).replace('T',' ')+'Z';}
- function displaySaved(){
-  const o=stored(),win=crewManualDutyWindow();
-  if(o.enabled&&win){
-   button.textContent='✓ Screening Times Saved';button.style.background='#217a4a';
-   status.textContent='✓ Confirmed duty: '+format(win.manualStart)+' → '+format(win.manualFinish)+' · WX/NOTAM screening: '+format(win.start)+' → '+format(win.finish)+'.';
-   return true;
-  }
-  button.textContent='Use these screening times';button.style.removeProperty('background');return false;
- }
- function refresh(){
-  const v=values(),result=validate(v);
-  if(result.error){status.textContent=result.error;return;}
-  const current=stored();
-  if(current.enabled&&ids.every(k=>String(current[k.charAt(0).toLowerCase()+k.slice(1)]||'')===String(v[k.charAt(0).toLowerCase()+k.slice(1)]||''))){displaySaved();return;}
-  button.textContent='Use these screening times';button.style.removeProperty('background');
-  status.textContent='UTC preview: '+format(result.a)+' → '+format(result.b)+' · Tap Use these screening times to confirm.';
- }
- for(const k of ids)get(k)?.addEventListener('change',refresh);
- button.addEventListener('click',()=>{
-  const v=values(),result=validate(v);
-  if(result.error){status.textContent='⚠ Not saved — '+result.error;return;}
-  try{
-   localStorage.setItem(crewScreeningKey,JSON.stringify({...v,enabled:true}));
-   crewWxSetMode('duty');
-   if(!displaySaved())throw Error('Saved duty times could not be read back.');
-   const updated=crewScreeningRefreshWeather();
-   if(typeof crewFlightCompactRefresh==='function')crewFlightCompactRefresh();
-   if(!updated)status.textContent+=' Weather will be assessed when a NAIPS briefing is available.';
-  }catch(e){status.textContent='⚠ Screening times not confirmed: '+e.message;button.textContent='Use these screening times';button.style.removeProperty('background');}
- });
- document.getElementById('manualDutyClear')?.addEventListener('click',()=>{
-  try{localStorage.removeItem(crewScreeningKey);}catch(e){status.textContent='Could not clear override';return;}
-  button.textContent='Use these screening times';button.style.removeProperty('background');refresh();
-  status.textContent+=' · Manual override cleared';
-  crewWxSetMode('cbr');
-  if(typeof crewFlightCompactRefresh==='function')crewFlightCompactRefresh();
- });
- if(!displaySaved())refresh();
-}
-if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',crewManualDutyInit);else crewManualDutyInit();
 function crewWxDutyWindow(){
- const manual=crewManualDutyWindow();if(manual)return manual;
+ if(crewWxMode()==='sector'){
+  const events=crewSectorTimelineRead();
+  if(!events?.length)return null;
+  const times=events.map(e=>crewScreeningUTC(e.date,e.time,e.port)).filter(Boolean).sort((a,b)=>a-b);
+  if(!times.length)return null;
+  return {start:times[0],finish:times[times.length-1],source:'confirmed single sector',testSector:true};
+ }
  // A retained imported CBR is authoritative even if the review form is collapsed.
  // Never require the user to reimport it to review the weather.
  try{
@@ -2323,9 +2256,6 @@ function crewWxTafAnalysis(raw){
   for(const e of airportEvents){
    if(e.time<validFrom||e.time>=validTo)gaps.push(e.type+' '+crewWxUTC(e.time)+' outside TAF validity');
   }
- }else if(window&&!testTimelineActive){
-  if(validFrom>window.start)gaps.push('TAF begins '+crewWxUTC(validFrom)+' after duty Wx window begins');
-  if(validTo<window.finish)gaps.push('TAF expires '+crewWxUTC(validTo)+' before duty Wx window ends');
  }
  const groups=[];
  const re=/\b(FM(\d{2})(\d{2})(\d{2})|(?:BECMG|TEMPO|INTER|PROB30|PROB40)(?:\s+(?:TEMPO|INTER))?\s+(\d{2})(\d{2})\/(\d{2})(\d{2}))\b/gi;
@@ -2347,7 +2277,7 @@ function crewWxTafAnalysis(raw){
  const temps=tempMatch?tempMatch[1].trim().split(/\s+/).map(x=>/^M/i.test(x)?-Number(x.slice(1)):Number(x)):[];
  const qnh=qnhMatch?qnhMatch[1].trim().split(/\s+/).map(Number):[];
  const points=temps.length===4&&qnh.length===4?temps.map((t,i)=>({time:new Date(validFrom.getTime()+i*10800000),temp:t,qnh:qnh[i]})):[];
- const assessed=groups.map(g=>({...g,applicable:airportEvents.length?airportEvents.some(e=>e.time>=g.start&&e.time<g.end):(testTimelineActive?null:(window?g.start<window.finish&&g.end>window.start:null))}));
+ const assessed=groups.map(g=>({...g,applicable:airportEvents.length?airportEvents.some(e=>e.time>=g.start&&e.time<g.end):null}));
  return {window,airportEvents,testTimelineActive,untestedAirport,issued,validFrom,validTo,groups:assessed,points,warning:gaps.join(' · '),tempFound:temps.length===4,qnhFound:qnh.length===4};
 }
 // Select departure/arrival instants from the retained CBR without changing its contents.
@@ -2363,9 +2293,8 @@ function crewSectorSourceRows(){
  }catch(e){return [];}
 }
 function crewSectorDefaultEvents(){
- const manual=JSON.parse(localStorage.getItem(crewScreeningKey)||'null')||{};
  const saved=JSON.parse(localStorage.getItem('crewFocusCBRStateV1')||'null')||{};
- const date=manual.enabled?manual.date:(typeof effectiveCBRDate==='function'?effectiveCBRDate():saved.date);
+ const date=typeof effectiveCBRDate==='function'?effectiveCBRDate():saved.date;
  if(!/^\d{4}-\d{2}-\d{2}$/.test(date||''))return [];
  const result=[];let prev=null;
  for(const [i,r] of crewSectorSourceRows().entries()){
@@ -2395,67 +2324,39 @@ function crewTestTimelineInit(){
  const root=document.getElementById('crewTestTimelineRows'),status=document.getElementById('crewTestTimelineStatus');
  if(!root||!status)return;
  const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
- let workingEvents=crewSectorTimelineRead()||crewSectorDefaultEvents();
- function render(){
-  const events=workingEvents;
-  if(!events.length){root.textContent='Import a CBR with sector times first.';return;}
-  root.innerHTML=events.map((e,i)=>`<div class="crew-timeline-row" style="border-top:1px solid #dce3e9;padding:9px 0"><strong>${esc(e.type)} ${esc(e.flight)} · ${esc(e.port)}</strong><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px"><label style="flex:1;min-width:135px">Local date<input type="date" data-field="date" data-i="${i}" value="${esc(e.date)}"></label><label style="flex:1;min-width:105px">Local time<input type="time" data-field="time" data-i="${i}" value="${esc(e.time)}"></label></div><small data-utc="${i}"></small></div>`).join('');
-  root.querySelectorAll('input').forEach(input=>input.addEventListener('change',preview));preview();
- }
- function collect(){const original=workingEvents;return original.map((e,i)=>({...e,date:root.querySelector(`[data-i="${i}"][data-field="date"]`)?.value||'',time:root.querySelector(`[data-i="${i}"][data-field="time"]`)?.value||''}));}
- function preview(){
-  const events=collect();let previous=null,errors=[];
-  const window=crewManualDutyWindow();
-  for(const [i,e] of events.entries()){
-   const t=crewScreeningUTC(e.date,e.time,e.port),label=root.querySelector(`[data-utc="${i}"]`);
-   if(!t){errors.push('Invalid local time at '+e.port);if(label)label.textContent='⚠ UTC conversion unavailable';continue;}
-   if(previous&&t<previous)errors.push('Events are out of sequence at '+e.port);
-   previous=t;
-   const outside=window?.manualStart&&window?.manualFinish&&(t<window.manualStart||t>window.manualFinish);
-   if(label)label.textContent=t.toISOString().slice(0,16).replace('T',' ')+'Z'+(outside?' · ⚠ Outside confirmed duty':'');
-  }
-  status.textContent=errors.length?'⚠ '+errors.join(' · '):'Review UTC conversions, then confirm sector times.';
-  return errors.length===0?events:null;
- }
- document.getElementById('crewTestTimelineSave')?.addEventListener('click',()=>{
-  const events=preview();if(!events){status.textContent+=' · Not saved';return;}
-  try{localStorage.setItem(crewSectorTimelineKey,JSON.stringify({events,confirmedAt:new Date().toISOString()}));workingEvents=events;crewWxSetMode('sector');status.textContent='✓ Sector timeline saved. Weather recalculated; imported CBR unchanged.';crewScreeningRefreshWeather();}
-  catch(e){status.textContent='⚠ Could not save sector timeline: '+e.message;}
- });
- document.getElementById('crewTestTimelineReset')?.addEventListener('click',()=>{
-  localStorage.removeItem(crewSectorTimelineKey);workingEvents=crewSectorDefaultEvents();render();status.textContent='First imported sector restored for review. Confirm to use it.';crewScreeningRefreshWeather();
- });
- document.getElementById('crewTestTimelineAdd')?.addEventListener('click',()=>{
-  workingEvents=collect();
-  const imported=crewSectorSourceRows();
-  const next=Math.floor(workingEvents.length/2);
-  const row=imported[next];
-  const last=workingEvents[workingEvents.length-1];
-  const date=last?.date||document.getElementById('manualDutyDate')?.value||new Date().toISOString().slice(0,10);
-  const portFrom=crewScreeningAirport(row?.[1]||last?.port||'MEL');
-  const portTo=crewScreeningAirport(row?.[3]||'BNE');
-  const flight=row?.[0]||'TEST '+(next+1);
-  workingEvents.push({flight,type:'DEP',port:portFrom,date,time:row?.[2]||'12:00'},{flight,type:'ARR',port:portTo,date,time:row?.[4]||'13:00'});
-  render();status.textContent='Additional sector added for testing. Confirm sector times to apply.';
- });
+ const initial=()=>{const saved=crewSectorTimelineRead();if(saved?.length>=2)return saved.slice(0,2);const imported=crewSectorDefaultEvents();if(imported.length>=2)return imported.slice(0,2);const date=melbourneToday();return [{type:'DEP',flight:'TEST',port:'MEL',date,time:'12:00'},{type:'ARR',flight:'TEST',port:'BNE',date,time:'14:00'}];};
+ let working=initial();
+ function render(){root.innerHTML=working.map((e,i)=>`<div class="crew-timeline-row" style="border-top:1px solid #dce3e9;padding:10px 0"><strong>${i?'Arrival':'Departure'}</strong><div class="fields" style="margin-top:8px"><div class="field"><label>Airport (IATA or ICAO)</label><input data-i="${i}" data-field="port" maxlength="4" autocapitalize="characters" value="${esc(e.port)}" placeholder="${i?'BNE':'MEL'}"></div><div class="field"><label>Local date</label><input type="date" data-i="${i}" data-field="date" value="${esc(e.date)}"></div><div class="field"><label>Local time</label><input type="time" data-i="${i}" data-field="time" value="${esc(e.time)}"></div></div><small data-utc="${i}"></small></div>`).join('');root.querySelectorAll('input').forEach(x=>x.addEventListener('input',preview));preview();}
+ function collect(){return working.map((e,i)=>({...e,flight:'TEST',port:(root.querySelector(`[data-i="${i}"][data-field="port"]`)?.value||'').trim().toUpperCase(),date:root.querySelector(`[data-i="${i}"][data-field="date"]`)?.value||'',time:root.querySelector(`[data-i="${i}"][data-field="time"]`)?.value||''}));}
+ function preview(){const events=collect(),times=events.map(e=>crewScreeningUTC(e.date,e.time,e.port));times.forEach((t,i)=>{const label=root.querySelector(`[data-utc="${i}"]`);if(label)label.textContent=t?'UTC: '+t.toISOString().slice(0,16).replace('T',' ')+'Z':'⚠ Check airport, date and local time';});const valid=times.every(Boolean)&&times[1]>times[0]&&crewScreeningAirport(events[0].port)!==crewScreeningAirport(events[1].port);status.textContent=valid?'Review both UTC times, then confirm to recalculate weather.':'⚠ Enter two different supported airports and an arrival later than departure (UTC).';return valid?events:null;}
+ document.getElementById('crewTestTimelineSave')?.addEventListener('click',()=>{const events=preview();if(!events)return;try{localStorage.setItem(crewSectorTimelineKey,JSON.stringify({events,confirmedAt:new Date().toISOString()}));working=events;crewWxSetMode('sector');status.textContent='✓ Test sector confirmed. Only these two airport times are used for weather screening.';}catch(e){status.textContent='⚠ Could not save test sector: '+e.message;}});
+ document.getElementById('crewTestTimelineReset')?.addEventListener('click',()=>{localStorage.removeItem(crewSectorTimelineKey);working=[{type:'DEP',flight:'TEST',port:'MEL',date:melbourneToday(),time:'12:00'},{type:'ARR',flight:'TEST',port:'BNE',date:melbourneToday(),time:'14:00'}];render();status.textContent='Test values reset. Confirm to activate.';});
  render();
- document.getElementById('manualDutyApply')?.addEventListener('click',()=>{if(!crewSectorTimelineRead()){workingEvents=crewSectorDefaultEvents();render();}});
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',crewTestTimelineInit);else crewTestTimelineInit();
 function crewWxAirportEvents(code,window){
  const airport=crewScreeningAirport(code),out=[];
- const events=crewSectorTimelineRead();
- if(!events)return out; // Do not silently use outdated sector dates.
- for(const e of events){
-  if(crewScreeningAirport(e.port)!==airport)continue;
-  const instant=crewScreeningUTC(e.date,e.time,e.port);
-  if(!instant)continue;
-  out.push({time:instant,type:e.type,flight:e.flight,port:e.port,
-   outsideDuty:!!(window?.manualStart&&window?.manualFinish&&(instant<window.manualStart||instant>window.manualFinish))});
+ let events=[];
+ if(crewWxMode()==='sector')events=crewSectorTimelineRead()||[];
+ else {
+  const saved=(()=>{try{return JSON.parse(localStorage.getItem('crewFocusCBRStateV1')||'null')||{};}catch(e){return {};}})();
+  const rs=crewSectorSourceRows();
+  const date=typeof effectiveCBRDate==='function'?effectiveCBRDate():saved.date;
+  if(/^\d{4}-\d{2}-\d{2}$/.test(date||'')){
+   let previous=null;
+   for(const [i,r] of rs.entries())for(const e of [{type:'DEP',port:r[1],time:r[2]},{type:'ARR',port:r[3],time:r[4]}]){
+    if(!/^\d{1,2}:\d{2}$/.test(e.time||''))continue;
+    for(let shift=0;shift<4;shift++){
+     const day=new Date(date+'T12:00:00Z');day.setUTCDate(day.getUTCDate()+shift);
+     const d=day.toISOString().slice(0,10),instant=crewScreeningUTC(d,e.time,e.port);
+     if(instant&&(!previous||instant>=previous)){events.push({...e,flight:r[0]||'Sector '+(i+1),date:d});previous=instant;break;}
+    }
+   }
+  }
  }
+ for(const e of events){if(crewScreeningAirport(e.port)!==airport)continue;const instant=crewScreeningUTC(e.date,e.time,e.port);if(instant)out.push({time:instant,type:e.type,flight:e.flight,port:e.port,outsideDuty:false});}
  return out;
 }
-
 function crewWxInterpolate(points,time){
  if(points.length<2||time<points[0].time||time>points[points.length-1].time)return null;
  for(let i=0;i<points.length-1;i++){
@@ -2470,7 +2371,7 @@ function crewWxInterpolate(points,time){
 function crewWxMarkTaf(raw,parent,make){
  const a=crewWxTafAnalysis(raw);if(!a)return;
  const panel=make('div','crew-wx-assessment','',parent);
- make('p','flight-source','Screening mode: '+({cbr:'Imported CBR duty',duty:'Manual duty override',sector:'Single-sector test'}[crewWxMode()]),panel);
+ make('p','flight-source','Screening mode: '+({cbr:'Imported CBR duty',sector:'Single-sector test'}[crewWxMode()]),panel);
  if(a.untestedAirport){
   make('p','flight-source','Not in confirmed test sector — original TAF retained; no applicability or temperature/QNH assessment.',panel);
   return;
@@ -2478,10 +2379,10 @@ function crewWxMarkTaf(raw,parent,make){
  if(a.airportEvents?.length)make('p','flight-source','Confirmed airport event(s): '+a.airportEvents.map(e=>e.type+' '+(e.flight||'')+' '+crewWxUTC(e.time)).join(' · '),panel);
  if(a.issued)make('p','flight-source','Issued '+crewWxUTC(a.issued)+' · Valid '+crewWxUTC(a.validFrom)+' – '+crewWxUTC(a.validTo),panel);
  if(a.window)make('p','flight-source','Duty-wide Wx window ('+a.window.source+'): '+crewWxUTC(a.window.start)+' – '+crewWxUTC(a.window.finish),panel);
- if(!a.window)make('p','crew-wx-warning','⚠ Duty times unavailable — review/confirm the CBR duty to assess coverage.',panel);
+ if(!a.window)make('p','crew-wx-warning','⚠ Airport times unavailable — confirm the selected screening sector or imported CBR.',panel);
  else if(a.warning)make('p','crew-wx-warning','⚠ TAF UPDATE / REVIEW REQUIRED — '+a.warning,panel);
  else if(a.airportEvents?.length)make('p','crew-wx-ok','TAF validity covers the confirmed airport event time(s).',panel);
- else if(!a.testTimelineActive)make('p','crew-wx-ok','TAF validity covers the duty weather window.',panel);
+ else if(!a.airportEvents?.length)make('p','flight-source','No verified airport event time — TAF applicability cannot be determined.',panel);
  if(a.groups.length&&!a.untestedAirport){make('p','flight-source',a.airportEvents?.length?'TAF change groups at confirmed airport event times (UTC):':'TAF change groups (UTC):',panel);
   for(const g of a.groups)make('div',g.applicable===true?'crew-wx-group-active':'crew-wx-group-outside',(g.applicable===true?'● APPLICABLE  ':g.applicable===false?'○ Outside window  ':'◇ Duty not confirmed  ')+g.token+' ('+crewWxUTC(g.start)+' – '+crewWxUTC(g.end)+')',panel);
  }else make('p','flight-source','No timed change groups identified; prevailing conditions apply until a change.',panel);
@@ -3093,7 +2994,7 @@ try{
   if(wxT){const age=(Date.now()-Number(wxT))/3600000;wx.textContent='Last imported: '+fmt(wxT)+(age>=1?' · '+Math.floor(age)+' h ago':' · <1 h ago');if(age>=12)wx.classList.add('wx-red');else if(age>=6)wx.classList.add('wx-amber');}
   else wx.textContent=localStorage.getItem('crewFocusNaipsBriefingV1')?'Previous briefing retained · import time unavailable':'Not imported';
   const reference=el('flightDutyWindowText');
-  const manualWindow=crewManualDutyWindow();
+  const manualWindow=null;
   if(reference&&manualWindow){reference.textContent='Confirmed local duty times · UTC screening: '+manualWindow.start.toISOString().slice(0,16).replace('T',' ')+'Z – '+manualWindow.finish.toISOString().slice(0,16).replace('T',' ')+'Z';return;}
   if(reference){
    const existing=el('cbrPreview')?.textContent||'';
