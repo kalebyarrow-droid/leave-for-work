@@ -5,7 +5,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <meta content="#15283f" name="theme-color"/>
-<title>CrewFocus v160 — Adaptive CBR Layout</title>
+<title>CrewFocus v161 — Adaptive CBR Layout</title>
 <style>
 :root{color-scheme:light dark;--bg:#f3f6fa;--card:#fff;--ink:#15283f;--muted:#637184;--line:#dce3eb;--accent:#176b87;--soft:#e9f4f7;--danger:#b13e3e}
 @media(prefers-color-scheme:dark){:root{--bg:#101820;--card:#1a2632;--ink:#edf4fb;--muted:#aab8c6;--line:#344454;--accent:#72c7df;--soft:#203a46;--danger:#ff9b9b}}
@@ -270,7 +270,7 @@ main{overflow-x:clip}
 #ipadCBRPreview .ipad-wallpaper .ipad-cbr-section .ipad-cbr-wx-line,#ipadCBRPreview .ipad-wallpaper .ipad-cbr-section .ipad-selected{flex:0 0 auto!important;position:relative!important;margin:1px 0!important;padding:1px 0!important}
 #ipadCBRPreview .ipad-wallpaper .ipad-cbr-section .ipad-cbr-writing{flex:1 1 auto!important;min-height:0!important;height:auto!important}
 
-/* v160: only the blue clock band has a fixed height. Content dictates all other heights. */
+/* v161: only the blue clock band has a fixed height. Content dictates all other heights. */
 .ipad-wallpaper{height:auto!important;min-height:100%!important;max-height:none!important;overflow:visible!important;display:flex!important;flex-direction:column!important}
 .ipad-wallpaper .ipad-reserved{height:14vh!important;min-height:14vh!important;max-height:14vh!important;flex:0 0 14vh!important;margin:0 0 6px!important}
 .ipad-wallpaper .ipad-visit-columns{height:auto!important;min-height:0!important;max-height:none!important;flex:0 0 auto!important;grid-auto-rows:auto!important;align-items:stretch!important;overflow:visible!important}
@@ -360,6 +360,33 @@ main{position:relative}
 .crew-screening-mode label{display:flex;align-items:center;gap:9px;margin:9px 0;font-weight:600}
 .crew-screening-mode input{width:auto!important;flex:none}
 .crew-screening-mode .note{margin:7px 0 0}
+</style><style id="ipadCanonical161">/* v161 canonical briefing renderer: only clock area is fixed; all other content measured naturally. */
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:#fff;font-family:Arial,sans-serif}
+.ipad-wallpaper{--ipad-crew-row-height:22px;box-sizing:border-box!important;width:100%!important;min-width:0!important;max-width:none!important;height:auto!important;min-height:100vh!important;max-height:none!important;margin:0!important;padding:1.1vw!important;background:#f7f9fc!important;color:#17202b!important;border:0!important;border-radius:0!important;box-shadow:none!important;display:flex!important;flex-direction:column!important;overflow:visible!important;gap:.6vw!important}
+.ipad-wallpaper .ipad-sector-strip{display:none!important}
+.ipad-wallpaper .ipad-reserved{display:block!important;flex:0 0 14vh!important;height:14vh!important;min-height:14vh!important;max-height:14vh!important;background:#e8edf4!important;border-radius:0!important;margin:0!important;padding:0!important}
+.ipad-wallpaper .ipad-visit-columns{display:grid!important;grid-template-columns:repeat(var(--ipad-count),minmax(0,1fr))!important;align-items:stretch!important;gap:.45vw!important;width:100%!important;min-width:0!important;max-width:none!important;height:auto!important;min-height:0!important;max-height:none!important;flex:0 0 auto!important;overflow:visible!important}
+.ipad-wallpaper .ipad-visit{box-sizing:border-box!important;display:flex!important;flex-direction:column!important;align-self:stretch!important;min-width:0!important;max-width:none!important;width:auto!important;height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important;padding:.5vw!important;border:1px solid #cbd5e1!important;border-radius:5px!important;font-size:clamp(10px,1.06vw,18px)!important;line-height:1.23!important;white-space:normal!important;overflow-wrap:break-word!important}
+.ipad-wallpaper .ipad-visit>strong{display:block!important;flex:0 0 auto!important;position:static!important;font-size:clamp(11px,1.12vw,19px)!important;line-height:1.2!important;margin:0 0 3px!important;white-space:normal!important;overflow-wrap:break-word!important}
+.ipad-wallpaper .ipad-aircraft-details{font-size:clamp(9px,.93vw,16px)!important;line-height:1.2!important;margin:0 0 4px!important;padding:0 0 3px!important;white-space:normal!important}
+.ipad-wallpaper .ipad-cbr-section{display:block!important;position:static!important;flex:0 0 auto!important;height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important;padding:3px 0 5px!important;border-top:1px solid #d7dee8!important}
+.ipad-wallpaper .ipad-cbr-section .ipad-visit-heading{display:block!important;position:static!important;border:0!important;padding:0!important;margin:0 0 4px!important;font-size:clamp(9px,.94vw,16px)!important;line-height:1.15!important}
+.ipad-wallpaper .ipad-cbr-populated>.ipad-visit-heading{display:none!important}
+.ipad-wallpaper .ipad-cbr-section .ipad-cbr-wx-line,.ipad-wallpaper .ipad-cbr-section .ipad-selected{display:block!important;position:static!important;flex:0 0 auto!important;height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important;margin:2px 0!important;padding:0!important;font-size:clamp(9px,.96vw,17px)!important;line-height:1.24!important;white-space:normal!important;overflow-wrap:break-word!important;word-break:normal!important}
+.ipad-wallpaper .ipad-cbr-wx-alert{color:#bd202c!important;font-weight:700!important}
+.ipad-wallpaper .ipad-notam-text,.ipad-wallpaper .ipad-notam-text span{color:#1659ad!important}
+.ipad-wallpaper .ipad-cbr-writing{height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important;flex:0 0 auto!important}
+.ipad-wallpaper .ipad-cbr-writing-operational{min-height:2.5vh!important}
+.ipad-wallpaper .ipad-sector-crew-section{box-sizing:border-box!important;display:block!important;position:static!important;flex:0 0 auto!important;width:100%!important;min-width:0!important;height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important;margin:.3vw 0 0!important;padding:.5vw 0 0!important;border-top:1px solid #9aaabd!important}
+.ipad-wallpaper .ipad-sector-crew-columns{display:grid!important;grid-template-columns:minmax(0,var(--ipad-details-width,25%)) repeat(var(--ipad-sectors),minmax(0,1fr))!important;gap:.45vw!important;width:100%!important;min-width:0!important;max-width:none!important;align-items:stretch!important}
+.ipad-wallpaper .ipad-sector-crew-card{box-sizing:border-box!important;display:block!important;width:auto!important;min-width:0!important;max-width:none!important;height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important;padding:.4vw!important;border:1px solid #cbd5e1!important;border-radius:5px!important}
+.ipad-wallpaper .ipad-sector-crew-card>strong{display:flex!important;align-items:center!important;height:auto!important;min-height:22px!important;max-height:none!important;margin:0!important;padding:0 0 4px!important;font-size:clamp(10px,1vw,17px)!important;line-height:1.15!important;white-space:normal!important;overflow-wrap:break-word!important}
+.ipad-wallpaper .ipad-crew-details-table{padding:0!important;margin:0!important}
+.ipad-wallpaper .ipad-crew-names{padding:22px 0 0!important;margin:0!important}
+.ipad-wallpaper .ipad-crew-details-row{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:2px!important;height:auto!important;min-height:20px!important;max-height:none!important;margin:0!important;padding:2px 0!important;font-size:clamp(8px,.8vw,14px)!important;line-height:1.15!important;border-bottom:1px dotted #d5dce5!important}
+.ipad-wallpaper .ipad-crew-details-row span{min-width:0!important;overflow-wrap:break-word!important;white-space:normal!important}
+.ipad-wallpaper .ipad-sector-crew-card .ipad-crew-name{display:block!important;box-sizing:border-box!important;width:100%!important;height:auto!important;min-height:20px!important;max-height:none!important;margin:0!important;padding:2px 0!important;border:0!important;border-bottom:1px dotted #d5dce5!important;background:transparent!important;text-align:left!important;font-size:clamp(9px,.89vw,15px)!important;line-height:1.15!important;white-space:normal!important;overflow-wrap:break-word!important;text-overflow:clip!important;overflow:visible!important}
 </style></head>
 <body>
 <main>
@@ -2231,7 +2258,7 @@ function ipadCBRRender(){
   sector.append(list);crewColumns.append(sector);
  });
  crewSection.append(crewColumns);frame.append(crewSection);
- ipadApplyLayout(frame);crewFitIpadPreview();root.append(frame);
+ ipadApplyLayout(frame);root.append(frame);crewFitIpadPreview();
  if(Object.keys(ipadSelections).length){const details=document.createElement('details');details.className='ipad-manage';const summary=document.createElement('summary');summary.textContent='Edit / remove selected NOTAMs';details.append(summary);
  for(const [key,item] of Object.entries(ipadSelections)){const line=document.createElement('div');line.className='ipad-manage-row';const label=document.createElement('span');label.textContent=item.id+' · '+(visits.find(v=>v.key===item.visit)?.label||item.visit);line.append(label);
  const move=document.createElement('button');move.type='button';move.className='btn small';move.textContent='Change visit';move.onclick=()=>{const choices=ipadAirportVisits((visits.find(v=>v.key===item.visit)||{}).code);const response=prompt('Override airport visit for '+item.id+'\nValidity: '+ipadValidityLabel(item.raw)+'\n'+choices.map((v,i)=>(i+1)+'. '+v.label+' ('+ipadVisitUtcLabel(v)+')').join('\n')+'\nEnter visit number:');if(response===null)return;const n=Number(response);if(!Number.isInteger(n)||n<1||n>choices.length)return alert('Invalid visit number');const visit=choices[n-1];delete ipadSelections[key];ipadSelections[visit.key+'|'+item.id]={...item,visit:visit.key};ipadSave();ipadCBRRender();ipadUpdateButtons();};line.append(move);
@@ -2252,141 +2279,11 @@ function ipadExportHTML(){
  const original=document.querySelector('#ipadCBRPreview .ipad-wallpaper');
  if(!original)throw Error('Generate the iPad CBR preview first.');
  const clone=original.cloneNode(true);
- clone.querySelectorAll('button').forEach(b=>{const span=document.createElement('span');span.className=b.className;span.textContent=b.textContent;span.style.display='contents';b.replaceWith(span)});
+ clone.style.removeProperty('zoom');clone.style.removeProperty('width');clone.style.removeProperty('min-width');clone.style.removeProperty('max-width');clone.style.removeProperty('transform');
+ clone.querySelectorAll('button').forEach(b=>{const span=document.createElement('span');span.className=b.className;span.textContent=b.textContent;b.replaceWith(span)});
  clone.querySelectorAll('textarea,input').forEach(el=>{const span=document.createElement('span');span.textContent=el.value||'';el.replaceWith(span)});
- const css=[...document.styleSheets].filter(x=>!x.href).map(sheet=>{try{return [...sheet.cssRules].map(r=>r.cssText).join('\n')}catch(e){return ''}}).join('\n');
- const exportCss=`
- *{box-sizing:border-box}html,body{margin:0!important;padding:0!important;background:#fff!important;overflow:hidden!important}
- body{font-family:Arial,sans-serif!important;color:#17202b!important}
- .ipad-wallpaper{position:absolute!important;left:0!important;top:0!important;margin:0!important;width:2360px!important;min-width:2360px!important;max-width:2360px!important;height:1640px!important;min-height:1640px!important;max-height:1640px!important;padding:24px!important;border:0!important;border-radius:0!important;box-shadow:none!important;overflow:hidden!important;background:#f7f9fc!important;display:flex!important;flex-direction:column!important}
- .ipad-sector-strip{flex:0 0 auto!important;font-size:25px!important;line-height:1.3!important;padding:9px 4px!important;white-space:normal!important;overflow:visible!important}
- .ipad-reserved{flex:0 0 max(0px, 315px)!important;height:max(0px, 315px)!important;margin-bottom:15px!important;font-size:20px!important}
- .ipad-visit-columns{display:grid!important;grid-template-columns:repeat(var(--ipad-count),minmax(0,1fr))!important;gap:12px!important;width:100%!important;min-width:0!important;max-width:100%!important;flex:1 1 0!important;min-height:0!important;align-items:stretch!important}
- .ipad-visit{display:flex!important;flex-direction:column!important;flex:initial!important;min-width:0!important;max-width:none!important;width:auto!important;min-height:0!important;height:100%!important;overflow:hidden!important;padding:13px!important;font-size:22px!important;line-height:1.3!important}
- .ipad-visit>strong{font-size:25px!important;line-height:1.2!important;min-height:54px!important}
- .ipad-visit-heading{font-size:21px!important;margin-top:13px!important;padding-top:6px!important}
- .ipad-selected{font-size:21px!important;line-height:1.25!important;padding:7px 0!important;overflow-wrap:break-word!important}
- .ipad-column-crew{margin-top:auto!important;min-width:0!important;padding-top:10px!important;overflow:hidden!important}
- .ipad-column-crew>strong{font-size:21px!important;line-height:1.3!important}
- .ipad-crew-table{width:100%!important;overflow:visible!important}
- .ipad-crew-grid{display:grid!important;grid-template-columns:12% 10% 12% 9% 10% minmax(0,1fr)!important;gap:3px!important;width:100%!important;min-width:0!important;max-width:100%!important;align-items:start!important;white-space:normal!important}
- .ipad-crew-header{font-size:16px!important;padding:5px 0!important}
- .ipad-crew-person{font-size:18px!important;line-height:1.2!important;padding:5px 0!important;min-height:30px!important;cursor:default!important}
- .ipad-crew-person span{min-width:0!important;overflow:hidden!important;overflow-wrap:anywhere!important;word-break:normal!important}
- .ipad-crew-person span:last-child{font-size:18px!important}
- .ipad-crew-names{display:flex!important;flex-direction:column!important;gap:4px!important;width:100%!important}
- .ipad-crew-name{display:block!important;width:100%!important;border:0!important;border-bottom:1px dotted #ccd4df!important;background:transparent!important;color:#17202b!important;text-align:left!important;font:23px/1.25 Arial,sans-serif!important;padding:6px 0!important;white-space:normal!important;overflow-wrap:break-word!important}
- .ipad-column-crew textarea{font-size:19px!important}
- 
- /* v102 export: 4 airport visits above 3 independent crew sectors */
- .ipad-visit-columns{flex:0 0 auto!important;min-height:0!important;align-items:start!important}
- .ipad-visit{height:auto!important;min-height:280px!important;max-height:520px!important;overflow:hidden!important}
- .ipad-sector-crew-section{flex:1 1 auto!important;min-height:0!important;margin-top:22px!important;padding-top:16px!important;border-top:3px solid #9aaabd!important;overflow:hidden!important}
- .ipad-sector-crew-title{font-size:26px!important;margin-bottom:15px!important}
- .ipad-sector-crew-columns{display:grid!important;grid-template-columns:repeat(var(--ipad-sectors),minmax(0,1fr))!important;gap:18px!important;min-width:0!important;width:100%!important}
- .ipad-sector-crew-card{min-width:0!important;padding:14px!important;border:2px solid #cbd5e1!important;border-radius:10px!important}
- .ipad-sector-crew-card>strong{font-size:24px!important;margin-bottom:12px!important}
- .ipad-sector-crew-card .ipad-crew-name{font-size:23px!important;line-height:1.3!important;padding:8px 0!important;white-space:nowrap!important;overflow-wrap:normal!important;word-break:normal!important;overflow:visible!important;text-overflow:clip!important}
- /* v103: all three crew columns use the full 2360px export width */
- .ipad-sector-crew-section{overflow:visible!important;max-width:none!important}
- .ipad-sector-crew-columns{grid-template-columns:repeat(var(--ipad-sectors),minmax(0,1fr))!important;min-width:0!important;gap:12px!important}
- .ipad-sector-crew-card{padding:12px 16px!important;overflow:hidden!important}
-
-`;
- // v104: iPad Quick Look / Mail preview may block JavaScript. CSS must fit independently.
- const responsiveCss=`
- html,body{width:100%!important;height:100%!important;overflow:hidden!important}
- body{container-type:inline-size!important}
- .ipad-wallpaper{position:relative!important;left:auto!important;top:auto!important;transform:none!important;width:100%!important;min-width:0!important;max-width:100%!important;height:100dvh!important;min-height:0!important;max-height:100dvh!important;padding:1.25cqw!important;overflow:hidden!important}
- .ipad-sector-strip{font-size:1.6cqw!important;line-height:1.2!important;padding:.4cqw!important;white-space:nowrap!important}
- .ipad-reserved{flex:0 0 max(0px, 18vh)!important;height:max(0px, 18vh)!important;min-height:0!important;margin-bottom:1vh!important;font-size:1.2cqw!important;overflow:hidden!important}
- .ipad-visit-columns{display:grid!important;grid-template-columns:repeat(var(--ipad-count),minmax(0,1fr))!important;gap:.7cqw!important;min-width:0!important;max-width:100%!important;width:100%!important;flex:0 0 auto!important}
- .ipad-visit{width:auto!important;min-width:0!important;max-width:100%!important;min-height:16vh!important;max-height:23vh!important;height:auto!important;padding:.8cqw!important;font-size:1.25cqw!important;overflow:hidden!important}
- .ipad-visit>strong{font-size:1.45cqw!important;min-height:0!important;line-height:1.2!important}
- .ipad-visit-heading{font-size:1.25cqw!important;margin-top:.6cqw!important}
- .ipad-selected{font-size:1.2cqw!important;line-height:1.2!important}
- .ipad-sector-crew-section{flex:1 1 auto!important;min-height:0!important;max-width:100%!important;width:100%!important;margin-top:1vh!important;padding-top:1vh!important;overflow:hidden!important}
- .ipad-sector-crew-title{font-size:1.6cqw!important;margin-bottom:.6cqw!important}
- .ipad-sector-crew-columns{display:grid!important;grid-template-columns:repeat(var(--ipad-sectors),minmax(0,1fr))!important;gap:.7cqw!important;width:100%!important;min-width:0!important}
- .ipad-sector-crew-card{min-width:0!important;max-width:100%!important;padding:.8cqw!important;overflow:hidden!important}
- .ipad-sector-crew-card>strong{font-size:1.45cqw!important;margin-bottom:.5cqw!important}
- .ipad-sector-crew-card .ipad-crew-name{font-size:1.30cqw!important;line-height:1.2!important;padding:.35cqw 0!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
- `;
- clone.style.setProperty('--ipad-count',String(clone.querySelectorAll('.ipad-visit').length));
- const ipadExportLayoutCss=`
- .ipad-sector-strip{display:none!important}.ipad-reserved{margin-top:0!important;border-radius:0!important;flex:0 0 var(--ipad-clock-height,15vh)!important;height:var(--ipad-clock-height,15vh)!important}
- .ipad-visit{min-height:var(--ipad-airport-height,23vh)!important;max-height:var(--ipad-airport-height,23vh)!important;overflow:hidden!important}
- .ipad-visit>strong{font-size:var(--ipad-airport-font,17px)!important;min-height:0!important}.ipad-visit-heading,.ipad-selected{font-size:var(--ipad-airport-font,17px)!important}
- .ipad-sector-crew-columns{grid-template-columns:var(--ipad-details-width,25%) repeat(var(--ipad-sectors),minmax(0,1fr))!important}
- .ipad-sector-crew-card .ipad-crew-name{font-size:var(--ipad-crew-font,16px)!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
- .ipad-crew-details-row{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:3px!important;padding:5px 0!important;border-bottom:1px dotted #ccd4df!important;font-size:clamp(10px,1cqw,15px)!important}
- .ipad-crew-details-row span{min-width:0!important;overflow:hidden!important;text-overflow:ellipsis!important}
- .ipad-aircraft-details{font-size:var(--ipad-airport-font,17px)!important}
- `;
- const alignedCss='\n/* v107: canonical crew rows, consistent font and baseline across all sectors */\n.ipad-crew-details-card>strong,.ipad-sector-crew-card>strong{display:flex;align-items:center;min-height:44px!important;margin:0!important;padding:0 0 8px!important;box-sizing:border-box}\n.ipad-crew-details-table .ipad-crew-details-row:first-child{height:34px!important;min-height:34px!important;align-items:center!important}\n.ipad-crew-details-table .ipad-aligned-crew-row,.ipad-crew-names .ipad-aligned-crew-row{height:var(--ipad-crew-row-height,34px)!important;min-height:var(--ipad-crew-row-height,34px)!important;max-height:var(--ipad-crew-row-height,34px)!important;box-sizing:border-box!important;display:flex!important;align-items:center!important;padding:0 2px!important;margin:0!important;line-height:1.1!important;border-bottom:1px dotted #ccd4df!important}\n.ipad-crew-details-table .ipad-aligned-crew-row{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important}\n.ipad-crew-names{padding-top:34px!important}\n.ipad-sector-crew-card .ipad-crew-name{font-size:var(--ipad-crew-font,14px)!important;white-space:nowrap!important;text-overflow:ellipsis!important;overflow:hidden!important;width:100%!important;text-align:left!important}\n';
- const compactCss='\n/* v110 compact wallpaper: common geometry for preview and exported HTML */\n.ipad-wallpaper{--ipad-crew-row-height:24px!important;box-sizing:border-box!important}\n.ipad-wallpaper .ipad-sector-crew-section{margin-top:5px!important;padding-top:5px!important;border-top:1px solid #9aaabd!important;flex:0 0 auto!important;min-height:0!important}\n.ipad-wallpaper .ipad-sector-crew-title{display:none!important}\n.ipad-wallpaper .ipad-sector-crew-columns{gap:5px!important;align-items:start!important}\n.ipad-wallpaper .ipad-sector-crew-card{padding:5px 7px!important;border-width:1px!important;border-radius:5px!important;min-height:0!important}\n.ipad-wallpaper .ipad-crew-details-card>strong,.ipad-wallpaper .ipad-sector-crew-card>strong{height:27px!important;min-height:27px!important;max-height:27px!important;line-height:1.05!important;font-size:var(--ipad-crew-font,14px)!important;padding:0!important;margin:0!important;display:flex!important;align-items:center!important}\n.ipad-wallpaper .ipad-crew-details-table .ipad-crew-details-row:first-child{height:23px!important;min-height:23px!important;max-height:23px!important;padding:0!important;line-height:1!important;font-size:11px!important}\n.ipad-wallpaper .ipad-crew-names{padding-top:23px!important;gap:0!important;margin:0!important}\n.ipad-wallpaper .ipad-crew-details-table .ipad-aligned-crew-row,.ipad-wallpaper .ipad-crew-names .ipad-aligned-crew-row{height:var(--ipad-crew-row-height)!important;min-height:var(--ipad-crew-row-height)!important;max-height:var(--ipad-crew-row-height)!important;padding:0 2px!important;margin:0!important;line-height:1.05!important;border-bottom:1px dotted #d4dae1!important}\n.ipad-wallpaper .ipad-crew-details-table .ipad-aligned-crew-row{font-size:11px!important}\n.ipad-wallpaper .ipad-sector-crew-card .ipad-crew-name{font-size:var(--ipad-crew-font,14px)!important;line-height:1.05!important;padding:0 2px!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}\n.ipad-wallpaper .ipad-visit-columns{gap:5px!important}\n.ipad-wallpaper .ipad-visit{padding:6px!important;min-height:0!important;box-sizing:border-box!important}\n.ipad-wallpaper .ipad-visit>strong{min-height:0!important;height:auto!important;margin:0 0 3px!important;padding:0 0 3px!important;line-height:1.15!important}\n.ipad-wallpaper .ipad-visit-heading{margin:3px 0 0!important;padding:3px 0!important;line-height:1.1!important;min-height:0!important}\n.ipad-wallpaper .ipad-selected{padding:2px 0!important;margin:0!important;line-height:1.15!important}\n.ipad-wallpaper .ipad-aircraft-details{margin-top:2px!important;line-height:1.15!important}\n';
- const bottomCrewCss=`
- /* v110: preserve the complete crew table and anchor it near the bottom of the iPad */
- .ipad-wallpaper{display:flex!important;flex-direction:column!important;overflow:hidden!important}
- .ipad-wallpaper .ipad-reserved{flex-shrink:0!important}
- .ipad-wallpaper .ipad-visit-columns{flex:0 0 auto!important;align-self:stretch!important}
- .ipad-wallpaper .ipad-sector-crew-section{margin-top:auto!important;margin-bottom:1.1vh!important;flex:0 0 auto!important;max-height:calc(100% - var(--ipad-clock-height,15vh) - var(--ipad-airport-height,23vh) - 3vh)!important;overflow:hidden!important}
- .ipad-wallpaper .ipad-sector-crew-columns{grid-template-columns:minmax(0,var(--ipad-details-width,25%)) repeat(var(--ipad-sectors),minmax(0,1fr))!important;width:100%!important;min-width:0!important;gap:6px!important}
- .ipad-wallpaper .ipad-sector-crew-card{width:100%!important;min-width:0!important;max-width:100%!important}
- .ipad-wallpaper .ipad-crew-details-card>strong,.ipad-wallpaper .ipad-sector-crew-card>strong{font-size:clamp(12px,1.05cqw,17px)!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
- .ipad-wallpaper .ipad-sector-crew-card .ipad-crew-name{font-size:var(--ipad-crew-font,16px)!important}
- .ipad-wallpaper .ipad-crew-details-row span{min-width:0!important}
- `;
- const dynamicNotamCss=`
- /* v113: content-driven airport height and uniform operational font */
- html,body{height:auto!important;min-height:100%!important;overflow:auto!important}
- .ipad-wallpaper{height:auto!important;min-height:100dvh!important;max-height:none!important;overflow:visible!important}
- .ipad-wallpaper .ipad-visit-columns{grid-auto-rows:auto!important;align-items:stretch!important;flex:0 0 auto!important}
- .ipad-wallpaper .ipad-visit{height:auto!important;min-height:var(--ipad-airport-height,23vh)!important;max-height:none!important;overflow:visible!important;align-self:stretch!important}
- .ipad-wallpaper .ipad-visit>strong{position:relative!important;z-index:1!important;flex:0 0 auto!important;overflow-wrap:anywhere!important}
- .ipad-wallpaper .ipad-selected,.ipad-wallpaper .ipad-selected span{font-size:var(--ipad-airport-font,17px)!important;line-height:1.18!important;white-space:pre-wrap!important;overflow-wrap:anywhere!important;word-break:normal!important}
- .ipad-wallpaper .ipad-sector-crew-section{max-height:none!important;overflow:visible!important;flex:0 0 auto!important;margin-top:auto!important}
- `;
- const compact114Css='\n/* v114 unified compact iPad typography and tighter gutters */\n.ipad-wallpaper .ipad-visit,.ipad-wallpaper .ipad-visit-heading,.ipad-wallpaper .ipad-selected,.ipad-wallpaper .ipad-selected span,.ipad-wallpaper .ipad-aircraft-details,.ipad-wallpaper .ipad-alternate .ipad-selected{font-family:Arial,sans-serif!important;font-size:11px!important;line-height:1.13!important;letter-spacing:0!important;word-break:normal!important;overflow-wrap:break-word!important;white-space:normal!important}\n.ipad-wallpaper .ipad-visit>strong,.ipad-wallpaper .ipad-sector-crew-card>strong,.ipad-wallpaper .ipad-crew-details-card>strong{font-size:12px!important;line-height:1.12!important;letter-spacing:0!important}\n.ipad-wallpaper .ipad-sector-crew-card .ipad-crew-name,.ipad-wallpaper .ipad-crew-details-row,.ipad-wallpaper .ipad-crew-details-row span{font-size:11px!important;line-height:1.08!important;letter-spacing:0!important}\n.ipad-wallpaper .ipad-visit-columns{gap:5px!important;align-items:stretch!important;grid-auto-rows:auto!important}\n.ipad-wallpaper .ipad-visit{padding:4px!important;min-height:145px!important;max-height:none!important;height:auto!important;overflow:visible!important}\n.ipad-wallpaper .ipad-visit>strong{margin:0 0 2px!important;padding:0 0 2px!important;min-height:0!important}\n.ipad-wallpaper .ipad-visit-heading{padding:2px 0!important;margin:2px 0 0!important}\n.ipad-wallpaper .ipad-selected{padding:2px 0!important;margin:0!important}\n.ipad-wallpaper .ipad-sector-crew-columns{gap:5px!important}\n.ipad-wallpaper .ipad-sector-crew-card{padding:4px!important}\n.ipad-wallpaper .ipad-crew-details-card>strong,.ipad-wallpaper .ipad-sector-crew-card>strong{height:23px!important;min-height:23px!important;max-height:23px!important;padding:0!important;margin:0!important}\n.ipad-wallpaper .ipad-crew-details-table .ipad-crew-details-row:first-child{height:19px!important;min-height:19px!important;max-height:19px!important;font-size:10px!important}\n.ipad-wallpaper .ipad-crew-names{padding-top:19px!important}\n.ipad-wallpaper .ipad-crew-details-table .ipad-aligned-crew-row,.ipad-wallpaper .ipad-crew-names .ipad-aligned-crew-row{height:21px!important;min-height:21px!important;max-height:21px!important;padding:0 1px!important}\n.ipad-wallpaper .ipad-sector-crew-card .ipad-crew-name{padding:0 1px!important}\n.ipad-wallpaper .ipad-sector-crew-section{max-height:none!important;overflow:visible!important}\n\n/* v114 exported CBR: maintain compact readable layout regardless of viewport */\nhtml,body{height:auto!important;overflow:auto!important}\n.ipad-wallpaper{overflow:visible!important;min-height:100dvh!important;max-height:none!important;height:auto!important}\n.ipad-wallpaper .ipad-visit-columns{flex:0 0 auto!important}\n.ipad-wallpaper .ipad-sector-crew-section{margin-top:160px!important;max-height:none!important;overflow:visible!important}\n';
- const compact115Css='\n/* v115 tighter crew row spacing in AirDropped CBR */\n.ipad-wallpaper .ipad-crew-details-table .ipad-aligned-crew-row,.ipad-wallpaper .ipad-crew-names .ipad-aligned-crew-row{height:16px!important;min-height:16px!important;max-height:16px!important;padding:0 1px!important;line-height:1!important}\n.ipad-wallpaper .ipad-sector-crew-card .ipad-crew-name{line-height:1!important;padding:0 1px!important}\n';
- const compact116Css="\n/* v116 CBR section dividers, colour coding and crew alignment */\n.ipad-wallpaper .ipad-visit-heading{font-weight:700!important;border-top:1px solid #d3dce6!important;padding:2px 0 1px!important;margin:2px 0 0!important}\n.ipad-wallpaper .ipad-notam-text,.ipad-wallpaper .ipad-notam-text span{color:#1659ad!important}\n.ipad-wallpaper .ipad-crew-details-row:first-child span{font-weight:700!important}\n.ipad-wallpaper .ipad-crew-details-card{position:relative!important}\n.ipad-wallpaper .ipad-crew-details-table{padding-top:0!important}\n.ipad-wallpaper .ipad-crew-names{padding-top:19px!important}\n.ipad-wallpaper .ipad-crew-details-card .ipad-crew-details-table{padding-top:23px!important}\n.ipad-wallpaper .ipad-crew-details-card .ipad-crew-details-row:first-child{height:19px!important}\n.ipad-wallpaper .ipad-crew-details-card .ipad-aligned-crew-row{height:16px!important;min-height:16px!important;max-height:16px!important}\n";
- const v117ExportCss=`
- /* v117: same contiguous layout as the app preview and responsive iPad output */
- html,body{height:auto!important;min-height:100%!important;overflow:auto!important}
- .ipad-wallpaper{display:flex!important;flex-direction:column!important;height:100dvh!important;min-height:100dvh!important;max-height:none!important;overflow:visible!important}
- .ipad-wallpaper .ipad-visit-columns{display:grid!important;flex:1 1 auto!important;grid-auto-rows:minmax(0,1fr)!important;align-items:stretch!important;min-height:0!important}
- .ipad-wallpaper .ipad-visit{height:100%!important;min-height:0!important;max-height:none!important;overflow:visible!important}
- .ipad-wallpaper .ipad-sector-crew-section{margin-top:0!important;flex:0 0 auto!important;margin-bottom:0!important;max-height:none!important;overflow:visible!important;padding-top:5px!important}
- .ipad-wallpaper .ipad-aircraft-details{font-size:11px!important;line-height:1.12!important;margin:1px 0 3px!important;padding:1px 0!important}
- `;
- const html='<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><title>CrewFocus iPad Briefing</title><style>'+css+'\n'+exportCss+responsiveCss+'\n'+ipadExportLayoutCss+'\n'+alignedCss+'\n'+compactCss+'\n'+bottomCrewCss+'\n'+dynamicNotamCss+'\n'+compact114Css+compact115Css+compact116Css+v117ExportCss+`
-/* v149: concise duty-applicable weather and expandable handwriting space. */
-.ipad-wallpaper .ipad-cbr-wx-line{font-family:Arial,sans-serif;font-size:11px;line-height:1.2;margin:2px 0;white-space:normal;overflow-wrap:break-word;color:#17202b}
-.ipad-wallpaper .ipad-cbr-wx-alert{color:#bd202c!important;font-weight:700}
-.ipad-wallpaper .ipad-cbr-writing{flex:0 0 auto;min-height:54px;min-width:0}
-.ipad-wallpaper .ipad-cbr-writing-notams{min-height:70px}
-.ipad-wallpaper .ipad-cbr-writing-operational{min-height:100px}
-
-/* v158: shorten the airport columns while preserving the existing blue clock band.
-   Allow airport panels to consume the remaining height; keep the crew strip visible. */
-.ipad-wallpaper{height:100dvh!important;min-height:100dvh!important;max-height:100dvh!important;overflow:hidden!important;display:flex!important;flex-direction:column!important}
-.ipad-wallpaper .ipad-reserved{height:14vh!important;min-height:14vh!important;max-height:14vh!important;flex:0 0 14vh!important;margin:0 0 0.6vh!important;padding:0!important;overflow:hidden!important}
-.ipad-wallpaper .ipad-visit-columns{flex:0 0 43vh!important;min-height:0!important;height:43vh!important;grid-auto-rows:minmax(0,1fr)!important;align-items:stretch!important;overflow:visible!important}
-.ipad-wallpaper .ipad-visit{min-height:0!important;max-height:none!important;height:100%!important;overflow:hidden!important}
-.ipad-wallpaper .ipad-sector-crew-section{flex:0 0 auto!important;margin-top:0.7vh!important;margin-bottom:0!important;max-height:31vh!important;overflow:hidden!important}
-
-/* v159: preserve the existing blue clock band and airport column heights. */
-.ipad-wallpaper .ipad-visit{display:flex!important;flex-direction:column!important;min-height:0!important}
-.ipad-wallpaper .ipad-cbr-section{display:flex!important;flex-direction:column!important;min-height:0!important;flex:1 1 0!important;overflow:hidden!important;position:relative!important}
-.ipad-wallpaper .ipad-cbr-section-weather{flex:1.45 1 0!important}
-.ipad-wallpaper .ipad-cbr-section-notams{flex:1.05 1 0!important}
-.ipad-wallpaper .ipad-cbr-section-operational{flex:.85 1 0!important}
-.ipad-wallpaper .ipad-cbr-section .ipad-visit-heading{position:relative!important;flex:0 0 auto!important;display:block!important;margin:0 0 4px!important;padding:3px 0 3px!important;line-height:1.15!important;z-index:1!important;background:transparent!important}
-.ipad-wallpaper .ipad-cbr-section .ipad-cbr-wx-line,.ipad-wallpaper .ipad-cbr-section .ipad-selected{flex:0 0 auto!important;position:relative!important;margin:1px 0!important;padding:1px 0!important;line-height:1.2!important}
-.ipad-wallpaper .ipad-cbr-section .ipad-cbr-writing{flex:1 1 auto!important;min-height:0!important;height:auto!important;overflow:hidden!important}
-.ipad-wallpaper .ipad-cbr-section .ipad-cbr-writing-notams,.ipad-wallpaper .ipad-cbr-section .ipad-cbr-writing-operational{min-height:0!important}
-`+'\n/* v160: only the blue clock band has a fixed height. Content dictates all other heights. */\n.ipad-wallpaper{height:auto!important;min-height:100%!important;max-height:none!important;overflow:visible!important;display:flex!important;flex-direction:column!important}\n.ipad-wallpaper .ipad-reserved{height:14vh!important;min-height:14vh!important;max-height:14vh!important;flex:0 0 14vh!important;margin:0 0 6px!important}\n.ipad-wallpaper .ipad-visit-columns{height:auto!important;min-height:0!important;max-height:none!important;flex:0 0 auto!important;grid-auto-rows:auto!important;align-items:stretch!important;overflow:visible!important}\n.ipad-wallpaper .ipad-visit{height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important;display:flex!important;flex-direction:column!important}\n.ipad-wallpaper .ipad-cbr-section{height:auto!important;min-height:0!important;max-height:none!important;flex:0 0 auto!important;display:block!important;overflow:visible!important;position:relative!important;padding:2px 0 4px!important}\n.ipad-wallpaper .ipad-cbr-section-weather,.ipad-wallpaper .ipad-cbr-section-notams,.ipad-wallpaper .ipad-cbr-section-operational{flex:0 0 auto!important}\n.ipad-wallpaper .ipad-cbr-populated>.ipad-visit-heading{display:none!important}\n.ipad-wallpaper .ipad-cbr-section .ipad-visit-heading{margin:2px 0 4px!important;padding:3px 0!important;position:static!important}\n.ipad-wallpaper .ipad-cbr-section .ipad-cbr-wx-line,.ipad-wallpaper .ipad-cbr-section .ipad-selected{position:static!important;display:block!important;height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important;margin:2px 0!important;padding:1px 0!important;white-space:normal!important;overflow-wrap:anywhere!important;line-height:1.2!important}\n.ipad-wallpaper .ipad-cbr-writing{height:auto!important;min-height:24px!important;max-height:none!important;flex:0 0 auto!important;overflow:visible!important}\n.ipad-wallpaper .ipad-cbr-writing-notams{min-height:38px!important}\n.ipad-wallpaper .ipad-cbr-writing-operational{min-height:58px!important}\n.ipad-wallpaper .ipad-sector-crew-section{height:auto!important;min-height:0!important;max-height:none!important;flex:0 0 auto!important;overflow:visible!important;margin:8px 0 0!important;padding:5px 0 0!important}\n.ipad-wallpaper .ipad-sector-crew-card{height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important}\n.ipad-wallpaper .ipad-crew-details-card>strong,.ipad-wallpaper .ipad-sector-crew-card>strong{height:23px!important;min-height:23px!important;max-height:none!important;margin:0!important;padding:0!important;align-items:center!important}\n.ipad-wallpaper .ipad-crew-details-card .ipad-crew-details-table{padding-top:0!important}\n.ipad-wallpaper .ipad-crew-names{padding-top:0!important}\n.ipad-wallpaper .ipad-sector-crew-card .ipad-crew-name{height:auto!important;min-height:16px!important;max-height:none!important;overflow:visible!important;text-overflow:clip!important;white-space:normal!important}\n'+'</style></head><body>'+clone.outerHTML+`<script>(function(){const page=document.querySelector('.ipad-wallpaper');function fit(){const w=window.innerWidth,h=window.innerHeight;const scale=Math.min(w/2360,h/1640);page.style.transform='none';}addEventListener('resize',fit);fit();})();<\/script>`+'</body></html>';
-
+ const css=document.getElementById('ipadCanonical161').textContent;
+ const html='<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CrewFocus iPad Briefing v161</title><style>'+css+'</style></head><body>'+clone.outerHTML+'</body></html>';
  return new File([html],'CrewFocus_iPad_CBR.html',{type:'text/html'});
 }
 async function ipadShareCBR(){
@@ -2402,7 +2299,7 @@ async function ipadShareCBR(){
 
 function crewFitIpadPreview(){
  const root=document.getElementById('ipadCBRPreview'),page=root?.querySelector('.ipad-wallpaper');if(!page)return;
- const width=1400,available=Math.max(200,root.clientWidth||document.documentElement.clientWidth);
+ const width=1474,available=Math.max(200,root.clientWidth||document.documentElement.clientWidth);
  const factor=Math.min(1,available/width);
  page.style.setProperty('zoom',String(factor),'important');
  page.style.setProperty('width',width+'px','important');
