@@ -5,7 +5,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <meta content="#15283f" name="theme-color"/>
-<title>CrewFocus v146 — Local Calendar Duty Titles</title>
+<title>CrewFocus v147 — CBR Applicable Weather</title>
 <style>
 :root{color-scheme:light dark;--bg:#f3f6fa;--card:#fff;--ink:#15283f;--muted:#637184;--line:#dce3eb;--accent:#176b87;--soft:#e9f4f7;--danger:#b13e3e}
 @media(prefers-color-scheme:dark){:root{--bg:#101820;--card:#1a2632;--ink:#edf4fb;--muted:#aab8c6;--line:#344454;--accent:#72c7df;--soft:#203a46;--danger:#ff9b9b}}
@@ -235,6 +235,13 @@ main{overflow-x:clip}
 #flightViewArea[hidden],#flightCBRArea[hidden],#flightWXArea[hidden],#flightOperArea[hidden]{display:none!important}
 #ipadCBRPreview:not(:empty){max-width:100%;overflow-x:auto}
 .ipad-speci-compact{color:#bd202c;font-weight:700;font-size:0.85em;line-height:1.2;overflow-wrap:anywhere;margin:2px 0 4px}
+
+/* v147: concise duty-applicable weather and expandable handwriting space. */
+.ipad-wallpaper .ipad-cbr-wx-line{font-family:Arial,sans-serif;font-size:11px;line-height:1.2;margin:2px 0;white-space:normal;overflow-wrap:break-word;color:#17202b}
+.ipad-wallpaper .ipad-cbr-wx-alert{color:#bd202c!important;font-weight:700}
+.ipad-wallpaper .ipad-cbr-writing{flex:0 0 auto;min-height:54px;min-width:0}
+.ipad-wallpaper .ipad-cbr-writing-notams{min-height:70px}
+.ipad-wallpaper .ipad-cbr-writing-operational{min-height:100px}
 </style>
 <style>
 :root{--bg:#f3f5f7;--card:#fff;--ink:#14283f;--accent:#146e7b;--soft:#e9f4f3;--muted:#657486}
@@ -409,7 +416,7 @@ VA 1101 0705 NTL BNE 0720" rows="7"></textarea><p class="note">Check the year, d
 <h2>Calculation notes</h2>
 <p class="note">The sign on date and time are used exactly as entered, including for future planning. The countdown is relative to the current local time. Schedule times use the selected sign-on time zone; the live clock uses your device's local time zone. Your selections are remembered on this device. Past sign-on dates advance to today when reopening.</p>
 <p class="note">Hotel transport times can be saved and updated. This prototype saves them in the browser's local storage; downloaded-file previews may not retain settings. A hosted version can make saving more reliable across sessions and devices.</p>
-</section></details><p class="note" id="planApplyStatus" role="status"></p><button class="btn primary wide" id="applyPlan" type="button">Use this plan</button></div></dialog><dialog aria-labelledby="calendarTitle" id="calendarDialog"><div class="modal-shell"><header><h2 id="calendarTitle">Add to Calendar</h2><button class="btn small" id="closeCalendar" type="button">Close</button></header><label for="calendarScope">Include</label><select id="calendarScope"><option value="current">Accepted duty</option><option value="upcoming">Upcoming roster duties</option><option value="all">Whole roster</option></select><h3 id="calendarCount"></h3><p class="note" id="calendarSkipped" role="status"></p><div id="calendarIssues"></div><p class="note">One event per duty. Titles show local sign-on and sign-off times and finishing location; full sector details remain in Notes. No hotels or reminders.</p><button class="btn primary wide" id="calendarExport" type="button">Add roster to Calendar</button><p class="note" id="calendarStatus" role="status"></p><details id="calendarSetup"><summary>One-time iPhone setup</summary><p class="note">Use a separate shortcut named <strong>Leave for Work Calendar</strong>. Your alarm shortcut stays separate. Shortcuts opens briefly during import and requests a return to this app. No downloading or Siri Suggestions is needed.</p><p class="note">One action at a time. Your progress is saved on this device. “What you should see” describes the checkpoint; if it differs, send that screen before continuing.</p><p class="note" id="calendarGuideProgress"></p><h3 id="calendarGuideTitle"></h3><div class="note" id="calendarGuideInstruction"></div><div class="calendar-issue"><strong>What you should see</strong><p class="note" id="calendarGuideExpected"></p></div><div class="row help-nav"><button class="btn" id="calendarGuideBack" type="button">Back</button><button class="btn primary" id="calendarGuideNext" type="button">Next step</button></div><button class="btn small" id="calendarGuideResume" type="button">Continue from my screenshot</button><p class="note">These controls can vary with iOS. The test checks your phone before sending a full roster. If Calendar opens an editor for every event, check the expanded Add New Event action and turn its compose screen off.</p><button class="btn wide" id="calendarTest" type="button">Test with one event</button><button class="btn wide" id="calendarSetupDone" type="button">I checked the test</button></details><details style="margin-top:16px"><summary>Other options &amp; roster changes</summary><p class="note">This makes a copy, not a live subscription. A completed import is remembered on this device to help prevent duplicates. Changed duties need their previous calendar events removed before you import them again. An interrupted shortcut can leave some events added: check Calendar before retrying.</p><button class="btn wide" id="calendarDownload" type="button">Download .ics file instead</button><p class="note">File import depends on the app opening the file; Safari and Files may only preview it. The shortcut above avoids that route.</p><button class="btn wide" id="calendarResetHistory" type="button">Allow a fresh import</button></details></div></dialog><dialog aria-labelledby="alarmHelpTitle" id="alarmHelp"><div class="help-shell"><header><h2 id="alarmHelpTitle">Set up iPhone alarms</h2><button class="btn small" id="closeAlarmHelp" type="button">Close</button></header><p class="note" id="alarmHelpProgress"></p><div id="alarmHelpContent"></div><p class="note" id="alarmHelpStatus" role="status"></p><div class="row help-nav"><button class="btn" id="alarmHelpBack" type="button">Back</button><button class="btn primary" id="alarmHelpNext" type="button">Next</button></div></div></dialog><footer class="note" style="text-align:center;padding:8px 10px">Version 146 · 14 Nov 2026</footer></main>
+</section></details><p class="note" id="planApplyStatus" role="status"></p><button class="btn primary wide" id="applyPlan" type="button">Use this plan</button></div></dialog><dialog aria-labelledby="calendarTitle" id="calendarDialog"><div class="modal-shell"><header><h2 id="calendarTitle">Add to Calendar</h2><button class="btn small" id="closeCalendar" type="button">Close</button></header><label for="calendarScope">Include</label><select id="calendarScope"><option value="current">Accepted duty</option><option value="upcoming">Upcoming roster duties</option><option value="all">Whole roster</option></select><h3 id="calendarCount"></h3><p class="note" id="calendarSkipped" role="status"></p><div id="calendarIssues"></div><p class="note">One event per duty. Titles show local sign-on and sign-off times and finishing location; full sector details remain in Notes. No hotels or reminders.</p><button class="btn primary wide" id="calendarExport" type="button">Add roster to Calendar</button><p class="note" id="calendarStatus" role="status"></p><details id="calendarSetup"><summary>One-time iPhone setup</summary><p class="note">Use a separate shortcut named <strong>Leave for Work Calendar</strong>. Your alarm shortcut stays separate. Shortcuts opens briefly during import and requests a return to this app. No downloading or Siri Suggestions is needed.</p><p class="note">One action at a time. Your progress is saved on this device. “What you should see” describes the checkpoint; if it differs, send that screen before continuing.</p><p class="note" id="calendarGuideProgress"></p><h3 id="calendarGuideTitle"></h3><div class="note" id="calendarGuideInstruction"></div><div class="calendar-issue"><strong>What you should see</strong><p class="note" id="calendarGuideExpected"></p></div><div class="row help-nav"><button class="btn" id="calendarGuideBack" type="button">Back</button><button class="btn primary" id="calendarGuideNext" type="button">Next step</button></div><button class="btn small" id="calendarGuideResume" type="button">Continue from my screenshot</button><p class="note">These controls can vary with iOS. The test checks your phone before sending a full roster. If Calendar opens an editor for every event, check the expanded Add New Event action and turn its compose screen off.</p><button class="btn wide" id="calendarTest" type="button">Test with one event</button><button class="btn wide" id="calendarSetupDone" type="button">I checked the test</button></details><details style="margin-top:16px"><summary>Other options &amp; roster changes</summary><p class="note">This makes a copy, not a live subscription. A completed import is remembered on this device to help prevent duplicates. Changed duties need their previous calendar events removed before you import them again. An interrupted shortcut can leave some events added: check Calendar before retrying.</p><button class="btn wide" id="calendarDownload" type="button">Download .ics file instead</button><p class="note">File import depends on the app opening the file; Safari and Files may only preview it. The shortcut above avoids that route.</p><button class="btn wide" id="calendarResetHistory" type="button">Allow a fresh import</button></details></div></dialog><dialog aria-labelledby="alarmHelpTitle" id="alarmHelp"><div class="help-shell"><header><h2 id="alarmHelpTitle">Set up iPhone alarms</h2><button class="btn small" id="closeAlarmHelp" type="button">Close</button></header><p class="note" id="alarmHelpProgress"></p><div id="alarmHelpContent"></div><p class="note" id="alarmHelpStatus" role="status"></p><div class="row help-nav"><button class="btn" id="alarmHelpBack" type="button">Back</button><button class="btn primary" id="alarmHelpNext" type="button">Next</button></div></div></dialog><footer class="note" style="text-align:center;padding:8px 10px">Version 147 · 14 Nov 2026</footer></main>
 <script>
 (() => {
  const $ = id => document.getElementById(id);
@@ -1973,6 +1980,62 @@ function ipadCompactSpeci(airportCode){
  specis.sort((a,b)=>(a.day-b.day)||(a.hour-b.hour)||(a.minute-b.minute));
  return specis[specis.length-1].text;
 }
+// v147: compact airport-specific CBR forecast; never use an out-of-validity TAF.
+function ipadCbrCompactWx(text){
+ return String(text||'').replace(/\bSHOWERS? OF LIGHT RAIN\b/gi,'-SHRA').replace(/\bSHOWERS? OF MODERATE RAIN\b/gi,'SHRA').replace(/\bLIGHT RAIN\b/gi,'-RN').replace(/\bMODERATE RAIN\b/gi,'RN').replace(/\bHEAVY RAIN\b/gi,'+RN').replace(/\bNO SIG WX\b/gi,'NSW').replace(/\b(\d{3}|VRB)(\d{2,3})KT\b/gi,(_,dir,spd)=>dir+'/'+Number(spd)).replace(/\s+/g,' ').trim();
+}
+function ipadCbrWeather(visit){
+ const source=(document.getElementById('flightPaste')?.value||'').trim()||localStorage.getItem('crewFocusNaipsBriefingV1')||'';
+ const parsed=source?flightNaipsParse(source):null;
+ const reports=parsed?.airports?.get(visit.code)?.weather||[];
+ const event=visit.time instanceof Date?visit.time:new Date(visit.time);
+ if(!Number.isFinite(event.getTime()))return [];
+ const candidates=[];
+ for(const raw of reports){
+  const head=raw.match(/^\s*TAF(?:\s+(?:AMD|COR))?\s+[A-Z]{4}\s+(\d{2})(\d{2})(\d{2})Z?\s+(\d{2})(\d{2})\/(\d{2})(\d{2})\b/i);
+  if(!head)continue;
+  const from=crewWxDDHH(+head[4],+head[5],0,event);
+  let to=crewWxDDHH(+head[6],+head[7],0,from);
+  if(to<=from)to=crewWxDDHH(+head[6],+head[7],0,new Date(from.getTime()+86400000));
+  if(event<from||event>=to)continue;
+  const issued=crewWxDDHH(+head[1],+head[2],+head[3],from);
+  // Do not use a TAF issued after the relevant airport event.
+  if(issued>event)continue;
+  const groups=[];
+  const re=/\b(FM(\d{2})(\d{2})(\d{2})|(?:BECMG|TEMPO|INTER|PROB30|PROB40)(?:\s+(?:TEMPO|INTER))?\s+(\d{2})(\d{2})\/(\d{2})(\d{2}))\b/gi;
+  let m;while((m=re.exec(raw))){
+   const fm=!!m[2],start=fm?crewWxDDHH(+m[2],+m[3],+m[4],from):crewWxDDHH(+m[5],+m[6],0,from);
+   let end=fm?to:crewWxDDHH(+m[7],+m[8],0,start);
+   if(!fm&&end<=start)end=crewWxDDHH(+m[7],+m[8],0,new Date(start.getTime()+86400000));
+   groups.push({start,end,kind:fm?'FM':'CHANGE'});
+  }
+  for(let i=0;i<groups.length;i++)if(groups[i].kind==='FM'){const next=groups.slice(i+1).find(g=>g.kind==='FM');if(next)groups[i].end=next.start;}
+  const remark=(raw.split(/\bRMK\b/i)[1]||'').split(/\bTAF3\b/i)[0];
+  const t=remark.match(/\bT\s+((?:M?\d{1,2}\s+){3}M?\d{1,2})\b/i);
+  const q=remark.match(/\bQ\s+((?:\d{4}\s+){3}\d{4})\b/i);
+  const temps=t?t[1].trim().split(/\s+/).map(v=>/^M/i.test(v)?-Number(v.slice(1)):Number(v)):[];
+  const qnh=q?q[1].trim().split(/\s+/).map(Number):[];
+  const points=temps.length===4&&qnh.length===4?temps.map((temp,i)=>({time:new Date(from.getTime()+i*10800000),temp,qnh:qnh[i]})):[];
+  candidates.push({raw,issued,analysis:{validFrom:from,groups,points}});
+ }
+ if(!candidates.length)return []; // Deliberately blank for missing or invalid TAF.
+ candidates.sort((a,b)=>b.issued-a.issued);
+ const {raw,analysis}=candidates[0];
+ const layers=crewWxForecastLayers(raw,analysis,event);
+ if(!layers)return [];
+ const result=[];
+ if(layers.prevailing&&layers.prevailing!=='Not supplied')result.push({text:ipadCbrCompactWx(layers.prevailing),red:false});
+ for(const t of [...layers.temporary,...layers.transitions]){
+  const m=t.token.match(/^(TEMPO|INTER|BECMG|PROB30|PROB40)(?:\s+(?:TEMPO|INTER))?\s+(\d{2})(\d{2})\/(\d{2})(\d{2})/i);
+  const prefix=m?({TEMPO:'T',INTER:'I',BECMG:'B',PROB30:'P30',PROB40:'P40'}[m[1].toUpperCase()]||'')+m[3]+'/'+m[5]+': ':'';
+  result.push({text:prefix+ipadCbrCompactWx(t.weather),red:true});
+ }
+ const speci=ipadCompactSpeci(visit.code);
+ if(speci)result.push({text:speci,red:true});
+ const tq=crewWxInterpolate(analysis.points,event);
+ if(tq)result.push({text:'T: '+Math.round(tq.temp)+' Q: '+Math.round(tq.qnh),red:false});
+ return result;
+}
 function ipadCBRRender(){
  const root=document.getElementById('ipadCBRPreview'),status=document.getElementById('ipadCBRStatus');if(!root)return;
  const visits=ipadVisitList();root.replaceChildren();const summary=document.getElementById('ipadCBRSelectionSummary');if(summary){const count=Object.keys(ipadSelections).length;summary.textContent=count+' NOTAM'+(count===1?'':'s')+' selected for the iPad CBR.';}
@@ -1996,10 +2059,12 @@ function ipadCBRRender(){
    const selected=heading==='NOTAMs'?Object.values(ipadSelections).filter(item=>item.visit===visit.key):[];
    // Keep section dividers visible even when information is populated.
    const h=document.createElement('div');h.className='ipad-visit-heading';h.textContent=heading;col.append(h);
-   if(heading==='WEATHER'){const speci=ipadCompactSpeci(visit.code);if(speci){const line=document.createElement('div');line.className='ipad-speci-compact';line.textContent=speci;col.append(line);}}
+   if(heading==='WEATHER')for(const wx of ipadCbrWeather(visit)){const line=document.createElement('div');line.className=wx.red?'ipad-cbr-wx-line ipad-cbr-wx-alert':'ipad-cbr-wx-line';line.textContent=wx.text;col.append(line);}
    for(const item of selected){
     const entry=document.createElement('div');entry.className='ipad-selected ipad-notam-text';const txt=document.createElement('span');txt.textContent=item.abbreviated?(item.display||item.raw):ipadAbbreviate(item.raw);txt.title=item.raw;entry.append(txt);col.append(entry);
    }
+   // Reserved handwriting area follows content; it never replaces or clips duty information.
+   const writing=document.createElement('div');writing.className='ipad-cbr-writing ipad-cbr-writing-'+heading.toLowerCase().replace(/[^a-z]/g,'');col.append(writing);
   }
   columns.append(col);
  }
@@ -2174,7 +2239,14 @@ function ipadExportHTML(){
  .ipad-wallpaper .ipad-sector-crew-section{margin-top:0!important;flex:0 0 auto!important;margin-bottom:0!important;max-height:none!important;overflow:visible!important;padding-top:5px!important}
  .ipad-wallpaper .ipad-aircraft-details{font-size:11px!important;line-height:1.12!important;margin:1px 0 3px!important;padding:1px 0!important}
  `;
- const html='<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><title>CrewFocus iPad Briefing</title><style>'+css+'\n'+exportCss+responsiveCss+'\n'+ipadExportLayoutCss+'\n'+alignedCss+'\n'+compactCss+'\n'+bottomCrewCss+'\n'+dynamicNotamCss+'\n'+compact114Css+compact115Css+compact116Css+v117ExportCss+'</style></head><body>'+clone.outerHTML+`<script>(function(){const page=document.querySelector('.ipad-wallpaper');function fit(){const w=window.innerWidth,h=window.innerHeight;const scale=Math.min(w/2360,h/1640);page.style.transform='none';}addEventListener('resize',fit);fit();})();<\/script>`+'</body></html>';
+ const html='<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><title>CrewFocus iPad Briefing</title><style>'+css+'\n'+exportCss+responsiveCss+'\n'+ipadExportLayoutCss+'\n'+alignedCss+'\n'+compactCss+'\n'+bottomCrewCss+'\n'+dynamicNotamCss+'\n'+compact114Css+compact115Css+compact116Css+v117ExportCss+`
+/* v147: concise duty-applicable weather and expandable handwriting space. */
+.ipad-wallpaper .ipad-cbr-wx-line{font-family:Arial,sans-serif;font-size:11px;line-height:1.2;margin:2px 0;white-space:normal;overflow-wrap:break-word;color:#17202b}
+.ipad-wallpaper .ipad-cbr-wx-alert{color:#bd202c!important;font-weight:700}
+.ipad-wallpaper .ipad-cbr-writing{flex:0 0 auto;min-height:54px;min-width:0}
+.ipad-wallpaper .ipad-cbr-writing-notams{min-height:70px}
+.ipad-wallpaper .ipad-cbr-writing-operational{min-height:100px}
+`+'</style></head><body>'+clone.outerHTML+`<script>(function(){const page=document.querySelector('.ipad-wallpaper');function fit(){const w=window.innerWidth,h=window.innerHeight;const scale=Math.min(w/2360,h/1640);page.style.transform='none';}addEventListener('resize',fit);fit();})();<\/script>`+'</body></html>';
 
  return new File([html],'CrewFocus_iPad_CBR.html',{type:'text/html'});
 }
