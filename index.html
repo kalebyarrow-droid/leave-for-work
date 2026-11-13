@@ -5,7 +5,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <meta content="#15283f" name="theme-color"/>
-<title>CrewFocus v141 — Compact SPECI</title>
+<title>CrewFocus v143 — SIM & Roster Focus</title>
 <style>
 :root{color-scheme:light dark;--bg:#f3f6fa;--card:#fff;--ink:#15283f;--muted:#637184;--line:#dce3eb;--accent:#176b87;--soft:#e9f4f7;--danger:#b13e3e}
 @media(prefers-color-scheme:dark){:root{--bg:#101820;--card:#1a2632;--ink:#edf4fb;--muted:#aab8c6;--line:#344454;--accent:#72c7df;--soft:#203a46;--danger:#ff9b9b}}
@@ -409,7 +409,7 @@ VA 1101 0705 NTL BNE 0720" rows="7"></textarea><p class="note">Check the year, d
 <h2>Calculation notes</h2>
 <p class="note">The sign on date and time are used exactly as entered, including for future planning. The countdown is relative to the current local time. Schedule times use the selected sign-on time zone; the live clock uses your device's local time zone. Your selections are remembered on this device. Past sign-on dates advance to today when reopening.</p>
 <p class="note">Hotel transport times can be saved and updated. This prototype saves them in the browser's local storage; downloaded-file previews may not retain settings. A hosted version can make saving more reliable across sessions and devices.</p>
-</section></details><p class="note" id="planApplyStatus" role="status"></p><button class="btn primary wide" id="applyPlan" type="button">Use this plan</button></div></dialog><dialog aria-labelledby="calendarTitle" id="calendarDialog"><div class="modal-shell"><header><h2 id="calendarTitle">Add to Calendar</h2><button class="btn small" id="closeCalendar" type="button">Close</button></header><label for="calendarScope">Include</label><select id="calendarScope"><option value="current">Accepted duty</option><option value="upcoming">Upcoming roster duties</option><option value="all">Whole roster</option></select><h3 id="calendarCount"></h3><p class="note" id="calendarSkipped" role="status"></p><div id="calendarIssues"></div><p class="note">One event per duty, with the original roster details. No hotels or reminders.</p><button class="btn primary wide" id="calendarExport" type="button">Add roster to Calendar</button><p class="note" id="calendarStatus" role="status"></p><details id="calendarSetup"><summary>One-time iPhone setup</summary><p class="note">Use a separate shortcut named <strong>Leave for Work Calendar</strong>. Your alarm shortcut stays separate. Shortcuts opens briefly during import and requests a return to this app. No downloading or Siri Suggestions is needed.</p><p class="note">One action at a time. Your progress is saved on this device. “What you should see” describes the checkpoint; if it differs, send that screen before continuing.</p><p class="note" id="calendarGuideProgress"></p><h3 id="calendarGuideTitle"></h3><div class="note" id="calendarGuideInstruction"></div><div class="calendar-issue"><strong>What you should see</strong><p class="note" id="calendarGuideExpected"></p></div><div class="row help-nav"><button class="btn" id="calendarGuideBack" type="button">Back</button><button class="btn primary" id="calendarGuideNext" type="button">Next step</button></div><button class="btn small" id="calendarGuideResume" type="button">Continue from my screenshot</button><p class="note">These controls can vary with iOS. The test checks your phone before sending a full roster. If Calendar opens an editor for every event, check the expanded Add New Event action and turn its compose screen off.</p><button class="btn wide" id="calendarTest" type="button">Test with one event</button><button class="btn wide" id="calendarSetupDone" type="button">I checked the test</button></details><details style="margin-top:16px"><summary>Other options &amp; roster changes</summary><p class="note">This makes a copy, not a live subscription. A completed import is remembered on this device to help prevent duplicates. Changed duties need their previous calendar events removed before you import them again. An interrupted shortcut can leave some events added: check Calendar before retrying.</p><button class="btn wide" id="calendarDownload" type="button">Download .ics file instead</button><p class="note">File import depends on the app opening the file; Safari and Files may only preview it. The shortcut above avoids that route.</p><button class="btn wide" id="calendarResetHistory" type="button">Allow a fresh import</button></details></div></dialog><dialog aria-labelledby="alarmHelpTitle" id="alarmHelp"><div class="help-shell"><header><h2 id="alarmHelpTitle">Set up iPhone alarms</h2><button class="btn small" id="closeAlarmHelp" type="button">Close</button></header><p class="note" id="alarmHelpProgress"></p><div id="alarmHelpContent"></div><p class="note" id="alarmHelpStatus" role="status"></p><div class="row help-nav"><button class="btn" id="alarmHelpBack" type="button">Back</button><button class="btn primary" id="alarmHelpNext" type="button">Next</button></div></div></dialog><footer class="note" style="text-align:center;padding:8px 10px">Version 141 · 14 Nov 2026</footer></main>
+</section></details><p class="note" id="planApplyStatus" role="status"></p><button class="btn primary wide" id="applyPlan" type="button">Use this plan</button></div></dialog><dialog aria-labelledby="calendarTitle" id="calendarDialog"><div class="modal-shell"><header><h2 id="calendarTitle">Add to Calendar</h2><button class="btn small" id="closeCalendar" type="button">Close</button></header><label for="calendarScope">Include</label><select id="calendarScope"><option value="current">Accepted duty</option><option value="upcoming">Upcoming roster duties</option><option value="all">Whole roster</option></select><h3 id="calendarCount"></h3><p class="note" id="calendarSkipped" role="status"></p><div id="calendarIssues"></div><p class="note">One event per duty, with the original roster details. No hotels or reminders.</p><button class="btn primary wide" id="calendarExport" type="button">Add roster to Calendar</button><p class="note" id="calendarStatus" role="status"></p><details id="calendarSetup"><summary>One-time iPhone setup</summary><p class="note">Use a separate shortcut named <strong>Leave for Work Calendar</strong>. Your alarm shortcut stays separate. Shortcuts opens briefly during import and requests a return to this app. No downloading or Siri Suggestions is needed.</p><p class="note">One action at a time. Your progress is saved on this device. “What you should see” describes the checkpoint; if it differs, send that screen before continuing.</p><p class="note" id="calendarGuideProgress"></p><h3 id="calendarGuideTitle"></h3><div class="note" id="calendarGuideInstruction"></div><div class="calendar-issue"><strong>What you should see</strong><p class="note" id="calendarGuideExpected"></p></div><div class="row help-nav"><button class="btn" id="calendarGuideBack" type="button">Back</button><button class="btn primary" id="calendarGuideNext" type="button">Next step</button></div><button class="btn small" id="calendarGuideResume" type="button">Continue from my screenshot</button><p class="note">These controls can vary with iOS. The test checks your phone before sending a full roster. If Calendar opens an editor for every event, check the expanded Add New Event action and turn its compose screen off.</p><button class="btn wide" id="calendarTest" type="button">Test with one event</button><button class="btn wide" id="calendarSetupDone" type="button">I checked the test</button></details><details style="margin-top:16px"><summary>Other options &amp; roster changes</summary><p class="note">This makes a copy, not a live subscription. A completed import is remembered on this device to help prevent duplicates. Changed duties need their previous calendar events removed before you import them again. An interrupted shortcut can leave some events added: check Calendar before retrying.</p><button class="btn wide" id="calendarDownload" type="button">Download .ics file instead</button><p class="note">File import depends on the app opening the file; Safari and Files may only preview it. The shortcut above avoids that route.</p><button class="btn wide" id="calendarResetHistory" type="button">Allow a fresh import</button></details></div></dialog><dialog aria-labelledby="alarmHelpTitle" id="alarmHelp"><div class="help-shell"><header><h2 id="alarmHelpTitle">Set up iPhone alarms</h2><button class="btn small" id="closeAlarmHelp" type="button">Close</button></header><p class="note" id="alarmHelpProgress"></p><div id="alarmHelpContent"></div><p class="note" id="alarmHelpStatus" role="status"></p><div class="row help-nav"><button class="btn" id="alarmHelpBack" type="button">Back</button><button class="btn primary" id="alarmHelpNext" type="button">Next</button></div></div></dialog><footer class="note" style="text-align:center;padding:8px 10px">Version 142 · 14 Nov 2026</footer></main>
 <script>
 (() => {
  const $ = id => document.getElementById(id);
@@ -712,7 +712,19 @@ function parseRoster(source,year,base){
   const raw=chunk.lines.join('\n'),lines=chunk.lines;
   const flightLine=lines.find(l=>/^\*?\s*VA\s*\d+\s+\d{4}\s+[A-Z]{3}\s+[A-Z]{3}\s+\d{4}/i.test(l));
   const flight=flightLine?.match(/^(\*?)\s*VA\s*(\d+)\s+(\d{4})\s+([A-Z]{3})\s+([A-Z]{3})\s+(\d{4})/i);
+  // Simulator/training duty: roster times are session start/end, not flight sectors.
+  const simLine=lines.find(l=>/\b(?:RTP[\w-]*|SIM(?:ULATOR)?|SIM\s*ASSESSMENT)\b/i.test(l)&&/\b\d{4}\s+[A-Z]{3}\s+[A-Z]{3}\s+\d{4}\b/i.test(l));
+  const sim=simLine?.match(/\b(RTP[\w-]*|SIM(?:ULATOR)?(?:\s+ASSESSMENT)?)\s+(\d{4})\s+([A-Z]{3})\s+([A-Z]{3})\s+(\d{4})\b/i);
   const layover=lines.map(l=>l.match(/^LO\s+0000\s+([A-Z]{3})\s+\1\s+(\d{4})/i)).find(Boolean);
+  if(sim&&!flight){
+   const port=sim[3].toUpperCase(),endPort=sim[4].toUpperCase(),zone=portZones[port]||portZones[base]||'';
+   const sessionStart=hhmm(sim[2]),sessionEnd=hhmm(sim[5]);
+   if(sessionStart&&sessionEnd){
+    const start=portInstant(chunk.date,sessionStart,zone),end=portInstant(chunk.date,sessionEnd,portZones[endPort]||zone);
+    const signOn=localParts(start-90*60000,zone),signOff=localParts(end+30*60000,portZones[endPort]||zone);
+    return [{id:chunk.date+'-'+index,sourceDate:chunk.date,date:signOn.date,time:signOn.time,port,zone,mode:port===base?'home':'hotel',hotel:'',rule:'SIM assessment: sign-on 90 min before, sign-off 30 min after',flags:port===base?[]:['SIM away from home base: confirm departure arrangements'],raw,sim:true,simCode:sim[1],sessionStart,sessionEnd,finish:{...signOff,zone:portZones[endPort]||zone,source:'SIM session end + 30 minutes'},confirmed:false}];
+   }
+  }
   const standbyLine=standbyDetails(raw);
   if(standbyLine){
    const port=standbyLine.port||base,time=standbyLine.time||'';
@@ -773,6 +785,7 @@ function inferFinish(d){
   }
   return {...localParts(last+30*60000,endZone),zone:endZone,source:'Estimated: final arrival + 30 min. Edit if needed'};
  }
+ if(d.sim&&d.finish)return d.finish;
  const standby=standbyDetails(d.raw);
  if(standby?.endTime&&portZones[standby.port])return {date:standby.endTime<standby.time?shiftDay(sourceDate,1):sourceDate,time:standby.endTime,zone:portZones[standby.port],source:'Recorded standby end'};
  return null;
@@ -901,7 +914,7 @@ reconcileStandbyCallouts();
    $('rosterList').appendChild(card);return;
   }
   const card=document.createElement('div');card.className='roster-duty'+(acceptedPlan?.kind==='roster'&&acceptedPlan.id===d.id&&d.confirmed?' accepted-duty':'');
-  card.innerHTML=`${card.classList.contains('accepted-duty')?'<div class="accepted-duty-label">✓ ACCEPTED DUTY</div>':''}<strong>${escapeHTML(reviewDate(d))}</strong><div class="review-signon">${d.standby?'Standby starts':'Sign-on'} ${escapeHTML(d.time||'Confirm time')} · ${escapeHTML(d.port||'Confirm port')}</div><div class="review-hotel ${d.standby?'hidden':''}"><span>${d.mode==='hotel'?'Morning departure hotel':'Depart from'}</span><b>${escapeHTML(d.mode==='hotel'?(d.hotel||'Select hotel'):'Home')}</b></div><details><summary>Review details${d.confirmed?'':' · check before accepting'}</summary>${fullDutyHTML(d)}<div class="fields"><div class="field"><label>Date</label><input type="date" data-key="date" value="${escapeHTML(d.date)}"></div><div class="field"><label>Sign-on (port local)</label><input type="time" data-key="time" value="${escapeHTML(d.time)}"></div></div><label>Departure port</label><input data-key="port" maxlength="3" value="${escapeHTML(d.port)}"><label>Time zone</label><select data-key="zone">${$('scheduleZone').innerHTML}</select><h3>When this duty finishes</h3><p class="note">Used to advance to the next duty. Where no layover start is recorded, the default is final arrival plus 30 minutes; change it for your duty.</p><div class="fields"><div class="field"><label>Finish date</label><input type="date" data-finish="date" value="${escapeHTML(d.finish?.date||'')}"></div><div class="field"><label>Finish time (finish port local)</label><input type="time" data-finish="time" value="${escapeHTML(d.finish?.time||'')}"></div></div><label>Finish time zone</label><select data-finish="zone">${$('scheduleZone').innerHTML}</select><div class="${d.standby?'hidden':''}"><h3>Morning departure</h3><label>Leave from before sign-on</label><select data-key="mode"><option value="home">Home</option><option value="hotel">Hotel</option></select><label>Morning departure hotel</label><select data-key="hotel"><option value="">Select hotel</option>${hotels.map(h=>`<option value="${escapeHTML(h.name)}">${escapeHTML(h.name)}</option>`).join('')}</select><p class="note">For a missing hotel, add it using the calculator's custom hotel controls, then reopen this review. Confirm the roster date, sign-on allowance, time zone and hotel before continuing.</p></div><button class="btn" type="button" data-confirm>Accept duty</button></details><button class="btn primary" type="button" data-accept style="margin-top:12px;width:100%">${d.standby?'Review & accept standby':'Accept duty & view times'}</button><button class="btn primary" type="button" data-load ${d.confirmed?'':'disabled'} style="margin-top:10px">Load duty</button><button class="btn" type="button" data-complete style="margin-top:10px">${d.completedAt?'Marked completed':'Duty completed — show next'}</button><p class="note" data-error role="status"></p>`;
+  card.innerHTML=`${card.classList.contains('accepted-duty')?'<div class="accepted-duty-label">✓ ACCEPTED DUTY</div>':''}<strong>${escapeHTML(reviewDate(d))}${d.sim?' · SIM assessment':''}</strong><div class="review-signon">${d.standby?'Standby starts':'Sign-on'} ${escapeHTML(d.time||'Confirm time')} · ${escapeHTML(d.port||'Confirm port')}</div><div class="review-hotel ${d.standby?'hidden':''}"><span>${d.mode==='hotel'?'Morning departure hotel':'Depart from'}</span><b>${escapeHTML(d.mode==='hotel'?(d.hotel||'Select hotel'):'Home')}</b></div><details><summary>Review details${d.confirmed?'':' · check before accepting'}</summary>${fullDutyHTML(d)}<div class="fields"><div class="field"><label>Date</label><input type="date" data-key="date" value="${escapeHTML(d.date)}"></div><div class="field"><label>Sign-on (port local)</label><input type="time" data-key="time" value="${escapeHTML(d.time)}"></div></div><label>Departure port</label><input data-key="port" maxlength="3" value="${escapeHTML(d.port)}"><label>Time zone</label><select data-key="zone">${$('scheduleZone').innerHTML}</select><h3>When this duty finishes</h3><p class="note">Used to advance to the next duty. Where no layover start is recorded, the default is final arrival plus 30 minutes; change it for your duty.</p><div class="fields"><div class="field"><label>Finish date</label><input type="date" data-finish="date" value="${escapeHTML(d.finish?.date||'')}"></div><div class="field"><label>Finish time (finish port local)</label><input type="time" data-finish="time" value="${escapeHTML(d.finish?.time||'')}"></div></div><label>Finish time zone</label><select data-finish="zone">${$('scheduleZone').innerHTML}</select><div class="${d.standby?'hidden':''}"><h3>Morning departure</h3><label>Leave from before sign-on</label><select data-key="mode"><option value="home">Home</option><option value="hotel">Hotel</option></select><label>Morning departure hotel</label><select data-key="hotel"><option value="">Select hotel</option>${hotels.map(h=>`<option value="${escapeHTML(h.name)}">${escapeHTML(h.name)}</option>`).join('')}</select><p class="note">For a missing hotel, add it using the calculator's custom hotel controls, then reopen this review. Confirm the roster date, sign-on allowance, time zone and hotel before continuing.</p></div><button class="btn" type="button" data-confirm>Accept duty</button></details><button class="btn primary" type="button" data-accept style="margin-top:12px;width:100%">${d.standby?'Review & accept standby':'Accept duty & view times'}</button><button class="btn primary" type="button" data-load ${d.confirmed?'':'disabled'} style="margin-top:10px">Load duty</button><button class="btn" type="button" data-complete style="margin-top:10px">${d.completedAt?'Marked completed':'Duty completed — show next'}</button><p class="note" data-error role="status"></p>`;
   ['zone','mode','hotel'].forEach(key=>card.querySelector('[data-key='+key+']').value=d[key]);
   card.querySelector('[data-finish="zone"]').value=d.finish?.zone||d.zone||'';
   card.querySelectorAll('[data-finish]').forEach(el=>el.addEventListener('input',()=>{
@@ -933,7 +946,15 @@ $('parseRoster').addEventListener('click',()=>{
  const incomingDates=new Set(parsed.map(d=>d.sourceDate||d.date));
  const historical=roster.filter(d=>!incomingDates.has(d.sourceDate||d.date));
  const reconciled=parsed.map(d=>{const old=roster.find(x=>x.id===d.id&&x.raw===d.raw);return old?{...d,confirmed:old.confirmed,completedAt:old.completedAt,finish:(d.callout?inferFinish(d):old.finish)}:d;});
- roster=[...historical,...reconciled];acceptedPlan=null;try{localStorage.removeItem('leaveForWorkAcceptedV26');}catch(e){}followRoster=true;rosterCursor=null;saveRoster();renderRoster();$('rosterImportPanel').open=false;$('rosterImportDialog').close();$('rosterStatus').textContent='Roster imported. Review your next duty, then accept it.';syncDashboard();openDutyReview();}catch(e){$('rosterStatus').textContent=e.message;}
+ roster=[...historical,...reconciled];
+ // Retain an accepted duty when its roster entry and planning details are unchanged.
+ // If its details changed, invalidate only that acceptance; don't reopen review automatically.
+ if(acceptedPlan?.kind==='roster'&&!acceptedRosterDuty()){
+  acceptedPlan=null;try{localStorage.removeItem('leaveForWorkAcceptedV26');}catch(e){}
+ }
+ followRoster=true;rosterCursor=null;saveRoster();renderRoster();$('rosterImportPanel').open=false;$('rosterImportDialog').close();$('rosterStatus').textContent='Roster imported. Reviewed duties retained where unchanged.';syncDashboard();crewRefreshHome();
+ if($('dutyReviewDialog').open)$('dutyReviewDialog').close();
+ if(typeof crewShowPage==='function')crewShowPage('focus');}catch(e){$('rosterStatus').textContent=e.message;}
 });
 $('clearRoster').addEventListener('click',()=>{if(!confirm('Delete the imported roster from this browser?'))return;roster=[];acceptedPlan=null;try{localStorage.removeItem('leaveForWorkAcceptedV26');}catch(e){}rosterCursor=null;saveRoster();renderRoster();$('rosterText').value='';$('rosterStatus').textContent='Roster removed.';syncDashboard();});
 function rosterWordsToText(words){
@@ -1872,31 +1893,32 @@ function ipadApplyLayout(frame){if(!frame)return;const get=(id,def)=>Number(docu
 function ipadCrewDisplayName(name){const n=String(name||'').trim();if(!n.includes(','))return n;const parts=n.split(',');return (parts.slice(1).join(',').trim()+' '+parts[0].trim()).trim();}
 // Compact latest SPECI observation for each airport in the iPad CBR.
 // SPECI is an observation, never a TAF validity or screening input.
+function crewCompactSpeciReport(report){
+ const m=String(report||'').replace(/\s+/g,' ').trim().match(/^SPECI\s+[A-Z]{4}\s+(\d{2})(\d{2})(\d{2})Z?\s+(?:AUTO\s+|COR\s+)*([\s\S]*)$/i);
+ if(!m)return null;
+ const body=m[4].replace(/\s+RMK\b.*$/i,'');
+ const wind=body.match(/\b(\d{3}|VRB)(\d{2,3})(?:G\d{2,3})?KT\b/i);
+ const vis=body.match(/\b(\d{4})\b/);
+ const clouds=[...body.matchAll(/\b(?:FEW|SCT|BKN|OVC)\d{3}(?:CB|TCU)?\b/gi)].map(x=>x[0].toUpperCase());
+ const temp=body.match(/\b(M?\d{2})\/(?:M?\d{2}|\/\/)\b/);
+ const qnh=body.match(/\bQ(\d{4})\b/i);
+ const wxCodes=body.replace(/\b(?:LIGHT|MODERATE|HEAVY)\s+(?:SHOWERS?\s+OF\s+)?(RAIN|SNOW|DRIZZLE)\b/gi,(_,phen)=>'-'+({RAIN:'RA',SNOW:'SN',DRIZZLE:'DZ'}[phen.toUpperCase()]));
+ const wx=wxCodes.match(/(?:^|\s)([+-]?(?:VC)?(?:SH|TS|FZ|BL|DR|MI|BC|PR)?(?:DZ|RA|SN|SG|PL|GR|GS|BR|FG|HZ|FU|DU|SA|SQ|PO|FC|SS|DS)(?:(?:RA|SN|GR|GS|DZ|PL))?)\b/i);
+ const parts=[];
+ if(wind)parts.push(wind[1].toUpperCase()+'/'+Number(wind[2]));
+ if(vis)parts.push(vis[1]==='9999'?'10km+':Number(vis[1])+'m');
+ if(wx)parts.push(wx[1].toUpperCase());
+ parts.push(...clouds);
+ if(temp)parts.push((temp[1][0]==='M'?'-'+Number(temp[1].slice(1)):Number(temp[1]))+'°C');
+ if(qnh)parts.push('Q'+qnh[1]);
+ return {day:+m[1],hour:+m[2],minute:+m[3],text:'SPECI '+m[2]+m[3]+': '+parts.join(' ')};
+}
 function ipadCompactSpeci(airportCode){
  const raw=(document.getElementById('flightPaste')?.value||'').trim()||localStorage.getItem('crewFocusNaipsBriefingV1')||'';
  const parsed=raw?flightNaipsParse(raw):null;
  const reports=parsed?.airports?.get(airportCode)?.weather||[];
- const specis=reports.map(report=>{
-  const m=String(report).replace(/\s+/g,' ').trim().match(/^SPECI\s+[A-Z]{4}\s+(\d{2})(\d{2})(\d{2})Z?\s+(?:AUTO\s+|COR\s+)*([\s\S]*)$/i);
-  if(!m)return null;
-  const body=m[4].replace(/\s+RMK\b.*$/i,'');
-  const wind=body.match(/\b(\d{3}|VRB)(\d{2,3})(?:G\d{2,3})?KT\b/i);
-  const vis=body.match(/\b(\d{4})\b/);
-  const wx=body.match(/(?:^|\s)([+-]?(?:VC)?(?:SH|TS|FZ|BL|DR|MI|BC|PR)?(?:DZ|RA|SN|SG|PL|GR|GS|BR|FG|HZ|FU|DU|SA|SQ|PO|FC|SS|DS)(?:(?:RA|SN|GR|GS|DZ|PL))?)\b/i);
-  const clouds=[...body.matchAll(/\b(?:FEW|SCT|BKN|OVC)\d{3}(?:CB|TCU)?\b/gi)].map(x=>x[0].toUpperCase());
-  const temp=body.match(/\b(M?\d{2})\/(?:M?\d{2}|\/\/)\b/);
-  const qnh=body.match(/\bQ(\d{4})\b/i);
-  const parts=[];
-  if(wind)parts.push(wind[1].toUpperCase()+'/'+Number(wind[2]));
-  if(vis)parts.push(vis[1]==='9999'?'10km+':Number(vis[1])+'m');
-  if(wx)parts.push(wx[1].toUpperCase());
-  parts.push(...clouds);
-  if(temp)parts.push((temp[1][0]==='M'?'-'+Number(temp[1].slice(1)):Number(temp[1]))+'°C');
-  if(qnh)parts.push('Q'+qnh[1]);
-  return {day:+m[1],hour:+m[2],minute:+m[3],text:'SPECI '+m[2]+m[3]+': '+parts.join(' ')};
- }).filter(Boolean);
+ const specis=reports.map(crewCompactSpeciReport).filter(Boolean);
  if(!specis.length)return '';
- // Report order follows NAIPS; use latest dated observation, not the TAF validity period.
  specis.sort((a,b)=>(a.day-b.day)||(a.hour-b.hour)||(a.minute-b.minute));
  return specis[specis.length-1].text;
 }
@@ -2506,6 +2528,7 @@ function flightRenderNaips(parsed){
   const latest=ranked.reduce((a,b)=>!a||b.issued>a.issued?b:a,null);
   const ambiguous=ranked.filter(x=>x.issued===latest?.issued).length>1&&new Set(ranked.filter(x=>x.issued===latest?.issued).map(x=>x.raw.trim())).size>1;
   for(const [i,raw] of airport.weather.entries()){
+   const compact=crewCompactSpeciReport(raw);if(compact)make('div','ipad-speci-compact',compact.text,block);
    const w=make('pre','',raw,block);w.style.whiteSpace='pre-wrap';w.style.overflowWrap='anywhere';
    const isTaf=/^\s*TAF\b/i.test(raw);
    if(!isTaf)continue;
@@ -2597,7 +2620,7 @@ function flightRender(reports,source){
   for(const kind of ['TAF','METAR','ATIS']){
    const matching=reports.filter(x=>String(x.station||'').toUpperCase()===station && (kind==='METAR'?['METAR','SPECI'].includes(String(x.kind||'').toUpperCase()):String(x.kind||'').toUpperCase()===kind));
    if(!matching.length){const missing=document.createElement('p');missing.className='flight-missing';missing.textContent=kind+': Not available from connected source';block.append(missing);continue;}
-   for(const item of matching){const pre=document.createElement('pre');pre.textContent=flightFormatRaw(item.raw,kind);block.append(pre);}
+   for(const item of matching){const compact=crewCompactSpeciReport(item.raw);if(compact){const line=document.createElement('div');line.className='ipad-speci-compact';line.textContent=compact.text;block.append(line);}const pre=document.createElement('pre');pre.textContent=flightFormatRaw(item.raw,kind);block.append(pre);}
   }
   sheet.append(block);
  }
@@ -2771,7 +2794,7 @@ function crewRefreshHome(){
  $('homeNextPanel').classList.toggle('hidden',!next);
  if(current){
   $('homeAccepted').textContent=current.confirmed?'✓ Reviewed':'Needs review';$('homeAccepted').classList.toggle('accepted',!!current.confirmed);
-  $('homeDutyTitle').textContent=current.standby?'Standby · '+current.port:(current.port||'Current duty');$('homeDutyDate').textContent=reviewDate(current);
+  $('homeDutyTitle').textContent=current.standby?'Standby · '+current.port:current.sim?'SIM assessment · '+current.port:(current.port||'Current duty');$('homeDutyDate').textContent=reviewDate(current);
   $('homeDutyTime').textContent='';
   const standbyForCallout=current.callout?ordered.find(x=>x.standby&&x.date===current.date):null;
   const standbySummary=standbyForCallout?'<div class="callout-standby"><strong>✓ Standby · '+escapeHTML(standbyForCallout.port||current.port)+'</strong><span>'+escapeHTML(standbyForCallout.time||'--:--')+'–'+escapeHTML(current.standbyEnd||current.time||'--:--')+' · retained for duty calculations</span></div>':'';
@@ -2785,7 +2808,7 @@ function crewRefreshHome(){
   $('homeDutyTime').textContent='';$('homeDutySectors').innerHTML='';$('homeReview').classList.add('hidden');$('homeOpenDuty').classList.remove('hidden');
  }
  if(next){
-  $('homeNextDate').textContent=reviewDate(next);$('homeNextDuty').textContent=next.standby?('Standby · '+next.port+' · '+(next.time||'Time to confirm')+(next.finish?.time?'–'+next.finish.time:'')):((next.port||'Duty')+' · Sign-on '+(next.time||'to confirm'));
+  $('homeNextDate').textContent=reviewDate(next);$('homeNextDuty').textContent=next.standby?('Standby · '+next.port+' · '+(next.time||'Time to confirm')+(next.finish?.time?'–'+next.finish.time:'')):((next.sim?'SIM assessment · ':'')+(next.port||'Duty')+' · Sign-on '+(next.time||'to confirm'));
   $('homeNextSectors').innerHTML=fullDutyHTML(next,now);
   $('homeNextStatus').textContent=next.confirmed?'✓ Reviewed':'Not reviewed';$('homeNextStatus').classList.toggle('accepted',!!next.confirmed);
   $('homeViewNext').classList.toggle('hidden',!!next.confirmed);
