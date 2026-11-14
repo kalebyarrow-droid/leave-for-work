@@ -5,7 +5,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <meta content="#15283f" name="theme-color"/>
-<title>CrewFocus v172 — Unified Briefing Renderer</title>
+<title>CrewFocus v173 — Wallpaper Safe Area Renderer</title>
 <style>
 :root{color-scheme:light dark;--bg:#f3f6fa;--card:#fff;--ink:#15283f;--muted:#637184;--line:#dce3eb;--accent:#176b87;--soft:#e9f4f7;--danger:#b13e3e}
 @media(prefers-color-scheme:dark){:root{--bg:#101820;--card:#1a2632;--ink:#edf4fb;--muted:#aab8c6;--line:#344454;--accent:#72c7df;--soft:#203a46;--danger:#ff9b9b}}
@@ -650,7 +650,7 @@ VA 1101 0705 NTL BNE 0720" rows="7"></textarea><p class="note">Check the year, d
 <h2>Calculation notes</h2>
 <p class="note">The sign on date and time are used exactly as entered, including for future planning. The countdown is relative to the current local time. Schedule times use the selected sign-on time zone; the live clock uses your device's local time zone. Your selections are remembered on this device. Past sign-on dates advance to today when reopening.</p>
 <p class="note">Hotel transport times can be saved and updated. This prototype saves them in the browser's local storage; downloaded-file previews may not retain settings. A hosted version can make saving more reliable across sessions and devices.</p>
-</section></details><p class="note" id="planApplyStatus" role="status"></p><button class="btn primary wide" id="applyPlan" type="button">Use this plan</button></div></dialog><dialog aria-labelledby="calendarTitle" id="calendarDialog"><div class="modal-shell"><header><h2 id="calendarTitle">Add to Calendar</h2><button class="btn small" id="closeCalendar" type="button">Close</button></header><label for="calendarScope">Include</label><select id="calendarScope"><option value="current">Accepted duty</option><option value="upcoming">Upcoming roster duties</option><option value="all">Whole roster</option></select><h3 id="calendarCount"></h3><p class="note" id="calendarSkipped" role="status"></p><div id="calendarIssues"></div><p class="note">One event per duty. Titles show local sign-on and sign-off times and finishing location; full sector details remain in Notes. No hotels or reminders.</p><button class="btn primary wide" id="calendarExport" type="button">Add roster to Calendar</button><p class="note" id="calendarStatus" role="status"></p><details id="calendarSetup"><summary>One-time iPhone setup</summary><p class="note">Use a separate shortcut named <strong>Leave for Work Calendar</strong>. Your alarm shortcut stays separate. Shortcuts opens briefly during import and requests a return to this app. No downloading or Siri Suggestions is needed.</p><p class="note">One action at a time. Your progress is saved on this device. “What you should see” describes the checkpoint; if it differs, send that screen before continuing.</p><p class="note" id="calendarGuideProgress"></p><h3 id="calendarGuideTitle"></h3><div class="note" id="calendarGuideInstruction"></div><div class="calendar-issue"><strong>What you should see</strong><p class="note" id="calendarGuideExpected"></p></div><div class="row help-nav"><button class="btn" id="calendarGuideBack" type="button">Back</button><button class="btn primary" id="calendarGuideNext" type="button">Next step</button></div><button class="btn small" id="calendarGuideResume" type="button">Continue from my screenshot</button><p class="note">These controls can vary with iOS. The test checks your phone before sending a full roster. If Calendar opens an editor for every event, check the expanded Add New Event action and turn its compose screen off.</p><button class="btn wide" id="calendarTest" type="button">Test with one event</button><button class="btn wide" id="calendarSetupDone" type="button">I checked the test</button></details><details style="margin-top:16px"><summary>Other options &amp; roster changes</summary><p class="note">This makes a copy, not a live subscription. A completed import is remembered on this device to help prevent duplicates. Changed duties need their previous calendar events removed before you import them again. An interrupted shortcut can leave some events added: check Calendar before retrying.</p><button class="btn wide" id="calendarDownload" type="button">Download .ics file instead</button><p class="note">File import depends on the app opening the file; Safari and Files may only preview it. The shortcut above avoids that route.</p><button class="btn wide" id="calendarResetHistory" type="button">Allow a fresh import</button></details></div></dialog><dialog aria-labelledby="alarmHelpTitle" id="alarmHelp"><div class="help-shell"><header><h2 id="alarmHelpTitle">Set up iPhone alarms</h2><button class="btn small" id="closeAlarmHelp" type="button">Close</button></header><p class="note" id="alarmHelpProgress"></p><div id="alarmHelpContent"></div><p class="note" id="alarmHelpStatus" role="status"></p><div class="row help-nav"><button class="btn" id="alarmHelpBack" type="button">Back</button><button class="btn primary" id="alarmHelpNext" type="button">Next</button></div></div></dialog><footer class="note" style="text-align:center;padding:8px 10px">Version 172 · 14 Nov 2026</footer></main>
+</section></details><p class="note" id="planApplyStatus" role="status"></p><button class="btn primary wide" id="applyPlan" type="button">Use this plan</button></div></dialog><dialog aria-labelledby="calendarTitle" id="calendarDialog"><div class="modal-shell"><header><h2 id="calendarTitle">Add to Calendar</h2><button class="btn small" id="closeCalendar" type="button">Close</button></header><label for="calendarScope">Include</label><select id="calendarScope"><option value="current">Accepted duty</option><option value="upcoming">Upcoming roster duties</option><option value="all">Whole roster</option></select><h3 id="calendarCount"></h3><p class="note" id="calendarSkipped" role="status"></p><div id="calendarIssues"></div><p class="note">One event per duty. Titles show local sign-on and sign-off times and finishing location; full sector details remain in Notes. No hotels or reminders.</p><button class="btn primary wide" id="calendarExport" type="button">Add roster to Calendar</button><p class="note" id="calendarStatus" role="status"></p><details id="calendarSetup"><summary>One-time iPhone setup</summary><p class="note">Use a separate shortcut named <strong>Leave for Work Calendar</strong>. Your alarm shortcut stays separate. Shortcuts opens briefly during import and requests a return to this app. No downloading or Siri Suggestions is needed.</p><p class="note">One action at a time. Your progress is saved on this device. “What you should see” describes the checkpoint; if it differs, send that screen before continuing.</p><p class="note" id="calendarGuideProgress"></p><h3 id="calendarGuideTitle"></h3><div class="note" id="calendarGuideInstruction"></div><div class="calendar-issue"><strong>What you should see</strong><p class="note" id="calendarGuideExpected"></p></div><div class="row help-nav"><button class="btn" id="calendarGuideBack" type="button">Back</button><button class="btn primary" id="calendarGuideNext" type="button">Next step</button></div><button class="btn small" id="calendarGuideResume" type="button">Continue from my screenshot</button><p class="note">These controls can vary with iOS. The test checks your phone before sending a full roster. If Calendar opens an editor for every event, check the expanded Add New Event action and turn its compose screen off.</p><button class="btn wide" id="calendarTest" type="button">Test with one event</button><button class="btn wide" id="calendarSetupDone" type="button">I checked the test</button></details><details style="margin-top:16px"><summary>Other options &amp; roster changes</summary><p class="note">This makes a copy, not a live subscription. A completed import is remembered on this device to help prevent duplicates. Changed duties need their previous calendar events removed before you import them again. An interrupted shortcut can leave some events added: check Calendar before retrying.</p><button class="btn wide" id="calendarDownload" type="button">Download .ics file instead</button><p class="note">File import depends on the app opening the file; Safari and Files may only preview it. The shortcut above avoids that route.</p><button class="btn wide" id="calendarResetHistory" type="button">Allow a fresh import</button></details></div></dialog><dialog aria-labelledby="alarmHelpTitle" id="alarmHelp"><div class="help-shell"><header><h2 id="alarmHelpTitle">Set up iPhone alarms</h2><button class="btn small" id="closeAlarmHelp" type="button">Close</button></header><p class="note" id="alarmHelpProgress"></p><div id="alarmHelpContent"></div><p class="note" id="alarmHelpStatus" role="status"></p><div class="row help-nav"><button class="btn" id="alarmHelpBack" type="button">Back</button><button class="btn primary" id="alarmHelpNext" type="button">Next</button></div></div></dialog><footer class="note" style="text-align:center;padding:8px 10px">Version 173 · 14 Nov 2026</footer></main>
 <script>
 (() => {
  const $ = id => document.getElementById(id);
@@ -2342,7 +2342,16 @@ function ipadAddWeatherToCBR(){
    No browser CSS participates in the output geometry. */
 let ipadImageCanvas=null;
 function ipadCanvasRender(source){
+ // Layout measured in a 1474×1024 logical coordinate system.
+ // Final PNG is native iPad Air 5 landscape 2360×1640 (same aspect ratio).
+ // Device wallpaper editor was observed zooming ~1.25×, showing as little
+ // as 80% of the source width. The intersection of left-anchored and centred
+ // 80% windows is 10–80%. We stay inside 12.5–78.5% with tolerance.
  const W=1474, H=1024, margin=16, gap=7, band=145;
+ const safeLeft=Math.round(W*.125),safeRight=Math.round(W*.785);
+ const contentWidth=safeRight-safeLeft;
+ const safeBottom=Math.round(H*.87);
+ const pixelScale=2360/W;
  const airports=[...source.querySelectorAll('.ipad-visit-columns > .ipad-visit')].map(col=>({
   label:col.querySelector(':scope > strong')?.textContent||'',
   aircraft:col.querySelector('.ipad-aircraft-details')?.textContent||'',
@@ -2357,8 +2366,8 @@ function ipadCanvasRender(source){
  const cells=matrix?[...matrix.querySelectorAll(':scope > .ipad-matrix-cell')]:[];
  const crewRows=[];
  for(let i=0;i<cells.length;i+=nCrewCols+1)crewRows.push(cells.slice(i,i+nCrewCols+1).map(e=>e.classList.contains('ipad-matrix-details')?[...e.querySelectorAll('span')].map(x=>x.textContent):e.textContent));
- const canvas=document.createElement('canvas');canvas.width=W;canvas.height=H;
- const ctx=canvas.getContext('2d',{alpha:false});if(!ctx)throw Error('Canvas 2D unavailable');
+ const canvas=document.createElement('canvas');canvas.width=2360;canvas.height=1640;
+ const ctx=canvas.getContext('2d',{alpha:false});if(!ctx)throw Error('Canvas 2D unavailable');ctx.setTransform(pixelScale,0,0,pixelScale,0,0);
  const pad=7;
  function font(size,bold=false){ctx.font=(bold?'bold ':'')+size+'px Arial,Helvetica,sans-serif';}
  function wrap(str,maxWidth,size,bold=false){font(size,bold);const words=String(str||'').split(/\s+/).filter(Boolean),lines=[];let line='';
@@ -2367,7 +2376,7 @@ function ipadCanvasRender(source){
   if(line)lines.push(line);return lines.length?lines:[''];}
  function drawLines(lines,x,y,size,color,bold=false,leading=1.25){font(size,bold);ctx.fillStyle=color;ctx.textBaseline='top';const lh=size*leading;for(const line of lines){ctx.fillText(line,x,y);y+=lh;}return y;}
  function measure(scale){
-  const count=Math.max(1,airports.length),width=(W-margin*2-gap*(count-1))/count;
+  const count=Math.max(1,airports.length),width=(contentWidth-gap*(count-1))/count;
   const airFont=Math.max(10.1,(count>=7?12.6:count===6?13.4:count===5?14.3:15.5)*scale);
   const labelFont=airFont+1.2,subFont=Math.max(9.2,airFont-1.1);
   const headingFont=Math.max(9,airFont-1.2);
@@ -2379,27 +2388,31 @@ function ipadCanvasRender(source){
     for(const line of part.lines)h+=wrap(line.text,width-pad*2,airFont).length*airFont*1.25+4;
    }return h+pad;});
   const airportHeight=Math.max(...heights,0);
-  const crewCount=Math.max(1,nCrewCols+1),crewWidth=(W-margin*2-gap*(crewCount-1))/crewCount;
+  const crewCount=Math.max(1,nCrewCols+1);
+  const detailsWidth=Math.max(208,contentWidth*(nCrewCols>=5?.22:nCrewCols===4?.24:.25));
+  const crewWidth=(contentWidth-detailsWidth-gap*nCrewCols)/Math.max(1,nCrewCols);
   const cf=Math.max(9.5,(nCrewCols>=5?12:nCrewCols===4?13:14)*scale);
-  const detailsW=crewWidth-12;
+  const detailsW=detailsWidth-12;
   const rowHeights=crewRows.map((row,i)=>{let h=0;for(let c=0;c<row.length;c++){
-    if(c===0){const parts=Array.isArray(row[c])?row[c]:[row[c]];const widths=[.24,.13,.15,.40];let max=1;for(let q=0;q<parts.length;q++)max=Math.max(max,wrap(parts[q],detailsW*widths[q],cf-1,i===0).length);h=Math.max(h,max*(cf-1)*1.23+10)}
+    if(c===0){const parts=Array.isArray(row[c])?row[c]:[row[c]];const widths=[.28,.15,.16,.36];let max=1;for(let q=0;q<parts.length;q++)max=Math.max(max,wrap(parts[q],detailsW*widths[q],cf-1,i===0).length);h=Math.max(h,max*(cf-1)*1.23+10)}
     else h=Math.max(h,wrap(row[c]||'',crewWidth-12,cf,i===0).length*cf*1.25+10);
   }return Math.max(i===0?32:26,h);});
   const crewHeight=rowHeights.reduce((a,b)=>a+b,0);
-  return {scale,width,airFont,labelFont,subFont,headingFont,airportHeight,crewWidth,cf,rowHeights,crewHeight,used:margin+band+10+airportHeight+11+crewHeight+margin};
+  return {scale,width,airFont,labelFont,subFont,headingFont,airportHeight,crewWidth,detailsWidth,cf,rowHeights,crewHeight,used:margin+band+10+airportHeight+11+crewHeight+margin};
  }
  let layout=measure(1);
- for(let s=.97;s>=.72 && layout.used>H;s-=.03)layout=measure(s);
+ for(let s=.97;s>=.68 && layout.used>safeBottom;s-=.03)layout=measure(s);
  // When a single wallpaper cannot hold all content at a legible font, create
  // a taller PNG and show an explicit warning rather than truncate information.
- if(layout.used>H)canvas.height=Math.ceil(layout.used+16);
- const maxY=canvas.height;
+ // A wallpaper cannot safely contain information below the visible area.
+ // Preserve every line in an extended image and flag it visibly in the app.
+ if(layout.used>safeBottom)canvas.height=Math.ceil((layout.used+16)*pixelScale);
+ const maxY=canvas.height/pixelScale;
  ctx.fillStyle='#f7f9fc';ctx.fillRect(0,0,W,maxY);
  ctx.fillStyle='#153b73';ctx.fillRect(margin,margin,W-2*margin,band);
  function border(x,y,w,h){ctx.strokeStyle='#cbd5e1';ctx.lineWidth=1;ctx.strokeRect(Math.round(x)+.5,Math.round(y)+.5,Math.round(w)-1,Math.round(h)-1);}
  const airportY=margin+band+10;
- airports.forEach((col,i)=>{const x=margin+i*(layout.width+gap),w=layout.width;let y=airportY+pad;
+ airports.forEach((col,i)=>{const x=safeLeft+i*(layout.width+gap),w=layout.width;let y=airportY+pad;
   border(x,airportY,w,layout.airportHeight);
   y=drawLines(wrap(col.label,w-pad*2,layout.labelFont,true),x+pad,y,layout.labelFont,'#17202b',true,1.2)+4;
   if(col.aircraft)y=drawLines(wrap(col.aircraft,w-pad*2,layout.subFont),x+pad,y,layout.subFont,'#42546a')+4;
@@ -2410,21 +2423,24 @@ function ipadCanvasRender(source){
   }
  });
  const crewY=airportY+layout.airportHeight+11;
- ctx.fillStyle='#9aaabd';ctx.fillRect(margin,crewY-5,W-2*margin,1);
+ ctx.fillStyle='#9aaabd';ctx.fillRect(safeLeft,crewY-5,contentWidth,1);
  let y=crewY;
  crewRows.forEach((row,r)=>{const h=layout.rowHeights[r];row.forEach((value,c)=>{
-  const x=margin+c*(layout.crewWidth+gap),w=layout.crewWidth;
+  const x=c===0?safeLeft:safeLeft+layout.detailsWidth+gap+(c-1)*(layout.crewWidth+gap),w=c===0?layout.detailsWidth:layout.crewWidth;
   border(x,y,w,h);
-  if(c===0){const vals=Array.isArray(value)?value:[value];const fractions=[.24,.13,.15,.40],offsets=[0,.25,.39,.54];vals.forEach((v,j)=>{
+  if(c===0){const vals=Array.isArray(value)?value:[value];const fractions=[.28,.15,.16,.36],offsets=[0,.29,.45,.62];vals.forEach((v,j)=>{
    const text=wrap(v,w*fractions[j]-5,layout.cf-1,r===0);drawLines(text,x+5+w*offsets[j],y+5,layout.cf-1,'#17202b',r===0,1.2);
   });}else{
    drawLines(wrap(value||'',w-12,layout.cf,r===0),x+6,y+5,layout.cf,'#17202b',r===0,1.25);
   }
  });y+=h;});
- canvas.dataset.overflow=String(layout.used>H);
+ canvas.dataset.overflow=String(layout.used>safeBottom);
  canvas.dataset.sectors=String(nCrewCols);
  canvas.dataset.airportColumns=String(airports.length);
  canvas.dataset.layoutHeight=String(layout.used);
+ canvas.dataset.safeLeft=String(Math.round(safeLeft*pixelScale));
+ canvas.dataset.safeRight=String(Math.round(safeRight*pixelScale));
+ canvas.dataset.safeBottom=String(Math.round(safeBottom*pixelScale));
  return canvas;
 }
 function ipadCanvasRefresh(){
@@ -2435,7 +2451,7 @@ function ipadCanvasRefresh(){
  const old=root.querySelector('#ipadCBROverflow171');if(old)old.remove();
  let warning=root.querySelector('#ipadCBROverflow172');if(warning)warning.remove();
  if(imageCanvas.dataset.overflow==='true'){
-  warning=document.createElement('p');warning.id='ipadCBROverflow172';warning.className='note';warning.style.cssText='color:#a44400;font-weight:700;margin:8px 0';warning.textContent='This briefing contains more information than one iPad wallpaper can display legibly. The full content is retained in an extended image; review before setting as wallpaper.';root.append(warning);
+  warning=document.createElement('p');warning.id='ipadCBROverflow172';warning.className='note';warning.style.cssText='color:#a44400;font-weight:700;margin:8px 0';warning.textContent='This briefing exceeds the iPad wallpaper safe area. The full content is retained in an extended image; review before setting as wallpaper.';root.append(warning);
  }
  crewFitIpadPreview();
 }
@@ -2556,7 +2572,7 @@ function crewFitIpadPreview(){
  const fullscreen=document.getElementById('ipadCBRPanel')?.classList.contains('ipad-fullscreen');
  const available=Math.max(260,(root.clientWidth||document.documentElement.clientWidth)-(fullscreen?24:0));
  const fit=Math.min(1,available/1474),scale=fullscreen?(ipadPreviewZoom||fit):fit;
- const naturalHeight=ipadImageCanvas?.height||1024;
+ const naturalHeight=(ipadImageCanvas?.height||1640)*(1474/(ipadImageCanvas?.width||2360));
  let spacer=root.querySelector('.ipad-preview-spacer');
  if(!spacer){spacer=document.createElement('div');spacer.className='ipad-preview-spacer';root.insertBefore(spacer,page);}
  spacer.style.cssText='display:block;pointer-events:none;flex:none;width:'+Math.ceil(1474*scale)+'px;height:'+Math.ceil(naturalHeight*scale)+'px';
