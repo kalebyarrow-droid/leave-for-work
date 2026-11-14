@@ -5,7 +5,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <meta content="#15283f" name="theme-color"/>
-<title>CrewFocus v171 — Unified Briefing Renderer</title>
+<title>CrewFocus v172 — Unified Briefing Renderer</title>
 <style>
 :root{color-scheme:light dark;--bg:#f3f6fa;--card:#fff;--ink:#15283f;--muted:#637184;--line:#dce3eb;--accent:#176b87;--soft:#e9f4f7;--danger:#b13e3e}
 @media(prefers-color-scheme:dark){:root{--bg:#101820;--card:#1a2632;--ink:#edf4fb;--muted:#aab8c6;--line:#344454;--accent:#72c7df;--soft:#203a46;--danger:#ff9b9b}}
@@ -536,6 +536,13 @@ html,body{margin:0;padding:0}
 #ipadCBRPreview .ipad-wallpaper.cbr171 .ipad-crew-matrix .ipad-matrix-person{display:flex!important;align-items:center!important;font:12px/1.3 Arial,sans-serif!important;padding:6px!important;border:1px solid #cbd5e1!important;border-top:0!important;border-bottom:1px dotted #cbd5e1!important;text-align:left!important;min-height:26px!important}
 #ipadCBRPreview .ipad-wallpaper.cbr171 .ipad-crew-matrix .ipad-matrix-person.ipad-matrix-details{display:grid!important}
 #ipadCBRPreview .ipad-wallpaper.cbr171 .ipad-crew-matrix .ipad-matrix-name{font:12px/1.3 Arial,sans-serif!important;appearance:none!important;-webkit-appearance:none!important;cursor:pointer!important;text-overflow:clip!important;white-space:normal!important;overflow-wrap:anywhere!important}
+</style><style id="ipadRaster172">
+#ipadCBRPreview .ipad-wallpaper.cbr171.cbr172-source{display:none!important}
+#ipadCBRPanel.ipad-fullscreen #ipadCBRPreview > img.cbr172-image:not(.ipad-wallpaper):not(.ipad-preview-spacer){display:block!important}
+#ipadCBRPanel.ipad-fullscreen #ipadCBRPreview > .ipad-preview-spacer{display:block!important}
+#ipadCBRPanel:not(.ipad-fullscreen) #ipadCBRPreview > .cbr172-image{display:none!important}
+#ipadCBRPanel:not(.ipad-fullscreen) #ipadCBRPreview > .ipad-preview-spacer{display:none!important}
+#ipadCBRPreview .cbr172-image{border:0!important;border-radius:0!important;box-shadow:none!important;max-width:none!important;user-select:none;-webkit-user-drag:none}
 </style></head>
 <body>
 <main>
@@ -554,7 +561,7 @@ html,body{margin:0;padding:0}
 <section class="crew-panel flight-compact-card" id="flightCBRCard"><h3>Duty <span class="flight-arrow" aria-hidden="true">⌄</span></h3><div class="flight-summary-line"><span id="flightDutySummary">No CBR imported</span><span id="flightCbrUpdated" class="flight-compact-stamp">Not imported</span></div><div class="crew-home-actions"><button class="btn primary" type="button" id="flightOpenCBRReview">Update/Review CBR</button><button class="btn" type="button" id="flightOpenCBRView">View CBR</button></div><div class="crew-home-actions" style="margin-top:10px"><button class="btn primary" id="ipadCBRAddWeather" type="button">Add Weather to CBR</button></div></section>
 <section class="crew-panel flight-compact-card" id="flightWXCard"><h3>Weather and NOTAMs <span class="flight-arrow" aria-hidden="true">⌄</span></h3><p class="flight-compact-stamp" id="flightWxUpdated">Not imported</p><div class="crew-home-actions"><button class="btn primary" type="button" id="flightAutoImport">Auto Import</button><button class="btn" type="button" id="flightManualImport">Manual Import</button><button class="btn" type="button" id="flightCurrentWx">Current WX/NOTAMs</button></div><p class="note" id="flightAutoStatus" role="status" hidden></p></section>
 <section class="crew-panel flight-compact-card" id="flightOperationalCard"><button class="flight-operational-button" id="flightOperationalOpen" type="button"><span><strong>Operational</strong><small>Airport, aircraft and duty requirements</small></span><span aria-hidden="true">⌄</span></button></section>
-</div><div id="flightCompactDetail" hidden><div class="crew-home-actions flight-detail-back"><button class="btn small" type="button" id="flightCompactBack" hidden>← Flight Planning</button></div><h3 id="flightDetailTitle" class="flight-detail-title"></h3><div class="crew-panel" id="cbrPanel"><h3>Crew Briefing Report · beta</h3><p class="note">Upload a CBR screenshot or PDF. CrewFocus automatically extracts the schedule. Review or modify it only if needed.</p><div class="field"><label for="cbrFile">Upload CBR screenshot / PDF</label><input accept="image/*,.pdf,application/pdf" id="cbrFile" type="file"/></div><details id="cbrReviewDetails"><summary>Review / modify imported CBR (optional)</summary><div class="field"><label for="cbrText">CBR text (copy and paste)</label><textarea id="cbrText" placeholder="Paste copied CBR text, including sign-on and sectors" rows="7"></textarea></div><div class="field"><label style="display:flex;align-items:center;gap:9px"><input id="cbrTestDateOverride" type="checkbox" style="width:auto"/>Test mode: use today’s date instead of the CBR date</label><p class="note">Uses the current Melbourne date for testing. Turn off to use the date printed on the CBR.</p></div><div class="fields"><div class="field"><label for="cbrDate">Duty date (local)</label><input id="cbrDate" type="date"/></div><div class="field"><label for="cbrSignon">Sign-on (local, MEL)</label><input id="cbrSignon" type="time" value="05:00"/></div></div><p class="note">The schedule below fills automatically after upload. Edit only if needed. Times are local to each airport.</p><div class="fields"><div class="field"><label for="cbrSignoff">Sign-off (local)</label><input id="cbrSignoff" type="time"/></div><div class="field"><label for="cbrSignoffPort">Sign-off airport</label><input autocapitalize="characters" id="cbrSignoffPort" maxlength="3"/></div></div><div id="cbrRows"></div><button class="btn small" id="cbrAdd" type="button">+ Sector</button><div class="crew-home-actions"><button class="btn" id="cbrParse" type="button">Read pasted CBR</button><button class="btn primary" id="cbrConfirm" type="button">Review &amp; Confirm</button></div></details><p class="note" id="cbrStatus" role="status">Upload a CBR to extract your flights automatically.</p><div class="cbr-export-actions"><button class="btn primary" id="cbrPreviewBtn" type="button">Generate original CBR preview</button><button class="btn" id="cbrPrint" type="button">Print / Save PDF</button><button class="btn primary" id="cbrAirDrop" type="button">Share / AirDrop PDF</button></div></div><div id="cbrPreview"></div><div class="crew-panel" id="ipadCBRPanel"><h3>iPad CBR · landscape preview</h3><p class="note">Separate iPad landscape briefing draft. Your original imported CBR and NAIPS briefing remain unchanged. Preview the airport visits before selecting NOTAMs.</p><details class="ipad-layout-controls" style="margin:12px 0"><summary>Alternates &amp; aircraft details</summary><p class="note">The briefing layout fits automatically. Enter alternates and aircraft information here when needed.</p><div class="fields ipad-obsolete-layout"><div class="field"><label>Airport section height <output id="ipadAirportHeightValue"></output></label><input id="ipadAirportHeight" type="range" min="12" max="43" value="23" step="1"></div><div class="field"><label>Crew font size <output id="ipadCrewFontValue"></output></label><input id="ipadCrewFont" type="range" min="10" max="22" value="16" step="1"></div><div class="field"><label>Airport font size <output id="ipadAirportFontValue"></output></label><input id="ipadAirportFont" type="range" min="11" max="23" value="17" step="1"></div><div class="field"><label>Crew details column width <output id="ipadCrewDetailsWidthValue"></output></label><input id="ipadCrewDetailsWidth" type="range" min="15" max="40" value="25" step="1"></div><div class="field"><label>Clock area height <output id="ipadClockHeightValue"></output></label><input id="ipadClockHeight" type="range" min="4" max="28" value="15" step="1"></div></div><div class="field"><label for="ipadAlternateText">Alternates (en-route / destination; manually verified)</label><textarea id="ipadAlternateText" rows="2" placeholder="e.g. ENR: ... | DEST: ..."></textarea></div><div class="field"><label for="ipadAircraftConfig">Aircraft configuration (manual until registration mapping verified)</label><input id="ipadAircraftConfig" placeholder="e.g. B737-800 · 26K · SFP status unverified"></div><p class="note">Aircraft configuration is not inferred without a verified registration database. Alternate data must be reviewed.</p></details><div class="crew-home-actions"><button class="btn" id="ipadCrewReviewBtn" type="button">Review / add crew</button><button class="btn primary" id="ipadCBRShow" type="button">Open iPad landscape preview</button><button class="btn" id="ipadCBRExport" type="button">Share / AirDrop iPad CBR</button><button class="btn" id="ipadCBRClose" type="button" hidden>Close preview</button><button class="btn" id="ipadCBRClear" type="button">Clear selected items</button></div><p class="note" id="ipadCBRWeatherStatus" role="status">Weather is added manually after importing the CBR and NAIPS briefing.</p><p class="note" id="ipadCBRStatus">No items selected yet.</p><div id="ipadCBRSelectionSummary" class="note" aria-live="polite">Selected for generated CBR: none yet</div><div id="ipadCBRPreview"></div></div><h3>Weather &amp; NOTAMs</h3><div class="crew-panel"><label for="flightPaste">Import NAIPS location briefing</label><p class="note">Copy the complete briefing from your NAIPS email and paste it here. Weather, ATIS, warnings and NOTAMs will be grouped by airport.</p><textarea autocapitalize="off" id="flightPaste" placeholder="0911 UTC ... AIRSERVICES AUSTRALIA
+</div><div id="flightCompactDetail" hidden><div class="crew-home-actions flight-detail-back"><button class="btn small" type="button" id="flightCompactBack" hidden>← Flight Planning</button></div><h3 id="flightDetailTitle" class="flight-detail-title"></h3><div class="crew-panel" id="cbrPanel"><h3>Crew Briefing Report · beta</h3><p class="note">Upload a CBR screenshot or PDF. CrewFocus automatically extracts the schedule. Review or modify it only if needed.</p><div class="field"><label for="cbrFile">Upload CBR screenshot / PDF</label><input accept="image/*,.pdf,application/pdf" id="cbrFile" type="file"/></div><details id="cbrReviewDetails"><summary>Review / modify imported CBR (optional)</summary><div class="field"><label for="cbrText">CBR text (copy and paste)</label><textarea id="cbrText" placeholder="Paste copied CBR text, including sign-on and sectors" rows="7"></textarea></div><div class="field"><label style="display:flex;align-items:center;gap:9px"><input id="cbrTestDateOverride" type="checkbox" style="width:auto"/>Test mode: use today’s date instead of the CBR date</label><p class="note">Uses the current Melbourne date for testing. Turn off to use the date printed on the CBR.</p></div><div class="fields"><div class="field"><label for="cbrDate">Duty date (local)</label><input id="cbrDate" type="date"/></div><div class="field"><label for="cbrSignon">Sign-on (local, MEL)</label><input id="cbrSignon" type="time" value="05:00"/></div></div><p class="note">The schedule below fills automatically after upload. Edit only if needed. Times are local to each airport.</p><div class="fields"><div class="field"><label for="cbrSignoff">Sign-off (local)</label><input id="cbrSignoff" type="time"/></div><div class="field"><label for="cbrSignoffPort">Sign-off airport</label><input autocapitalize="characters" id="cbrSignoffPort" maxlength="3"/></div></div><div id="cbrRows"></div><button class="btn small" id="cbrAdd" type="button">+ Sector</button><div class="crew-home-actions"><button class="btn" id="cbrParse" type="button">Read pasted CBR</button><button class="btn primary" id="cbrConfirm" type="button">Review &amp; Confirm</button></div></details><p class="note" id="cbrStatus" role="status">Upload a CBR to extract your flights automatically.</p><div class="cbr-export-actions"><button class="btn primary" id="cbrPreviewBtn" type="button">Generate original CBR preview</button><button class="btn" id="cbrPrint" type="button">Print / Save PDF</button><button class="btn primary" id="cbrAirDrop" type="button">Share / AirDrop PDF</button></div></div><div id="cbrPreview"></div><div class="crew-panel" id="ipadCBRPanel"><h3>iPad CBR · landscape preview</h3><p class="note">Separate iPad landscape briefing draft. Your original imported CBR and NAIPS briefing remain unchanged. Preview the airport visits before selecting NOTAMs.</p><details class="ipad-layout-controls" style="margin:12px 0"><summary>Alternates &amp; aircraft details</summary><p class="note">The briefing layout fits automatically. Enter alternates and aircraft information here when needed.</p><div class="fields ipad-obsolete-layout"><div class="field"><label>Airport section height <output id="ipadAirportHeightValue"></output></label><input id="ipadAirportHeight" type="range" min="12" max="43" value="23" step="1"></div><div class="field"><label>Crew font size <output id="ipadCrewFontValue"></output></label><input id="ipadCrewFont" type="range" min="10" max="22" value="16" step="1"></div><div class="field"><label>Airport font size <output id="ipadAirportFontValue"></output></label><input id="ipadAirportFont" type="range" min="11" max="23" value="17" step="1"></div><div class="field"><label>Crew details column width <output id="ipadCrewDetailsWidthValue"></output></label><input id="ipadCrewDetailsWidth" type="range" min="15" max="40" value="25" step="1"></div><div class="field"><label>Clock area height <output id="ipadClockHeightValue"></output></label><input id="ipadClockHeight" type="range" min="4" max="28" value="15" step="1"></div></div><div class="field"><label for="ipadAlternateText">Alternates (en-route / destination; manually verified)</label><textarea id="ipadAlternateText" rows="2" placeholder="e.g. ENR: ... | DEST: ..."></textarea></div><div class="field"><label for="ipadAircraftConfig">Aircraft configuration (manual until registration mapping verified)</label><input id="ipadAircraftConfig" placeholder="e.g. B737-800 · 26K · SFP status unverified"></div><p class="note">Aircraft configuration is not inferred without a verified registration database. Alternate data must be reviewed.</p></details><div class="crew-home-actions"><button class="btn" id="ipadCrewReviewBtn" type="button">Review / add crew</button><button class="btn primary" id="ipadCBRShow" type="button">Open iPad landscape preview</button><button class="btn" id="ipadCBRExport" type="button">Share / AirDrop iPad CBR PNG</button><button class="btn" id="ipadCBRClose" type="button" hidden>Close preview</button><button class="btn" id="ipadCBRClear" type="button">Clear selected items</button></div><p class="note" id="ipadCBRWeatherStatus" role="status">Weather is added manually after importing the CBR and NAIPS briefing.</p><p class="note" id="ipadCBRStatus">No items selected yet.</p><div id="ipadCBRSelectionSummary" class="note" aria-live="polite">Selected for generated CBR: none yet</div><div id="ipadCBRPreview"></div></div><h3>Weather &amp; NOTAMs</h3><div class="crew-panel"><label for="flightPaste">Import NAIPS location briefing</label><p class="note">Copy the complete briefing from your NAIPS email and paste it here. Weather, ATIS, warnings and NOTAMs will be grouped by airport.</p><textarea autocapitalize="off" id="flightPaste" placeholder="0911 UTC ... AIRSERVICES AUSTRALIA
 LOCATION BRIEFING
 ... WEATHER INFORMATION ...
 ... NOTAM INFORMATION ..." rows="8" spellcheck="false"></textarea><div class="crew-home-actions"><button class="btn primary" id="flightInterpret" type="button">Import briefing</button></div><p class="note" id="flightPasteStatus">On iPhone, tap the box and choose Paste.</p></div><div class="crew-section-heading" style="margin-top:12px"><h3 style="margin:0">Additional airports</h3></div><div class="crew-panel"><p class="note">Weather briefing assistant · preliminary interpretation only. Airport names and common 3-letter codes are accepted. Verify all reports, times and operational requirements using approved aviation sources.</p><div class="fields"><div class="field" style="display:none"><label for="flightDeparture">Departure ICAO</label><input autocapitalize="characters" id="flightDeparture" maxlength="40" placeholder="Melbourne / MEL / YMML"/></div><div class="field" style="display:none"><label for="flightDestination">Destination ICAO</label><input autocapitalize="characters" id="flightDestination" maxlength="40" placeholder="Sydney / SYD / YSSY"/></div><div class="field"><label for="flightAlternate">Additional airport / alternate (optional)</label><input autocapitalize="characters" id="flightAlternate" maxlength="40" placeholder="Canberra / CBR / YSCB"/></div><div class="field" style="display:none"><label for="flightDate">Flight date</label><input id="flightDate" type="date"/></div><div class="field" style="display:none"><label for="flightTime">Departure (local)</label><input id="flightTime" type="time"/></div></div><div class="field" style="margin-top:12px"><label>Additional airports</label><div id="flightExtraAirports"></div><button class="btn small" id="flightAddAirport" type="button">+ Add airport</button></div><div class="crew-home-actions"><button class="btn primary" id="flightFetch" type="button">Retrieve weather</button><button class="btn" id="flightClear" type="button">Clear reports</button></div><p class="note" id="flightStatus" role="status">Enter airport codes to begin. Live retrieval requires internet and a source permitting browser access.</p></div><p class="note" id="flightShortlistStatus" role="status">Import a NAIPS briefing to shortlist NOTAMs automatically against the CBR duty window.</p><div aria-live="polite" id="flightResults"></div><div class="crew-panel"><p class="crew-kicker">FLIGHT PLANNING · FUTURE FEATURES</p><div id="flightIdeaList"></div></div></div></section><section class="crew-page hidden" id="crewPlaceholder"><div class="crew-section-heading"><h2 class="crew-page-title" id="placeholderTitle">Coming soon</h2><button class="btn small" id="placeholderBack" type="button">← Dashboard</button></div><div class="crew-panel"><p class="note" id="placeholderText">This module is planned.</p><div class="hidden" id="ebaIdeas"><p class="crew-kicker" style="margin-top:18px">EBA &amp; REST · SAVED IDEAS · NOT YET DEVELOPED</p><ul style="padding-left:20px;line-height:1.7;font-size:13px"><li><strong>Maximum duty calculator — normal duty:</strong> determine permitted maximum duty from sign-on time, duty type and applicable EBA/flight-duty rules.</li><li><strong>Maximum duty calculator — standby:</strong> calculate the maximum permitted duty after standby activation, using standby commencement and call-out/report times.</li><li><strong>Standby time remaining:</strong> live countdown of remaining permissible duty, with a proposed-trip check (e.g. Canberra or Sydney return) showing whether a return could fit within the limit, including relevant buffers.</li><li><strong>Unused standby congratulations:</strong> after standby ends without call-out, show a friendly message such as “Congratulations — paid X credits and home for the day!” using the verified EBA credit entitlement.</li></ul><p class="note">Ideas recorded for future development only — no calculations or pop-ups are active. Duty limits, credit values and trip feasibility will need validation against the applicable EBA, fatigue rules and operational requirements before implementation.</p></div><div class="hidden" id="flightIdeas"><p class="crew-kicker" style="margin-top:18px">DEVELOPMENT IDEAS · NOT YET ACTIVE</p><ul style="padding-left:20px;line-height:1.7;font-size:13px"><li>Download and automatically interpret weather (Wx) and NOTAMs</li><li>Major airport meteorological and expected traffic-flow briefing</li><li>Expected runway changes</li><li>Aircraft crosswind limitations</li><li>10-7 limitations for applicable airports</li><li>Dark-hole approach considerations for First Officers</li><li>30 m runway limitations</li><li>Expected fuel figure, with customisable scrolling-wheel inputs</li><li>Ground delays: integrate iFIDS, Google, gate information and aircraft ETA</li><li>Revised CBR: update automatically when selected, show a green tick after updating, and provide a Teams link to contact crew</li></ul><p class="note">Ideas only — operational information will require verified sources and crew cross-checks before use.</p></div></div></section>
@@ -643,7 +650,7 @@ VA 1101 0705 NTL BNE 0720" rows="7"></textarea><p class="note">Check the year, d
 <h2>Calculation notes</h2>
 <p class="note">The sign on date and time are used exactly as entered, including for future planning. The countdown is relative to the current local time. Schedule times use the selected sign-on time zone; the live clock uses your device's local time zone. Your selections are remembered on this device. Past sign-on dates advance to today when reopening.</p>
 <p class="note">Hotel transport times can be saved and updated. This prototype saves them in the browser's local storage; downloaded-file previews may not retain settings. A hosted version can make saving more reliable across sessions and devices.</p>
-</section></details><p class="note" id="planApplyStatus" role="status"></p><button class="btn primary wide" id="applyPlan" type="button">Use this plan</button></div></dialog><dialog aria-labelledby="calendarTitle" id="calendarDialog"><div class="modal-shell"><header><h2 id="calendarTitle">Add to Calendar</h2><button class="btn small" id="closeCalendar" type="button">Close</button></header><label for="calendarScope">Include</label><select id="calendarScope"><option value="current">Accepted duty</option><option value="upcoming">Upcoming roster duties</option><option value="all">Whole roster</option></select><h3 id="calendarCount"></h3><p class="note" id="calendarSkipped" role="status"></p><div id="calendarIssues"></div><p class="note">One event per duty. Titles show local sign-on and sign-off times and finishing location; full sector details remain in Notes. No hotels or reminders.</p><button class="btn primary wide" id="calendarExport" type="button">Add roster to Calendar</button><p class="note" id="calendarStatus" role="status"></p><details id="calendarSetup"><summary>One-time iPhone setup</summary><p class="note">Use a separate shortcut named <strong>Leave for Work Calendar</strong>. Your alarm shortcut stays separate. Shortcuts opens briefly during import and requests a return to this app. No downloading or Siri Suggestions is needed.</p><p class="note">One action at a time. Your progress is saved on this device. “What you should see” describes the checkpoint; if it differs, send that screen before continuing.</p><p class="note" id="calendarGuideProgress"></p><h3 id="calendarGuideTitle"></h3><div class="note" id="calendarGuideInstruction"></div><div class="calendar-issue"><strong>What you should see</strong><p class="note" id="calendarGuideExpected"></p></div><div class="row help-nav"><button class="btn" id="calendarGuideBack" type="button">Back</button><button class="btn primary" id="calendarGuideNext" type="button">Next step</button></div><button class="btn small" id="calendarGuideResume" type="button">Continue from my screenshot</button><p class="note">These controls can vary with iOS. The test checks your phone before sending a full roster. If Calendar opens an editor for every event, check the expanded Add New Event action and turn its compose screen off.</p><button class="btn wide" id="calendarTest" type="button">Test with one event</button><button class="btn wide" id="calendarSetupDone" type="button">I checked the test</button></details><details style="margin-top:16px"><summary>Other options &amp; roster changes</summary><p class="note">This makes a copy, not a live subscription. A completed import is remembered on this device to help prevent duplicates. Changed duties need their previous calendar events removed before you import them again. An interrupted shortcut can leave some events added: check Calendar before retrying.</p><button class="btn wide" id="calendarDownload" type="button">Download .ics file instead</button><p class="note">File import depends on the app opening the file; Safari and Files may only preview it. The shortcut above avoids that route.</p><button class="btn wide" id="calendarResetHistory" type="button">Allow a fresh import</button></details></div></dialog><dialog aria-labelledby="alarmHelpTitle" id="alarmHelp"><div class="help-shell"><header><h2 id="alarmHelpTitle">Set up iPhone alarms</h2><button class="btn small" id="closeAlarmHelp" type="button">Close</button></header><p class="note" id="alarmHelpProgress"></p><div id="alarmHelpContent"></div><p class="note" id="alarmHelpStatus" role="status"></p><div class="row help-nav"><button class="btn" id="alarmHelpBack" type="button">Back</button><button class="btn primary" id="alarmHelpNext" type="button">Next</button></div></div></dialog><footer class="note" style="text-align:center;padding:8px 10px">Version 171 · 14 Nov 2026</footer></main>
+</section></details><p class="note" id="planApplyStatus" role="status"></p><button class="btn primary wide" id="applyPlan" type="button">Use this plan</button></div></dialog><dialog aria-labelledby="calendarTitle" id="calendarDialog"><div class="modal-shell"><header><h2 id="calendarTitle">Add to Calendar</h2><button class="btn small" id="closeCalendar" type="button">Close</button></header><label for="calendarScope">Include</label><select id="calendarScope"><option value="current">Accepted duty</option><option value="upcoming">Upcoming roster duties</option><option value="all">Whole roster</option></select><h3 id="calendarCount"></h3><p class="note" id="calendarSkipped" role="status"></p><div id="calendarIssues"></div><p class="note">One event per duty. Titles show local sign-on and sign-off times and finishing location; full sector details remain in Notes. No hotels or reminders.</p><button class="btn primary wide" id="calendarExport" type="button">Add roster to Calendar</button><p class="note" id="calendarStatus" role="status"></p><details id="calendarSetup"><summary>One-time iPhone setup</summary><p class="note">Use a separate shortcut named <strong>Leave for Work Calendar</strong>. Your alarm shortcut stays separate. Shortcuts opens briefly during import and requests a return to this app. No downloading or Siri Suggestions is needed.</p><p class="note">One action at a time. Your progress is saved on this device. “What you should see” describes the checkpoint; if it differs, send that screen before continuing.</p><p class="note" id="calendarGuideProgress"></p><h3 id="calendarGuideTitle"></h3><div class="note" id="calendarGuideInstruction"></div><div class="calendar-issue"><strong>What you should see</strong><p class="note" id="calendarGuideExpected"></p></div><div class="row help-nav"><button class="btn" id="calendarGuideBack" type="button">Back</button><button class="btn primary" id="calendarGuideNext" type="button">Next step</button></div><button class="btn small" id="calendarGuideResume" type="button">Continue from my screenshot</button><p class="note">These controls can vary with iOS. The test checks your phone before sending a full roster. If Calendar opens an editor for every event, check the expanded Add New Event action and turn its compose screen off.</p><button class="btn wide" id="calendarTest" type="button">Test with one event</button><button class="btn wide" id="calendarSetupDone" type="button">I checked the test</button></details><details style="margin-top:16px"><summary>Other options &amp; roster changes</summary><p class="note">This makes a copy, not a live subscription. A completed import is remembered on this device to help prevent duplicates. Changed duties need their previous calendar events removed before you import them again. An interrupted shortcut can leave some events added: check Calendar before retrying.</p><button class="btn wide" id="calendarDownload" type="button">Download .ics file instead</button><p class="note">File import depends on the app opening the file; Safari and Files may only preview it. The shortcut above avoids that route.</p><button class="btn wide" id="calendarResetHistory" type="button">Allow a fresh import</button></details></div></dialog><dialog aria-labelledby="alarmHelpTitle" id="alarmHelp"><div class="help-shell"><header><h2 id="alarmHelpTitle">Set up iPhone alarms</h2><button class="btn small" id="closeAlarmHelp" type="button">Close</button></header><p class="note" id="alarmHelpProgress"></p><div id="alarmHelpContent"></div><p class="note" id="alarmHelpStatus" role="status"></p><div class="row help-nav"><button class="btn" id="alarmHelpBack" type="button">Back</button><button class="btn primary" id="alarmHelpNext" type="button">Next</button></div></div></dialog><footer class="note" style="text-align:center;padding:8px 10px">Version 172 · 14 Nov 2026</footer></main>
 <script>
 (() => {
  const $ = id => document.getElementById(id);
@@ -2331,6 +2338,108 @@ function ipadAddWeatherToCBR(){
  try{const active=flightNaipsParse(raw);if(active?.order?.length)flightRenderNaips(active);}catch(e){console.warn('SPECI markers refresh',e);}
  if(status)status.textContent='Weather added to '+populated+' airport visit(s); '+blank+' blank. '+(details.length?details.join(' · '):'Check the preview before sharing.');
 }
+/* v172: Sector-driven raster CBR, shared by iPhone preview and PNG export.
+   No browser CSS participates in the output geometry. */
+let ipadImageCanvas=null;
+function ipadCanvasRender(source){
+ const W=1474, H=1024, margin=16, gap=7, band=145;
+ const airports=[...source.querySelectorAll('.ipad-visit-columns > .ipad-visit')].map(col=>({
+  label:col.querySelector(':scope > strong')?.textContent||'',
+  aircraft:col.querySelector('.ipad-aircraft-details')?.textContent||'',
+  parts:[...col.querySelectorAll('.ipad-cbr-section')].map(s=>({
+   label:s.querySelector('.ipad-visit-heading')?.textContent||'',
+   lines:[...s.querySelectorAll('.ipad-cbr-wx-line,.ipad-selected')].map(e=>({text:e.textContent.trim(),color:e.classList.contains('ipad-notam-text')?'#1659ad':e.classList.contains('ipad-cbr-wx-alert')?'#b42318':'#17202b'})).filter(x=>x.text)
+  })),
+  alternate:col.classList.contains('ipad-alternate')?col.querySelector('.ipad-selected')?.textContent||'':''
+ }));
+ const matrix=source.querySelector('.ipad-crew-matrix');
+ const nCrewCols=matrix?parseInt(matrix.style.getPropertyValue('--ipad-crew-columns'))||0:0;
+ const cells=matrix?[...matrix.querySelectorAll(':scope > .ipad-matrix-cell')]:[];
+ const crewRows=[];
+ for(let i=0;i<cells.length;i+=nCrewCols+1)crewRows.push(cells.slice(i,i+nCrewCols+1).map(e=>e.classList.contains('ipad-matrix-details')?[...e.querySelectorAll('span')].map(x=>x.textContent):e.textContent));
+ const canvas=document.createElement('canvas');canvas.width=W;canvas.height=H;
+ const ctx=canvas.getContext('2d',{alpha:false});if(!ctx)throw Error('Canvas 2D unavailable');
+ const pad=7;
+ function font(size,bold=false){ctx.font=(bold?'bold ':'')+size+'px Arial,Helvetica,sans-serif';}
+ function wrap(str,maxWidth,size,bold=false){font(size,bold);const words=String(str||'').split(/\s+/).filter(Boolean),lines=[];let line='';
+  for(let word of words){if(ctx.measureText(word).width>maxWidth){if(line){lines.push(line);line='';}let frag='';for(const ch of word){if(frag&&ctx.measureText(frag+ch).width>maxWidth){lines.push(frag);frag=ch}else frag+=ch;}word=frag;}
+   if(!line)line=word;else if(ctx.measureText(line+' '+word).width<=maxWidth)line+=' '+word;else{lines.push(line);line=word;}}
+  if(line)lines.push(line);return lines.length?lines:[''];}
+ function drawLines(lines,x,y,size,color,bold=false,leading=1.25){font(size,bold);ctx.fillStyle=color;ctx.textBaseline='top';const lh=size*leading;for(const line of lines){ctx.fillText(line,x,y);y+=lh;}return y;}
+ function measure(scale){
+  const count=Math.max(1,airports.length),width=(W-margin*2-gap*(count-1))/count;
+  const airFont=Math.max(10.1,(count>=7?12.6:count===6?13.4:count===5?14.3:15.5)*scale);
+  const labelFont=airFont+1.2,subFont=Math.max(9.2,airFont-1.1);
+  const headingFont=Math.max(9,airFont-1.2);
+  const heights=airports.map(col=>{let h=pad;
+   h+=wrap(col.label,width-pad*2,labelFont,true).length*(labelFont*1.2)+4;
+   if(col.aircraft)h+=wrap(col.aircraft,width-pad*2,subFont).length*subFont*1.23+4;
+   if(col.alternate)h+=wrap(col.alternate,width-pad*2,subFont).length*subFont*1.25+4;
+   for(const part of col.parts){h+=5;if(!part.lines.length)h+=headingFont*1.3+4;
+    for(const line of part.lines)h+=wrap(line.text,width-pad*2,airFont).length*airFont*1.25+4;
+   }return h+pad;});
+  const airportHeight=Math.max(...heights,0);
+  const crewCount=Math.max(1,nCrewCols+1),crewWidth=(W-margin*2-gap*(crewCount-1))/crewCount;
+  const cf=Math.max(9.5,(nCrewCols>=5?12:nCrewCols===4?13:14)*scale);
+  const detailsW=crewWidth-12;
+  const rowHeights=crewRows.map((row,i)=>{let h=0;for(let c=0;c<row.length;c++){
+    if(c===0){const parts=Array.isArray(row[c])?row[c]:[row[c]];const widths=[.24,.13,.15,.40];let max=1;for(let q=0;q<parts.length;q++)max=Math.max(max,wrap(parts[q],detailsW*widths[q],cf-1,i===0).length);h=Math.max(h,max*(cf-1)*1.23+10)}
+    else h=Math.max(h,wrap(row[c]||'',crewWidth-12,cf,i===0).length*cf*1.25+10);
+  }return Math.max(i===0?32:26,h);});
+  const crewHeight=rowHeights.reduce((a,b)=>a+b,0);
+  return {scale,width,airFont,labelFont,subFont,headingFont,airportHeight,crewWidth,cf,rowHeights,crewHeight,used:margin+band+10+airportHeight+11+crewHeight+margin};
+ }
+ let layout=measure(1);
+ for(let s=.97;s>=.72 && layout.used>H;s-=.03)layout=measure(s);
+ // When a single wallpaper cannot hold all content at a legible font, create
+ // a taller PNG and show an explicit warning rather than truncate information.
+ if(layout.used>H)canvas.height=Math.ceil(layout.used+16);
+ const maxY=canvas.height;
+ ctx.fillStyle='#f7f9fc';ctx.fillRect(0,0,W,maxY);
+ ctx.fillStyle='#153b73';ctx.fillRect(margin,margin,W-2*margin,band);
+ function border(x,y,w,h){ctx.strokeStyle='#cbd5e1';ctx.lineWidth=1;ctx.strokeRect(Math.round(x)+.5,Math.round(y)+.5,Math.round(w)-1,Math.round(h)-1);}
+ const airportY=margin+band+10;
+ airports.forEach((col,i)=>{const x=margin+i*(layout.width+gap),w=layout.width;let y=airportY+pad;
+  border(x,airportY,w,layout.airportHeight);
+  y=drawLines(wrap(col.label,w-pad*2,layout.labelFont,true),x+pad,y,layout.labelFont,'#17202b',true,1.2)+4;
+  if(col.aircraft)y=drawLines(wrap(col.aircraft,w-pad*2,layout.subFont),x+pad,y,layout.subFont,'#42546a')+4;
+  if(col.alternate)y=drawLines(wrap(col.alternate,w-pad*2,layout.subFont),x+pad,y,layout.subFont,'#17202b')+4;
+  for(const part of col.parts){ctx.fillStyle='#d7dee8';ctx.fillRect(x+pad,y,w-2*pad,1);y+=5;
+   if(!part.lines.length)y=drawLines([part.label],x+pad,y,layout.headingFont,'#17202b',true)+4;
+   for(const item of part.lines)y=drawLines(wrap(item.text,w-pad*2,layout.airFont),x+pad,y,layout.airFont,item.color)+4;
+  }
+ });
+ const crewY=airportY+layout.airportHeight+11;
+ ctx.fillStyle='#9aaabd';ctx.fillRect(margin,crewY-5,W-2*margin,1);
+ let y=crewY;
+ crewRows.forEach((row,r)=>{const h=layout.rowHeights[r];row.forEach((value,c)=>{
+  const x=margin+c*(layout.crewWidth+gap),w=layout.crewWidth;
+  border(x,y,w,h);
+  if(c===0){const vals=Array.isArray(value)?value:[value];const fractions=[.24,.13,.15,.40],offsets=[0,.25,.39,.54];vals.forEach((v,j)=>{
+   const text=wrap(v,w*fractions[j]-5,layout.cf-1,r===0);drawLines(text,x+5+w*offsets[j],y+5,layout.cf-1,'#17202b',r===0,1.2);
+  });}else{
+   drawLines(wrap(value||'',w-12,layout.cf,r===0),x+6,y+5,layout.cf,'#17202b',r===0,1.25);
+  }
+ });y+=h;});
+ canvas.dataset.overflow=String(layout.used>H);
+ canvas.dataset.sectors=String(nCrewCols);
+ canvas.dataset.airportColumns=String(airports.length);
+ canvas.dataset.layoutHeight=String(layout.used);
+ return canvas;
+}
+function ipadCanvasRefresh(){
+ const root=document.getElementById('ipadCBRPreview'),source=root?.querySelector('.ipad-wallpaper');if(!source)return;
+ const imageCanvas=ipadCanvasRender(source);ipadImageCanvas=imageCanvas;source.classList.add('cbr172-source');
+ let img=root.querySelector('.cbr172-image');if(!img){img=document.createElement('img');img.className='cbr172-image';img.alt='iPad landscape CBR — exact PNG export preview';root.insertBefore(img,source);}
+ img.src=imageCanvas.toDataURL('image/png');
+ const old=root.querySelector('#ipadCBROverflow171');if(old)old.remove();
+ let warning=root.querySelector('#ipadCBROverflow172');if(warning)warning.remove();
+ if(imageCanvas.dataset.overflow==='true'){
+  warning=document.createElement('p');warning.id='ipadCBROverflow172';warning.className='note';warning.style.cssText='color:#a44400;font-weight:700;margin:8px 0';warning.textContent='This briefing contains more information than one iPad wallpaper can display legibly. The full content is retained in an extended image; review before setting as wallpaper.';root.append(warning);
+ }
+ crewFitIpadPreview();
+}
+
 function ipadCBRRender(){
  const root=document.getElementById('ipadCBRPreview'),status=document.getElementById('ipadCBRStatus');if(!root)return;
  const visits=ipadVisitList();root.replaceChildren();const summary=document.getElementById('ipadCBRSelectionSummary');if(summary){const count=Object.keys(ipadSelections).length;summary.textContent=count+' NOTAM'+(count===1?'':'s')+' selected for the iPad CBR.';}
@@ -2397,7 +2506,7 @@ function ipadCBRRender(){
  crewSection.append(crewColumns);frame.append(crewSection);
  ipadApplyLayout(frame);root.append(frame);crewFitIpadPreview();
  // A briefing may exceed one wallpaper. Warn explicitly rather than clip or reduce text invisibly.
- requestAnimationFrame(()=>{const h=frame.scrollHeight;const warning=document.getElementById('ipadCBROverflow171');if(warning)warning.remove();if(h>1028){const p=document.createElement('p');p.id='ipadCBROverflow171';p.className='note';p.style.color='#aa4b00';p.textContent='Briefing exceeds one landscape wallpaper ('+h+'px). All information is retained; shorten or select fewer items before using it as a wallpaper.';root.append(p)}});
+
  if(Object.keys(ipadSelections).length){const details=document.createElement('details');details.className='ipad-manage';const summary=document.createElement('summary');summary.textContent='Edit / remove selected NOTAMs';details.append(summary);
  for(const [key,item] of Object.entries(ipadSelections)){const line=document.createElement('div');line.className='ipad-manage-row';const label=document.createElement('span');label.textContent=item.id+' · '+(visits.find(v=>v.key===item.visit)?.label||item.visit);line.append(label);
  const move=document.createElement('button');move.type='button';move.className='btn small';move.textContent='Change visit';move.onclick=()=>{const choices=ipadAirportVisits((visits.find(v=>v.key===item.visit)||{}).code);const response=prompt('Override airport visit for '+item.id+'\nValidity: '+ipadValidityLabel(item.raw)+'\n'+choices.map((v,i)=>(i+1)+'. '+v.label+' ('+ipadVisitUtcLabel(v)+')').join('\n')+'\nEnter visit number:');if(response===null)return;const n=Number(response);if(!Number.isInteger(n)||n<1||n>choices.length)return alert('Invalid visit number');const visit=choices[n-1];delete ipadSelections[key];ipadSelections[visit.key+'|'+item.id]={...item,visit:visit.key};ipadSave();ipadCBRRender();ipadUpdateButtons();};line.append(move);
@@ -2405,8 +2514,9 @@ function ipadCBRRender(){
  const del=document.createElement('button');del.type='button';del.className='btn small';del.textContent='Remove';del.onclick=()=>{delete ipadSelections[key];ipadSave();ipadCBRRender();ipadUpdateButtons()};line.append(del);details.append(line);
  }root.append(details);}
 
- const tip=document.createElement('p');tip.className='note';tip.textContent='Live iPad draft. Scroll horizontally to see every airport visit. Compact SPECI observations appear when available. Original CBR and NAIPS text are unchanged.';root.append(tip);
- const count=Object.keys(ipadSelections).length;status.textContent=count+' NOTAM selection(s) in iPad draft · '+visits.length+' airport visit(s). Weather interpretation and wallpaper export to follow.';
+ const tip=document.createElement('p');tip.className='note';tip.textContent='Live iPad draft. Preview and exported PNG are identical. Compact SPECI observations appear when available. Original CBR and NAIPS text are unchanged.';root.append(tip);
+ const count=Object.keys(ipadSelections).length;status.textContent=count+' NOTAM selection(s) in iPad draft · '+visits.length+' airport visit(s). '+(window.crewIpadSchedule?.rows()||[]).length+' sector(s).';
+ ipadCanvasRefresh();
 }
 function ipadUpdateButtons(){
  document.querySelectorAll('[data-ipad-notam-id]').forEach(el=>{
@@ -2428,42 +2538,33 @@ function ipadExportHTML(){
 }
 async function ipadShareCBR(){
  try{
-  const file=ipadExportHTML();
+  ipadCBRRender();
+  const canvas=ipadImageCanvas;
+  if(!canvas)throw Error('Import a CBR before exporting.');
+  const blob=await new Promise((resolve,reject)=>canvas.toBlob(b=>b?resolve(b):reject(Error('PNG encoding failed')),'image/png'));
+  const file=new File([blob],'CrewFocus_iPad_CBR.png',{type:'image/png'});
   if(navigator.canShare?.({files:[file]})&&navigator.share){
-   try{await navigator.share({files:[file],title:'CrewFocus iPad CBR'});return}catch(e){if(e.name==='AbortError')return;}
+   try{await navigator.share({files:[file],title:'CrewFocus iPad CBR'});return;}catch(e){if(e.name==='AbortError')return;}
   }
   const url=URL.createObjectURL(file),a=document.createElement('a');a.href=url;a.download=file.name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30000);
-  alert('Briefing saved as an HTML file. Open it on your iPad, or share the file using AirDrop from Files.');
- }catch(e){alert('Could not export iPad CBR: '+e.message)}
+ }catch(e){alert('Could not export iPad CBR PNG: '+e.message)}
 }
 
 let ipadPreviewZoom=0; // 0 = fit; otherwise an explicit zoom multiplier
 function crewFitIpadPreview(){
- const root=document.getElementById('ipadCBRPreview'),page=root?.querySelector('.ipad-wallpaper');if(!page)return;
+ const root=document.getElementById('ipadCBRPreview'),page=root?.querySelector('.cbr172-image');if(!page)return;
  const fullscreen=document.getElementById('ipadCBRPanel')?.classList.contains('ipad-fullscreen');
  const available=Math.max(260,(root.clientWidth||document.documentElement.clientWidth)-(fullscreen?24:0));
- const fit=Math.min(1,available/1474);
- const scale=fullscreen?(ipadPreviewZoom||fit):fit;
- page.style.removeProperty('zoom');
- page.style.setProperty('zoom','1','important');
- page.style.setProperty('transform','scale('+scale+')','important');
- page.style.setProperty('transform-origin','top left','important');
- page.style.setProperty('width','1474px','important');
- page.style.setProperty('min-width','1474px','important');
- page.style.setProperty('max-width','1474px','important');
- page.style.setProperty('height','auto','important');
- const naturalHeight=Math.max(1024,page.scrollHeight);
+ const fit=Math.min(1,available/1474),scale=fullscreen?(ipadPreviewZoom||fit):fit;
+ const naturalHeight=ipadImageCanvas?.height||1024;
  let spacer=root.querySelector('.ipad-preview-spacer');
  if(!spacer){spacer=document.createElement('div');spacer.className='ipad-preview-spacer';root.insertBefore(spacer,page);}
- spacer.style.width=Math.ceil(1474*scale)+'px';
- spacer.style.height=Math.ceil(naturalHeight*scale)+'px';
- spacer.style.pointerEvents='none';spacer.style.display='block';spacer.style.flex='none';
- page.style.position='absolute';
- page.style.left='0';page.style.top='0';
- root.style.position='relative';root.style.height=fullscreen?'':'auto';
- root.style.minHeight='0';root.style.overflow=fullscreen?'auto':'hidden';
+ spacer.style.cssText='display:block;pointer-events:none;flex:none;width:'+Math.ceil(1474*scale)+'px;height:'+Math.ceil(naturalHeight*scale)+'px';
+ page.style.cssText='display:block!important;position:absolute!important;left:0;top:0;width:1474px!important;max-width:none!important;height:'+naturalHeight+'px!important;transform:scale('+scale+')!important;transform-origin:top left!important;';
+ root.style.position='relative';root.style.height=fullscreen?'':'auto';root.style.minHeight='0';root.style.overflow=fullscreen?'auto':'hidden';
  const counter=document.getElementById('ipadPreviewScale');if(counter)counter.textContent=Math.round(scale*100)+'%';
 }
+
 window.addEventListener('resize',crewFitIpadPreview);
 
 function ipadInit(){
