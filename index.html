@@ -5,7 +5,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <meta content="#15283f" name="theme-color"/>
-<title>CrewFocus v188 — CBR Visual Theme</title>
+<title>CrewFocus v189 — CBR Visual Theme</title>
 <style>
 :root{color-scheme:light dark;--bg:#f3f6fa;--card:#fff;--ink:#15283f;--muted:#637184;--line:#dce3eb;--accent:#176b87;--soft:#e9f4f7;--danger:#b13e3e}
 @media(prefers-color-scheme:dark){:root{--bg:#101820;--card:#1a2632;--ink:#edf4fb;--muted:#aab8c6;--line:#344454;--accent:#72c7df;--soft:#203a46;--danger:#ff9b9b}}
@@ -1729,7 +1729,7 @@ function crewNotamWindow(){
  try{
   const c=JSON.parse(localStorage.getItem('crewFocusCBRStateV1')||'null');
   if(!c?.date||!c?.rows?.length)return null;const dutyDate=c.testDateOverride?melbourneToday():c.date;
-  const zones={MEL:'Australia/Melbourne',SYD:'Australia/Sydney',BNE:'Australia/Brisbane',ADL:'Australia/Adelaide',PER:'Australia/Perth',CBR:'Australia/Sydney',HBA:'Australia/Hobart',OOL:'Australia/Brisbane',CNS:'Australia/Brisbane',DRW:'Australia/Darwin',AKL:'Pacific/Auckland'};
+  const zones={...portZones,AKL:'Pacific/Auckland',CHC:'Pacific/Auckland',WLG:'Pacific/Auckland',ZQN:'Pacific/Auckland',SIN:'Asia/Singapore'};
   function localUTC(date,time,code){
    if(!date||!/^\d\d:\d\d$/.test(time)||!zones[code])return null;
    const target=date+' '+time, f=new Intl.DateTimeFormat('en-CA',{timeZone:zones[code],year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hourCycle:'h23'});
@@ -1923,20 +1923,46 @@ try{ipadSelections=JSON.parse(localStorage.getItem(IPAD_DRAFT_KEY)||'{}')||{}}ca
 // v85 migration: remove only the bulk automatic selections created by v84.
 try{if(!localStorage.getItem('crewFocus_iPadV85Migration')){for(const [k,v] of Object.entries(ipadSelections))if(v.auto)delete ipadSelections[k];localStorage.setItem(IPAD_DRAFT_KEY,JSON.stringify(ipadSelections));localStorage.setItem('crewFocus_iPadV85Migration','1');}}catch(e){}
 function ipadSave(){try{localStorage.setItem(IPAD_DRAFT_KEY,JSON.stringify(ipadSelections))}catch(e){}}
-function ipadVisitList(){
- const source=window.crewIpadSchedule,rs=source?.rows()||[],date=source?.date()||'',visits=[];
- const utc=(airport,time)=>{try{const d=source.utc(date,time,airport);return d&&Number.isFinite(new Date(d).getTime())?new Date(d).toISOString().slice(11,16):'—'}catch(e){return '—'}};
- const fmtTime=t=>String(t||'').replace(':','');
- const fmt=(airport,arr,dep)=>airport+' · '+(arr?fmtTime(arr)+'L ('+utc(airport,arr)+'Z)':'')+(arr&&dep?' – ':'')+(dep?fmtTime(dep)+'L ('+utc(airport,dep)+'Z)':'');
+/* v189: one airport-local-to-UTC chronological timeline for the whole imported duty.
+   Each sector inherits the correct local date, including midnight and DST crossings.
+   No replacement times are guessed when an airport/time is unsupported. */
+function crewCBRUtcTimeline(){
+ const source=window.crewIpadSchedule,rs=source?.rows()||[],base=source?.date()||'',out=[];
+ if(!/^\d{4}-\d{2}-\d{2}$/.test(base))return out;
+ let previous=null;
  for(let i=0;i<rs.length;i++){
-  const r=rs[i],dep=source.utc(date,r[2],r[1]),arr=source.utc(date,r[4],r[3]);
-  if(i===0)visits.push({key:'departure-0',code:r[1],label:fmt(r[1],null,r[2]),time:dep,kind:'departure'});
-  const next=rs[i+1],same=next&&r[3]===next[1];
-  visits.push({key:'arrival-'+i,code:r[3],label:fmt(r[3],r[4],same?next[2]:null),time:arr,kind:'arrival'});
-  if(next&&!same)visits.push({key:'departure-'+(i+1),code:next[1],label:fmt(next[1],null,next[2]),time:source.utc(date,next[2],next[1]),kind:'departure'});
+  const r=rs[i],events=[];
+  for(const [kind,airport,time] of [['departure',r[1],r[2]],['arrival',r[3],r[4]]]){
+   let found=null;
+   for(let shift=0;shift<5;shift++){
+    const day=new Date(base+'T12:00:00Z');day.setUTCDate(day.getUTCDate()+shift);
+    const localDate=day.toISOString().slice(0,10);
+    const instant=crewScreeningUTC(localDate,time,airport);
+    if(instant&&(!previous||instant>previous)){found={instant,localDate,airport,time,kind,sector:i};break;}
+   }
+   if(found)previous=found.instant;
+   events.push(found);
+  }
+  out.push({flight:r[0],departure:events[0],arrival:events[1]});
+ }
+ return out;
+}
+function ipadVisitList(){
+ const source=window.crewIpadSchedule,rs=source?.rows()||[],timeline=crewCBRUtcTimeline(),visits=[];
+ const local=t=>String(t||'').replace(':','');
+ const labelled=(airport,arr,dep)=>{
+  const fmt=e=>e?local(e.time)+'L ('+e.instant.toISOString().slice(11,16)+'Z)':'—';
+  return airport+' · '+(arr?fmt(arr):'')+(arr&&dep?' – ':'')+(dep?fmt(dep):'');
+ };
+ for(let i=0;i<rs.length;i++){
+  const r=rs[i],e=timeline[i]||{},next=rs[i+1],same=next&&r[3]===next[1];
+  if(i===0)visits.push({key:'departure-0',code:r[1],label:labelled(r[1],null,e.departure),time:e.departure?.instant||null,kind:'departure'});
+  visits.push({key:'arrival-'+i,code:r[3],label:labelled(r[3],e.arrival,same?timeline[i+1]?.departure:null),time:e.arrival?.instant||null,kind:'arrival'});
+  if(next&&!same)visits.push({key:'departure-'+(i+1),code:next[1],label:labelled(next[1],null,timeline[i+1]?.departure),time:timeline[i+1]?.departure?.instant||null,kind:'departure'});
  }
  return visits;
 }
+
 function ipadAbbreviate(raw){
  // The identifier, superseded NOTAM, administrative references and validity
  // are retained in the original record, not repeated in the wallpaper summary.
@@ -2280,7 +2306,7 @@ function ipadCbrWeather(visit){
  const source=ipadRetainedNaipsText();
  const parsed=source?flightNaipsParse(source):null;
  const reports=parsed?.airports?.get(ipadWxICAO(visit.code))?.weather||[];
- const event=visit.time instanceof Date?visit.time:new Date(visit.time);
+ const event=visit.time instanceof Date?visit.time:new Date(visit.time||NaN);
  if(!Number.isFinite(event.getTime()))return [];
  const candidates=[];
  for(const rawReport of reports){
@@ -2340,7 +2366,7 @@ function ipadAddWeatherToCBR(){
  if(!parsed?.order?.length){if(status)status.textContent='NAIPS briefing not recognised. Import the full location briefing with WEATHER INFORMATION and NOTAM INFORMATION headings.';return;}
  const next={};let populated=0,blank=0;const details=[];
  for(const visit of visits){
-  const event=visit.time instanceof Date?visit.time:new Date(visit.time);
+  const event=visit.time instanceof Date?visit.time:new Date(visit.time||NaN);
   if(!visit.code||!Number.isFinite(event.getTime())){blank++;details.push((visit.code||'?')+': invalid airport time');continue;}
   let lines=[];try{lines=ipadCbrWeather(visit)}catch(e){details.push(visit.code+': '+(e.message||'weather parsing error'));console.warn('CBR weather',visit,e);}
   // Store both airport and exact UTC visit time to prevent assigning one
@@ -2349,7 +2375,7 @@ function ipadAddWeatherToCBR(){
   if(lines.length)populated++;else{blank++;if(!details.some(x=>x.startsWith(visit.code+':'))){
     const listed=parsed.airports.get(ipadWxICAO(visit.code))?.weather||[];
     const tafFound=listed.some(r=>/^TAF\b/i.test(ipadTafNormalize(r)));
-    details.push(visit.code+' ('+ipadWxICAO(visit.code)+'): '+(tafFound?'TAF present, but issue/validity does not cover ':'no TAF recognised for ')+event.toISOString().slice(11,16)+'Z');
+    details.push(visit.code+' ('+ipadWxICAO(visit.code)+'): '+(tafFound?'TAF present, but issue/validity does not cover ':'no TAF recognised for ')+event.toISOString().slice(0,16).replace('T',' ')+'Z');
    }}
  }
  ipadWeatherAssignments=next;
@@ -2664,7 +2690,7 @@ function ipadCBRRender(){
    const selected=heading==='NOTAMs'?Object.values(ipadSelections).filter(item=>item.visit===visit.key):[];
    // Section labels are hidden when populated; their content remains visible.
    const section=document.createElement('div');section.className='ipad-cbr-section ipad-cbr-section-'+heading.toLowerCase().replace(/[^a-z]/g,'');col.append(section);const h=document.createElement('div');h.className='ipad-visit-heading';h.textContent=heading;section.append(h);
-   if(heading==='WEATHER')for(const wx of ((ipadWeatherAssignments[visit.key]?.airport===visit.code && ipadWeatherAssignments[visit.key]?.utc===(visit.time instanceof Date?visit.time:new Date(visit.time)).toISOString())?ipadWeatherAssignments[visit.key].lines:[])){const line=document.createElement('div');line.className=wx.red?'ipad-cbr-wx-line ipad-cbr-wx-alert':'ipad-cbr-wx-line';line.textContent=wx.text;section.append(line);}
+   if(heading==='WEATHER')for(const wx of ((ipadWeatherAssignments[visit.key]?.airport===visit.code && ipadWeatherAssignments[visit.key]?.utc===(visit.time instanceof Date&&Number.isFinite(visit.time.getTime())?visit.time.toISOString():''))?ipadWeatherAssignments[visit.key].lines:[])){const line=document.createElement('div');line.className=wx.red?'ipad-cbr-wx-line ipad-cbr-wx-alert':'ipad-cbr-wx-line';line.textContent=wx.text;section.append(line);}
    for(const item of selected){
     const entry=document.createElement('div');entry.className='ipad-selected ipad-notam-text';const txt=document.createElement('span');txt.textContent=item.abbreviated?(item.display||item.raw):ipadAbbreviate(item.raw);txt.title=item.raw;entry.append(txt);section.append(entry);
    }
@@ -2867,11 +2893,11 @@ function crewWxModeInit(){
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',crewWxModeInit);else crewWxModeInit();
 const crewScreeningKey='crewFocusManualDutyV126'; // Legacy data retained, never used for screening.
 function crewScreeningAirport(code){
- const aliases={YMML:'MEL',YSSY:'SYD',YBBN:'BNE',YPAD:'ADL',YPPH:'PER',YSCB:'CBR',YMHB:'HBA',YBCG:'OOL',YBCS:'CNS',YPDN:'DRW'};
+ const aliases={YMML:'MEL',YSSY:'SYD',YBBN:'BNE',YPAD:'ADL',YPPH:'PER',YSCB:'CBR',YMHB:'HBA',YBCG:'OOL',YBCS:'CNS',YPDN:'DRW',YWLM:'NTL',YBRK:'ROK',YMLT:'LST',YBTL:'TSV',YBMK:'MKY',YBSU:'MCY',YMAV:'AVV',NZAA:'AKL',NZCH:'CHC',NZWN:'WLG',NZQN:'ZQN',WSSS:'SIN',WADD:'DPS',NFFN:'NAN'};
  const value=String(code||'').trim().toUpperCase();return aliases[value]||value;
 }
 function crewScreeningUTC(date,time,port){
- const zones={MEL:'Australia/Melbourne',SYD:'Australia/Sydney',BNE:'Australia/Brisbane',ADL:'Australia/Adelaide',PER:'Australia/Perth',CBR:'Australia/Sydney',HBA:'Australia/Hobart',OOL:'Australia/Brisbane',CNS:'Australia/Brisbane',DRW:'Australia/Darwin',AKL:'Pacific/Auckland'};
+ const zones={...portZones,AKL:'Pacific/Auckland',CHC:'Pacific/Auckland',WLG:'Pacific/Auckland',ZQN:'Pacific/Auckland',SIN:'Asia/Singapore'};
  const tz=zones[crewScreeningAirport(port)];
  if(!tz||!/^\d{4}-\d{2}-\d{2}$/.test(date||'')||!/^\d{2}:\d{2}$/.test(time||''))return null;
  const [y,mo,d]=date.split('-').map(Number),[h,mi]=time.split(':').map(Number);
@@ -3048,27 +3074,21 @@ function crewTestTimelineInit(){
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',crewTestTimelineInit);else crewTestTimelineInit();
 function crewWxAirportEvents(code,window){
  const airport=crewScreeningAirport(code),out=[];
- let events=[];
- if(crewWxMode()==='sector')events=crewSectorTimelineRead()||[];
- else {
-  const saved=(()=>{try{return JSON.parse(localStorage.getItem('crewFocusCBRStateV1')||'null')||{};}catch(e){return {};}})();
-  const rs=crewSectorSourceRows();
-  const date=typeof effectiveCBRDate==='function'?effectiveCBRDate():saved.date;
-  if(/^\d{4}-\d{2}-\d{2}$/.test(date||'')){
-   let previous=null;
-   for(const [i,r] of rs.entries())for(const e of [{type:'DEP',port:r[1],time:r[2]},{type:'ARR',port:r[3],time:r[4]}]){
-    if(!/^\d{1,2}:\d{2}$/.test(e.time||''))continue;
-    for(let shift=0;shift<4;shift++){
-     const day=new Date(date+'T12:00:00Z');day.setUTCDate(day.getUTCDate()+shift);
-     const d=day.toISOString().slice(0,10),instant=crewScreeningUTC(d,e.time,e.port);
-     if(instant&&(!previous||instant>=previous)){events.push({...e,sector:i+1,flight:r[0]||'Sector '+(i+1),date:d});previous=instant;break;}
-    }
-   }
+ if(crewWxMode()==='sector'){
+  for(const e of crewSectorTimelineRead()||[]){
+   if(crewScreeningAirport(e.port)!==airport)continue;
+   const time=crewScreeningUTC(e.date,e.time,e.port);
+   if(time)out.push({time,type:e.type,sector:1,flight:e.flight,port:e.port,outsideDuty:false});
+  }
+ }else{
+  for(const item of crewCBRUtcTimeline())for(const event of [item.departure,item.arrival]){
+   if(!event||crewScreeningAirport(event.airport)!==airport)continue;
+   out.push({time:event.instant,type:event.kind==='departure'?'DEP':'ARR',sector:event.sector+1,flight:item.flight,port:event.airport,outsideDuty:false});
   }
  }
- for(const e of events){if(crewScreeningAirport(e.port)!==airport)continue;const instant=crewScreeningUTC(e.date,e.time,e.port);if(instant)out.push({time:instant,type:e.type,sector:e.sector||(crewWxMode()==='sector'?1:null),flight:e.flight,port:e.port,outsideDuty:false});}
  return out;
 }
+
 function crewWxInterpolate(points,time){
  if(points.length<2||time<points[0].time||time>points[points.length-1].time)return null;
  for(let i=0;i<points.length-1;i++){
@@ -3589,7 +3609,7 @@ crewNavigate('home');
 
 // CBR preview module. All times are explicitly converted through IANA airport zones.
 (function(){
-const $c=id=>document.getElementById(id), zone={MEL:'Australia/Melbourne',SYD:'Australia/Sydney',BNE:'Australia/Brisbane',ADL:'Australia/Adelaide',PER:'Australia/Perth',CBR:'Australia/Sydney',HBA:'Australia/Hobart',OOL:'Australia/Brisbane',CNS:'Australia/Brisbane',DRW:'Australia/Darwin'};
+const $c=id=>document.getElementById(id), zone={...portZones,AKL:'Pacific/Auckland',CHC:'Pacific/Auckland',WLG:'Pacific/Auckland',ZQN:'Pacific/Auckland',SIN:'Asia/Singapore'};
 const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const crewAircraftData={B738:{name:'Boeing 737-800',span:'35.8 m (blended winglets; configuration-dependent)',code:'4C'},B38M:{name:'Boeing 737 MAX 8',span:'35.9 m (approx.)',code:'4C'},B3XM:{name:'Boeing 737 MAX 10',span:'35.9 m (approx.)',code:'4C'}};
 (function(){const selector=document.getElementById('crewAircraftType'),details=document.getElementById('crewAircraftDetails');if(!selector||!details)return;try{selector.value=localStorage.getItem('crewFocus_aircraftType')||'B738'}catch(e){}if(!crewAircraftData[selector.value])selector.value='B738';const update=()=>{const a=crewAircraftData[selector.value];details.textContent='ICAO aircraft type: '+selector.value+' · Aerodrome reference code: '+a.code+' · Wingspan: '+a.span;try{localStorage.setItem('crewFocus_aircraftType',selector.value)}catch(e){}};selector.addEventListener('change',()=>{update();const raw=document.getElementById('flightNaipsInput')?.value||'';if(raw){const parsed=flightNaipsParse(raw);if(parsed?.order?.length)flightRenderNaips(parsed);}});update()})();
@@ -3667,7 +3687,7 @@ async function cbrReadPDF(file){if(!Promise.withResolvers)Promise.withResolvers=
  for(let i=1;i<=Math.min(doc.numPages,3);i++){const page=await doc.getPage(i),content=await page.getTextContent();const viewport=page.getViewport({scale:1});const items=content.items.filter(x=>x.str?.trim()).map(x=>({str:x.str,x:x.transform[4],y:x.transform[5]}));const ys=[];for(const it of items){let group=ys.find(g=>Math.abs(g.y-it.y)<5);if(!group){group={y:it.y,items:[]};ys.push(group)}group.items.push(it)}let t=ys.sort((a,b)=>b.y-a.y).map(g=>g.items.sort((a,b)=>a.x-b.x).map(x=>x.str).join(' ')).join('\n');if(!/VA\s*\d{3,4}/i.test(t)){const v=page.getViewport({scale:2});const canvas=document.createElement('canvas');canvas.width=v.width;canvas.height=v.height;await page.render({canvasContext:canvas.getContext('2d'),viewport:v}).promise;t=await cbrOCR(canvas)}texts.push(t)}return texts.join('\n')}
 $c('cbrFile').onchange=async()=>{const file=$c('cbrFile').files?.[0];if(!file)return;markUnconfirmed();$c('cbrStatus').textContent='Reading '+file.name+'… This may take a minute on first use.';$c('cbrFile').disabled=true;
  try{let text;if(file.type==='application/pdf'||/\.pdf$/i.test(file.name))text=await cbrReadPDF(file);else if(file.type.startsWith('image/'))text=await cbrOCR(await cbrImageCanvas(file));else text=await file.text();$c('cbrText').value=text;parse();}catch(e){$c('cbrStatus').textContent='Could not read CBR: '+e.message+'. You can still paste text or enter manually.';}finally{$c('cbrFile').disabled=false}};
-function utc(date,hm,airport){const tz=zone[airport];if(!tz||!/^\d\d:\d\d$/.test(hm)||!date)return null;const target=date+' '+hm;const f=new Intl.DateTimeFormat('en-CA',{timeZone:tz,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hourCycle:'h23'});const parts=d=>Object.fromEntries(f.formatToParts(d).filter(p=>p.type!=='literal').map(p=>[p.type,p.value]));let ms=Date.parse(date+'T'+hm+':00Z');for(let i=0;i<4;i++){const p=parts(new Date(ms));const shown=Date.UTC(+p.year,+p.month-1,+p.day,+p.hour,+p.minute);const wanted=Date.parse(date+'T'+hm+':00Z');ms+=wanted-shown}const p=parts(new Date(ms));if(`${p.year}-${p.month}-${p.day} ${p.hour}:${p.minute}`!==target)return null;return new Date(ms)}
+function utc(date,hm,airport){const port=(typeof crewScreeningAirport==='function'?crewScreeningAirport(airport):String(airport||'').toUpperCase());const tz=zone[port];if(!tz||!/^\d\d:\d\d$/.test(hm)||!date)return null;const target=date+' '+hm;const f=new Intl.DateTimeFormat('en-CA',{timeZone:tz,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hourCycle:'h23'});const parts=d=>Object.fromEntries(f.formatToParts(d).filter(p=>p.type!=='literal').map(p=>[p.type,p.value]));let ms=Date.parse(date+'T'+hm+':00Z');for(let i=0;i<4;i++){const p=parts(new Date(ms));const shown=Date.UTC(+p.year,+p.month-1,+p.day,+p.hour,+p.minute);const wanted=Date.parse(date+'T'+hm+':00Z');ms+=wanted-shown}const p=parts(new Date(ms));if(`${p.year}-${p.month}-${p.day} ${p.hour}:${p.minute}`!==target)return null;return new Date(ms)}
 function stamp(d){return d?d.toISOString().slice(11,16)+'Z ('+d.toISOString().slice(0,10)+')':'Time zone unavailable'}
 function rows(){return [...$c('cbrRows').children].map(r=>[...r.querySelectorAll('input')].map(i=>i.value.trim().toUpperCase())).filter(r=>r.some(Boolean))}
 function preview(){const date=effectiveCBRDate(), rs=rows(), sign=utc(date,$c('cbrSignon').value,'MEL');if(!sign||!rs.length){$c('cbrStatus').textContent='Enter a valid duty date, MEL sign-on and at least one sector.';$c('cbrPreview').innerHTML='<section class="cbr-report"><h2>Original CBR preview</h2><p class="cbr-warning">No complete CBR schedule available yet. Upload a CBR or open Review / modify imported CBR and enter a duty date, sign-on and sectors.</p></section>';$c('cbrPreview').scrollIntoView({behavior:'smooth',block:'center'});return}let html='<section class="cbr-report"><h2>CREW BRIEFING · WORKING PREVIEW</h2><p>Duty date '+esc(date)+' · Sign-on MEL '+esc($c('cbrSignon').value)+' ('+esc(stamp(sign))+')</p><table><thead><tr><th>Flight</th><th>Departure · local (UTC)</th><th>Arrival · local (UTC)</th></tr></thead><tbody>';let problems=[];let flights=[];for(const r of rs){let [no,from,dep,to,arr,rego]=r;let d=utc(date,dep,from),a=utc(date,arr,to);if(d&&a&&a<=d){const next=new Date(date+'T12:00:00Z');next.setUTCDate(next.getUTCDate()+1);a=utc(next.toISOString().slice(0,10),arr,to)}if(!d||!a)problems.push(no||'Sector');flights.push({no,from,to,dep,arr,rego,d,a});html+='<tr><td>'+esc(no)+(rego?' <small>('+esc(rego)+')</small>':' <small>(rego not supplied)</small>')+'</td><td>'+esc(from)+' '+esc(dep)+'<div class="utc">('+esc(stamp(d))+')</div></td><td>'+esc(to)+' '+esc(arr)+'<div class="utc">('+esc(stamp(a))+')</div></td></tr>'}html+='</tbody></table>';let signoff=utc(date,$c('cbrSignoff').value,$c('cbrSignoffPort').value||rs[rs.length-1][3]);if(signoff&&signoff<sign)signoff=new Date(signoff.getTime()+86400000);const start=new Date(sign.getTime()-Number($c('cbrBefore').value)*3600000),end=new Date((signoff||sign).getTime()+Number($c('cbrAfter').value)*3600000);html+='<p>Sign-off '+esc($c('cbrSignoff').value||'not supplied')+' '+esc($c('cbrSignoffPort').value||'')+(signoff?' ('+esc(stamp(signoff))+')':' (UTC unavailable — check sign-off airport/time)')+'</p><h3>Screening window</h3><p>'+esc(stamp(start))+' to '+esc(stamp(end))+'</p><p>Later flight sectors remain in scope for individual departure/arrival checks.</p>';
