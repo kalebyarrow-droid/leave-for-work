@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>CrewFocus v179 — iPad Clock Recalibration</title>
+<title>CrewFocus v178 — iPad Wallpaper Calibration</title>
 <style>
   :root{
     --bg:#eef3f8;
@@ -12,33 +13,116 @@
     --muted:#637a90;
     --line:#d7e0e9;
     --accent:#1c7896;
+    --blue:#183f78;
   }
   *{box-sizing:border-box}
-  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:var(--bg);color:var(--ink)}
-  main{max-width:840px;margin:0 auto;padding:calc(20px + env(safe-area-inset-top)) 16px calc(28px + env(safe-area-inset-bottom))}
-  .card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px;margin:14px 0;box-shadow:0 6px 18px rgba(0,0,0,.05)}
-  h1{margin:0 0 6px;font-size:30px;letter-spacing:-.6px}
-  .sub{margin:0;color:var(--muted);line-height:1.45;font-size:15px}
-  .btns{display:grid;grid-template-columns:1fr;gap:12px;margin-top:10px}
-  button{width:100%;border-radius:18px;min-height:58px;border:1px solid var(--line);background:#fff;color:var(--ink);font-size:18px;font-weight:700;padding:14px 18px;cursor:pointer}
-  button.primary{background:linear-gradient(180deg,#2d89a8,#187693);border-color:#187693;color:#fff}
-  .note{margin-top:12px;color:var(--muted);font-size:14px;line-height:1.45}
-  .preview-shell{overflow:auto;-webkit-overflow-scrolling:touch;padding-bottom:6px}
-  .preview-wrap{width:1200px;max-width:none;margin-top:8px;transform-origin:top left}
-  @media (max-width:760px){.preview-wrap{zoom:.46}}
-  .preview-wrap img{display:block;width:100%;height:auto;border-radius:20px;box-shadow:0 10px 26px rgba(0,0,0,.08);border:1px solid #d6deea;background:#fff}
-  .footer{text-align:center;color:var(--muted);font-size:16px;margin-top:18px}
-  .steps{margin:0;padding-left:18px;color:var(--ink);line-height:1.55}
-  .steps li{margin:8px 0}
-  .small{font-size:13px;color:var(--muted)}
+  body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+  }
+  main{
+    max-width:840px;
+    margin:0 auto;
+    padding:calc(20px + env(safe-area-inset-top)) 16px calc(28px + env(safe-area-inset-bottom));
+  }
+  .card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:22px;
+    padding:18px;
+    margin:14px 0;
+    box-shadow:0 6px 18px rgba(0,0,0,.05);
+  }
+  h1{
+    margin:0 0 6px;
+    font-size:30px;
+    letter-spacing:-.6px;
+  }
+  .sub{
+    margin:0;
+    color:var(--muted);
+    line-height:1.45;
+    font-size:15px;
+  }
+  .btns{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:12px;
+    margin-top:10px;
+  }
+  button{
+    width:100%;
+    border-radius:18px;
+    min-height:58px;
+    border:1px solid var(--line);
+    background:#fff;
+    color:var(--ink);
+    font-size:18px;
+    font-weight:700;
+    padding:14px 18px;
+    cursor:pointer;
+  }
+  button.primary{
+    background:linear-gradient(180deg, #2d89a8, #187693);
+    border-color:#187693;
+    color:#fff;
+  }
+  .note{
+    margin-top:12px;
+    color:var(--muted);
+    font-size:14px;
+    line-height:1.45;
+  }
+  .preview-shell{
+    overflow:auto;
+    -webkit-overflow-scrolling:touch;
+    padding-bottom:6px;
+  }
+  .preview-wrap{
+    width:1200px;
+    max-width:none;
+    margin-top:8px;
+    transform-origin:top left;
+  }
+  @media (max-width: 760px){
+    .preview-wrap{ zoom:.46; }
+  }
+  .preview-wrap img{
+    display:block;
+    width:100%;
+    height:auto;
+    border-radius:20px;
+    box-shadow:0 10px 26px rgba(0,0,0,.08);
+    border:1px solid #d6deea;
+    background:#fff;
+  }
+  .footer{
+    text-align:center;
+    color:var(--muted);
+    font-size:16px;
+    margin-top:18px;
+  }
+  .steps{
+    margin:0;
+    padding-left:18px;
+    color:var(--ink);
+    line-height:1.55;
+  }
+  .steps li{ margin:8px 0; }
+  .small{
+    font-size:13px;
+    color:var(--muted);
+  }
   a.hidden-link{display:none}
 </style>
 </head>
 <body>
 <main>
   <div class="card">
-    <h1>CrewFocus v179</h1>
-    <p class="sub"><strong>iPad wallpaper clock/date recalibration only.</strong> Wallpaper safe area is now locked. This test only repositions the top clock/date guide.</p>
+    <h1>CrewFocus v178</h1>
+    <p class="sub"><strong>iPad wallpaper calibration only.</strong> This page is for confirming the file → wallpaper scaling/cropping. No briefing layout changes are included in this test.</p>
   </div>
 
   <div class="card">
@@ -56,19 +140,23 @@
     <ol class="steps">
       <li>Tap <strong>Share / save calibration PNG</strong>.</li>
       <li>AirDrop or save the PNG to the iPad.</li>
-      <li>Apply it as wallpaper with <strong>no pinch zoom</strong>.</li>
-      <li>Send back the wallpaper screenshot only.</li>
+      <li>Apply it as wallpaper with <strong>no pinch zoom</strong> first.</li>
+      <li>Send back the wallpaper screenshot.</li>
     </ol>
-    <p class="small">This version is adjusted purely for the file → wallpaper clock/date position.</p>
+    <p class="small">What I’m checking with this version: whether the new content-safe box and top clock/date guides survive wallpaper placement without chopping.</p>
   </div>
 
   <div class="card">
     <h2 style="margin:0 0 10px;font-size:19px;">iPhone preview</h2>
     <p class="sub">Reference only. The real check is the screenshot from the iPad wallpaper screen.</p>
-    <div class="preview-shell"><div class="preview-wrap"><img id="previewImg" alt="Calibration preview" /></div></div>
+    <div class="preview-shell">
+      <div class="preview-wrap">
+        <img id="previewImg" alt="Calibration preview" />
+      </div>
+    </div>
   </div>
 
-  <div class="footer">Version 179 · 15 Nov 2026</div>
+  <div class="footer">Version 178 · 15 Nov 2026</div>
   <a id="downloadLink" class="hidden-link"></a>
 </main>
 
@@ -80,61 +168,74 @@
     return `
 <svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
   <rect width="${W}" height="${H}" fill="#eef1f5"/>
+
+  <!-- top wallpaper band -->
   <rect x="0" y="0" width="${W}" height="258" fill="#1f467f"/>
 
+  <!-- subtle grid -->
   <g opacity="0.28" stroke="#9cb0c3" stroke-width="1">
     ${Array.from({length:23}, (_,i)=>`<line x1="${i*100}" y1="0" x2="${i*100}" y2="${H}" />`).join('')}
     ${Array.from({length:17}, (_,i)=>`<line x1="0" y1="${i*100}" x2="${W}" y2="${i*100}" />`).join('')}
   </g>
 
+  <!-- predicted visible / content references -->
   <rect x="6" y="6" width="${W-12}" height="${H-12}" fill="none" stroke="#ff4d4f" stroke-width="4"/>
   <rect x="22" y="22" width="${W-44}" height="${H-44}" fill="none" stroke="#ff9f1a" stroke-width="4"/>
   <rect x="42" y="42" width="${W-84}" height="${H-84}" fill="none" stroke="#2db55d" stroke-width="4"/>
   <rect x="72" y="72" width="${W-144}" height="${H-144}" fill="none" stroke="#6d5efc" stroke-width="4"/>
 
+  <!-- widget guide -->
   <rect x="44" y="62" width="356" height="1488" rx="40" fill="none" stroke="#c6cdd9" stroke-width="6"/>
   <text x="88" y="118" font-size="22" font-weight="700" fill="#17324a">LEFT WIDGET GUIDE</text>
 
-  <!-- recalibrated date/clock guides -->
-  <rect x="790" y="18" width="780" height="70" rx="32" fill="none" stroke="#7ec9f2" stroke-width="4"/>
-  <rect x="744" y="82" width="872" height="242" rx="34" fill="none" stroke="#89d6ff" stroke-width="4"/>
-  <text x="1180" y="54" text-anchor="middle" font-size="28" font-weight="700" fill="#ffffff">DATE / CLOCK GUIDE</text>
+  <!-- clock/date guides -->
+  <rect x="790" y="72" width="780" height="74" rx="32" fill="none" stroke="#7ec9f2" stroke-width="4"/>
+  <rect x="744" y="152" width="872" height="252" rx="34" fill="none" stroke="#89d6ff" stroke-width="4"/>
+  <text x="1180" y="119" text-anchor="middle" font-size="28" font-weight="700" fill="#ffffff">DATE / CLOCK GUIDE</text>
 
+  <!-- y reference lines for date/clock -->
   <g stroke-width="3">
-    <line x1="680" y1="112" x2="1680" y2="112" stroke="#82f0ff"/>
-    <line x1="680" y1="156" x2="1680" y2="156" stroke="#f0d347"/>
-    <line x1="680" y1="200" x2="1680" y2="200" stroke="#82f0ff"/>
-    <line x1="680" y1="244" x2="1680" y2="244" stroke="#f0d347"/>
-    <line x1="680" y1="288" x2="1680" y2="288" stroke="#82f0ff"/>
+    <line x1="680" y1="192" x2="1680" y2="192" stroke="#82f0ff"/>
+    <line x1="680" y1="236" x2="1680" y2="236" stroke="#f0d347"/>
+    <line x1="680" y1="280" x2="1680" y2="280" stroke="#82f0ff"/>
+    <line x1="680" y1="324" x2="1680" y2="324" stroke="#f0d347"/>
+    <line x1="680" y1="368" x2="1680" y2="368" stroke="#82f0ff"/>
   </g>
   <g font-size="20" font-weight="700" fill="#17324a">
-    <text x="1722" y="118">Y 112</text>
-    <text x="1722" y="162">Y 156</text>
-    <text x="1722" y="206">Y 200</text>
-    <text x="1722" y="250">Y 244</text>
-    <text x="1722" y="294">Y 288</text>
+    <text x="1722" y="198">Y 192</text>
+    <text x="1722" y="242">Y 236</text>
+    <text x="1722" y="286">Y 280</text>
+    <text x="1722" y="330">Y 324</text>
+    <text x="1722" y="374">Y 368</text>
   </g>
 
+  <!-- calibrated content safe area -->
   <rect x="420" y="350" width="1620" height="720" rx="4" fill="rgba(255,255,255,.20)" stroke="#0e7f95" stroke-width="5"/>
   <text x="1230" y="414" text-anchor="middle" font-size="34" font-weight="800" fill="#0c5667">CONTENT SAFE REFERENCE</text>
   <text x="1230" y="456" text-anchor="middle" font-size="26" font-weight="700" fill="#0c5667">X=420..2040   /   Y=350..1070</text>
-  <text x="1230" y="512" text-anchor="middle" font-size="24" font-weight="700" fill="#17324a">This box is the working target for wallpaper-safe briefing content.</text>
+  <text x="1230" y="512" text-anchor="middle" font-size="24" font-weight="700" fill="#17324a">This box is unchanged from v178. Only the clock/date guide has been shifted for fine tuning.</text>
 
+  <!-- centre cross -->
   <line x1="1180" y1="860" x2="1180" y2="940" stroke="#c13b7e" stroke-width="4"/>
   <line x1="1140" y1="900" x2="1220" y2="900" stroke="#c13b7e" stroke-width="4"/>
   <text x="1180" y="972" text-anchor="middle" font-size="22" font-weight="700" fill="#c13b7e">IMAGE CENTRE  X=1180</text>
 
+  <!-- edge distance labels -->
   <g font-size="20" font-weight="800">
     <rect x="505" y="1280" width="360" height="72" rx="12" fill="#ffffff" stroke="#ff4d4f" stroke-width="4"/>
     <text x="685" y="1325" text-anchor="middle" fill="#ff4d4f">6px FROM EDGE</text>
+
     <rect x="905" y="1280" width="390" height="72" rx="12" fill="#ffffff" stroke="#ff9f1a" stroke-width="4"/>
     <text x="1100" y="1325" text-anchor="middle" fill="#ff9f1a">22px FROM EDGE</text>
+
     <rect x="1335" y="1280" width="390" height="72" rx="12" fill="#ffffff" stroke="#2db55d" stroke-width="4"/>
     <text x="1530" y="1325" text-anchor="middle" fill="#2db55d">42px FROM EDGE</text>
+
     <rect x="1765" y="1280" width="390" height="72" rx="12" fill="#ffffff" stroke="#6d5efc" stroke-width="4"/>
     <text x="1960" y="1325" text-anchor="middle" fill="#6d5efc">72px FROM EDGE</text>
   </g>
 
+  <!-- measurement rule -->
   <g stroke="#244a67" stroke-width="3" fill="none">
     <line x1="80" y1="620" x2="2280" y2="620"/>
     ${Array.from({length:12}, (_,i)=>`<line x1="${180 + i*180}" y1="620" x2="${180 + i*180}" y2="646"/>`).join('')}
@@ -143,6 +244,7 @@
     ${Array.from({length:12}, (_,i)=>`<text x="${172 + i*180}" y="600">${180 + i*180}</text>`).join('')}
   </g>
 
+  <!-- corner labels -->
   <g font-size="20" font-weight="800" fill="#17324a">
     <text x="88" y="1514">BOTTOM LEFT</text>
     <text x="1958" y="1514">BOTTOM RIGHT</text>
@@ -150,8 +252,11 @@
     <text x="64" y="120">TOP LEFT</text>
   </g>
 
+  <!-- instruction -->
   <text x="1180" y="1398" text-anchor="middle" font-size="26" font-weight="900" fill="#17324a">DO NOT PINCH OR MOVE · SCREENSHOT DEFAULT WALLPAPER PLACEMENT</text>
-  <text x="120" y="34" font-size="18" font-weight="800" fill="#ffffff">CREWFOCUS v179 · IPAD CLOCK RECALIBRATION</text>
+
+  <!-- version -->
+  <text x="120" y="34" font-size="18" font-weight="800" fill="#ffffff">CREWFOCUS v180 · IPAD CLOCK FINE TUNE</text>
   <text x="${W-120}" y="34" text-anchor="end" font-size="18" font-weight="800" fill="#ffffff">${W} × ${H} px</text>
 </svg>`;
   }
@@ -193,7 +298,7 @@
     pngUrl = await svgToPngDataUrl(svg);
     previewImg.src = pngUrl;
     downloadLink.href = pngUrl;
-    downloadLink.download = 'CrewFocus_v179_iPad_Clock_Recalibration.png';
+    downloadLink.download = 'CrewFocus_v178_iPad_Calibration.png';
     status.textContent = 'Calibration PNG ready.';
   }
 
@@ -202,9 +307,9 @@
       if(!pngUrl) await build();
       const res = await fetch(pngUrl);
       const blob = await res.blob();
-      const file = new File([blob], 'CrewFocus_v179_iPad_Clock_Recalibration.png', {type:'image/png'});
+      const file = new File([blob], 'CrewFocus_v178_iPad_Calibration.png', {type:'image/png'});
       if(navigator.canShare && navigator.canShare({files:[file]})){
-        await navigator.share({files:[file], title:'CrewFocus v179 calibration'});
+        await navigator.share({files:[file], title:'CrewFocus v178 calibration'});
       }else{
         downloadLink.click();
       }
