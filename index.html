@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>CrewFocus v178 — iPad Wallpaper Calibration</title>
+<title>CrewFocus v181 — iPad Clock Fine Tune</title>
 <style>
   :root{
     --bg:#eef3f8;
@@ -121,7 +121,7 @@
 <body>
 <main>
   <div class="card">
-    <h1>CrewFocus v178</h1>
+    <h1>CrewFocus v181</h1>
     <p class="sub"><strong>iPad wallpaper calibration only.</strong> This page is for confirming the file → wallpaper scaling/cropping. No briefing layout changes are included in this test.</p>
   </div>
 
@@ -156,7 +156,7 @@
     </div>
   </div>
 
-  <div class="footer">Version 178 · 15 Nov 2026</div>
+  <div class="footer">Version 181 · 15 Nov 2026</div>
   <a id="downloadLink" class="hidden-link"></a>
 </main>
 
@@ -190,7 +190,7 @@
 
   <!-- clock/date guides -->
   <rect x="790" y="72" width="780" height="74" rx="32" fill="none" stroke="#7ec9f2" stroke-width="4"/>
-  <rect x="744" y="152" width="872" height="252" rx="34" fill="none" stroke="#89d6ff" stroke-width="4"/>
+  <rect x="753" y="178" width="854" height="252" rx="34" fill="none" stroke="#89d6ff" stroke-width="4"/>
   <text x="1180" y="119" text-anchor="middle" font-size="28" font-weight="700" fill="#ffffff">DATE / CLOCK GUIDE</text>
 
   <!-- y reference lines for date/clock -->
@@ -256,7 +256,7 @@
   <text x="1180" y="1398" text-anchor="middle" font-size="26" font-weight="900" fill="#17324a">DO NOT PINCH OR MOVE · SCREENSHOT DEFAULT WALLPAPER PLACEMENT</text>
 
   <!-- version -->
-  <text x="120" y="34" font-size="18" font-weight="800" fill="#ffffff">CREWFOCUS v180 · IPAD CLOCK FINE TUNE</text>
+  <text x="120" y="34" font-size="18" font-weight="800" fill="#ffffff">CREWFOCUS v181 · IPAD CLOCK FINE TUNE</text>
   <text x="${W-120}" y="34" text-anchor="end" font-size="18" font-weight="800" fill="#ffffff">${W} × ${H} px</text>
 </svg>`;
   }
@@ -298,7 +298,7 @@
     pngUrl = await svgToPngDataUrl(svg);
     previewImg.src = pngUrl;
     downloadLink.href = pngUrl;
-    downloadLink.download = 'CrewFocus_v178_iPad_Calibration.png';
+    downloadLink.download = 'CrewFocus_v181_iPad_Clock_Calibration.png';
     status.textContent = 'Calibration PNG ready.';
   }
 
@@ -307,9 +307,9 @@
       if(!pngUrl) await build();
       const res = await fetch(pngUrl);
       const blob = await res.blob();
-      const file = new File([blob], 'CrewFocus_v178_iPad_Calibration.png', {type:'image/png'});
+      const file = new File([blob], 'CrewFocus_v181_iPad_Clock_Calibration.png', {type:'image/png'});
       if(navigator.canShare && navigator.canShare({files:[file]})){
-        await navigator.share({files:[file], title:'CrewFocus v178 calibration'});
+        await navigator.share({files:[file], title:'CrewFocus v181 calibration'});
       }else{
         downloadLink.click();
       }
