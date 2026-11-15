@@ -5,7 +5,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <meta content="#15283f" name="theme-color"/>
-<title>CrewFocus v189 — CBR Visual Theme</title>
+<title>CrewFocus v190 — CBR Visual Theme</title>
 <style>
 :root{color-scheme:light dark;--bg:#f3f6fa;--card:#fff;--ink:#15283f;--muted:#637184;--line:#dce3eb;--accent:#176b87;--soft:#e9f4f7;--danger:#b13e3e}
 @media(prefers-color-scheme:dark){:root{--bg:#101820;--card:#1a2632;--ink:#edf4fb;--muted:#aab8c6;--line:#344454;--accent:#72c7df;--soft:#203a46;--danger:#ff9b9b}}
@@ -68,6 +68,11 @@ main{overflow-x:clip}
 .crew-test-control input:checked+.crew-switch-track{background:#d34545}
 .crew-test-control input:checked+.crew-switch-track:after{transform:translateX(11px)}
 .crew-test-control input:focus-visible+.crew-switch-track{outline:2px solid var(--accent);outline-offset:3px}
+/* v190: one exclusive state-controlled LED and track; prevent stale glow on iOS. */
+.crew-topbar #cbrModeLED{background:#00ed69;box-shadow:0 0 0 1px #087c3b,0 0 7px 2px #00ed69!important}
+.crew-topbar #cbrModeLED.testing,.crew-topbar .crew-test-control:has(#cbrTestTop:checked) #cbrModeLED{background:#ff2929!important;box-shadow:0 0 0 1px #a60000,0 0 7px 2px #ff2929!important}
+.crew-topbar #cbrTestTop:checked+.crew-switch-track{background:#c53333!important}
+.crew-topbar #cbrTestTop:not(:checked)+.crew-switch-track{background:#26a46c!important}
 @media(max-width:370px){.crew-topbar{gap:6px}.crew-test-text{font-size:9px}.crew-topbar .crew-tab{font-size:12px}}
 .flight-notam-low-section{margin-top:22px;border-top:1px solid #7aa8c9;padding-top:12px}.flight-notam-low-section .flight-briefing-heading,.flight-notam-low{color:#17649a!important}.flight-notam-low{background:transparent!important;border:0!important;padding:0!important}
 .ipad-fullscreen{position:fixed!important;inset:0!important;z-index:99999!important;background:#eef2f5!important;overflow:auto!important;border-radius:0!important;padding:18px!important;margin:0!important;max-width:none!important;width:100%!important;box-sizing:border-box!important}.ipad-fullscreen #ipadCBRPreview{display:block!important}.ipad-fullscreen .ipad-wallpaper{min-width:900px;min-height:550px;aspect-ratio:2360/1640;background:#fff}.ipad-fullscreen .ipad-visit{flex:1 0 165px;max-width:none}.ipad-sector-strip{font-size:12px;font-weight:700;padding:10px 8px;white-space:nowrap;overflow:auto}.ipad-fullscreen #ipadCBRClose{display:inline-block!important;position:sticky;top:0;z-index:100;background:#153b73;color:#fff}.ipad-fullscreen .ipad-reserved{height:110px}.ipad-fullscreen .ipad-visit-columns{min-height:340px}.ipad-fullscreen #ipadCBRSelectionSummary{font-size:12px}
@@ -3623,12 +3628,36 @@ const CBR_STORAGE='crewFocusCBRStateV1';
 function cbrToday(){const parts=Object.fromEntries(new Intl.DateTimeFormat('en-GB',{timeZone:'Australia/Melbourne',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date()).filter(p=>p.type!=='literal').map(p=>[p.type,p.value]));return `${parts.year}-${parts.month}-${parts.day}`;}
 function effectiveCBRDate(){return testDateOverride.checked?cbrToday():$c('cbrDate').value;}
 const testDateOverride=$c('cbrTestDateOverride');
-function applyCBRTestDate(){if(testDateOverride.checked){$c('cbrDate').value=cbrToday();const flightDate=$c('flightDate');if(flightDate)flightDate.value=cbrToday();}const notice=$c('cbrModeNotice');notice.hidden=!testDateOverride.checked;const top=$c('cbrTestTop'),led=$c('cbrModeLED'),label=$c('cbrModeText');if(top)top.checked=testDateOverride.checked;if(led){led.classList.toggle('testing',testDateOverride.checked);led.setAttribute('title',testDateOverride.checked?'Test mode':'Live mode');}if(label)label.textContent=testDateOverride.checked?'TEST':'LIVE';if(testDateOverride.checked)notice.textContent='';}
+// v190: keep the original reported date separate from the temporary test-date override.
+let liveCBRDate=$c('cbrDate').value||'';
+function applyCBRTestDate(){
+ const testing=!!testDateOverride.checked;
+ const dateInput=$c('cbrDate');
+ if(testing){if(!liveCBRDate&&dateInput.value)liveCBRDate=dateInput.value;dateInput.value=cbrToday();}
+ else if(liveCBRDate){dateInput.value=liveCBRDate;}
+ const fd=$c('flightDate');if(fd)fd.value=dateInput.value;
+ const notice=$c('cbrModeNotice');if(notice){notice.hidden=!testing;notice.textContent='';}
+ const top=$c('cbrTestTop'),led=$c('cbrModeLED'),label=$c('cbrModeText'),track=document.querySelector('.crew-topbar .crew-switch-track');
+ if(top){top.checked=testing;top.setAttribute('aria-checked',String(testing));}
+ if(led){led.classList.toggle('testing',testing);led.style.backgroundColor=testing?'#ff2929':'#00ed69';led.style.boxShadow=testing?'0 0 0 1px #a60000, 0 0 9px 2px #ff2929':'0 0 0 1px #087c3b, 0 0 9px 2px #00ed69';led.title=testing?'TEST mode':'LIVE mode';}
+ if(track)track.style.backgroundColor=testing?'#c53333':'#26a46c';
+ if(label)label.textContent=testing?'TEST':'LIVE';
+}
 $c('cbrTestTop').addEventListener('change',e=>{testDateOverride.checked=e.target.checked;testDateOverride.dispatchEvent(new Event('change',{bubbles:true}));});
-testDateOverride.addEventListener('change',()=>{if(testDateOverride.checked)applyCBRTestDate();else if($c('cbrText').value.trim()){const m=$c('cbrText').value.match(/(?:Reports?\s*[-–:]\s*)(\d{1,2})\s+([A-Za-z]+)\s+(20\d\d)/i);if(m){const d=new Date(m[2]+' '+m[1]+', '+m[3]+' 12:00:00 GMT');if(!isNaN(d))$c('cbrDate').value=d.toISOString().slice(0,10)}}const fd=$c('flightDate');if(fd)fd.value=$c('cbrDate').value;applyCBRTestDate();markUnconfirmed();queueCBRSave();});
+testDateOverride.addEventListener('change',()=>{
+ if(testDateOverride.checked){if($c('cbrDate').value!==cbrToday())liveCBRDate=$c('cbrDate').value||liveCBRDate;}
+ else if(!liveCBRDate&&$c('cbrText').value.trim()){
+  const m=$c('cbrText').value.match(/(?:Reports?\s*[-–:]\s*)(\d{1,2})\s+([A-Za-z]+)\s+(20\d\d)/i);
+  if(m){const d=new Date(m[2]+' '+m[1]+', '+m[3]+' 12:00:00 GMT');if(!isNaN(d))liveCBRDate=d.toISOString().slice(0,10);}
+ }
+ applyCBRTestDate();markUnconfirmed();queueCBRSave();
+});
+// Keep LIVE date current with manual edits, without allowing TEST to overwrite the saved date.
+$c('cbrDate').addEventListener('change',()=>{if(!testDateOverride.checked)liveCBRDate=$c('cbrDate').value;});
+applyCBRTestDate();
 let restoringCBR=false,saveCBRTimer;
 function saveCBR(){if(restoringCBR)return;try{
- const data={date:$c('cbrDate').value,signon:$c('cbrSignon').value,signoff:$c('cbrSignoff').value,signoffPort:$c('cbrSignoffPort').value,text:$c('cbrText').value,rows:[...$c('cbrRows').children].map(r=>[...r.querySelectorAll('input')].map(i=>i.value)),confirmed:cbrConfirmed,testDateOverride:testDateOverride.checked};
+ const data={date:(testDateOverride.checked?(liveCBRDate||$c('cbrDate').value):$c('cbrDate').value),signon:$c('cbrSignon').value,signoff:$c('cbrSignoff').value,signoffPort:$c('cbrSignoffPort').value,text:$c('cbrText').value,rows:[...$c('cbrRows').children].map(r=>[...r.querySelectorAll('input')].map(i=>i.value)),confirmed:cbrConfirmed,testDateOverride:testDateOverride.checked};
  localStorage.setItem(CBR_STORAGE,JSON.stringify(data));
  }catch(e){console.warn('CBR could not be saved',e)}}
 function queueCBRSave(){clearTimeout(saveCBRTimer);saveCBRTimer=setTimeout(saveCBR,250)}
@@ -3643,7 +3672,7 @@ function parse(){
  const off=t.match(/Sign\s*Off\s*:?\s*(\d{1,2}:\d\d)\s*L?\s*[-–]?\s*([A-Z]{3})?/i);
  if(off){$c('cbrSignoff').value=off[1].padStart(5,'0');if(off[2])$c('cbrSignoffPort').value=off[2].toUpperCase();}
  const date=t.match(/(?:Reports?\s*[-–:]\s*)(\d{1,2})\s+([A-Za-z]+)\s+(20\d\d)/i);
- if(date&&!testDateOverride.checked){const dt=new Date(date[2]+' '+date[1]+', '+date[3]+' 12:00:00 GMT');if(!isNaN(dt))$c('cbrDate').value=dt.toISOString().slice(0,10)}
+ if(date){const dt=new Date(date[2]+' '+date[1]+', '+date[3]+' 12:00:00 GMT');if(!isNaN(dt)){liveCBRDate=dt.toISOString().slice(0,10);if(!testDateOverride.checked)$c('cbrDate').value=liveCBRDate;}}
  applyCBRTestDate();
  const lines=t.split(/\r?\n/),parsed=[];
  for(let l of lines){
@@ -3680,13 +3709,36 @@ $c('cbrConfirm').onclick=()=>{if(!rows().length||!$c('cbrDate').value){$c('cbrSt
 $c('cbrRows').addEventListener('input',()=>{markUnconfirmed();queueCBRSave();});
 async function cbrScript(url){if(url.includes('tesseract')&&window.Tesseract)return;return new Promise((ok,bad)=>{const e=document.createElement('script');e.src=url;e.onload=ok;e.onerror=()=>bad(Error('Could not load image reader. Check internet connection.'));document.head.appendChild(e)})}
 async function cbrOCR(canvas){await cbrScript('https://cdn.jsdelivr.net/npm/tesseract.js@6.0.1/dist/tesseract.min.js');let worker;
- try{worker=await Tesseract.createWorker('eng',1,{workerPath:'https://cdn.jsdelivr.net/npm/tesseract.js@6.0.1/dist/worker.min.js',corePath:'https://cdn.jsdelivr.net/npm/tesseract.js-core@6.0.0',langPath:'https://tessdata.projectnaptha.com/4.0.0'});await worker.setParameters({tessedit_pageseg_mode:'6'});const r=await worker.recognize(canvas);return r.data.text||'';}finally{if(worker)await worker.terminate()}}
-async function cbrImageCanvas(file){const img=await createImageBitmap(file);const scale=Math.min(2,3000/Math.max(img.width,img.height));const canvas=document.createElement('canvas');canvas.width=Math.round(img.width*scale);canvas.height=Math.round(img.height*scale);canvas.getContext('2d').drawImage(img,0,0,canvas.width,canvas.height);img.close();return canvas}
+ try{worker=await Tesseract.createWorker('eng',1,{workerPath:'https://cdn.jsdelivr.net/npm/tesseract.js@6.0.1/dist/worker.min.js',corePath:'https://cdn.jsdelivr.net/npm/tesseract.js-core@6.0.0',langPath:'https://tessdata.projectnaptha.com/4.0.0'});await worker.setParameters({tessedit_pageseg_mode:'6'});const r=await worker.recognize(canvas);let text=r.data.text||'';
+ if(!/\b(?:VA\s*\d{3,4}|SIGN\s*ON|SIGN\s*OFF)\b/i.test(text)){
+  await worker.setParameters({tessedit_pageseg_mode:'3'});
+  const retry=await worker.recognize(canvas);
+  if((retry.data.text||'').length>text.length)text=retry.data.text;
+ }
+ return text;}finally{if(worker)await worker.terminate()}}
+async function cbrImageCanvas(file){
+ // Never downsample screenshots before OCR: CBR text often contains tiny time/airport labels.
+ // createImageBitmap is not consistently available for iPhone Photos exports.
+ let source,close=()=>{};
+ try{source=await createImageBitmap(file);close=()=>source.close();}
+ catch(e){const url=URL.createObjectURL(file);try{source=await new Promise((resolve,reject)=>{const img=new Image();img.onload=()=>resolve(img);img.onerror=()=>reject(Error('This image format could not be opened'));img.src=url;});}finally{URL.revokeObjectURL(url);}}
+ try{
+  const width=source.width||source.naturalWidth,height=source.height||source.naturalHeight;
+  if(!width||!height)throw Error('Image has no readable pixels');
+  // Upscale only genuinely small originals. Keep large Photos screenshots at native resolution.
+  const scale=Math.min(2,Math.max(1,1800/Math.max(width,height)));
+  const canvas=document.createElement('canvas');canvas.width=Math.round(width*scale);canvas.height=Math.round(height*scale);
+  const ctx=canvas.getContext('2d',{willReadFrequently:true});if(!ctx)throw Error('Image canvas not supported');
+  ctx.imageSmoothingEnabled=scale===1;ctx.imageSmoothingQuality='high';ctx.fillStyle='#fff';ctx.fillRect(0,0,canvas.width,canvas.height);
+  ctx.drawImage(source,0,0,canvas.width,canvas.height);
+  return canvas;
+ }finally{close();}
+}
 async function cbrReadPDF(file){if(!Promise.withResolvers)Promise.withResolvers=function(){let resolve,reject;const promise=new Promise((a,b)=>{resolve=a;reject=b});return {promise,resolve,reject}};
  const pdfjs=await import('https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/legacy/build/pdf.mjs');pdfjs.GlobalWorkerOptions.workerSrc='https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/legacy/build/pdf.worker.mjs';const doc=await pdfjs.getDocument({data:new Uint8Array(await file.arrayBuffer()),isEvalSupported:false}).promise;let texts=[];
  for(let i=1;i<=Math.min(doc.numPages,3);i++){const page=await doc.getPage(i),content=await page.getTextContent();const viewport=page.getViewport({scale:1});const items=content.items.filter(x=>x.str?.trim()).map(x=>({str:x.str,x:x.transform[4],y:x.transform[5]}));const ys=[];for(const it of items){let group=ys.find(g=>Math.abs(g.y-it.y)<5);if(!group){group={y:it.y,items:[]};ys.push(group)}group.items.push(it)}let t=ys.sort((a,b)=>b.y-a.y).map(g=>g.items.sort((a,b)=>a.x-b.x).map(x=>x.str).join(' ')).join('\n');if(!/VA\s*\d{3,4}/i.test(t)){const v=page.getViewport({scale:2});const canvas=document.createElement('canvas');canvas.width=v.width;canvas.height=v.height;await page.render({canvasContext:canvas.getContext('2d'),viewport:v}).promise;t=await cbrOCR(canvas)}texts.push(t)}return texts.join('\n')}
 $c('cbrFile').onchange=async()=>{const file=$c('cbrFile').files?.[0];if(!file)return;markUnconfirmed();$c('cbrStatus').textContent='Reading '+file.name+'… This may take a minute on first use.';$c('cbrFile').disabled=true;
- try{let text;if(file.type==='application/pdf'||/\.pdf$/i.test(file.name))text=await cbrReadPDF(file);else if(file.type.startsWith('image/'))text=await cbrOCR(await cbrImageCanvas(file));else text=await file.text();$c('cbrText').value=text;parse();}catch(e){$c('cbrStatus').textContent='Could not read CBR: '+e.message+'. You can still paste text or enter manually.';}finally{$c('cbrFile').disabled=false}};
+ try{let text;if(file.type==='application/pdf'||/\.pdf$/i.test(file.name))text=await cbrReadPDF(file);else if(file.type.startsWith('image/'))text=await cbrOCR(await cbrImageCanvas(file));else text=await file.text();if(!text||text.trim().length<25)throw Error('Not enough readable text in the selected image. Choose the original full-resolution screenshot from Files or Photos');$c('cbrText').value=text;parse();}catch(e){$c('cbrStatus').textContent='Could not read CBR: '+e.message+'. You can still paste text or enter manually.';}finally{$c('cbrFile').disabled=false}};
 function utc(date,hm,airport){const port=(typeof crewScreeningAirport==='function'?crewScreeningAirport(airport):String(airport||'').toUpperCase());const tz=zone[port];if(!tz||!/^\d\d:\d\d$/.test(hm)||!date)return null;const target=date+' '+hm;const f=new Intl.DateTimeFormat('en-CA',{timeZone:tz,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hourCycle:'h23'});const parts=d=>Object.fromEntries(f.formatToParts(d).filter(p=>p.type!=='literal').map(p=>[p.type,p.value]));let ms=Date.parse(date+'T'+hm+':00Z');for(let i=0;i<4;i++){const p=parts(new Date(ms));const shown=Date.UTC(+p.year,+p.month-1,+p.day,+p.hour,+p.minute);const wanted=Date.parse(date+'T'+hm+':00Z');ms+=wanted-shown}const p=parts(new Date(ms));if(`${p.year}-${p.month}-${p.day} ${p.hour}:${p.minute}`!==target)return null;return new Date(ms)}
 function stamp(d){return d?d.toISOString().slice(11,16)+'Z ('+d.toISOString().slice(0,10)+')':'Time zone unavailable'}
 function rows(){return [...$c('cbrRows').children].map(r=>[...r.querySelectorAll('input')].map(i=>i.value.trim().toUpperCase())).filter(r=>r.some(Boolean))}
@@ -3746,7 +3798,7 @@ $c('cbrAirDrop').onclick=async()=>{
 try{const saved=JSON.parse(localStorage.getItem(CBR_STORAGE)||'null');if(saved&&Array.isArray(saved.rows)){
  restoringCBR=true;
  for(const [id,key] of [['cbrDate','date'],['cbrSignon','signon'],['cbrSignoff','signoff'],['cbrSignoffPort','signoffPort'],['cbrText','text']])if(typeof saved[key]==='string')$c(id).value=saved[key];
- testDateOverride.checked=!!saved.testDateOverride;applyCBRTestDate();if(!testDateOverride.checked&&$c('flightDate'))$c('flightDate').value=$c('cbrDate').value;
+ liveCBRDate=saved.date||'';testDateOverride.checked=!!saved.testDateOverride;applyCBRTestDate();if(!testDateOverride.checked&&$c('flightDate'))$c('flightDate').value=$c('cbrDate').value;
  $c('cbrRows').replaceChildren();saved.rows.forEach(addRow);if(!saved.rows.length)addRow();
  cbrConfirmed=!!saved.confirmed;
  if(cbrConfirmed){$c('cbrConfirm').textContent='✓ Reviewed';$c('cbrConfirm').style.background='#217a4a';}
