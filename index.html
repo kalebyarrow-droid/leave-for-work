@@ -5,7 +5,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <meta content="#15283f" name="theme-color"/>
-<title>CrewFocus v184 — Unified CBR Renderer</title>
+<title>CrewFocus v185 — Full-Width Priority CBR</title>
 <style>
 :root{color-scheme:light dark;--bg:#f3f6fa;--card:#fff;--ink:#15283f;--muted:#637184;--line:#dce3eb;--accent:#176b87;--soft:#e9f4f7;--danger:#b13e3e}
 @media(prefers-color-scheme:dark){:root{--bg:#101820;--card:#1a2632;--ink:#edf4fb;--muted:#aab8c6;--line:#344454;--accent:#72c7df;--soft:#203a46;--danger:#ff9b9b}}
@@ -648,7 +648,7 @@ VA 1101 0705 NTL BNE 0720" rows="7"></textarea><p class="note">Check the year, d
 <h2>Calculation notes</h2>
 <p class="note">The sign on date and time are used exactly as entered, including for future planning. The countdown is relative to the current local time. Schedule times use the selected sign-on time zone; the live clock uses your device's local time zone. Your selections are remembered on this device. Past sign-on dates advance to today when reopening.</p>
 <p class="note">Hotel transport times can be saved and updated. This prototype saves them in the browser's local storage; downloaded-file previews may not retain settings. A hosted version can make saving more reliable across sessions and devices.</p>
-</section></details><p class="note" id="planApplyStatus" role="status"></p><button class="btn primary wide" id="applyPlan" type="button">Use this plan</button></div></dialog><dialog aria-labelledby="calendarTitle" id="calendarDialog"><div class="modal-shell"><header><h2 id="calendarTitle">Add to Calendar</h2><button class="btn small" id="closeCalendar" type="button">Close</button></header><label for="calendarScope">Include</label><select id="calendarScope"><option value="current">Accepted duty</option><option value="upcoming">Upcoming roster duties</option><option value="all">Whole roster</option></select><h3 id="calendarCount"></h3><p class="note" id="calendarSkipped" role="status"></p><div id="calendarIssues"></div><p class="note">One event per duty. Titles show local sign-on and sign-off times and finishing location; full sector details remain in Notes. No hotels or reminders.</p><button class="btn primary wide" id="calendarExport" type="button">Add roster to Calendar</button><p class="note" id="calendarStatus" role="status"></p><details id="calendarSetup"><summary>One-time iPhone setup</summary><p class="note">Use a separate shortcut named <strong>Leave for Work Calendar</strong>. Your alarm shortcut stays separate. Shortcuts opens briefly during import and requests a return to this app. No downloading or Siri Suggestions is needed.</p><p class="note">One action at a time. Your progress is saved on this device. “What you should see” describes the checkpoint; if it differs, send that screen before continuing.</p><p class="note" id="calendarGuideProgress"></p><h3 id="calendarGuideTitle"></h3><div class="note" id="calendarGuideInstruction"></div><div class="calendar-issue"><strong>What you should see</strong><p class="note" id="calendarGuideExpected"></p></div><div class="row help-nav"><button class="btn" id="calendarGuideBack" type="button">Back</button><button class="btn primary" id="calendarGuideNext" type="button">Next step</button></div><button class="btn small" id="calendarGuideResume" type="button">Continue from my screenshot</button><p class="note">These controls can vary with iOS. The test checks your phone before sending a full roster. If Calendar opens an editor for every event, check the expanded Add New Event action and turn its compose screen off.</p><button class="btn wide" id="calendarTest" type="button">Test with one event</button><button class="btn wide" id="calendarSetupDone" type="button">I checked the test</button></details><details style="margin-top:16px"><summary>Other options &amp; roster changes</summary><p class="note">This makes a copy, not a live subscription. A completed import is remembered on this device to help prevent duplicates. Changed duties need their previous calendar events removed before you import them again. An interrupted shortcut can leave some events added: check Calendar before retrying.</p><button class="btn wide" id="calendarDownload" type="button">Download .ics file instead</button><p class="note">File import depends on the app opening the file; Safari and Files may only preview it. The shortcut above avoids that route.</p><button class="btn wide" id="calendarResetHistory" type="button">Allow a fresh import</button></details></div></dialog><dialog aria-labelledby="alarmHelpTitle" id="alarmHelp"><div class="help-shell"><header><h2 id="alarmHelpTitle">Set up iPhone alarms</h2><button class="btn small" id="closeAlarmHelp" type="button">Close</button></header><p class="note" id="alarmHelpProgress"></p><div id="alarmHelpContent"></div><p class="note" id="alarmHelpStatus" role="status"></p><div class="row help-nav"><button class="btn" id="alarmHelpBack" type="button">Back</button><button class="btn primary" id="alarmHelpNext" type="button">Next</button></div></div></dialog><footer class="note" style="text-align:center;padding:8px 10px">Version 184 · 15 Nov 2026</footer></main>
+</section></details><p class="note" id="planApplyStatus" role="status"></p><button class="btn primary wide" id="applyPlan" type="button">Use this plan</button></div></dialog><dialog aria-labelledby="calendarTitle" id="calendarDialog"><div class="modal-shell"><header><h2 id="calendarTitle">Add to Calendar</h2><button class="btn small" id="closeCalendar" type="button">Close</button></header><label for="calendarScope">Include</label><select id="calendarScope"><option value="current">Accepted duty</option><option value="upcoming">Upcoming roster duties</option><option value="all">Whole roster</option></select><h3 id="calendarCount"></h3><p class="note" id="calendarSkipped" role="status"></p><div id="calendarIssues"></div><p class="note">One event per duty. Titles show local sign-on and sign-off times and finishing location; full sector details remain in Notes. No hotels or reminders.</p><button class="btn primary wide" id="calendarExport" type="button">Add roster to Calendar</button><p class="note" id="calendarStatus" role="status"></p><details id="calendarSetup"><summary>One-time iPhone setup</summary><p class="note">Use a separate shortcut named <strong>Leave for Work Calendar</strong>. Your alarm shortcut stays separate. Shortcuts opens briefly during import and requests a return to this app. No downloading or Siri Suggestions is needed.</p><p class="note">One action at a time. Your progress is saved on this device. “What you should see” describes the checkpoint; if it differs, send that screen before continuing.</p><p class="note" id="calendarGuideProgress"></p><h3 id="calendarGuideTitle"></h3><div class="note" id="calendarGuideInstruction"></div><div class="calendar-issue"><strong>What you should see</strong><p class="note" id="calendarGuideExpected"></p></div><div class="row help-nav"><button class="btn" id="calendarGuideBack" type="button">Back</button><button class="btn primary" id="calendarGuideNext" type="button">Next step</button></div><button class="btn small" id="calendarGuideResume" type="button">Continue from my screenshot</button><p class="note">These controls can vary with iOS. The test checks your phone before sending a full roster. If Calendar opens an editor for every event, check the expanded Add New Event action and turn its compose screen off.</p><button class="btn wide" id="calendarTest" type="button">Test with one event</button><button class="btn wide" id="calendarSetupDone" type="button">I checked the test</button></details><details style="margin-top:16px"><summary>Other options &amp; roster changes</summary><p class="note">This makes a copy, not a live subscription. A completed import is remembered on this device to help prevent duplicates. Changed duties need their previous calendar events removed before you import them again. An interrupted shortcut can leave some events added: check Calendar before retrying.</p><button class="btn wide" id="calendarDownload" type="button">Download .ics file instead</button><p class="note">File import depends on the app opening the file; Safari and Files may only preview it. The shortcut above avoids that route.</p><button class="btn wide" id="calendarResetHistory" type="button">Allow a fresh import</button></details></div></dialog><dialog aria-labelledby="alarmHelpTitle" id="alarmHelp"><div class="help-shell"><header><h2 id="alarmHelpTitle">Set up iPhone alarms</h2><button class="btn small" id="closeAlarmHelp" type="button">Close</button></header><p class="note" id="alarmHelpProgress"></p><div id="alarmHelpContent"></div><p class="note" id="alarmHelpStatus" role="status"></p><div class="row help-nav"><button class="btn" id="alarmHelpBack" type="button">Back</button><button class="btn primary" id="alarmHelpNext" type="button">Next</button></div></div></dialog><footer class="note" style="text-align:center;padding:8px 10px">Version 185 · 15 Nov 2026</footer></main>
 <script>
 (() => {
  const $ = id => document.getElementById(id);
@@ -2348,165 +2348,234 @@ const CREWFOCUS_WALLPAPER_V181=Object.freeze({
  widget:Object.freeze({x:44,y:62,w:356,h:1488}),
  clockBottom:430
 });
-// CBR content margins are independent of the immutable display calibration.
-// On the user's wallpaper screenshot the widget's right border is at x~430;
-// x=480 leaves 50 px for legibility. On the right, 70 px is kept clear.
-const CREWFOCUS_CBR_BOUNDS=Object.freeze({left:480,right:2290,top:450,bottom:1530});
 function ipadCanvasRender(source){
- const G=CREWFOCUS_WALLPAPER_V181,B=CREWFOCUS_CBR_BOUNDS;
- const W=G.width,H=G.height,availableW=B.right-B.left,availableH=B.bottom-B.top;
- const gap=12,pad=9;
+ /* CrewFocus v185: one authoritative 2360 x 1640 wallpaper coordinate system.
+  * Calibration from v181 is immutable; there are NO external column margins.
+  * Weather and NOTAMs always survive. Crew omission happens only if necessary
+  * to accommodate that mandatory information, in stated role priority order.
+  * Raster preview and PNG export use the same canvas.
+  */
+ const G=CREWFOCUS_WALLPAPER_V181;
+ const W=G.width,H=G.height;
+ const top=G.clockBottom, bottom=H;
+ const availableH=bottom-top;
+ const pad=10, rowPad=7, separator=10;
  const airports=[...source.querySelectorAll('.ipad-visit-columns > .ipad-visit')].map(col=>({
-   title:col.querySelector(':scope > strong')?.textContent?.trim()||'',
-   aircraft:col.querySelector('.ipad-aircraft-details')?.textContent?.trim()||'',
-   alternate:col.classList.contains('ipad-alternate'),
-   alternateText:col.classList.contains('ipad-alternate')?col.querySelector('.ipad-selected')?.textContent?.trim()||'':'',
-   sections:[...col.querySelectorAll('.ipad-cbr-section')].map(sec=>({
-     name:sec.querySelector('.ipad-visit-heading')?.textContent?.trim()||'',
-     items:[...sec.querySelectorAll('.ipad-cbr-wx-line,.ipad-selected')].map(el=>({
-       text:el.textContent.trim(),
-       color:el.classList.contains('ipad-cbr-wx-alert')?'#b42318':el.classList.contains('ipad-notam-text')?'#1659ad':'#17202b'
-     })).filter(x=>x.text)
-   }))
+  title:col.querySelector(':scope > strong')?.textContent?.trim()||'',
+  aircraft:col.querySelector('.ipad-aircraft-details')?.textContent?.trim()||'',
+  alternate:col.classList.contains('ipad-alternate'),
+  alternateText:col.classList.contains('ipad-alternate')?col.querySelector('.ipad-selected')?.textContent?.trim()||'':'',
+  sections:[...col.querySelectorAll('.ipad-cbr-section')].map(sec=>({
+   name:sec.querySelector('.ipad-visit-heading')?.textContent?.trim()||'',
+   items:[...sec.querySelectorAll('.ipad-cbr-wx-line,.ipad-selected')].map(el=>({
+    text:el.textContent.trim(),
+    color:el.classList.contains('ipad-cbr-wx-alert')?'#b42318':el.classList.contains('ipad-notam-text')?'#1659ad':'#17202b'
+   })).filter(item=>item.text)
+  }))
  }));
  const matrix=source.querySelector('.ipad-crew-matrix');
  const nSectors=matrix?(parseInt(matrix.style.getPropertyValue('--ipad-crew-columns'),10)||0):0;
  const cells=matrix?[...matrix.querySelectorAll(':scope > .ipad-matrix-cell')]:[];
- const rows=[];
- if(nSectors>0)for(let k=0;k+nSectors<cells.length;k+=nSectors+1){
-   rows.push(cells.slice(k,k+nSectors+1).map(el=>el.classList.contains('ipad-matrix-details')
-       ?[...el.querySelectorAll('span')].map(e=>e.textContent.trim())
-       :el.textContent.trim()));
- }
+ const originalRows=[];
+ if(nSectors>0){for(let i=0;i+nSectors<cells.length;i+=nSectors+1){
+  const pair=cells.slice(i,i+nSectors+1);
+  originalRows.push(pair.map(el=>el.classList.contains('ipad-matrix-details')
+   ?[...el.querySelectorAll('span')].map(e=>e.textContent.trim())
+   :el.textContent.trim()));
+ }}
+ const nAir=airports.length;
+ if(!nSectors||nAir!==nSectors+2)throw Error('CBR columns mismatch: '+nSectors+' sectors require '+(nSectors+2)+' airport columns; got '+nAir);
+ const airW=W/nAir, crewW=W/(nSectors+1);
+ // Both grids are exact equal subdivisions of the FULL canvas width.
+ // No external margin, no inter-column gaps. Text padding is internal.
  const canvas=document.createElement('canvas');canvas.width=W;canvas.height=H;
- const ctx=canvas.getContext('2d',{alpha:false});if(!ctx)throw Error('Canvas unavailable');
- const nAir=Math.max(1,airports.length);
- const airW=(availableW-gap*(nAir-1))/nAir;
- const detailW=nSectors?Math.min(410,Math.max(350,availableW*(nSectors>=5?.22:.23))):0;
- const crewW=nSectors?(availableW-detailW-gap*nSectors)/nSectors:0;
- if(airW<=0||(nSectors&&crewW<=0))throw Error('Invalid CBR column configuration');
+ const ctx=canvas.getContext('2d',{alpha:false});if(!ctx)throw Error('Canvas not supported');
  const cache=new Map();
- function font(sz,bold=false){ctx.font=(bold?'700 ':'400 ')+sz+'px Arial,Helvetica,sans-serif';}
- function wrap(raw,width,sz,bold=false){
-   const value=String(raw??'').replace(/\s+/g,' ').trim();if(!value)return [];
-   width=Math.max(6,width);
-   const key=[value,width.toFixed(1),sz.toFixed(1),bold].join('~');
-   if(cache.has(key))return cache.get(key);
-   font(sz,bold);const out=[];let current='';
-   for(let word of value.split(' ')){
-     if(ctx.measureText(word).width>width){
-       if(current){out.push(current);current='';}
-       let part='';for(const char of word){
-         if(part&&ctx.measureText(part+char).width>width){out.push(part);part=char;}
-         else part+=char;
-       }word=part;
-     }
-     if(!current)current=word;
-     else if(ctx.measureText(current+' '+word).width<=width)current+=' '+word;
-     else{out.push(current);current=word;}
+ function font(size,bold=false){ctx.font=(bold?'700 ':'400 ')+size+'px Arial,Helvetica,sans-serif';}
+ function wrap(value,width,size,bold=false){
+  value=String(value??'').replace(/\s+/g,' ').trim();if(!value)return [];
+  width=Math.max(8,width);
+  const key=[value,width.toFixed(2),size.toFixed(2),bold].join('~');
+  if(cache.has(key))return cache.get(key);
+  font(size,bold);let out=[],line='';
+  for(let word of value.split(' ')){
+   if(ctx.measureText(word).width>width){
+    if(line){out.push(line);line='';}
+    let part='';for(const ch of word){
+     if(part&&ctx.measureText(part+ch).width>width){out.push(part);part=ch;}else part+=ch;
+    }word=part;
    }
-   if(current)out.push(current);
-   cache.set(key,out);return out;
+   if(!line)line=word;
+   else if(ctx.measureText(line+' '+word).width<=width)line+=' '+word;
+   else{out.push(line);line=word;}
+  }
+  if(line)out.push(line);
+  cache.set(key,out);return out;
  }
- const parts=[.30,.14,.17,.39];
- function measure(factor){
-   const baseA=nAir>=7?17:nAir===6?18:nAir===5?19.5:nAir===4?21:22;
-   const text=baseA*factor,title=text*1.08,meta=text*.91,section=text*.92;
-   const crew=(nSectors>=5?18.5:nSectors===4?20:22)*factor;
-   const header=18*factor,small=18*factor;
-   const airHeights=airports.map(a=>{
-     let h=pad+wrap(a.title,airW-2*pad,title,true).length*title*1.2+6;
-     if(a.aircraft)h+=wrap(a.aircraft,airW-2*pad,meta).length*meta*1.2+4;
-     if(a.alternateText)h+=wrap(a.alternateText,airW-2*pad,text).length*text*1.23+4;
-     for(const sec of a.sections){
-       h+=6;
-       if(!sec.items.length)h+=section*1.25+4;
-       for(const item of sec.items)h+=wrap(item.text,airW-2*pad,text).length*text*1.25+5;
-     }
-     return h+pad;
-   });
-   const airH=Math.max(150,...airHeights);
-   const rowHeights=rows.map((row,i)=>{
-     let maxLines=1;
-     const vals=Array.isArray(row[0])?row[0]:[row[0]||''];
-     for(let j=0;j<4;j++)maxLines=Math.max(maxLines,wrap(vals[j]||'',(detailW-2*pad)*parts[j]-5,small,i===0).length);
-     for(let c=1;c<row.length;c++)maxLines=Math.max(maxLines,wrap(row[c],crewW-2*pad,i===0?header:crew,i===0).length);
-     return Math.max(i===0?34:30,12+maxLines*Math.max(header,crew,small)*1.22);
-   });
-   const rowH=rowHeights.reduce((a,b)=>a+b,0);
-   return {factor,text,title,meta,section,crew,header,small,airH,airHeights,rowHeights,rowH,total:airH+13+rowH};
+ function write(lines,x,y,size,color='#17202b',bold=false){
+  ctx.fillStyle=color;ctx.textBaseline='top';font(size,bold);
+  for(const l of lines){ctx.fillText(l,x,y);y+=size*1.24;}
+  return y;
  }
- // Preserve readable base typography; shrink only when measured content demands it.
- // Do not inflate font sizes to occupy spare wallpaper area.
- let size=measure(1),fits=size.total<=availableH;
- if(!fits){
-   let low=.64,high=1;
-   if(measure(low).total<=availableH){
-     for(let i=0;i<22;i++){const mid=(low+high)/2;const attempt=measure(mid);
-       if(attempt.total<=availableH){size=attempt;low=mid;}else high=mid;
-     }
-     fits=true;
-   }else size=measure(low);
+ function border(x,y,w,h){
+  ctx.strokeStyle='#cbd5e1';ctx.lineWidth=1.25;
+  ctx.strokeRect(x+.625,y+.625,w-1.25,h-1.25);
  }
- function textLines(lines,x,y,sz,color='#17202b',bold=false){
-   ctx.textBaseline='top';ctx.fillStyle=color;font(sz,bold);
-   for(const line of lines){ctx.fillText(line,x,y);y+=sz*1.22;}return y;
+ // Classify source crew by the highest duty they perform on any sector.
+ // Never mutate the imported/reviewed crew lists; this is display-only.
+ const allCrew=[];const identities=new Map();
+ const rolePriority=role=>{
+  const r=String(role||'').trim().toUpperCase();
+  if(/^(P$|PAX|PAXING|DH|TVL|POS|DEADHEAD|PASS|POSITIONING)/.test(r))return 0;
+  if(/^(C$|CC|FA|CABIN CREW)/.test(r))return 1;
+  if(/^(CM|CS|SCC|PUR|CSM|CABIN MANAGER)/.test(r))return 2;
+  if(/^(FO|F\/O|FIRST OFFICER|SO)/.test(r))return 3;
+  if(/^(CPT|CAPT|CAPTAIN)/.test(r))return 4;
+  return 3; // Unknown category: conservative, do not cull early.
+ };
+ function personKey(p){return p.empNo?('EMP:'+String(p.empNo).trim()):('NAME:'+String(p.name||'').trim().toUpperCase());}
+ for(let sector=0;sector<nSectors;sector++)for(const p of (ipadCrewRows[sector]||[])){
+  const key=personKey(p),priority=rolePriority(p.role);
+  const existing=identities.get(key);
+  if(existing)existing.priority=Math.max(existing.priority,priority);
+  else identities.set(key,{key,priority});
  }
- function border(x,y,w,h){ctx.strokeStyle='#cbd5e1';ctx.lineWidth=1.5;ctx.strokeRect(x+.75,y+.75,w-1.5,h-1.5);}
+ for(const entry of identities.values())allCrew.push(entry);
+ // Rows are already ordered from the imported crew matrix; match those rows
+ // against the same original source ordering to retain details/sector alignment.
+ const crewMeta=originalRows.slice(1).map((cells,i)=>({
+  cells,priority:allCrew[i]?.priority??3,index:i,key:allCrew[i]?.key||String(i)
+ }));
+ const detailsParts=[.29,.15,.17,.39];
+ const typography={
+  airportTitle:nAir>=7?19:nAir>=6?21:24,
+  airportText:nAir>=7?17:nAir>=6?19:21,
+  airportMeta:nAir>=7?16:nAir>=6?17:19,
+  section:nAir>=7?17:nAir>=6?18:20,
+  crewText:nSectors>=5?17:nSectors===4?19:21,
+  crewHeader:nSectors>=5?18:nSectors===4?19:21,
+  crewDetail:nSectors>=5?16:18
+ };
+ function measureAirport(scale=1){
+  const t=typography;
+  const title=t.airportTitle*scale,txt=t.airportText*scale,meta=t.airportMeta*scale,heading=t.section*scale;
+  const heights=airports.map(a=>{
+   let y=pad;
+   y+=wrap(a.title,airW-2*pad,title,true).length*title*1.24+6;
+   if(a.aircraft)y+=wrap(a.aircraft,airW-2*pad,meta).length*meta*1.24+5;
+   if(a.alternateText)y+=wrap(a.alternateText,airW-2*pad,txt).length*txt*1.24+5;
+   for(const sec of a.sections){
+    y+=6;
+    // Retain the empty heading as a writable section label.
+    if(!sec.items.length)y+=heading*1.24+4;
+    for(const item of sec.items)y+=wrap(item.text,airW-2*pad,txt).length*txt*1.24+5;
+   }
+   return y+pad;
+  });
+  return {required:Math.max(0,...heights),scale,title,txt,meta,heading};
+ }
+ function measureCrew(visible){
+  const t=typography;
+  const out=[];let total=0;
+  const header=originalRows[0];
+  if(header){
+   const h=Math.max(37,...header.map((val,c)=>{
+    if(c===0){const vals=Array.isArray(val)?val:[val];return Math.max(1,...vals.slice(0,4).map((x,j)=>wrap(x,(crewW-2*pad)*detailsParts[j]-5,t.crewDetail,true).length))*t.crewDetail*1.24+rowPad*2;}
+    return wrap(val,crewW-2*pad,t.crewHeader,true).length*t.crewHeader*1.24+rowPad*2;
+   }));out.push(h);total+=h;
+  }
+  for(const entry of visible){
+   const h=Math.max(31,...entry.cells.map((val,c)=>{
+    if(c===0){const vals=Array.isArray(val)?val:[val];return Math.max(1,...vals.slice(0,4).map((x,j)=>wrap(x,(crewW-2*pad)*detailsParts[j]-5,t.crewDetail).length))*t.crewDetail*1.24+rowPad*2;}
+    return Math.max(1,wrap(val,crewW-2*pad,t.crewText).length)*t.crewText*1.24+rowPad*2;
+   }));out.push(h);total+=h;
+  }
+  return {heights:out,height:total};
+ }
+ // Weather/NOTAMs must fit completely. Expand the upper sector area only by
+ // culling actual crew rows, one at a time, in the stipulated priority order.
+ const mandatory=measureAirport(1);
+ let visible=crewMeta.slice(), omitted=[],crewLayout=measureCrew(visible);
+ let weatherArea=availableH-separator-crewLayout.height;
+ const removalOrder=[...crewMeta].sort((a,b)=>a.priority-b.priority||b.index-a.index);
+ for(const entry of removalOrder){
+  if(weatherArea>=mandatory.required)break;
+  visible=visible.filter(p=>p!==entry);omitted.push(entry);
+  crewLayout=measureCrew(visible);
+  weatherArea=availableH-separator-crewLayout.height;
+ }
+ // If even the header-only crew section cannot leave enough space, shrink
+ // weather typography to the largest size that fits. Never drop weather/NOTAMs.
+ let weather=mandatory;
+ if(weather.required>weatherArea){
+  let low=.52,high=1;
+  weather=measureAirport(low);
+  if(weather.required<=weatherArea){
+   for(let i=0;i<22;i++){
+    const mid=(low+high)/2,candidate=measureAirport(mid);
+    if(candidate.required<=weatherArea){weather=candidate;low=mid;}else high=mid;
+   }
+  }
+ }
+ const fits=weather.required<=weatherArea+.1 && weatherArea>=0;
+ // The sector panels get ALL available space above the crew table, regardless
+ // of the amount of actual weather/NOTAM content.
+ const crewY=top+Math.max(0,weatherArea)+separator;
  ctx.fillStyle='#f7f9fc';ctx.fillRect(0,0,W,H);
  ctx.fillStyle='#e2e6eb';ctx.fillRect(0,0,W,G.clockBottom);
  ctx.fillStyle='#c1cad4';ctx.fillRect(0,G.clockBottom-1,W,1);
  airports.forEach((a,i)=>{
-   const x=B.left+i*(airW+gap),w=airW;let y=B.top+pad;
-   border(x,B.top,w,size.airH);
-   y=textLines(wrap(a.title,w-2*pad,size.title,true),x+pad,y,size.title,'#17202b',true)+6;
-   if(a.aircraft)y=textLines(wrap(a.aircraft,w-2*pad,size.meta),x+pad,y,size.meta,'#42546a')+4;
-   if(a.alternateText)y=textLines(wrap(a.alternateText,w-2*pad,size.text),x+pad,y,size.text)+4;
-   for(const sec of a.sections){
-     ctx.fillStyle='#d7dee8';ctx.fillRect(x+pad,y,w-2*pad,1);y+=6;
-     if(!sec.items.length)y=textLines([sec.name],x+pad,y,size.section,'#17202b',true)+4;
-     for(const item of sec.items)y=textLines(wrap(item.text,w-2*pad,size.text),x+pad,y,size.text,item.color)+5;
-   }
+  const x=i*airW;let y=top+pad;
+  border(x,top,airW,Math.max(0,weatherArea));
+  y=write(wrap(a.title,airW-2*pad,weather.title,true),x+pad,y,weather.title,'#17202b',true)+6;
+  if(a.aircraft)y=write(wrap(a.aircraft,airW-2*pad,weather.meta),x+pad,y,weather.meta,'#42546a')+5;
+  if(a.alternateText)y=write(wrap(a.alternateText,airW-2*pad,weather.txt),x+pad,y,weather.txt)+5;
+  for(const sec of a.sections){
+   ctx.fillStyle='#d7dee8';ctx.fillRect(x+pad,y,airW-2*pad,1);y+=6;
+   if(!sec.items.length)y=write([sec.name],x+pad,y,weather.heading,'#17202b',true)+4;
+   for(const item of sec.items)y=write(wrap(item.text,airW-2*pad,weather.txt),x+pad,y,weather.txt,item.color)+5;
+  }
  });
- const crewY=B.top+size.airH+13;
- ctx.fillStyle='#9aaabd';ctx.fillRect(B.left,crewY-6,availableW,1);
- let y=crewY;
- rows.forEach((row,r)=>{
-   const rh=size.rowHeights[r];
-   for(let c=0;c<=nSectors;c++){
-     const x=c===0?B.left:B.left+detailW+gap+(c-1)*(crewW+gap),w=c===0?detailW:crewW;
-     border(x,y,w,rh);
-     if(c===0){
-       const fields=Array.isArray(row[0])?row[0]:[row[0]||''];
-       let rel=0;
-       for(let j=0;j<4;j++){
-         const wj=(detailW-2*pad)*parts[j];
-         textLines(wrap(fields[j]||'',wj-5,size.small,r===0),x+pad+rel,y+6,size.small,'#17202b',r===0);
-         rel+=wj;
-       }
-     }else{
-       const sz=r===0?size.header:size.crew;
-       textLines(wrap(row[c]||'',w-2*pad,sz,r===0),x+pad,y+6,sz,'#17202b',r===0);
-     }
+ ctx.fillStyle='#9aaabd';ctx.fillRect(0,crewY-5,W,1);
+ let cy=crewY;
+ const shownRows=[...(originalRows.length?[originalRows[0]]:[]),...visible.map(e=>e.cells)];
+ shownRows.forEach((row,r)=>{
+  const h=crewLayout.heights[r];
+  for(let c=0;c<=nSectors;c++){
+   const x=c*crewW;
+   border(x,cy,crewW,h);
+   if(c===0){
+    const fields=Array.isArray(row[0])?row[0]:[row[0]];let offset=0;
+    for(let j=0;j<4;j++){
+     const width=(crewW-2*pad)*detailsParts[j];
+     write(wrap(fields[j]||'',width-5,typography.crewDetail,r===0),
+       x+pad+offset,cy+rowPad,typography.crewDetail,'#17202b',r===0);
+     offset+=width;
+    }
+   }else{
+    const sz=r===0?typography.crewHeader:typography.crewText;
+    write(wrap(row[c]||'',crewW-2*pad,sz,r===0),x+pad,cy+rowPad,sz,'#17202b',r===0);
    }
-   y+=rh;
+  }
+  cy+=h;
  });
- // Geometry invariants: every column is entirely inside the independent bounds.
- const rightAir=B.left+nAir*airW+(nAir-1)*gap;
- const rightCrew=nSectors?B.left+detailW+gap*nSectors+crewW*nSectors:B.left;
- const columnsFit=Math.abs(rightAir-B.right)<.05&&(!nSectors||Math.abs(rightCrew-B.right)<.05);
- if(!columnsFit)throw Error('CBR horizontal layout does not close to its expected boundary');
+ // Export with no truncation; when impossible, warn clearly rather than
+ // silently deleting weather/NOTAMs or claiming operational fitness.
+ if(!fits){
+  ctx.fillStyle='#ad2a24';ctx.fillRect(0,H-50,W,50);
+  write(['OVERFLOW: WEATHER / NOTAM TEXT EXCEEDS WALLPAPER — EXPORT BLOCKED'],pad,H-39,22,'#ffffff',true);
+ }
  canvas.dataset.overflow=String(!fits);
  canvas.dataset.airportColumns=String(nAir);
  canvas.dataset.sectors=String(nSectors);
- canvas.dataset.safeLeft=String(B.left);
- canvas.dataset.safeRight=String(B.right);
+ canvas.dataset.airportColumnWidth=airW.toFixed(3);
+ canvas.dataset.crewColumnWidth=crewW.toFixed(3);
+ canvas.dataset.weatherHeight=weatherArea.toFixed(2);
+ canvas.dataset.weatherRequired=weather.required.toFixed(2);
+ canvas.dataset.crewHeight=crewLayout.height.toFixed(2);
+ canvas.dataset.crewOmitted=String(omitted.length);
+ canvas.dataset.crewOmittedRoles=omitted.map(p=>['PAX','CC','CM','FO','CPT'][p.priority]).join(',');
  canvas.dataset.clockBottom=String(G.clockBottom);
- canvas.dataset.layoutHeight=size.total.toFixed(1);
- canvas.dataset.scaleUsed=size.factor.toFixed(3);
- canvas.dataset.airportColumnWidth=airW.toFixed(2);
- canvas.dataset.crewDetailsWidth=detailW.toFixed(2);
- canvas.dataset.crewColumnWidth=crewW.toFixed(2);
  return canvas;
 }
 function ipadCanvasRefresh(){
@@ -2517,7 +2586,13 @@ function ipadCanvasRefresh(){
  const old=root.querySelector('#ipadCBROverflow171');if(old)old.remove();
  let warning=root.querySelector('#ipadCBROverflow172');if(warning)warning.remove();
  if(imageCanvas.dataset.overflow==='true'){
-  warning=document.createElement('p');warning.id='ipadCBROverflow172';warning.className='note';warning.style.cssText='color:#a44400;font-weight:700;margin:8px 0';warning.textContent='This briefing exceeds the fixed iPad wallpaper area. Reduce the selected text before exporting; no text has been silently clipped.';root.append(warning);
+  warning=document.createElement('p');warning.id='ipadCBROverflow172';warning.className='note';warning.style.cssText='color:#a44400;font-weight:700;margin:8px 0';warning.textContent='Weather/NOTAM text exceeds the wallpaper even after crew prioritisation. No aviation text has been removed; PNG export is blocked.';root.append(warning);
+ }
+ if(Number(imageCanvas.dataset.crewOmitted)>0){
+  const note=document.createElement('p');note.className='note';note.id='ipadCBRCrewPriority185';
+  note.style.cssText='font-weight:700;margin:8px 0';
+  note.textContent=imageCanvas.dataset.crewOmitted+' crew member(s) omitted from wallpaper only to preserve every weather/NOTAM item ('+imageCanvas.dataset.crewOmittedRoles+'). The imported crew list is unchanged.';
+  root.append(note);
  }
  crewFitIpadPreview();
 }
