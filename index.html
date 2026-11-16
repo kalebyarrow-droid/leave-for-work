@@ -5,7 +5,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <meta content="#15283f" name="theme-color"/>
-<title>CrewFocus v201 — CBR Crew and TAF Refresh</title>
+<title>CrewFocus v202 — NOTAM Validity and Visit Matching</title>
 <style>
 :root{color-scheme:light dark;--bg:#f3f6fa;--card:#fff;--ink:#15283f;--muted:#637184;--line:#dce3eb;--accent:#176b87;--soft:#e9f4f7;--danger:#b13e3e}
 @media(prefers-color-scheme:dark){:root{--bg:#101820;--card:#1a2632;--ink:#edf4fb;--muted:#aab8c6;--line:#344454;--accent:#72c7df;--soft:#203a46;--danger:#ff9b9b}}
@@ -685,7 +685,7 @@ VA 1101 0705 NTL BNE 0720" rows="7"></textarea><p class="note">Check the year, d
 <h2>Calculation notes</h2>
 <p class="note">The sign on date and time are used exactly as entered, including for future planning. The countdown is relative to the current local time. Schedule times use the selected sign-on time zone; the live clock uses your device's local time zone. Your selections are remembered on this device. Past sign-on dates advance to today when reopening.</p>
 <p class="note">Hotel transport times can be saved and updated. This prototype saves them in the browser's local storage; downloaded-file previews may not retain settings. A hosted version can make saving more reliable across sessions and devices.</p>
-</section></details><p class="note" id="planApplyStatus" role="status"></p><button class="btn primary wide" id="applyPlan" type="button">Use this plan</button></div></dialog><dialog aria-labelledby="calendarTitle" id="calendarDialog"><div class="modal-shell"><header><h2 id="calendarTitle">Add to Calendar</h2><button class="btn small" id="closeCalendar" type="button">Close</button></header><label for="calendarScope">Include</label><select id="calendarScope"><option value="current">Accepted duty</option><option value="upcoming">Upcoming roster duties</option><option value="all">Whole roster</option></select><h3 id="calendarCount"></h3><p class="note" id="calendarSkipped" role="status"></p><div id="calendarIssues"></div><p class="note">One event per duty. Titles show local sign-on and sign-off times and finishing location; full sector details remain in Notes. No hotels or reminders.</p><button class="btn primary wide" id="calendarExport" type="button">Add roster to Calendar</button><p class="note" id="calendarStatus" role="status"></p><details id="calendarSetup"><summary>One-time iPhone setup</summary><p class="note">Use a separate shortcut named <strong>Leave for Work Calendar</strong>. Your alarm shortcut stays separate. Shortcuts opens briefly during import and requests a return to this app. No downloading or Siri Suggestions is needed.</p><p class="note">One action at a time. Your progress is saved on this device. “What you should see” describes the checkpoint; if it differs, send that screen before continuing.</p><p class="note" id="calendarGuideProgress"></p><h3 id="calendarGuideTitle"></h3><div class="note" id="calendarGuideInstruction"></div><div class="calendar-issue"><strong>What you should see</strong><p class="note" id="calendarGuideExpected"></p></div><div class="row help-nav"><button class="btn" id="calendarGuideBack" type="button">Back</button><button class="btn primary" id="calendarGuideNext" type="button">Next step</button></div><button class="btn small" id="calendarGuideResume" type="button">Continue from my screenshot</button><p class="note">These controls can vary with iOS. The test checks your phone before sending a full roster. If Calendar opens an editor for every event, check the expanded Add New Event action and turn its compose screen off.</p><button class="btn wide" id="calendarTest" type="button">Test with one event</button><button class="btn wide" id="calendarSetupDone" type="button">I checked the test</button></details><details style="margin-top:16px"><summary>Other options &amp; roster changes</summary><p class="note">This makes a copy, not a live subscription. A completed import is remembered on this device to help prevent duplicates. Changed duties need their previous calendar events removed before you import them again. An interrupted shortcut can leave some events added: check Calendar before retrying.</p><button class="btn wide" id="calendarDownload" type="button">Download .ics file instead</button><p class="note">File import depends on the app opening the file; Safari and Files may only preview it. The shortcut above avoids that route.</p><button class="btn wide" id="calendarResetHistory" type="button">Allow a fresh import</button></details></div></dialog><dialog aria-labelledby="alarmHelpTitle" id="alarmHelp"><div class="help-shell"><header><h2 id="alarmHelpTitle">Set up iPhone alarms</h2><button class="btn small" id="closeAlarmHelp" type="button">Close</button></header><p class="note" id="alarmHelpProgress"></p><div id="alarmHelpContent"></div><p class="note" id="alarmHelpStatus" role="status"></p><div class="row help-nav"><button class="btn" id="alarmHelpBack" type="button">Back</button><button class="btn primary" id="alarmHelpNext" type="button">Next</button></div></div></dialog><footer class="note" style="text-align:center;padding:8px 10px">Version 201 · 16 Nov 2026</footer></main>
+</section></details><p class="note" id="planApplyStatus" role="status"></p><button class="btn primary wide" id="applyPlan" type="button">Use this plan</button></div></dialog><dialog aria-labelledby="calendarTitle" id="calendarDialog"><div class="modal-shell"><header><h2 id="calendarTitle">Add to Calendar</h2><button class="btn small" id="closeCalendar" type="button">Close</button></header><label for="calendarScope">Include</label><select id="calendarScope"><option value="current">Accepted duty</option><option value="upcoming">Upcoming roster duties</option><option value="all">Whole roster</option></select><h3 id="calendarCount"></h3><p class="note" id="calendarSkipped" role="status"></p><div id="calendarIssues"></div><p class="note">One event per duty. Titles show local sign-on and sign-off times and finishing location; full sector details remain in Notes. No hotels or reminders.</p><button class="btn primary wide" id="calendarExport" type="button">Add roster to Calendar</button><p class="note" id="calendarStatus" role="status"></p><details id="calendarSetup"><summary>One-time iPhone setup</summary><p class="note">Use a separate shortcut named <strong>Leave for Work Calendar</strong>. Your alarm shortcut stays separate. Shortcuts opens briefly during import and requests a return to this app. No downloading or Siri Suggestions is needed.</p><p class="note">One action at a time. Your progress is saved on this device. “What you should see” describes the checkpoint; if it differs, send that screen before continuing.</p><p class="note" id="calendarGuideProgress"></p><h3 id="calendarGuideTitle"></h3><div class="note" id="calendarGuideInstruction"></div><div class="calendar-issue"><strong>What you should see</strong><p class="note" id="calendarGuideExpected"></p></div><div class="row help-nav"><button class="btn" id="calendarGuideBack" type="button">Back</button><button class="btn primary" id="calendarGuideNext" type="button">Next step</button></div><button class="btn small" id="calendarGuideResume" type="button">Continue from my screenshot</button><p class="note">These controls can vary with iOS. The test checks your phone before sending a full roster. If Calendar opens an editor for every event, check the expanded Add New Event action and turn its compose screen off.</p><button class="btn wide" id="calendarTest" type="button">Test with one event</button><button class="btn wide" id="calendarSetupDone" type="button">I checked the test</button></details><details style="margin-top:16px"><summary>Other options &amp; roster changes</summary><p class="note">This makes a copy, not a live subscription. A completed import is remembered on this device to help prevent duplicates. Changed duties need their previous calendar events removed before you import them again. An interrupted shortcut can leave some events added: check Calendar before retrying.</p><button class="btn wide" id="calendarDownload" type="button">Download .ics file instead</button><p class="note">File import depends on the app opening the file; Safari and Files may only preview it. The shortcut above avoids that route.</p><button class="btn wide" id="calendarResetHistory" type="button">Allow a fresh import</button></details></div></dialog><dialog aria-labelledby="alarmHelpTitle" id="alarmHelp"><div class="help-shell"><header><h2 id="alarmHelpTitle">Set up iPhone alarms</h2><button class="btn small" id="closeAlarmHelp" type="button">Close</button></header><p class="note" id="alarmHelpProgress"></p><div id="alarmHelpContent"></div><p class="note" id="alarmHelpStatus" role="status"></p><div class="row help-nav"><button class="btn" id="alarmHelpBack" type="button">Back</button><button class="btn primary" id="alarmHelpNext" type="button">Next</button></div></div></dialog><footer class="note" style="text-align:center;padding:8px 10px">Version 202 · 16 Nov 2026</footer></main>
 <script>
 (() => {
  const $ = id => document.getElementById(id);
@@ -2027,9 +2027,12 @@ function ipadVisitList(){
  };
  for(let i=0;i<rs.length;i++){
   const r=rs[i],e=timeline[i]||{},next=rs[i+1],same=next&&r[3]===next[1];
-  if(i===0)visits.push({key:'departure-0',code:r[1],label:labelled(r[1],null,e.departure),time:e.departure?.instant||null,kind:'departure'});
-  visits.push({key:'arrival-'+i,code:r[3],label:labelled(r[3],e.arrival,same?timeline[i+1]?.departure:null),time:e.arrival?.instant||null,kind:'arrival'});
-  if(next&&!same)visits.push({key:'departure-'+(i+1),code:next[1],label:labelled(next[1],null,timeline[i+1]?.departure),time:timeline[i+1]?.departure?.instant||null,kind:'departure'});
+  if(i===0)visits.push({key:'departure-0',code:r[1],label:labelled(r[1],null,e.departure),time:e.departure?.instant||null,kind:'departure',start:e.departure?.instant||null,end:e.departure?.instant||null});
+  // A connecting-airport visit is an interval, not just its arrival instant.
+  // A NOTAM starting after touchdown but before the next departure must match.
+  const visitEnd=same?timeline[i+1]?.departure?.instant:e.arrival?.instant;
+  visits.push({key:'arrival-'+i,code:r[3],label:labelled(r[3],e.arrival,same?timeline[i+1]?.departure:null),time:e.arrival?.instant||null,kind:'arrival',start:e.arrival?.instant||null,end:visitEnd||e.arrival?.instant||null});
+  if(next&&!same)visits.push({key:'departure-'+(i+1),code:next[1],label:labelled(next[1],null,timeline[i+1]?.departure),time:timeline[i+1]?.departure?.instant||null,kind:'departure',start:timeline[i+1]?.departure?.instant||null,end:timeline[i+1]?.departure?.instant||null});
  }
  return visits;
 }
@@ -2128,17 +2131,19 @@ function ipadAssignmentConfirm(id,raw){
 function ipadChooseVisit(id,raw,abbreviated=false,airport='',displayText=''){
  const visits=ipadVisitList();if(!visits.length){alert('Import a CBR with sectors before assigning NOTAMs.');return;}
  const matches=ipadAirportVisits(airport);const choices=matches.length?matches:visits;
- const period=ipadNotamValidity(raw), eligible=period?ipadAutoVisits(airport,raw):[];
- // Assign only after a verified overlap. Multiple matching visits are all relevant.
- // Never silently choose a visit when validity cannot be established.
- if(period&&eligible.length){
+ const period=ipadNotamValidity(raw),schedule=ipadNotamSchedule(raw),eligible=period?ipadAutoVisits(airport,raw):[];
+ // Assign only after a verified overlap AND a reliably interpreted schedule.
+ // Never silently choose a visit when the additional operating hours are unclear.
+ if(period&&schedule.type!=='review'&&eligible.length){
   for(const visit of eligible)ipadSelections[visit.key+'|'+id]={visit:visit.key,id,raw,abbreviated,display:displayText,auto:false};
   ipadSave();ipadCBRRender();ipadUpdateButtons();crewNotamLearningPrompt(id,raw,()=>ipadAssignmentConfirm(id,raw));
   const status=document.getElementById('ipadCBRStatus');if(status)status.textContent=id+' automatically assigned to '+eligible.map(v=>v.label).join('; ')+'. You can change this under Edit / remove selected NOTAMs.';
   return;
  }
  const validity=ipadValidityLabel(raw);
- const response=window.prompt('Automatic sector matching '+(period?'found no overlapping visit.':'could not confirm the NOTAM validity.')+'\n'+id+' · '+validity+'\n\n'+choices.map((v,i)=>(i+1)+'. '+v.label+' ('+ipadVisitUtcLabel(v)+')').join('\n')+'\n\nEnter visit number to override, or Cancel to leave unassigned:');
+ const reason=!period?'could not read the NOTAM validity dates.':schedule.type==='review'?'read the date range, but cannot confirm the additional operating schedule.':'found no overlapping airport visit.';
+ const testWarning=document.getElementById('cbrTestTop')?.checked?'\nTEST mode shifts CBR duty dates, NOTAM publication dates remain unchanged.\n':'';
+ const response=window.prompt('Automatic sector matching '+reason+'\n'+id+' · '+validity+testWarning+'\n\n'+choices.map((v,i)=>(i+1)+'. '+v.label+' ('+ipadVisitUtcLabel(v)+')').join('\n')+'\n\nEnter visit number to override, or Cancel to leave unassigned:');
  if(response===null)return;
  const n=Number(response);if(!Number.isInteger(n)||n<1||n>choices.length){alert('Invalid visit number. NOTAM not added.');return;}
  const visit=choices[n-1];ipadSelections[visit.key+'|'+id]={visit:visit.key,id,raw,abbreviated,display:displayText,auto:false};ipadSave();ipadCBRRender();ipadUpdateButtons();crewNotamLearningPrompt(id,raw,()=>ipadAssignmentConfirm(id,raw));
@@ -2148,7 +2153,13 @@ function ipadAirportVisits(code){
  return ipadVisitList().filter(x=>!code||x.code===code||aliases[code]===x.code);
 }
 function ipadVisitUtcLabel(v){const t=v.time instanceof Date?v.time:new Date(v.time);return Number.isFinite(t.getTime())?t.toISOString().slice(0,16).replace('T',' ')+'Z':'UTC unknown';}
-function ipadValidityLabel(raw){const period=ipadNotamValidity(raw);if(period)return new Date(period[0]).toISOString().slice(0,16).replace('T',' ')+'Z to '+new Date(period[1]).toISOString().slice(0,16).replace('T',' ')+'Z';const m=String(raw).match(/\bFROM\s+\d{2}\s+\d{6}\s+TO\s+\d{2}\s+\d{6}(?:\s+EST)?/i);return m?m[0]+' (requires review)':'Validity not reliably parsed';}
+function ipadValidityLabel(raw){
+ const period=ipadNotamValidity(raw),schedule=ipadNotamSchedule(raw);
+ const estimated=/\bTO\s+\d{2}\s+\d{6}\s+EST\b|\bC\s*\)\s*\d{10,12}\s+EST\b/i.test(String(raw));
+ if(period)return new Date(period[0]).toISOString().slice(0,16).replace('T',' ')+'Z to '+new Date(period[1]).toISOString().slice(0,16).replace('T',' ')+'Z'+(estimated?' (estimated end)':'')+'; '+schedule.description;
+ const m=String(raw).match(/\bFROM\s+\d{2}\s+\d{6}\s+TO\s+\d{2}\s+\d{6}(?:\s+EST)?/i);
+ return m?m[0]+' (date format requires review)':'Validity not reliably parsed';
+}
 const IPAD_CREW_KEY='crewFocus_iPadSectorCrewV1';
 let ipadCrew={},ipadCrewSource='';
 try{ipadCrew=JSON.parse(localStorage.getItem(IPAD_CREW_KEY)||'{}')||{}}catch(e){}
@@ -2319,36 +2330,93 @@ function ipadCrewEditRow(sectorIndex,index){
  ipadCrewRows[sectorIndex][index]=edited;
  ipadCrewRows[sectorIndex].sort((a,b)=>ipadCrewOrder(a.role)-ipadCrewOrder(b.role));ipadCrewRowsSave();ipadCBRRender();
 }
+// v202: Validity dates and daily operating periods are independent.
+// EST means estimated END, not an uncertain commencement or a timezone.
+// Never claim automatic applicability when an operating schedule cannot be read.
 function ipadNotamValidity(raw){
- const text=String(raw);let a=null,b=null;
- // NAIPS: FROM MM DDHHMM TO MM DDHHMM. The NOTAM number's year is
- // the issue year, NOT necessarily the year of its start or expiry.
- const naips=text.match(/\bFROM\s+(\d{2})\s+(\d{2})(\d{2})(\d{2})\s+TO\s+(\d{2})\s+(\d{2})(\d{2})(\d{2})/i);
+ const text=String(raw||'').replace(/\u00a0/g,' ');let a=null,b=null;
+ const valid=(y,m,d,h,n)=>{
+  if(!Number.isInteger(y)||!Number.isInteger(m)||!Number.isInteger(d)||!Number.isInteger(h)||!Number.isInteger(n))return null;
+  const t=Date.UTC(y,m-1,d,h,n),x=new Date(t);
+  return x.getUTCFullYear()===y&&x.getUTCMonth()===m-1&&x.getUTCDate()===d&&x.getUTCHours()===h&&x.getUTCMinutes()===n?t:null;
+ };
+ // NAIPS format: FROM MM DDHHMM TO MM DDHHMM [EST].
+ const naips=text.match(/\bFROM\s+(\d{2})\s+(\d{2})(\d{2})(\d{2})\s+TO\s+(\d{2})\s+(\d{2})(\d{2})(\d{2})(?!\d)/i);
  if(naips){
-  const schedule=ipadVisitList().map(v=>new Date(v.time).getTime()).filter(Number.isFinite);
-  const base=schedule.length?new Date(schedule[0]).getUTCFullYear():new Date().getUTCFullYear();
+  const visits=ipadVisitList();
+  const events=visits.map(v=>v.time instanceof Date?v.time.getTime():new Date(v.time).getTime()).filter(Number.isFinite);
+  const base=events.length?new Date(events[0]).getUTCFullYear():new Date().getUTCFullYear();
   const candidates=[];
   for(let year=base-1;year<=base+1;year++){
-   const start=Date.UTC(year,+naips[1]-1,+naips[2],+naips[3],+naips[4]);
+   const start=valid(year,+naips[1],+naips[2],+naips[3],+naips[4]);
    const endYear=year+(+naips[5]<+naips[1]?1:0);
-   const end=Date.UTC(endYear,+naips[5]-1,+naips[6],+naips[7],+naips[8]);
-   if(end>=start&&end-start<370*86400000)candidates.push([start,end]);
+   const end=valid(endYear,+naips[5],+naips[6],+naips[7],+naips[8]);
+   if(start!==null&&end!==null&&end>=start&&end-start<370*86400000)candidates.push([start,end]);
   }
-  if(candidates.length){const ref=schedule.length?schedule[0]:Date.now();candidates.sort((x,y)=>Math.min(Math.abs(ref-x[0]),Math.abs(ref-x[1]),ref>=x[0]&&ref<=x[1]?0:Infinity)-Math.min(Math.abs(ref-y[0]),Math.abs(ref-y[1]),ref>=y[0]&&ref<=y[1]?0:Infinity));[a,b]=candidates[0];}
+  if(candidates.length){
+   const ref=events.length?events[0]:Date.now();
+   const distance=pair=>ref<pair[0]?pair[0]-ref:ref>pair[1]?ref-pair[1]:0;
+   candidates.sort((x,y)=>distance(x)-distance(y));
+   [a,b]=candidates[0];
+  }
  }else{
   // ICAO B)/C) format: YYMMDDHHMM or YYYYMMDDHHMM.
-  const stamp=(tag)=>{const m=text.match(new RegExp('(?:^|\\s)'+tag+'\\s*[:)]\\s*(\\d{10}|\\d{12})','i'));if(!m)return null;const x=m[1],n=x.length===12;return Date.UTC(n?+x.slice(0,4):2000+(+x.slice(0,2)),+x.slice(n?4:2,n?6:4)-1,+x.slice(n?6:4,n?8:6),+x.slice(n?8:6,n?10:8),+x.slice(n?10:8,n?12:10));};
+  const stamp=tag=>{
+   const m=text.match(new RegExp('(?:^|\\s)'+tag+'\\s*[:)]\\s*(\\d{10}|\\d{12})(?!\\d)','i'));
+   if(!m)return null;const x=m[1],long=x.length===12;
+   return valid(long?+x.slice(0,4):2000+(+x.slice(0,2)),+x.slice(long?4:2,long?6:4),+x.slice(long?6:4,long?8:6),+x.slice(long?8:6,long?10:8),+x.slice(long?10:8,long?12:10));
+  };
   a=stamp('B');b=stamp('C');
+  if(a!==null&&b===null&&/\bC\s*\)\s*PERM\b/i.test(text))b=Date.UTC(9999,11,31,23,59);
  }
- // Daily/weekday/HJ/HN schedules need per-day interpretation; never guess.
- if(!Number.isFinite(a)||!Number.isFinite(b)||b<a||/\b(?:HJ|HN|DAILY|MON|TUE|WED|THU|FRI|SAT|SUN)\b/i.test(text))return null;
+ if(a===null||b===null||b<a)return null;
  return [a,b];
+}
+function ipadNotamSchedule(raw){
+ const text=String(raw||'').replace(/\u00a0/g,' ');
+ // Only recognised UTC daily ranges are evaluated automatically. Dates in
+ // Item D), HJ/HN and weekday patterns require more detailed interpretation.
+ const d=text.match(/(?:^|\n)\s*D\)\s*([\s\S]*?)(?=\n\s*[EFGQ]\)|$)/i);
+ const src=(d?d[1]:text).replace(/\s+/g,' ').trim();
+ const daily=[...src.matchAll(/\bDAILY\s+(\d{4})\s*[-–—\/]\s*(\d{4})(?!\d)/gi)];
+ const timingTerms=/\b(?:DAILY|DLY|HJ|HN|MON|TUE|WED|THU|FRI|SAT|SUN)\b/i;
+ const other= /\b(?:DLY|HJ|HN|MON|TUE|WED|THU|FRI|SAT|SUN)\b/i.test(src);
+ if(daily.length===1&&!other&&[...src.matchAll(/\bDAILY\b/gi)].length===1){
+  const x=daily[0],hourMinute=code=>{const h=+code.slice(0,2),m=+code.slice(2);return h<24&&m<60?h*60+m:null;};
+  const from=hourMinute(x[1]),to=hourMinute(x[2]);
+  // Require the whole D) clause to be the schedule and nothing else.
+  const remaining=src.replace(x[0],'').replace(/[,;\s]+/g,'').trim();
+  if(from!==null&&to!==null&&from!==to&&(!d||!remaining))return {type:'daily',from,to,description:'DAILY '+x[1]+'–'+x[2]+' UTC'};
+ }
+ // If Item D is present but not precisely recognised, no automatic matches.
+ if(d||timingTerms.test(src))return {type:'review',description:'Additional operating schedule needs manual review'};
+ return {type:'continuous',description:'Throughout published validity'};
 }
 function ipadAutoVisits(code,raw){
  const v=ipadAirportVisits(code);if(!v.length)return [];
- const period=ipadNotamValidity(raw);if(!period)return [];
- const before=Number(document.getElementById('cbrSectorBefore')?.value||1)*3600000,after=Number(document.getElementById('cbrSectorAfter')?.value||2)*3600000;
- return v.filter(x=>{const t=x.time instanceof Date?x.time.getTime():new Date(x.time).getTime();return Number.isFinite(t)&&period[0]<=t+after&&period[1]>=t-before;});
+ const period=ipadNotamValidity(raw),schedule=ipadNotamSchedule(raw);
+ if(!period||schedule.type==='review')return [];
+ const before=Number(document.getElementById('cbrSectorBefore')?.value??1)*3600000;
+ const after=Number(document.getElementById('cbrSectorAfter')?.value??2)*3600000;
+ const dayMs=86400000;
+ return v.filter(x=>{
+  const ms=d=>d instanceof Date?d.getTime():new Date(d).getTime();
+  const arr=ms(x.start||x.time),dep=ms(x.end||x.time);
+  if(!Number.isFinite(arr)||!Number.isFinite(dep))return false;
+  const lo=Math.max(period[0],arr-before),hi=Math.min(period[1],Math.max(arr,dep)+after);
+  if(hi<lo)return false;
+  if(schedule.type==='continuous')return true;
+  // Recognised DAILY UTC operating hours, including overnight ranges.
+  // A 2100–0500 window is checked from the preceding UTC day as required.
+  const firstDay=Math.floor(lo/dayMs)-1,lastDay=Math.floor(hi/dayMs);
+  if(lastDay-firstDay>15)return false;
+  for(let day=firstDay;day<=lastDay;day++){
+   const start=day*dayMs+schedule.from*60000;
+   const end=day*dayMs+(schedule.to<=schedule.from?schedule.to+1440:schedule.to)*60000;
+   if(Math.max(lo,start)<=Math.min(hi,end))return true;
+  }
+  return false;
+ });
 }
 function ipadAutoAssign(parsed){
  // Screening only. Never insert a NOTAM into the wallpaper without crew selection.
