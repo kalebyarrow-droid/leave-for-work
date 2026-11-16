@@ -5,7 +5,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <meta content="#15283f" name="theme-color"/>
-<title>CrewFocus v207 — NOTAM Separators and Full Duty Alternate Weather</title>
+<title>CrewFocus v208 — Clean alternate TAFs and compact temperature/QNH</title>
 <style>
 :root{color-scheme:light dark;--bg:#f3f6fa;--card:#fff;--ink:#15283f;--muted:#637184;--line:#dce3eb;--accent:#176b87;--soft:#e9f4f7;--danger:#b13e3e}
 @media(prefers-color-scheme:dark){:root{--bg:#101820;--card:#1a2632;--ink:#edf4fb;--muted:#aab8c6;--line:#344454;--accent:#72c7df;--soft:#203a46;--danger:#ff9b9b}}
@@ -2630,7 +2630,10 @@ function ipadCbrWeather(visit){
   const points=reference.points;
   candidates.push({raw,issued,analysis:{validFrom:from,groups,points,reference}});
  }
- if(!candidates.length)return []; // Deliberately blank for missing or invalid TAF.
+ // No eligible TAF: do not invent weather, but show an unambiguous T/Q blank
+ // when a TAF was imported and cannot supply valid event-time values.
+ if(!candidates.length)return reports.some(r=>/^\s*TAF\b/i.test(ipadTafNormalize(r)))
+  ?[{text:'T: —   Q: —',color:'#17202b'}]:[];
  candidates.sort((a,b)=>b.issued-a.issued);
  const {raw,analysis}=candidates[0];
  const layers=crewWxForecastLayers(raw,analysis,event);
@@ -2645,17 +2648,12 @@ function ipadCbrWeather(visit){
  const speci=ipadCompactSpeci(visit.code);
  if(speci)result.push({text:speci,red:true});
  const tq=crewWxInterpolate(analysis.points,event);
- // T/Q are event-time point forecasts. Keep them on separate final lines,
- // below all prevailing, temporary and SPECI weather; never extrapolate beyond
- // the published HH, HH+3, HH+6, HH+9 TAF reference points.
- if(tq){
-  result.push({text:'T: '+Math.round(tq.temp)+'°C',red:false});
-  result.push({text:'Q: '+Math.round(tq.qnh)+' hPa',red:false});
- }else{
-  const why=analysis.reference?.complete?'outside TAF T/Q forecast hours':'no valid TAF T/Q values';
-  result.push({text:'T: — ('+why+' at '+ipadWxUtcStamp(event)+')',color:'#a45118'});
-  result.push({text:'Q: — ('+why+' at '+ipadWxUtcStamp(event)+')',color:'#a45118'});
- }
+ // v208: one compact black T/Q line below all forecast/SPECI weather.
+ // Do not extrapolate outside the published HH, HH+3, HH+6, HH+9 points.
+ // Unavailable values are just dashes, never explanatory amber text.
+ const temperature=tq&&Number.isFinite(tq.temp)?Math.round(tq.temp)+'°C':'—';
+ const pressure=tq&&Number.isFinite(tq.qnh)?String(Math.round(tq.qnh)):'—';
+ result.push({text:'T: '+temperature+'   Q: '+pressure,color:'#17202b'});
  return result;
 }
 // v206: All additional NAIPS forecast airports are placed INSIDE the existing
@@ -3744,11 +3742,14 @@ function crewWxRenderMarkedTaf(raw,parent,make){
  if(!analysis||!analysis.airportEvents?.length){
   make('pre','crew-wx-raw-unmarked',clean,pre);
   const tafAirport=(clean.match(/^TAF(?:\s+(?:AMD|COR))?\s+([A-Z]{4})\b/i)||[])[1]||'';
-  const extra=crewWxDutyWindow()&&!(window.crewIpadSchedule?.rows?.()||[]).some(r=>
+  const extra=!(window.crewIpadSchedule?.rows?.()||[]).some(r=>
    [r?.[1],r?.[3]].some(p=>crewScreeningAirport(p)===crewScreeningAirport(tafAirport)));
-  if(extra)make('p','note','Additional screening airport: no scheduled sector visit. Sector badges do not apply; assess this TAF across the full CBR duty window in the ALTERNATES column. Any coverage gap is shown there.',pre);
-  else if(document.getElementById('cbrTestTop')?.checked)make('p','note','No applicable CBR airport event in the current TEST timeline; forecast left unmarked.',pre);
-  else make('p','note','No matching airport event was recovered from the current CBR. Recheck the confirmed duty date and sectors.',pre);
+  // v208: no explanatory note for airports outside the CBR sector list;
+  // their validity and coverage are independently assessed in ALTERNATES.
+  if(!extra){
+   if(document.getElementById('cbrTestTop')?.checked)make('p','note','No applicable CBR airport event in the current TEST timeline; forecast left unmarked.',pre);
+   else make('p','note','No matching airport event was recovered from the current CBR. Recheck the confirmed duty date and sectors.',pre);
+  }
   return;
  }
  const body=clean.split(/\bRMK\b/i)[0];
