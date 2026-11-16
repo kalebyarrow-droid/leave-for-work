@@ -5,7 +5,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <meta content="#15283f" name="theme-color"/>
-<title>CrewFocus v199 — Wallpaper Top Image Test</title>
+<title>CrewFocus v201 — CBR Crew and TAF Refresh</title>
 <style>
 :root{color-scheme:light dark;--bg:#f3f6fa;--card:#fff;--ink:#15283f;--muted:#637184;--line:#dce3eb;--accent:#176b87;--soft:#e9f4f7;--danger:#b13e3e}
 @media(prefers-color-scheme:dark){:root{--bg:#101820;--card:#1a2632;--ink:#edf4fb;--muted:#aab8c6;--line:#344454;--accent:#72c7df;--soft:#203a46;--danger:#ff9b9b}}
@@ -604,7 +604,7 @@ LOCATION BRIEFING
 <div class="muted">LOCAL TIME</div><div class="clock" id="clock">--:--:--</div>
 <div class="countdown" id="countdown">Calculating time remaining…</div>
 <div class="muted hidden" id="targetLine" style="margin-top:5px">Until you leave the room</div>
-</section><section class="card"><h2 id="scheduleTitle">Your times</h2><div id="results"></div></section><p class="note route-summary" id="dashboardReadyStatus" role="status"></p></div><div class="dashboard-tools"><button class="btn small" id="openAlarmHelp" type="button">Setup &amp; help</button></div><p class="note" id="alarmStatus" role="status"></p></section><dialog aria-labelledby="dashboardMenuTitle" id="dashboardMenuDialog"><div class="modal-shell"><header><h2 id="dashboardMenuTitle">Dashboard</h2><button class="btn small" id="closeDashboardMenu" type="button">Close</button></header><p class="note">Crew tools</p><div class="summary-actions"><button class="btn" id="openCalendar" type="button">Export to Calendar</button><button class="btn" id="openRosterImport" type="button">Import Roster</button></div></div></dialog><dialog aria-labelledby="dutyReviewTitle" id="dutyReviewDialog"><div class="modal-shell"><header><div><p class="eyebrow">YOUR NEXT DUTY</p><h2 id="dutyReviewTitle">Next duty</h2></div><div class="review-nav"><button class="btn small" id="closeDutyReview" type="button">Close</button></div></header><p class="note" id="rosterNextSummary"></p><div class="row" style="margin-bottom:12px"><button class="btn small" id="rosterPrev" type="button">← Previous</button><button class="btn small" id="rosterToday" type="button">Next duty</button><button class="btn small" id="rosterCurrentDuty" type="button">Current duty</button><button class="btn small" id="rosterNext" type="button">Next →</button></div><div id="rosterList"></div><p class="note" id="rosterStatus" role="status"></p></div></dialog><dialog aria-labelledby="rosterImportTitle" id="rosterImportDialog"><div class="modal-shell"><header><h2 id="rosterImportTitle">Import your roster</h2><button class="btn small" id="closeRosterImport" type="button">Close</button></header><details id="rosterImportPanel" style="margin-top:12px"><summary class="hidden" style="font-weight:700">Import / replace roster</summary><p class="note">Choose a roster screenshot, PDF, saved HTML or text file. Screenshots and scanned PDFs are read on this device. Internet is needed to download the reading tools; your roster is not uploaded to an OCR service. Check the extracted dates, times and positioning marks before confirming duties. Import does not create alarms or location alerts.</p><label for="rosterFile">Choose roster file(s)</label><input accept=".html,.htm,.txt,.pdf,.png,.jpg,.jpeg,.webp,image/*,application/pdf" id="rosterFile" multiple="" type="file"/><progress aria-label="Reading roster" class="hidden" id="conversionProgress" style="width:100%;margin-top:12px"></progress><p class="note" id="conversionStatus" role="status"></p><button class="btn small hidden" id="cancelConversion" type="button">Cancel reading</button><p class="note hidden" id="conversionWarning" role="status" style="padding:12px;border:1px solid var(--accent);border-radius:12px"></p><details class="hidden" id="rosterPreviewPanel"><summary>Compare with original (first image/page)</summary><img alt="Original roster page for checking extracted text" id="rosterPreview" style="max-width:100%;height:auto;margin-top:10px"/></details><div class="fields" style="margin-top:12px"><div class="field"><label for="rosterYear">Roster year</label><input id="rosterYear" max="2100" min="2020" type="number"/></div><div class="field"><label for="rosterBase">Home base (airport code)</label><input id="rosterBase" maxlength="3" value="MEL"/></div></div><label for="rosterText" style="margin-top:12px">Roster text (one date followed by its duty lines)</label><textarea id="rosterText" placeholder="Nov 05
+</section><section class="card"><h2 id="scheduleTitle">Your times</h2><div id="results"></div></section><p class="note route-summary" id="dashboardReadyStatus" role="status"></p></div><div class="dashboard-tools"><button class="btn small" id="openAlarmHelp" type="button">Setup &amp; help</button></div><p class="note" id="alarmStatus" role="status"></p></section><dialog aria-labelledby="dashboardMenuTitle" id="dashboardMenuDialog"><div class="modal-shell"><header><h2 id="dashboardMenuTitle">Dashboard</h2><button class="btn small" id="closeDashboardMenu" type="button">Close</button></header><p class="note">Crew tools</p><div class="summary-actions"><button class="btn" id="openCalendar" type="button">Export to Calendar</button><button class="btn" id="openRosterImport" type="button">Import Roster</button></div></div></dialog><dialog aria-labelledby="dutyReviewTitle" id="dutyReviewDialog"><div class="modal-shell"><header><div><p class="eyebrow">YOUR NEXT DUTY</p><h2 id="dutyReviewTitle">Next duty</h2></div><div class="review-nav"><button class="btn small" id="closeDutyReview" type="button">Close</button></div></header><p class="note" id="rosterNextSummary"></p><div class="row" style="margin-bottom:12px"><button class="btn small" id="rosterPrev" type="button">← Previous</button><button class="btn small" id="rosterToday" type="button">Next duty</button><button class="btn small" id="rosterCurrentDuty" type="button">Current duty</button><button class="btn small" id="rosterNext" type="button">Next →</button></div><div id="rosterList"></div><p class="note" id="rosterStatus" role="status"></p></div></dialog><dialog id="departureReviewDialog" aria-labelledby="departureReviewTitle"><div class="modal-shell"><header><h2 id="departureReviewTitle">Review departure times?</h2></header><p class="note" id="departureReviewSummary"></p><p>Would you like to review your departure times for this duty now?</p><div class="row stack-mobile" style="margin-top:18px"><button class="btn primary" id="departureReviewNow" type="button">Review departure times</button><button class="btn" id="departureReviewLater" type="button">Later</button></div></div></dialog><dialog aria-labelledby="rosterImportTitle" id="rosterImportDialog"><div class="modal-shell"><header><h2 id="rosterImportTitle">Import your roster</h2><button class="btn small" id="closeRosterImport" type="button">Close</button></header><details id="rosterImportPanel" style="margin-top:12px"><summary class="hidden" style="font-weight:700">Import / replace roster</summary><p class="note">Choose a roster screenshot, PDF, saved HTML or text file. Screenshots and scanned PDFs are read on this device. Internet is needed to download the reading tools; your roster is not uploaded to an OCR service. Check the extracted dates, times and positioning marks before confirming duties. Import does not create alarms or location alerts.</p><label for="rosterFile">Choose roster file(s)</label><input accept=".html,.htm,.txt,.pdf,.png,.jpg,.jpeg,.webp,image/*,application/pdf" id="rosterFile" multiple="" type="file"/><progress aria-label="Reading roster" class="hidden" id="conversionProgress" style="width:100%;margin-top:12px"></progress><p class="note" id="conversionStatus" role="status"></p><button class="btn small hidden" id="cancelConversion" type="button">Cancel reading</button><p class="note hidden" id="conversionWarning" role="status" style="padding:12px;border:1px solid var(--accent);border-radius:12px"></p><details class="hidden" id="rosterPreviewPanel"><summary>Compare with original (first image/page)</summary><img alt="Original roster page for checking extracted text" id="rosterPreview" style="max-width:100%;height:auto;margin-top:10px"/></details><div class="fields" style="margin-top:12px"><div class="field"><label for="rosterYear">Roster year</label><input id="rosterYear" max="2100" min="2020" type="number"/></div><div class="field"><label for="rosterBase">Home base (airport code)</label><input id="rosterBase" maxlength="3" value="MEL"/></div></div><label for="rosterText" style="margin-top:12px">Roster text (one date followed by its duty lines)</label><textarea id="rosterText" placeholder="Nov 05
 LO 0000 NTL NTL 0605
 VA 1101 0705 NTL BNE 0720" rows="7"></textarea><p class="note">Check the year, dates and source text before importing. First flight minus 1 hour applies only where no starting layover is present. Starting layover end times already include the allowance. The roster is saved together. Review a duty only when you load its daily times and alarms.</p><div class="row stack-mobile"><button class="btn primary" id="parseRoster" type="button">Import roster</button><button class="btn" id="clearRoster" type="button">Remove roster</button></div></details></div></dialog><dialog aria-labelledby="planTitle" id="planDialog"><div class="modal-shell"><header><h2 id="planTitle">Adjust your plan</h2><button class="btn small" id="closePlan" type="button">Close</button></header><section class="card">
 <h2>Start with your sign-on</h2>
@@ -685,7 +685,7 @@ VA 1101 0705 NTL BNE 0720" rows="7"></textarea><p class="note">Check the year, d
 <h2>Calculation notes</h2>
 <p class="note">The sign on date and time are used exactly as entered, including for future planning. The countdown is relative to the current local time. Schedule times use the selected sign-on time zone; the live clock uses your device's local time zone. Your selections are remembered on this device. Past sign-on dates advance to today when reopening.</p>
 <p class="note">Hotel transport times can be saved and updated. This prototype saves them in the browser's local storage; downloaded-file previews may not retain settings. A hosted version can make saving more reliable across sessions and devices.</p>
-</section></details><p class="note" id="planApplyStatus" role="status"></p><button class="btn primary wide" id="applyPlan" type="button">Use this plan</button></div></dialog><dialog aria-labelledby="calendarTitle" id="calendarDialog"><div class="modal-shell"><header><h2 id="calendarTitle">Add to Calendar</h2><button class="btn small" id="closeCalendar" type="button">Close</button></header><label for="calendarScope">Include</label><select id="calendarScope"><option value="current">Accepted duty</option><option value="upcoming">Upcoming roster duties</option><option value="all">Whole roster</option></select><h3 id="calendarCount"></h3><p class="note" id="calendarSkipped" role="status"></p><div id="calendarIssues"></div><p class="note">One event per duty. Titles show local sign-on and sign-off times and finishing location; full sector details remain in Notes. No hotels or reminders.</p><button class="btn primary wide" id="calendarExport" type="button">Add roster to Calendar</button><p class="note" id="calendarStatus" role="status"></p><details id="calendarSetup"><summary>One-time iPhone setup</summary><p class="note">Use a separate shortcut named <strong>Leave for Work Calendar</strong>. Your alarm shortcut stays separate. Shortcuts opens briefly during import and requests a return to this app. No downloading or Siri Suggestions is needed.</p><p class="note">One action at a time. Your progress is saved on this device. “What you should see” describes the checkpoint; if it differs, send that screen before continuing.</p><p class="note" id="calendarGuideProgress"></p><h3 id="calendarGuideTitle"></h3><div class="note" id="calendarGuideInstruction"></div><div class="calendar-issue"><strong>What you should see</strong><p class="note" id="calendarGuideExpected"></p></div><div class="row help-nav"><button class="btn" id="calendarGuideBack" type="button">Back</button><button class="btn primary" id="calendarGuideNext" type="button">Next step</button></div><button class="btn small" id="calendarGuideResume" type="button">Continue from my screenshot</button><p class="note">These controls can vary with iOS. The test checks your phone before sending a full roster. If Calendar opens an editor for every event, check the expanded Add New Event action and turn its compose screen off.</p><button class="btn wide" id="calendarTest" type="button">Test with one event</button><button class="btn wide" id="calendarSetupDone" type="button">I checked the test</button></details><details style="margin-top:16px"><summary>Other options &amp; roster changes</summary><p class="note">This makes a copy, not a live subscription. A completed import is remembered on this device to help prevent duplicates. Changed duties need their previous calendar events removed before you import them again. An interrupted shortcut can leave some events added: check Calendar before retrying.</p><button class="btn wide" id="calendarDownload" type="button">Download .ics file instead</button><p class="note">File import depends on the app opening the file; Safari and Files may only preview it. The shortcut above avoids that route.</p><button class="btn wide" id="calendarResetHistory" type="button">Allow a fresh import</button></details></div></dialog><dialog aria-labelledby="alarmHelpTitle" id="alarmHelp"><div class="help-shell"><header><h2 id="alarmHelpTitle">Set up iPhone alarms</h2><button class="btn small" id="closeAlarmHelp" type="button">Close</button></header><p class="note" id="alarmHelpProgress"></p><div id="alarmHelpContent"></div><p class="note" id="alarmHelpStatus" role="status"></p><div class="row help-nav"><button class="btn" id="alarmHelpBack" type="button">Back</button><button class="btn primary" id="alarmHelpNext" type="button">Next</button></div></div></dialog><footer class="note" style="text-align:center;padding:8px 10px">Version 199 · 16 Nov 2026</footer></main>
+</section></details><p class="note" id="planApplyStatus" role="status"></p><button class="btn primary wide" id="applyPlan" type="button">Use this plan</button></div></dialog><dialog aria-labelledby="calendarTitle" id="calendarDialog"><div class="modal-shell"><header><h2 id="calendarTitle">Add to Calendar</h2><button class="btn small" id="closeCalendar" type="button">Close</button></header><label for="calendarScope">Include</label><select id="calendarScope"><option value="current">Accepted duty</option><option value="upcoming">Upcoming roster duties</option><option value="all">Whole roster</option></select><h3 id="calendarCount"></h3><p class="note" id="calendarSkipped" role="status"></p><div id="calendarIssues"></div><p class="note">One event per duty. Titles show local sign-on and sign-off times and finishing location; full sector details remain in Notes. No hotels or reminders.</p><button class="btn primary wide" id="calendarExport" type="button">Add roster to Calendar</button><p class="note" id="calendarStatus" role="status"></p><details id="calendarSetup"><summary>One-time iPhone setup</summary><p class="note">Use a separate shortcut named <strong>Leave for Work Calendar</strong>. Your alarm shortcut stays separate. Shortcuts opens briefly during import and requests a return to this app. No downloading or Siri Suggestions is needed.</p><p class="note">One action at a time. Your progress is saved on this device. “What you should see” describes the checkpoint; if it differs, send that screen before continuing.</p><p class="note" id="calendarGuideProgress"></p><h3 id="calendarGuideTitle"></h3><div class="note" id="calendarGuideInstruction"></div><div class="calendar-issue"><strong>What you should see</strong><p class="note" id="calendarGuideExpected"></p></div><div class="row help-nav"><button class="btn" id="calendarGuideBack" type="button">Back</button><button class="btn primary" id="calendarGuideNext" type="button">Next step</button></div><button class="btn small" id="calendarGuideResume" type="button">Continue from my screenshot</button><p class="note">These controls can vary with iOS. The test checks your phone before sending a full roster. If Calendar opens an editor for every event, check the expanded Add New Event action and turn its compose screen off.</p><button class="btn wide" id="calendarTest" type="button">Test with one event</button><button class="btn wide" id="calendarSetupDone" type="button">I checked the test</button></details><details style="margin-top:16px"><summary>Other options &amp; roster changes</summary><p class="note">This makes a copy, not a live subscription. A completed import is remembered on this device to help prevent duplicates. Changed duties need their previous calendar events removed before you import them again. An interrupted shortcut can leave some events added: check Calendar before retrying.</p><button class="btn wide" id="calendarDownload" type="button">Download .ics file instead</button><p class="note">File import depends on the app opening the file; Safari and Files may only preview it. The shortcut above avoids that route.</p><button class="btn wide" id="calendarResetHistory" type="button">Allow a fresh import</button></details></div></dialog><dialog aria-labelledby="alarmHelpTitle" id="alarmHelp"><div class="help-shell"><header><h2 id="alarmHelpTitle">Set up iPhone alarms</h2><button class="btn small" id="closeAlarmHelp" type="button">Close</button></header><p class="note" id="alarmHelpProgress"></p><div id="alarmHelpContent"></div><p class="note" id="alarmHelpStatus" role="status"></p><div class="row help-nav"><button class="btn" id="alarmHelpBack" type="button">Back</button><button class="btn primary" id="alarmHelpNext" type="button">Next</button></div></div></dialog><footer class="note" style="text-align:center;padding:8px 10px">Version 201 · 16 Nov 2026</footer></main>
 <script>
 (() => {
  const $ = id => document.getElementById(id);
@@ -1213,7 +1213,12 @@ reconcileStandbyCallouts();
   card.querySelector('[data-confirm]').addEventListener('click',()=>{
    if(!/^\d{4}-\d\d-\d\d$/.test(d.date)||!hhmm(d.time)||!d.zone||!d.port|| (!d.standby&&d.mode==='hotel'&&!hotels.some(h=>h.name===d.hotel))){card.querySelector('[data-error]').textContent='Complete date, sign-on, port, time zone and hotel (if needed).';return;}
    if(d.finish&&(!Number.isFinite(finishInstant(d))||finishInstant(d)<=portInstant(d.date,d.time,d.zone))){card.querySelector('[data-error]').textContent='Check the finish date, time and time zone: finish must be after sign-on.';return;}
-   d.confirmed=true;saveRoster();card.querySelector('[data-load]').disabled=false;if(!d.standby)card.querySelector('[data-load]').click();else {if($('dutyReviewDialog').open)$('dutyReviewDialog').close();crewRefreshHome();}renderRoster();
+   const newlyAccepted=!d.confirmed;
+   d.confirmed=true;saveRoster();card.querySelector('[data-load]').disabled=false;
+   if(!d.standby)card.querySelector('[data-load]').click();
+   else {if($('dutyReviewDialog').open)$('dutyReviewDialog').close();crewRefreshHome();}
+   renderRoster();
+   if(newlyAccepted&&!d.standby&&!d.completedAt&&d.date>=todayISO())showDepartureReviewPrompt(d);
   });
   card.querySelector('[data-load]').addEventListener('click',()=>{
    if(!d.confirmed||d.standby)return;
@@ -1464,6 +1469,14 @@ function syncDashboard(){
  document.querySelector('.duty-summary').classList.toggle('accepted-duty',!!d);
  $('dashboardReadyStatus').textContent=!ready?'':mode==='home'?($('routeState').textContent||''):'Your saved transport and room-to-checkout allowance are applied.';
 }
+// v200: Offer one deliberate follow-up after accepting an upcoming flying duty.
+// Standby is intentionally excluded: it has no departure alarm/time setup.
+function showDepartureReviewPrompt(d){
+ const dialog=$('departureReviewDialog');if(!dialog||dialog.open)return;
+ dialog.dataset.dutyId=d.id;
+ $('departureReviewSummary').textContent=reviewDate(d)+' · Sign-on '+(d.time||'to confirm')+' · '+(d.port||'');
+ dialog.showModal();
+}
 function openDutyReview(preferAccepted=false){
  if(!roster.length){$('rosterImportPanel').open=true;$('rosterImportDialog').showModal();return;}
  const accepted=preferAccepted?acceptedRosterDuty():null;followRoster=!accepted;rosterCursor=accepted?dutyOrder().indexOf(accepted):null;renderRoster();$('dutyReviewDialog').showModal();
@@ -1491,6 +1504,21 @@ $('closeDashboardMenu').addEventListener('click',()=>$('dashboardMenuDialog').cl
 $('openRosterImport').addEventListener('click',()=>{if($('dashboardMenuDialog').open)$('dashboardMenuDialog').close();if($('dutyReviewDialog').open)$('dutyReviewDialog').close();$('rosterImportPanel').open=true;$('rosterImportDialog').showModal();});
 $('closeRosterImport').addEventListener('click',()=>$('rosterImportDialog').close());
 $('closeDutyReview').addEventListener('click',()=>$('dutyReviewDialog').close());
+$('departureReviewLater').addEventListener('click',()=>$('departureReviewDialog').close());
+$('departureReviewNow').addEventListener('click',()=>{
+ const dialog=$('departureReviewDialog');
+ const duty=roster.find(x=>x.id===dialog.dataset.dutyId&&x.confirmed&&!x.standby&&!x.completedAt);
+ dialog.close();
+ if(!duty)return;
+ // Loading the selected plan in the existing departure calculator is the
+ // explicit action chosen by the user; the underlying roster stays unchanged.
+ if(acceptedRosterDuty()?.id!==duty.id)rememberAccepted(duty);
+ $('workDate').value=duty.date;$('departure').value=duty.time;$('scheduleZone').value=duty.zone;
+ if(duty.mode==='hotel')populateHotels(duty.hotel);
+ setMode(duty.mode);saveSelections();syncDashboard();
+ crewNavigate('duty');
+});
+
 $('openPlan').addEventListener('click',()=>$('planDialog').showModal());
 $('manualPlan').addEventListener('click',()=>$('planDialog').showModal());
 $('driveManualFromDuty').addEventListener('click',()=>$('planDialog').showModal());
@@ -2127,55 +2155,116 @@ try{ipadCrew=JSON.parse(localStorage.getItem(IPAD_CREW_KEY)||'{}')||{}}catch(e){
 function ipadCrewSave(){try{localStorage.setItem(IPAD_CREW_KEY,JSON.stringify(ipadCrew))}catch(e){}}
 const IPAD_CREW_ROWS_KEY='crewFocus_iPadCrewRowsV2';
 let ipadCrewRows={};try{ipadCrewRows=JSON.parse(localStorage.getItem(IPAD_CREW_ROWS_KEY)||'{}')||{}}catch(e){}
-function ipadCrewRowsSave(){try{localStorage.setItem(IPAD_CREW_ROWS_KEY,JSON.stringify(ipadCrewRows))}catch(e){}}
-function ipadCrewOrder(role){return ({CPT:0,CAPT:0,FO:1,CM:2,CS:2,SCC:2,PUR:2,CC:3,PAX:4,DH:4,TVL:4})[role]??5}
-function ipadExtractCrew(raw,flightRows){
- const section=String(raw||'').replace(/\u00a0/g,' ').split(/\bCrew\s+Informati(?:on|o)\b/i)[1];
- if(!section||!flightRows.length)return [];
- const lines=section.split(/\r?\n/).map(x=>x.trim()).filter(Boolean);
- const sectorCount=flightRows.length,output=Array.from({length:sectorCount},()=>[]);
- const names=[];
- // Read the crew table as aligned rows. Never invent missing employee or previous-flight data.
- for(const line of lines){
-  const match=line.match(/([A-Z][A-Z' -]{1,34}),\s*([A-Z][A-Z' -]{1,34}?)(?=\s+(?:MEL|SYD|BNE|ADL|PER|CBR|OOL|HBA|CNS|DRW|TSV)\b|\s{2,}|$)/i);
-  if(!match)continue;
-  const name=(match[1].trim()+', '+match[2].trim()).replace(/\s+/g,' ');
-  const tail=line.slice(match.index+match[0].length).trim();
-  const baseMatch=tail.match(/\b(MEL|SYD|BNE|ADL|PER|CBR|OOL|HBA|CNS|DRW|TSV)\b/i);
-  const base=baseMatch?baseMatch[1].toUpperCase():'';
-  const roles=(baseMatch?tail.slice(baseMatch.index+baseMatch[0].length):tail).match(/\b(?:CPT|CAPT|FO|CM|CS|SCC|PUR|CC|PAX|DH|TVL)\b/gi)||[];
-  names.push({name,base,roles:roles.map(x=>x.toUpperCase())});
- }
- // In source CBRs the preceding-flight and employee-number columns may be
- // extracted separately from the names. Associate by row position only when
- // the number of aligned entries is unambiguous.
- const left=section.split(/\bNext\s+Flight\b/i)[0];
- const empBlock=left.match(/\bEmp\s+No\b([\s\S]*?)(?=\bNext\s+Flight\b|$)/i)?.[1]||'';
- const empNumbers=(empBlock.match(/\b\d{3,7}\b/g)||[]);
- const prevRows=[];
- for(const line of left.split(/\r?\n/)){
-  const m=line.match(/\b(SYD|MEL|BNE|ADL|PER|CBR|OOL|HBA|CNS|DRW|TSV)\s+(VA\s*0*\d{2,4})\s+(\d{2}:?\d{2})\b/i);
-  if(m)prevRows.push({prevFlight:m[2].replace(/\s/g,'').toUpperCase(),prevSta:m[3].replace(/^(\d{2})(\d{2})$/,'$1:$2')});
- }
- const flights=flightRows.map(r=>String(r[0]).replace(/\s/g,'').replace(/^VA0*/i,'VA'));
- const headers=(section.match(/\bVA\s*0*\d{2,4}\b/gi)||[]).map(x=>x.replace(/\s/g,'').replace(/^VA0*/i,'VA'));
- // Flattened text loses blank flight cells: NEVER map role tokens to sequential flights.
- const useAlignedEmp=empNumbers.length===names.length;
- const useAlignedPrev=prevRows.length===names.length;
- names.forEach((person,n)=>{
-  const item={name:person.name,base:person.base,empNo:useAlignedEmp?empNumbers[n]:'',prevFlight:useAlignedPrev?prevRows[n].prevFlight:'',prevSta:useAlignedPrev?prevRows[n].prevSta:''};
-  // Names remain available for review; no sector assignment without explicit columns.
-  // Automatic mapping from flattened tokens caused incorrect crew in sector 1.
-  void item;
- });
- return output.map(list=>list.sort((a,b)=>ipadCrewOrder(a.role)-ipadCrewOrder(b.role)));
+const IPAD_CREW_DUTY_KEY='crewFocus_iPadCrewDutyV201';
+function ipadCrewDutySignature(){
+ const src=window.crewIpadSchedule;
+ const duty=src?.date()||'',flights=src?.rows()||[];
+ return duty&&flights.length?JSON.stringify({date:duty,flights:flights.map(r=>(r||[]).slice(0,5))}):'';
 }
-function ipadImportCrewFromCBR(raw,flightRows){
- const extracted=ipadExtractCrew(raw,flightRows);
- if(!extracted.some(x=>x.length))return false;
+function ipadCrewRowsSave(){try{
+ localStorage.setItem(IPAD_CREW_ROWS_KEY,JSON.stringify(ipadCrewRows));
+ const signature=ipadCrewDutySignature();if(signature)localStorage.setItem(IPAD_CREW_DUTY_KEY,signature);
+}catch(e){}}
+function ipadCrewEnsureCurrent(){
+ const signature=ipadCrewDutySignature();if(!signature)return;
+ let saved='';try{saved=localStorage.getItem(IPAD_CREW_DUTY_KEY)||''}catch(e){}
+ if(saved!==signature){
+  ipadCrewRows={};ipadCrew={};ipadCrewSource='';ipadCrewRowsSave();ipadCrewSave();
+ }
+}
+function ipadCrewOrder(role){return ({CPT:0,CAPT:0,FO:1,CM:2,CS:2,SCC:2,PUR:2,CC:3,PAX:4,DH:4,TVL:4})[role]??5}
+// v201: The older routine intentionally returned zero assignments, leaving
+// previous-duty crew in storage. Read the screenshot's actual table coordinates
+// instead; if OCR is ambiguous, leave names BLANK and request human review.
+function ipadExtractCrewFromTSV(tsv,flightRows){
+ // Prefer whichever independent OCR pass maps the most unique crew names.
+ if(Array.isArray(tsv)){
+  const parsed=tsv.map(x=>ipadExtractCrewFromTSV(x,flightRows));
+  const n=rows=>new Set(rows.flat().map(p=>p.name.toUpperCase())).size;
+  return parsed.sort((a,b)=>n(b)-n(a))[0]||Array.from({length:flightRows.length},()=>[]);
+ }
+ const empty=Array.from({length:flightRows.length},()=>[]);
+ if(typeof tsv!=='string'||!tsv.trim()||!flightRows.length)return empty;
+ const normFlight=s=>String(s||'').replace(/[^A-Z0-9]/gi,'').toUpperCase().replace(/^VA0*(\d+)$/,'VA$1');
+ const flights=flightRows.map(r=>normFlight(r[0]));
+ const words=tsv.split(/\r?\n/).slice(1).map(line=>{
+  const f=line.split('\t');if(f.length<12||+f[0]!==5)return null;
+  const text=f.slice(11).join('\t').trim(),x=+f[6],y=+f[7],w=+f[8],h=+f[9];
+  if(!text||!Number.isFinite(x+y+w+h)||w<=0||h<=0)return null;
+  return {text,x,y,cx:x+w/2,cy:y+h/2,w,h};
+ }).filter(Boolean);
+ if(!words.length)return empty;
+ const nameNorm=s=>String(s||'').toUpperCase().replace(/[^A-Z]/g,'');
+ // Find the crew table's flight-number HEADER, not the earlier flight schedule
+ // (whose flight numbers are vertically stacked rather than side-by-side).
+ let candidate=null;
+ for(const word of words){
+  if(!flights.includes(normFlight(word.text)))continue;
+  const aligned=words.filter(w=>flights.includes(normFlight(w.text))&&Math.abs(w.cy-word.cy)<=Math.max(12,word.h*.8));
+  const byFlight=flights.map(f=>aligned.find(w=>normFlight(w.text)===f));
+  const count=byFlight.filter(Boolean).length;
+  if(count<flights.length||byFlight.some((w,i)=>i&&w.cx<=byFlight[i-1].cx))continue;
+  if(!candidate||word.cy>candidate.y)candidate={y:word.cy,headers:byFlight};
+ }
+ if(!candidate)return empty; // Never infer a sector from flattened OCR text.
+ const headY=candidate.y,headers=candidate.headers,firstX=headers[0].cx;
+ const gap=flights.length>1?Math.min(...headers.slice(1).map((w,i)=>w.cx-headers[i].cx)):Math.max(70,firstX*.12);
+ const headerWords=words.filter(w=>Math.abs(w.cy-headY)<Math.max(18,w.h));
+ const nameHeading=headerWords.filter(w=>/^(?:NAME|NAMES)$/i.test(w.text)&&w.cx<firstX).sort((a,b)=>b.cx-a.cx)[0];
+ if(!nameHeading)return empty;
+ const nameX=nameHeading.x;
+ const nameRight=firstX-Math.max(22,gap*.36);
+ const medianH=words.map(w=>w.h).sort((a,b)=>a-b)[Math.floor(words.length/2)]||15;
+ const rowBand=Math.max(9,Math.min(24,medianH*.8));
+ const after=words.filter(w=>w.cy>headY+Math.max(9,medianH*.65));
+ // Crew rows may be interleaved with details and role cells in the OCR output.
+ // Cluster by physical Y-position, never the OCR's reading order.
+ const rowGroups=[];
+ for(const word of after.sort((a,b)=>a.cy-b.cy||a.cx-b.cx)){
+  let group=rowGroups.find(g=>Math.abs(g.y-word.cy)<=rowBand);
+  if(!group){group={y:word.cy,words:[]};rowGroups.push(group)}
+  group.words.push(word);
+ }
+ let matched=0;
+ for(const group of rowGroups){
+  const near=group.words.sort((a,b)=>a.x-b.x);
+  const names=near.filter(w=>w.cx>=nameX-15&&w.cx<nameRight);
+  if(!names.length)continue;
+  const joined=names.map(w=>w.text).join(' ').replace(/\s+/g,' ').trim().toUpperCase();
+  const nm=joined.match(/\b([A-Z][A-Z'’-]{1,31})\s*,\s*([A-Z][A-Z'’-]{1,31})\b/);
+  if(!nm)continue;
+  const name=nm[1]+', '+nm[2];
+  const details=near.filter(w=>w.cx<nameX-12);
+  const emp=details.filter(w=>/^\d{3,7}$/.test(w.text)).sort((a,b)=>b.cx-a.cx)[0];
+  const prev=details.find(w=>/^VA\s*0*\d{2,4}$/i.test(w.text));
+  const rest=details.some(w=>/^[-–]*REST[-–]*$/i.test(w.text));
+  const base=near.find(w=>w.cx>names[0].cx&&w.cx<firstX-gap*.25&&/^(MEL|SYD|BNE|ADL|PER|CBR|HBA|OOL|CNS|DRW|TSV|LST)$/i.test(w.text));
+  let assigned=0;
+  for(let i=0;i<headers.length;i++){
+   const center=headers[i].cx;
+   const left=i===0?center-gap*.45:(headers[i-1].cx+center)/2;
+   const right=i===headers.length-1?center+gap*.58:(center+headers[i+1].cx)/2;
+   const role=near.filter(w=>w.cx>=left&&w.cx<right)
+      .map(w=>w.text.toUpperCase().replace(/[^A-Z]/g,''))
+      .find(v=>/^(CPT|CAPT|FO|CS|CM|SCC|CC|C|PAX|DH|TVL)$/.test(v));
+   if(!role)continue;
+   empty[i].push({name,role:role==='CAPT'?'CPT':role,base:base?.text.toUpperCase()||'',empNo:emp?.text||'',prevOrigin:'',prevFlight:rest?'REST':prev?.text.toUpperCase()||'',prevSta:''});
+   assigned++;
+  }
+  if(assigned)matched++;
+ }
+ if(!matched)return Array.from({length:flightRows.length},()=>[]);
+ return empty.map(list=>list.sort((a,b)=>ipadCrewOrder(a.role)-ipadCrewOrder(b.role)));
+}
+function ipadImportCrewFromCBR(raw,flightRows,tsv=''){
+ // Successful import REPLACES the old crew list, even if table recognition
+ // fails. The old list must never survive a newly imported briefing.
+ const extracted=ipadExtractCrewFromTSV(tsv,flightRows);
  ipadCrewRows={};ipadCrew={};
- extracted.forEach((rows,i)=>{if(rows.length){ipadCrewRows[i]=rows;ipadCrew[i]=rows.map(x=>x.role+' '+x.name).join('\n')}});
- ipadCrewSource='imported';ipadCrewRowsSave();ipadCrewSave();return true;
+ extracted.forEach((list,i)=>{ipadCrewRows[i]=list;ipadCrew[i]=list.map(p=>p.role+' '+p.name).join('\n')});
+ ipadCrewSource=extracted.some(list=>list.length)?'imported':'unverified';
+ ipadCrewRowsSave();ipadCrewSave();
+ return extracted.some(list=>list.length);
 }
 
 function ipadCrewReview(){
@@ -2186,7 +2275,7 @@ function ipadCrewReview(){
  overlay.style.cssText='position:fixed;inset:0;z-index:1000001;background:#0009;overflow:auto;padding:16px;display:flex;justify-content:center;align-items:flex-start';
  const panel=document.createElement('section');panel.style.cssText='width:min(100%,1050px);background:#fff;color:#15283a;border-radius:18px;padding:16px;box-sizing:border-box;margin:auto 0;font:14px system-ui';
  const heading=document.createElement('h2');heading.textContent='Review crew assignments';heading.style.margin='0 0 8px';
- const help=document.createElement('p');help.textContent='Use the original CBR screenshot as your reference. For VA0303 / VA0314 / VA0841, tap “Load crew from supplied CBR screenshot” to populate the verified table, then Save reviewed crew. A tick means that crew member operates that flight. Unverified entries must be checked before use. Screenshot recognition is not automatic on this device.';help.style.lineHeight='1.5';
+ const help=document.createElement('p');help.textContent='Check every imported crew name and the sector tickboxes against the current CBR screenshot. Imported names and ranks are populated only when the screenshot table can be mapped reliably. Unrecognised entries remain blank; no previous-duty crew names are reused.';help.style.lineHeight='1.5';
  const file=document.createElement('input');file.type='file';file.accept='image/*';file.style.maxWidth='100%';
  const img=document.createElement('img');img.style.cssText='display:none;width:100%;max-height:280px;object-fit:contain;border:1px solid #ddd;margin:10px 0';
  file.onchange=()=>{const f=file.files?.[0];if(!f)return;const url=URL.createObjectURL(f);img.onload=()=>URL.revokeObjectURL(url);img.src=url;img.style.display='block'};
@@ -2212,26 +2301,6 @@ function ipadCrewReview(){
  render();table.append(grid);
  const buttons=document.createElement('div');buttons.style.cssText='display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end';
  const make=(label,fn)=>{const b=document.createElement('button');b.type='button';b.textContent=label;b.style.cssText='padding:10px 14px;border:1px solid #b5c5d0;border-radius:9px;background:#f2f7f8;color:#153b49;font-weight:650';b.onclick=fn;buttons.append(b)};
- make('Load crew from supplied CBR screenshot',()=>{
-  const actual=flights.map(r=>String(r[0]).replace(/\s/g,'').replace(/^VA0*/i,'VA'));
-  if(actual.join('|')!=='VA303|VA314|VA841'){
-   alert('This verified reference is only for VA0303 / VA0314 / VA0841. No changes made.');return;
-  }
-  if(!confirm('Replace the current crew review entries with assignments transcribed from your supplied CBR screenshot? Review before saving.'))return;
-  const reference=[
-   ['ANDERSON, TIMOTHY','2525','CPT',[0,1,2]],
-   ['DEAN, AMY','4001','CS',[0,1]],
-   ['JANKOVIC, ALEKSIA','201108','CC',[0,1]],
-   ['MITCHELL, JORDAN','201785','CC',[0,1]],
-   ['STALTARI, TRACY','24999','CC',[0,1]],
-   ['DE KONING, JAMES','17927','CS',[2]],
-   ['FINEFUIAKI, LAUKAU','24316','CC',[2]],
-   ['SHINTANI, SHUN','26470','CC',[2]],
-   ['WELLS, STEPH','203072','CC',[2]]
-  ];
-  entries.splice(0,entries.length,...reference.map(([name,empNo,role,sectors])=>({name,empNo,role,base:'MEL',prevFlight:'',prevSta:'',sectors:new Set(sectors)})));
-  render();alert('Reference loaded. Confirm the sector tickboxes, then tap Save reviewed crew.');
- });
  make('+ Add crew member',()=>{entries.push({prevFlight:'',prevSta:'',empNo:'',role:'',base:'',name:'',sectors:new Set()});render();table.scrollTop=table.scrollHeight});
  make('Cancel',()=>overlay.remove());
  make('Save reviewed crew',()=>{
@@ -2787,6 +2856,7 @@ function ipadCanvasRefresh(){
 }
 
 function ipadCBRRender(){
+ ipadCrewEnsureCurrent();
  const root=document.getElementById('ipadCBRPreview'),status=document.getElementById('ipadCBRStatus');if(!root)return;
  const visits=ipadVisitList();root.replaceChildren();const summary=document.getElementById('ipadCBRSelectionSummary');if(summary){const count=Object.keys(ipadSelections).length;summary.textContent=count+' NOTAM'+(count===1?'':'s')+' selected for the iPad CBR.';}
  if(!visits.length){const warning=document.createElement('p');warning.className='cbr-warning';warning.textContent='No CBR sectors available yet. Upload a CBR, or open Review / modify imported CBR and enter the sector airports and times. Then return to this preview.';root.append(warning);const placeholder=document.createElement('div');placeholder.className='ipad-wallpaper cbr171';placeholder.innerHTML='<div class="ipad-reserved">iPad Air 5 · clock safe area</div><div class="ipad-visit-columns"><section class="ipad-visit"><strong>Waiting for imported airports</strong><div class="ipad-visit-heading">WEATHER</div><div class="ipad-visit-heading">NOTAMs</div><div class="ipad-visit-heading">OPERATIONAL</div></section></div>';root.append(placeholder);status.textContent='Waiting for CBR sectors. Preview is visible and will populate after import.';return;}
@@ -2862,6 +2932,11 @@ function ipadCBRRender(){
 
  const tip=document.createElement('p');tip.className='note';tip.textContent='Live iPad draft. Preview and exported PNG are identical. Compact SPECI observations appear when available. Original CBR and NAIPS text are unchanged.';root.append(tip);
  const count=Object.keys(ipadSelections).length;status.textContent=count+' NOTAM selection(s) in iPad draft · '+visits.length+' airport visit(s). '+(window.crewIpadSchedule?.rows()||[]).length+' sector(s).';
+ if(flightRows.length&&!flightRows.some((_,i)=>(ipadCrewRows[i]||[]).length)){
+  const warning=document.createElement('p');warning.className='cbr-warning';warning.style.cssText='font-weight:700;margin-top:9px';
+  warning.textContent='Current CBR crew table not mapped automatically. Previous-duty crew names have been cleared. Tap “Review / add crew” and check the current screenshot before sharing.';
+  root.append(warning);
+ }
  ipadCanvasRefresh();
 }
 function ipadUpdateButtons(){
@@ -3040,6 +3115,10 @@ function crewScreeningRefreshWeather(){
  }
  return false;
 }
+window.crewWxSyncConfirmedCBR=function(live){
+ if(live&&crewWxMode()==='sector')crewWxSetMode('cbr');
+ else crewScreeningRefreshWeather();
+};
 function crewWxDutyWindow(){
  if(crewWxMode()==='sector'){
   const events=crewSectorTimelineRead();
@@ -3306,9 +3385,9 @@ function crewWxMarkTaf(raw,parent,make){
 // v150: mark original TAF forecast lines with their matching CBR sector numbers.
 // No extra assessment panels; a green number means the engine selected that line.
 function crewWxRenderMarkedTaf(raw,parent,make){
- const analysis=crewWxTafAnalysis(raw);
+ const clean=ipadTafNormalize(raw);
+ const analysis=crewWxTafAnalysis(clean);
  const pre=make('div','crew-wx-marked-taf','',parent);
- const clean=raw.replace(/\r/g,'').trim();
  if(!analysis||!analysis.airportEvents?.length){make('pre','crew-wx-raw-unmarked',clean,pre);return;}
  const body=clean.split(/\bRMK\b/i)[0];
  const header=body.match(/^\s*TAF(?:\s+(?:AMD|COR))?\s+[A-Z]{4}\s+\d{6}Z?\s+\d{4}\/\d{4}\s*/i);
@@ -3814,7 +3893,7 @@ function cbrSyncImportConfirmation(show=true){
  const button=$c('cbrImportConfirm');button.hidden=cbrConfirmed;button.disabled=!ready;
 }
 function markUnconfirmed(){cbrConfirmed=false;$c('cbrConfirm').textContent='Review & Confirm';$c('cbrConfirm').style.background='';}
-function parse(){
+function parse(crewTSV){
  const t=$c('cbrText').value.replace(/\u00a0/g,' ');markUnconfirmed();
  const on=t.match(/Sign\s*On\s*:?\s*(\d{1,2}:\d\d)\s*L?\s*[-–]?\s*([A-Z]{3})?/i);
  if(on)$c('cbrSignon').value=on[1].padStart(5,'0');
@@ -3835,7 +3914,7 @@ function parse(){
   const reg=tail.match(/\b(VH[\s-]?[A-Z0-9]{3,4})\b/i);
   parsed.push(['VA'+flight[1].padStart(4,'0'),from[1].toUpperCase(),from[2].padStart(5,'0'),to[1].toUpperCase(),to[2].padStart(5,'0'),reg?reg[1].replace(/[\s-]/g,'').toUpperCase():'']);
  }
- if(parsed.length){$c('cbrRows').replaceChildren();parsed.forEach(addRow);if(window.crewIpadDraft?.importCrew)window.crewIpadDraft.importCrew(t,parsed)}
+ if(parsed.length){$c('cbrRows').replaceChildren();parsed.forEach(addRow);if(window.crewIpadDraft?.importCrew)window.crewIpadDraft.importCrew(t,parsed,(Array.isArray(crewTSV)||typeof crewTSV==='string')?crewTSV:'')}
  const missing=parsed.filter(x=>!x[5]).length;
  queueCBRSave();
  $c('cbrStatus').textContent=parsed.length?parsed.length+' sectors extracted. '+(missing?missing+' registration(s) not shown/read. ':'')+'Check times, airports and regos, then tap Review & Confirm.':'No complete sectors recognised. Try a clearer screenshot or correct the extracted text.';
@@ -3855,13 +3934,14 @@ function parse(){
  return parsed.length;
 }
 $c('cbrParse').onclick=parse;
-$c('cbrConfirm').onclick=()=>{if(!rows().length||!$c('cbrDate').value){$c('cbrStatus').textContent='A duty date and at least one sector are required.';return;}cbrConfirmed=true;queueCBRSave();$c('cbrConfirm').textContent='✓ Reviewed';$c('cbrConfirm').style.background='#217a4a';$c('cbrStatus').textContent='CBR reviewed on this device. Missing aircraft registrations remain blank, not assumed.';preview();cbrSyncImportConfirmation()};
+$c('cbrConfirm').onclick=()=>{if(!rows().length||!$c('cbrDate').value){$c('cbrStatus').textContent='A duty date and at least one sector are required.';return;}cbrConfirmed=true;queueCBRSave();$c('cbrConfirm').textContent='✓ Reviewed';$c('cbrConfirm').style.background='#217a4a';$c('cbrStatus').textContent='CBR reviewed on this device. Missing aircraft registrations remain blank, not assumed.';preview();cbrSyncImportConfirmation();saveCBR();window.crewWxSyncConfirmedCBR?.(!testDateOverride.checked);};
 $c('cbrImportConfirm').onclick=()=>{
  if($c('cbrImportConfirm').disabled)return;
  $c('cbrConfirm').click();
 };
 $c('cbrRows').addEventListener('input',()=>{markUnconfirmed();queueCBRSave();});
 async function cbrScript(url){if(url.includes('tesseract')&&window.Tesseract)return;return new Promise((ok,bad)=>{const e=document.createElement('script');e.src=url;e.onload=ok;e.onerror=()=>bad(Error('Could not load image reader. Check internet connection.'));document.head.appendChild(e)})}
+let cbrCrewTableTSV=[];
 // v192: keep source pixels unchanged. OCR uses independent crops rather than
 // shrinking the entire (often tall) iPhone screenshot into a single text page.
 function cbrHasSchedule(text){return /\bVA\s*0*\d{2,4}\b/i.test(text)&&/\b[A-Z]{3}\s+\d{1,2}:\d\d\s+[A-Z]{3}\s+\d{1,2}:\d\d/i.test(text);}
@@ -3881,7 +3961,8 @@ async function cbrOCR(canvas){
   const status=$c('cbrStatus');
   await worker.setParameters({tessedit_pageseg_mode:'3',preserve_interword_spaces:'1'});
   status.textContent='Reading screenshot at original resolution…';
-  let text=(await worker.recognize(canvas)).data.text||'';
+  const result=(await worker.recognize(canvas,{}, {tsv:true})).data;
+  let text=result.text||'';cbrCrewTableTSV=result.tsv?[result.tsv]:[];
   const flights=(text.match(/\bVA\s*0*\d{2,4}\b/gi)||[]).length;
   // A tall or wide original contains tiny writing relative to the entire page.
   // Re-run overlapping horizontal slices at 1:1 resolution, maintaining line order.
@@ -3900,6 +3981,14 @@ async function cbrOCR(canvas){
    const sliceFlights=(sliced.match(/\bVA\s*0*\d{2,4}\b/gi)||[]).length;
    if(sliceFlights>flights||(!cbrHasSchedule(text)&&sliced.length>text.length*.6))text=sliced;
   }
+  // Crew-table OCR is independent of schedule recognition. Preserve source pixels.
+  try{
+   await worker.setParameters({tessedit_pageseg_mode:'6',preserve_interword_spaces:'1'});
+   const top=Math.floor(canvas.height*.48);
+   const crewImage=cbrCrop(canvas,top,canvas.height-top,canvas.width<1100?1.5:1);
+   const detail=(await worker.recognize(crewImage,{}, {tsv:true})).data;
+   if(detail.tsv)cbrCrewTableTSV.push(detail.tsv);
+  }catch(e){console.warn('Additional crew OCR not available',e)}
   return text;
  }finally{if(worker)await worker.terminate()}
 }
@@ -3994,7 +4083,7 @@ function cbrRestorePrevious(old){
 }
 async function cbrImportFile(file){
  if(!file)return;
- const previous=cbrCapturePrevious();$c('cbrStatus').textContent='Opening '+(file.name||'screenshot')+'…';$c('cbrFile').disabled=true;
+ const previous=cbrCapturePrevious();cbrCrewTableTSV=[];$c('cbrStatus').textContent='Opening '+(file.name||'screenshot')+'…';$c('cbrFile').disabled=true;
  try{
   let text;
   if(file.type==='application/pdf'||/\.pdf$/i.test(file.name||'')){ $c('cbrSourceCheck').hidden=true; text=await cbrReadPDF(file); }
@@ -4005,10 +4094,10 @@ async function cbrImportFile(file){
    text=await cbrOCR(canvas);
   }else text=await file.text();
   if(!text||text.trim().length<25)throw Error('No legible text extracted. Inspect the original image shown above.');
-  $c('cbrText').value=text;const count=parse();
+  $c('cbrText').value=text;const count=parse(cbrCrewTableTSV);
   if(!count){cbrRestorePrevious(previous);$c('cbrStatus').textContent='No complete sectors recognised in this screenshot. Your previous CBR has been retained.';}
  }catch(e){cbrRestorePrevious(previous);$c('cbrStatus').textContent='CBR screenshot could not be imported: '+e.message+'. Your previous CBR has been retained.';}
- finally{$c('cbrFile').disabled=false;}
+ finally{cbrCrewTableTSV=[];$c('cbrFile').disabled=false;}
 }
 async function cbrReadPDF(file){if(!Promise.withResolvers)Promise.withResolvers=function(){let resolve,reject;const promise=new Promise((a,b)=>{resolve=a;reject=b});return {promise,resolve,reject}};
  const pdfjs=await import('https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/legacy/build/pdf.mjs');pdfjs.GlobalWorkerOptions.workerSrc='https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/legacy/build/pdf.worker.mjs';const doc=await pdfjs.getDocument({data:new Uint8Array(await file.arrayBuffer()),isEvalSupported:false}).promise;let texts=[];
