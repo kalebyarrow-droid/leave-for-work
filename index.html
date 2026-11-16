@@ -5,7 +5,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <meta content="#15283f" name="theme-color"/>
-<title>CrewFocus v205 — Crew Data and Wallpaper Geometry Audit</title>
+<title>CrewFocus v206 — NOTAM Separators and Full Duty Alternate Weather</title>
 <style>
 :root{color-scheme:light dark;--bg:#f3f6fa;--card:#fff;--ink:#15283f;--muted:#637184;--line:#dce3eb;--accent:#176b87;--soft:#e9f4f7;--danger:#b13e3e}
 @media(prefers-color-scheme:dark){:root{--bg:#101820;--card:#1a2632;--ink:#edf4fb;--muted:#aab8c6;--line:#344454;--accent:#72c7df;--soft:#203a46;--danger:#ff9b9b}}
@@ -685,7 +685,7 @@ VA 1101 0705 NTL BNE 0720" rows="7"></textarea><p class="note">Check the year, d
 <h2>Calculation notes</h2>
 <p class="note">The sign on date and time are used exactly as entered, including for future planning. The countdown is relative to the current local time. Schedule times use the selected sign-on time zone; the live clock uses your device's local time zone. Your selections are remembered on this device. Past sign-on dates advance to today when reopening.</p>
 <p class="note">Hotel transport times can be saved and updated. This prototype saves them in the browser's local storage; downloaded-file previews may not retain settings. A hosted version can make saving more reliable across sessions and devices.</p>
-</section></details><p class="note" id="planApplyStatus" role="status"></p><button class="btn primary wide" id="applyPlan" type="button">Use this plan</button></div></dialog><dialog aria-labelledby="calendarTitle" id="calendarDialog"><div class="modal-shell"><header><h2 id="calendarTitle">Add to Calendar</h2><button class="btn small" id="closeCalendar" type="button">Close</button></header><label for="calendarScope">Include</label><select id="calendarScope"><option value="current">Accepted duty</option><option value="upcoming">Upcoming roster duties</option><option value="all">Whole roster</option></select><h3 id="calendarCount"></h3><p class="note" id="calendarSkipped" role="status"></p><div id="calendarIssues"></div><p class="note">One event per duty. Titles show local sign-on and sign-off times and finishing location; full sector details remain in Notes. No hotels or reminders.</p><button class="btn primary wide" id="calendarExport" type="button">Add roster to Calendar</button><p class="note" id="calendarStatus" role="status"></p><details id="calendarSetup"><summary>One-time iPhone setup</summary><p class="note">Use a separate shortcut named <strong>Leave for Work Calendar</strong>. Your alarm shortcut stays separate. Shortcuts opens briefly during import and requests a return to this app. No downloading or Siri Suggestions is needed.</p><p class="note">One action at a time. Your progress is saved on this device. “What you should see” describes the checkpoint; if it differs, send that screen before continuing.</p><p class="note" id="calendarGuideProgress"></p><h3 id="calendarGuideTitle"></h3><div class="note" id="calendarGuideInstruction"></div><div class="calendar-issue"><strong>What you should see</strong><p class="note" id="calendarGuideExpected"></p></div><div class="row help-nav"><button class="btn" id="calendarGuideBack" type="button">Back</button><button class="btn primary" id="calendarGuideNext" type="button">Next step</button></div><button class="btn small" id="calendarGuideResume" type="button">Continue from my screenshot</button><p class="note">These controls can vary with iOS. The test checks your phone before sending a full roster. If Calendar opens an editor for every event, check the expanded Add New Event action and turn its compose screen off.</p><button class="btn wide" id="calendarTest" type="button">Test with one event</button><button class="btn wide" id="calendarSetupDone" type="button">I checked the test</button></details><details style="margin-top:16px"><summary>Other options &amp; roster changes</summary><p class="note">This makes a copy, not a live subscription. A completed import is remembered on this device to help prevent duplicates. Changed duties need their previous calendar events removed before you import them again. An interrupted shortcut can leave some events added: check Calendar before retrying.</p><button class="btn wide" id="calendarDownload" type="button">Download .ics file instead</button><p class="note">File import depends on the app opening the file; Safari and Files may only preview it. The shortcut above avoids that route.</p><button class="btn wide" id="calendarResetHistory" type="button">Allow a fresh import</button></details></div></dialog><dialog aria-labelledby="alarmHelpTitle" id="alarmHelp"><div class="help-shell"><header><h2 id="alarmHelpTitle">Set up iPhone alarms</h2><button class="btn small" id="closeAlarmHelp" type="button">Close</button></header><p class="note" id="alarmHelpProgress"></p><div id="alarmHelpContent"></div><p class="note" id="alarmHelpStatus" role="status"></p><div class="row help-nav"><button class="btn" id="alarmHelpBack" type="button">Back</button><button class="btn primary" id="alarmHelpNext" type="button">Next</button></div></div></dialog><footer class="note" style="text-align:center;padding:8px 10px">Version 205 · 16 Nov 2026</footer></main>
+</section></details><p class="note" id="planApplyStatus" role="status"></p><button class="btn primary wide" id="applyPlan" type="button">Use this plan</button></div></dialog><dialog aria-labelledby="calendarTitle" id="calendarDialog"><div class="modal-shell"><header><h2 id="calendarTitle">Add to Calendar</h2><button class="btn small" id="closeCalendar" type="button">Close</button></header><label for="calendarScope">Include</label><select id="calendarScope"><option value="current">Accepted duty</option><option value="upcoming">Upcoming roster duties</option><option value="all">Whole roster</option></select><h3 id="calendarCount"></h3><p class="note" id="calendarSkipped" role="status"></p><div id="calendarIssues"></div><p class="note">One event per duty. Titles show local sign-on and sign-off times and finishing location; full sector details remain in Notes. No hotels or reminders.</p><button class="btn primary wide" id="calendarExport" type="button">Add roster to Calendar</button><p class="note" id="calendarStatus" role="status"></p><details id="calendarSetup"><summary>One-time iPhone setup</summary><p class="note">Use a separate shortcut named <strong>Leave for Work Calendar</strong>. Your alarm shortcut stays separate. Shortcuts opens briefly during import and requests a return to this app. No downloading or Siri Suggestions is needed.</p><p class="note">One action at a time. Your progress is saved on this device. “What you should see” describes the checkpoint; if it differs, send that screen before continuing.</p><p class="note" id="calendarGuideProgress"></p><h3 id="calendarGuideTitle"></h3><div class="note" id="calendarGuideInstruction"></div><div class="calendar-issue"><strong>What you should see</strong><p class="note" id="calendarGuideExpected"></p></div><div class="row help-nav"><button class="btn" id="calendarGuideBack" type="button">Back</button><button class="btn primary" id="calendarGuideNext" type="button">Next step</button></div><button class="btn small" id="calendarGuideResume" type="button">Continue from my screenshot</button><p class="note">These controls can vary with iOS. The test checks your phone before sending a full roster. If Calendar opens an editor for every event, check the expanded Add New Event action and turn its compose screen off.</p><button class="btn wide" id="calendarTest" type="button">Test with one event</button><button class="btn wide" id="calendarSetupDone" type="button">I checked the test</button></details><details style="margin-top:16px"><summary>Other options &amp; roster changes</summary><p class="note">This makes a copy, not a live subscription. A completed import is remembered on this device to help prevent duplicates. Changed duties need their previous calendar events removed before you import them again. An interrupted shortcut can leave some events added: check Calendar before retrying.</p><button class="btn wide" id="calendarDownload" type="button">Download .ics file instead</button><p class="note">File import depends on the app opening the file; Safari and Files may only preview it. The shortcut above avoids that route.</p><button class="btn wide" id="calendarResetHistory" type="button">Allow a fresh import</button></details></div></dialog><dialog aria-labelledby="alarmHelpTitle" id="alarmHelp"><div class="help-shell"><header><h2 id="alarmHelpTitle">Set up iPhone alarms</h2><button class="btn small" id="closeAlarmHelp" type="button">Close</button></header><p class="note" id="alarmHelpProgress"></p><div id="alarmHelpContent"></div><p class="note" id="alarmHelpStatus" role="status"></p><div class="row help-nav"><button class="btn" id="alarmHelpBack" type="button">Back</button><button class="btn primary" id="alarmHelpNext" type="button">Next</button></div></div></dialog><footer class="note" style="text-align:center;padding:8px 10px">Version 206 · 16 Nov 2026</footer></main>
 <script>
 (() => {
  const $ = id => document.getElementById(id);
@@ -2595,13 +2595,9 @@ function ipadCbrWeather(visit){
    groups.push({start,end,kind:fm?'FM':'CHANGE'});
   }
   for(let i=0;i<groups.length;i++)if(groups[i].kind==='FM'){const next=groups.slice(i+1).find(g=>g.kind==='FM');if(next)groups[i].end=next.start;}
-  const remark=(raw.split(/\bRMK\b/i)[1]||'').split(/\bTAF3\b/i)[0];
-  const t=remark.match(/\bT\s+((?:M?\d{1,2}\s+){3}M?\d{1,2})\b/i);
-  const q=remark.match(/\bQ\s+((?:\d{4}\s+){3}\d{4})\b/i);
-  const temps=t?t[1].trim().split(/\s+/).map(v=>/^M/i.test(v)?-Number(v.slice(1)):Number(v)):[];
-  const qnh=q?q[1].trim().split(/\s+/).map(Number):[];
-  const points=temps.length===4&&qnh.length===4?temps.map((temp,i)=>({time:new Date(from.getTime()+i*10800000),temp,qnh:qnh[i]})):[];
-  candidates.push({raw,issued,analysis:{validFrom:from,groups,points}});
+  const reference=crewWxTafReferenceValues(raw,from);
+  const points=reference.points;
+  candidates.push({raw,issued,analysis:{validFrom:from,groups,points,reference}});
  }
  if(!candidates.length)return []; // Deliberately blank for missing or invalid TAF.
  candidates.sort((a,b)=>b.issued-a.issued);
@@ -2618,8 +2614,104 @@ function ipadCbrWeather(visit){
  const speci=ipadCompactSpeci(visit.code);
  if(speci)result.push({text:speci,red:true});
  const tq=crewWxInterpolate(analysis.points,event);
- if(tq)result.push({text:'T: '+Math.round(tq.temp)+' Q: '+Math.round(tq.qnh),red:false});
+ if(tq)result.push({text:'T '+Math.round(tq.temp)+'°C · Q'+Math.round(tq.qnh)+' (at '+ipadWxUtcStamp(event)+')',red:false});
+ else if(analysis.reference?.complete){
+  // Retain the actual T/Q information while refusing to invent a forecast
+  // at an arrival/departure beyond its published HH-to-HH+9 reference points.
+  const ref=analysis.reference.points;
+  result.push({text:'T/Q REF '+ipadWxUtcStamp(ref[0].time)+'–'+ipadWxUtcStamp(ref[3].time)+': '+ref.map(p=>p.temp+'°/'+p.qnh).join(' · ')+'; NOT AT '+ipadWxUtcStamp(event),red:true});
+ }
+ else if(analysis.reference?.mentioned)result.push({text:'T/Q INCOMPLETE — CHECK ORIGINAL TAF',red:true});
  return result;
+}
+// v206: All additional NAIPS forecast airports are placed INSIDE the existing
+// alternates column (sector count + 2 columns remains unchanged).
+// Assess every overlapping prevailing/change period across the full CBR window.
+function ipadAlternateTafParse(raw,window){
+ const clean=ipadTafNormalize(raw);
+ const header=clean.match(/^TAF(?:\s+(?:AMD|COR))?\s+([A-Z]{4})\s+(\d{2})(\d{2})(\d{2})Z?\s+(\d{2})(\d{2})\/(\d{2})(\d{2})\b/i);
+ if(!header)return null;
+ const from=crewWxDDHH(+header[5],+header[6],0,window.start);
+ let to=crewWxDDHH(+header[7],+header[8],0,from);
+ if(to<=from)to=crewWxDDHH(+header[7],+header[8],0,new Date(from.getTime()+86400000));
+ const issued=crewWxDDHH(+header[2],+header[3],+header[4],from);
+ const body=clean.split(/\bRMK\b/i)[0],content=body.slice(header[0].length).trim();
+ const marker=/\b(?:FM\d{6}|BECMG\s+\d{4}\/\d{4}|(?:PROB30|PROB40)(?:\s+(?:TEMPO|INTER))?\s+\d{4}\/\d{4}|(?:TEMPO|INTER)\s+\d{4}\/\d{4})\b/gi;
+ const markers=[...content.matchAll(marker)];
+ const initial=content.slice(0,markers[0]?.index??content.length).trim();
+ const blocks=markers.map((m,i)=>{
+  const token=m[0].replace(/\s+/g,' ').toUpperCase(),weather=content.slice(m.index+m[0].length,markers[i+1]?.index??content.length).trim();
+  const fm=token.match(/^FM(\d{2})(\d{2})(\d{2})$/);
+  const time=token.match(/(\d{2})(\d{2})\/(\d{2})(\d{2})$/);
+  const start=fm?crewWxDDHH(+fm[1],+fm[2],+fm[3],from):time?crewWxDDHH(+time[1],+time[2],0,from):null;
+  let end=fm?to:time?crewWxDDHH(+time[3],+time[4],0,start):null;
+  if(!fm&&start&&end&&end<=start)end=crewWxDDHH(+time[3],+time[4],0,new Date(start.getTime()+86400000));
+  return {token,weather,start,end,kind:fm?'FM':token.startsWith('BECMG')?'BECMG':'TEMP'};
+ });
+ return {code:header[1],from,to,issued,initial,blocks,raw:clean};
+}
+function ipadAlternateForecastSummary(code,window,reports){
+ const result=[];
+ if(!window?.start||!window?.finish||window.finish<=window.start)return [{text:'⚠ DUTY SCREENING WINDOW NOT AVAILABLE — CONFIRM CBR TIMES',color:'#a45118'}];
+ const forecasts=(reports||[]).map(raw=>ipadAlternateTafParse(raw,window)).filter(Boolean)
+  .filter(taf=>taf.from<window.finish&&taf.to>window.start&&taf.issued<=window.finish)
+  .sort((a,b)=>b.issued-a.issued);
+ if(!forecasts.length)return [{text:'⚠ NO TAF COVERS DUTY WINDOW '+ipadWxUtcStamp(window.start)+'–'+ipadWxUtcStamp(window.finish),color:'#b42318'}];
+ // Latest forecast covering the entire screened interval is preferred.
+ // Otherwise retain all overlapping issue periods, explicitly flagging gaps.
+ const full=forecasts.find(t=>t.from<=window.start&&t.to>=window.finish&&t.issued<=window.start);
+ const chosen=full?[full]:forecasts;
+ const intervals=[];
+ for(const f of chosen){
+  const lo=Math.max(f.from.getTime(),window.start.getTime()),hi=Math.min(f.to.getTime(),window.finish.getTime());
+  if(hi>lo)intervals.push([lo,hi]);
+ }
+ intervals.sort((a,b)=>a[0]-b[0]);
+ let covered=window.start.getTime();
+ for(const [lo,hi] of intervals){
+  if(lo>covered)result.push({text:'⚠ NO TAF COVERAGE '+ipadWxUtcStamp(new Date(covered))+'–'+ipadWxUtcStamp(new Date(lo)),color:'#b42318'});
+  covered=Math.max(covered,hi);
+ }
+ if(covered<window.finish.getTime())result.push({text:'⚠ NO TAF COVERAGE '+ipadWxUtcStamp(new Date(covered))+'–'+ipadWxUtcStamp(window.finish),color:'#b42318'});
+ for(const f of chosen){
+  if(f.issued>window.start)result.push({text:'⚠ '+f.code+' TAF ISSUED '+ipadWxUtcStamp(f.issued)+' AFTER SCREENING START; EARLIER CONDITIONS UNVERIFIED',color:'#a45118'});
+  if(chosen.length>1)result.push({text:'TAF '+ipadWxUtcStamp(f.from)+'–'+ipadWxUtcStamp(f.to),color:'#62758a'});
+  const state=[{start:f.from,kind:'BASE',weather:f.initial,token:'BASE'}];
+  for(const b of f.blocks){
+   if(b.kind==='FM')state.push({start:b.start,kind:'FM',weather:b.weather,token:b.token});
+   if(b.kind==='BECMG')state.push({start:b.end,kind:'BECMG-END',weather:b.weather,token:'AFTER '+b.token});
+  }
+  state.sort((a,b)=>a.start-b.start);
+  const cut=t=>Math.max(t.getTime(),f.from.getTime(),window.start.getTime());
+  const limit=Math.min(f.to.getTime(),window.finish.getTime());
+  for(let i=0;i<state.length;i++){
+   const s=state[i],end=state[i+1]?.start?.getTime()??f.to.getTime();
+   if(!s.weather||cut(s.start)>=Math.min(end,limit))continue;
+   const from=Math.max(s.start.getTime(),f.from.getTime(),window.start.getTime());
+   const to=Math.min(end,limit);
+   if(to<=from)continue;
+   const period=s.kind==='FM'?s.token+'–'+ipadWxUtcStamp(new Date(to)):s.token+' '+ipadWxUtcStamp(new Date(from))+'–'+ipadWxUtcStamp(new Date(to));
+   result.push({text:period+' '+ipadCbrCompactWx(s.weather),color:s.kind==='BECMG-END'?'#135667':'#17202b'});
+  }
+  for(const b of f.blocks){
+   if(b.kind==='FM'||!b.start||!b.end||!b.weather)continue;
+   const lo=Math.max(window.start.getTime(),f.from.getTime(),b.start.getTime());
+   const hi=Math.min(window.finish.getTime(),f.to.getTime(),b.end.getTime());
+   if(hi<=lo)continue;
+   result.push({text:b.token+' '+ipadCbrCompactWx(b.weather),color:b.kind==='BECMG'?'#a45118':'#b42318'});
+  }
+ }
+ const unique=new Set();return result.filter(r=>{const k=r.text+'~'+r.color;if(unique.has(k))return false;unique.add(k);return true;});
+}
+function ipadAlternateAirportWeather(visits){
+ const raw=ipadRetainedNaipsText(),parsed=raw?flightNaipsParse(raw):null;
+ if(!parsed?.order?.length)return [];
+ const dutyPorts=new Set(visits.map(v=>ipadWxICAO(v.code)));
+ const window=crewWxDutyWindow();
+ return parsed.order.filter(code=>!dutyPorts.has(code)&&parsed.airports?.get(code)?.weather?.length).map(code=>{
+  const station=parsed.airports.get(code);
+  return {code,name:station.name||code,lines:ipadAlternateForecastSummary(code,window,station.weather)};
+ });
 }
 // v149: explicit, sector/visit-specific weather transfer. Not auto-populated.
 let ipadWeatherAssignments = {};
@@ -2683,9 +2775,11 @@ function ipadCanvasRender(source){
   alternateText:col.classList.contains('ipad-alternate')?col.querySelector('.ipad-selected')?.textContent?.trim()||'':'',
   sections:[...col.querySelectorAll('.ipad-cbr-section')].map(sec=>({
    name:sec.querySelector('.ipad-visit-heading')?.textContent?.trim()||'',
+   alwaysHeading:sec.classList.contains('ipad-alt-weather-section'),
    items:[...sec.querySelectorAll('.ipad-cbr-wx-line,.ipad-selected')].map(el=>({
     text:el.textContent.trim(),
-    color:el.classList.contains('ipad-cbr-wx-alert')?'#b42318':el.classList.contains('ipad-notam-text')?'#1659ad':'#17202b'
+    color:el.dataset.rasterColor|| (el.classList.contains('ipad-cbr-wx-alert')?'#b42318':el.classList.contains('ipad-notam-text')?'#1659ad':'#17202b'),
+    separatorBefore:el.dataset.notamSeparator==='true'
    })).filter(item=>item.text)
   }))
  }));
@@ -2803,9 +2897,9 @@ function ipadCanvasRender(source){
    if(a.alternateText)y+=wrap(a.alternateText,airW-2*pad,txt).length*txt*1.24+5;
    for(const sec of a.sections){
     y+=6;
-    // Retain the empty heading as a writable section label.
-    if(!sec.items.length)y+=heading*1.24+4;
-    for(const item of sec.items)y+=wrap(item.text,airW-2*pad,txt).length*txt*1.24+5;
+    // Always show alternate-airport names; preserve original section behavior elsewhere.
+    if(!sec.items.length||sec.alwaysHeading)y+=heading*1.24+4;
+    for(const item of sec.items){if(item.separatorBefore)y+=9;y+=wrap(item.text,airW-2*pad,txt).length*txt*1.24+5;}
    }
    return y+pad;
   });
@@ -2949,8 +3043,14 @@ function ipadCanvasRender(source){
   if(a.alternateText)y=write(wrap(a.alternateText,airW-2*pad,weather.txt),x+pad,y,weather.txt)+5;
   for(const sec of a.sections){
    ctx.fillStyle=visual.line;ctx.fillRect(x+pad,y,airW-2*pad,1);y+=6;
-   if(!sec.items.length)y=write([sec.name],x+pad,y,weather.heading,visual.tealInk,true)+4;
-   for(const item of sec.items)y=write(wrap(item.text,airW-2*pad,weather.txt),x+pad,y,weather.txt,item.color)+5;
+   if(!sec.items.length||sec.alwaysHeading)y=write([sec.name],x+pad,y,weather.heading,visual.tealInk,true)+4;
+   for(const item of sec.items){
+    if(item.separatorBefore){
+     // Hairline divider only BETWEEN distinct NOTAMs. No content is obscured.
+     ctx.fillStyle='#e0e8ef';ctx.fillRect(x+pad+8,y+3,airW-2*pad-16,1);y+=9;
+    }
+    y=write(wrap(item.text,airW-2*pad,weather.txt),x+pad,y,weather.txt,item.color)+5;
+   }
   }
  });
  ctx.fillStyle=visual.stroke;ctx.fillRect(0,crewY-5,W,1);
@@ -3040,8 +3140,10 @@ function ipadCBRRender(){
    // Section labels are hidden when populated; their content remains visible.
    const section=document.createElement('div');section.className='ipad-cbr-section ipad-cbr-section-'+heading.toLowerCase().replace(/[^a-z]/g,'');col.append(section);const h=document.createElement('div');h.className='ipad-visit-heading';h.textContent=heading;section.append(h);
    if(heading==='WEATHER')for(const wx of ((ipadWeatherAssignments[visit.key]?.airport===visit.code && ipadWeatherAssignments[visit.key]?.utc===(visit.time instanceof Date&&Number.isFinite(visit.time.getTime())?visit.time.toISOString():''))?ipadWeatherAssignments[visit.key].lines:[])){const line=document.createElement('div');line.className=wx.red?'ipad-cbr-wx-line ipad-cbr-wx-alert':'ipad-cbr-wx-line';line.textContent=wx.text;section.append(line);}
-   for(const item of selected){
-    const entry=document.createElement('div');entry.className='ipad-selected ipad-notam-text';const txt=document.createElement('span');txt.textContent=ipadNotamSummaryWithTiming(item.raw,item.abbreviated?(item.display||item.raw):ipadAbbreviate(item.raw));txt.title=item.raw;entry.append(txt);section.append(entry);
+   for(const [notamIndex,item] of selected.entries()){
+    const entry=document.createElement('div');entry.className='ipad-selected ipad-notam-text';
+    if(notamIndex>0)entry.dataset.notamSeparator='true';
+    const txt=document.createElement('span');txt.textContent=ipadNotamSummaryWithTiming(item.raw,item.abbreviated?(item.display||item.raw):ipadAbbreviate(item.raw));txt.title=item.raw;entry.append(txt);section.append(entry);
    }
    if(section.querySelector('.ipad-cbr-wx-line, .ipad-selected'))section.classList.add('ipad-cbr-populated');
    // Reserved handwriting area follows content; it never replaces or clips duty information.
@@ -3049,7 +3151,18 @@ function ipadCBRRender(){
   }
   columns.append(col);
  }
- const alt=document.createElement('section');alt.className='ipad-visit ipad-alternate';const altTitle=document.createElement('strong');altTitle.textContent='ALTERNATES';alt.append(altTitle);const altText=document.createElement('div');altText.className='ipad-selected';altText.textContent=document.getElementById('ipadAlternateText')?.value?.trim()||'En-route / destination alternates not entered';alt.append(altText);columns.append(alt);frame.style.setProperty('--ipad-count',String(visits.length+1));frame.append(columns);
+ const alt=document.createElement('section');alt.className='ipad-visit ipad-alternate';const altTitle=document.createElement('strong');altTitle.textContent='ALTERNATES';alt.append(altTitle);
+ const alternateNotes=document.getElementById('ipadAlternateText')?.value?.trim()||'';
+ if(alternateNotes){const altText=document.createElement('div');altText.className='ipad-selected';altText.textContent=alternateNotes;alt.append(altText);}
+ const alternateAirports=ipadAlternateAirportWeather(visits);
+ for(const airport of alternateAirports){
+  const section=document.createElement('div');section.className='ipad-cbr-section ipad-alt-weather-section';
+  const name=document.createElement('div');name.className='ipad-visit-heading';name.textContent=airport.name+' ('+airport.code+')';section.append(name);
+  for(const wx of airport.lines){const line=document.createElement('div');line.className='ipad-cbr-wx-line';line.textContent=wx.text;line.dataset.rasterColor=wx.color||'#17202b';section.append(line);}
+  alt.append(section);
+ }
+ if(!alternateNotes&&!alternateAirports.length){const altText=document.createElement('div');altText.className='ipad-selected';altText.textContent='No additional weather airports imported';alt.append(altText);}
+ columns.append(alt);frame.style.setProperty('--ipad-count',String(visits.length+1));frame.append(columns);
  // Crew is organised by flight (three sectors), independently of airport visits
  // (four weather/NOTAM columns for MEL-BNE-MEL-SYD).
  const flightRows=window.crewIpadSchedule?.rows()||[];
@@ -3317,7 +3430,7 @@ function crewWxDutyWindow(){
  // Never require the user to reimport it to review the weather.
  try{
   const saved=JSON.parse(localStorage.getItem('crewFocusCBRStateV1')||'null')||{};
-  const live=typeof rows==='function'?rows():[];
+  const live=window.crewIpadSchedule?.rows?.()||[];
   const complete=r=>Array.isArray(r)&&r[1]&&r[2]&&r[3]&&r[4];
   const liveRows=live.filter(complete),savedRows=(saved.rows||[]).filter(complete);
   const rs=liveRows.length?liveRows:savedRows;
@@ -3329,8 +3442,8 @@ function crewWxDutyWindow(){
   const before=Number(document.getElementById('cbrBefore')?.value??1);
   const after=Number(document.getElementById('cbrAfter')?.value??4);
   if(date&&rs.length){
-   const first=utc(date,signon||rs[0][2],rs[0][1]);
-   let last=utc(date,signoff||rs[rs.length-1][4],signoffPort||rs[rs.length-1][3]);
+   const first=crewScreeningUTC(date,signon||rs[0][2],rs[0][1]);
+   let last=crewScreeningUTC(date,signoff||rs[rs.length-1][4],signoffPort||rs[rs.length-1][3]);
    if(first&&last){
     if(last<first)last=new Date(last.getTime()+86400000);
     return {start:new Date(first.getTime()-before*3600000),finish:new Date(last.getTime()+after*3600000),date,rows:rs,source:'retained CBR'};
@@ -3356,6 +3469,21 @@ function crewWxDDHH(day,hour,minute,anchor){
  return candidates.sort((a,b)=>Math.abs(a-anchor)-Math.abs(b-anchor))[0];
 }
 function crewWxUTC(date){return date.toISOString().slice(5,16).replace('T',' ')+'Z';}
+// v206: BoM forecasts T/Q at TAF validity HH, HH+3, HH+6, HH+9.
+// These are POINT values, never to be extrapolated beyond the 9-hour span.
+function crewWxTafReferenceValues(raw,validFrom){
+ const remark=String(raw||'').split(/\bRMK\b/i)[1]?.split(/\bTAF3\b/i)[0]||'';
+ const temperatures=remark.match(/(?:^|\s)T\s+((?:M?\d{1,2}\s+){3}M?\d{1,2})(?=\s|$)/i);
+ const pressures=remark.match(/(?:^|\s)Q\s+((?:\d{4}\s+){3}\d{4})(?=\s|$)/i);
+ const temps=temperatures?temperatures[1].trim().split(/\s+/).map(v=>/^M/i.test(v)?-Number(v.slice(1)):Number(v)):[];
+ const qnh=pressures?pressures[1].trim().split(/\s+/).map(Number):[];
+ const complete=temps.length===4&&qnh.length===4&&temps.every(Number.isFinite)&&qnh.every(n=>Number.isFinite(n)&&n>=850&&n<=1100);
+ const points=complete?temps.map((temp,i)=>({time:new Date(validFrom.getTime()+i*10800000),temp,qnh:qnh[i]})):[];
+ return {temps,qnh,points,complete,mentioned:/\b(?:T\s+M?\d|Q\s+\d{4})\b/i.test(remark)};
+}
+function ipadWxUtcStamp(date){
+ return String(date.getUTCDate()).padStart(2,'0')+String(date.getUTCHours()).padStart(2,'0')+String(date.getUTCMinutes()).padStart(2,'0')+'Z';
+}
 function crewWxTafAnalysis(raw){
  if(!/^\s*TAF\b/i.test(raw))return null;
  const window=crewWxDutyWindow();
@@ -3397,12 +3525,8 @@ function crewWxTafAnalysis(raw){
  }
  // Australian TAF RMK: T 09 12 17 20 Q 1022 1023 1021 1020.
  // Reference times are TAF commencement, then +3h, +6h and +9h.
- const remark=(raw.split(/\bRMK\b/i)[1]||'').split(/\bTAF3\b/i)[0];
- const tempMatch=remark.match(/\bT\s+((?:M?\d{1,2}\s+){3}M?\d{1,2})\b/i);
- const qnhMatch=remark.match(/\bQ\s+((?:\d{4}\s+){3}\d{4})\b/i);
- const temps=tempMatch?tempMatch[1].trim().split(/\s+/).map(x=>/^M/i.test(x)?-Number(x.slice(1)):Number(x)):[];
- const qnh=qnhMatch?qnhMatch[1].trim().split(/\s+/).map(Number):[];
- const points=temps.length===4&&qnh.length===4?temps.map((t,i)=>({time:new Date(validFrom.getTime()+i*10800000),temp:t,qnh:qnh[i]})):[];
+ const reference=crewWxTafReferenceValues(raw,validFrom);
+ const {temps,qnh,points}=reference;
  const assessed=groups.map(g=>({...g,applicable:airportEvents.length?airportEvents.some(e=>e.time>=g.start&&e.time<g.end):null}));
  return {window,airportEvents,testTimelineActive,untestedAirport,issued,validFrom,validTo,groups:assessed,points,warning:gaps.join(' · '),tempFound:temps.length===4,qnhFound:qnh.length===4};
 }
@@ -3414,7 +3538,7 @@ const crewSectorTimelineKey='crewFocusTestSectorTimelineV132';
 function crewSectorSourceRows(){
  try{
   const saved=JSON.parse(localStorage.getItem('crewFocusCBRStateV1')||'null')||{};
-  const live=typeof rows==='function'?rows():[];
+  const live=window.crewIpadSchedule?.rows?.()||[];
   return (live.length?live:saved.rows||[]).filter(r=>r&&r.length>=5&&r[1]&&r[3]);
  }catch(e){return [];}
 }
@@ -3624,7 +3748,7 @@ function flightRenderNaips(parsed){
  const make=(tag,cls,text,parent)=>{const e=document.createElement(tag);if(cls)e.className=cls;e.textContent=text;parent.append(e);return e;};
  const appendNotam=(raw,block,status)=>{
   const pre=make('pre',status==='excluded'?'flight-notam-excluded':status==='uncertain'?'flight-notam-uncertain':status==='low'?'flight-notam-low':'',raw,block);
-  pre.style.whiteSpace='pre-wrap';pre.style.overflowWrap='anywhere';pre.style.margin='8px 0 16px';pre.style.fontWeight='400';pre.style.fontFamily='ui-monospace, SFMono-Regular, Menlo, monospace';
+  pre.style.whiteSpace='pre-wrap';pre.style.overflowWrap='anywhere';pre.style.borderTop=block.querySelectorAll('pre').length?'1px solid #e5ebf2':'none';pre.style.paddingTop=block.querySelectorAll('pre').length?'12px':'0';pre.style.margin='8px 0 16px';pre.style.fontWeight='400';pre.style.fontFamily='ui-monospace, SFMono-Regular, Menlo, monospace';
   const sectorCode=(block.querySelector('h3')?.textContent.match(/\(([A-Z]{3,4})\)/)||[])[1]||'';
   const dailyWarning=ipadNotamDailyAdvisory(raw,sectorCode);
   if(dailyWarning){const advisory=make('p','flight-source',dailyWarning,block);advisory.style.cssText='color:#97510a;font-weight:700;font-size:12px;line-height:1.4;margin:0 0 10px;white-space:normal';}
