@@ -5,7 +5,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <meta content="#15283f" name="theme-color"/>
-<title>CrewFocus v202 — NOTAM Validity and Visit Matching</title>
+<title>CrewFocus v203 — Crew Table and TAF Markers</title>
 <style>
 :root{color-scheme:light dark;--bg:#f3f6fa;--card:#fff;--ink:#15283f;--muted:#637184;--line:#dce3eb;--accent:#176b87;--soft:#e9f4f7;--danger:#b13e3e}
 @media(prefers-color-scheme:dark){:root{--bg:#101820;--card:#1a2632;--ink:#edf4fb;--muted:#aab8c6;--line:#344454;--accent:#72c7df;--soft:#203a46;--danger:#ff9b9b}}
@@ -685,7 +685,7 @@ VA 1101 0705 NTL BNE 0720" rows="7"></textarea><p class="note">Check the year, d
 <h2>Calculation notes</h2>
 <p class="note">The sign on date and time are used exactly as entered, including for future planning. The countdown is relative to the current local time. Schedule times use the selected sign-on time zone; the live clock uses your device's local time zone. Your selections are remembered on this device. Past sign-on dates advance to today when reopening.</p>
 <p class="note">Hotel transport times can be saved and updated. This prototype saves them in the browser's local storage; downloaded-file previews may not retain settings. A hosted version can make saving more reliable across sessions and devices.</p>
-</section></details><p class="note" id="planApplyStatus" role="status"></p><button class="btn primary wide" id="applyPlan" type="button">Use this plan</button></div></dialog><dialog aria-labelledby="calendarTitle" id="calendarDialog"><div class="modal-shell"><header><h2 id="calendarTitle">Add to Calendar</h2><button class="btn small" id="closeCalendar" type="button">Close</button></header><label for="calendarScope">Include</label><select id="calendarScope"><option value="current">Accepted duty</option><option value="upcoming">Upcoming roster duties</option><option value="all">Whole roster</option></select><h3 id="calendarCount"></h3><p class="note" id="calendarSkipped" role="status"></p><div id="calendarIssues"></div><p class="note">One event per duty. Titles show local sign-on and sign-off times and finishing location; full sector details remain in Notes. No hotels or reminders.</p><button class="btn primary wide" id="calendarExport" type="button">Add roster to Calendar</button><p class="note" id="calendarStatus" role="status"></p><details id="calendarSetup"><summary>One-time iPhone setup</summary><p class="note">Use a separate shortcut named <strong>Leave for Work Calendar</strong>. Your alarm shortcut stays separate. Shortcuts opens briefly during import and requests a return to this app. No downloading or Siri Suggestions is needed.</p><p class="note">One action at a time. Your progress is saved on this device. “What you should see” describes the checkpoint; if it differs, send that screen before continuing.</p><p class="note" id="calendarGuideProgress"></p><h3 id="calendarGuideTitle"></h3><div class="note" id="calendarGuideInstruction"></div><div class="calendar-issue"><strong>What you should see</strong><p class="note" id="calendarGuideExpected"></p></div><div class="row help-nav"><button class="btn" id="calendarGuideBack" type="button">Back</button><button class="btn primary" id="calendarGuideNext" type="button">Next step</button></div><button class="btn small" id="calendarGuideResume" type="button">Continue from my screenshot</button><p class="note">These controls can vary with iOS. The test checks your phone before sending a full roster. If Calendar opens an editor for every event, check the expanded Add New Event action and turn its compose screen off.</p><button class="btn wide" id="calendarTest" type="button">Test with one event</button><button class="btn wide" id="calendarSetupDone" type="button">I checked the test</button></details><details style="margin-top:16px"><summary>Other options &amp; roster changes</summary><p class="note">This makes a copy, not a live subscription. A completed import is remembered on this device to help prevent duplicates. Changed duties need their previous calendar events removed before you import them again. An interrupted shortcut can leave some events added: check Calendar before retrying.</p><button class="btn wide" id="calendarDownload" type="button">Download .ics file instead</button><p class="note">File import depends on the app opening the file; Safari and Files may only preview it. The shortcut above avoids that route.</p><button class="btn wide" id="calendarResetHistory" type="button">Allow a fresh import</button></details></div></dialog><dialog aria-labelledby="alarmHelpTitle" id="alarmHelp"><div class="help-shell"><header><h2 id="alarmHelpTitle">Set up iPhone alarms</h2><button class="btn small" id="closeAlarmHelp" type="button">Close</button></header><p class="note" id="alarmHelpProgress"></p><div id="alarmHelpContent"></div><p class="note" id="alarmHelpStatus" role="status"></p><div class="row help-nav"><button class="btn" id="alarmHelpBack" type="button">Back</button><button class="btn primary" id="alarmHelpNext" type="button">Next</button></div></div></dialog><footer class="note" style="text-align:center;padding:8px 10px">Version 202 · 16 Nov 2026</footer></main>
+</section></details><p class="note" id="planApplyStatus" role="status"></p><button class="btn primary wide" id="applyPlan" type="button">Use this plan</button></div></dialog><dialog aria-labelledby="calendarTitle" id="calendarDialog"><div class="modal-shell"><header><h2 id="calendarTitle">Add to Calendar</h2><button class="btn small" id="closeCalendar" type="button">Close</button></header><label for="calendarScope">Include</label><select id="calendarScope"><option value="current">Accepted duty</option><option value="upcoming">Upcoming roster duties</option><option value="all">Whole roster</option></select><h3 id="calendarCount"></h3><p class="note" id="calendarSkipped" role="status"></p><div id="calendarIssues"></div><p class="note">One event per duty. Titles show local sign-on and sign-off times and finishing location; full sector details remain in Notes. No hotels or reminders.</p><button class="btn primary wide" id="calendarExport" type="button">Add roster to Calendar</button><p class="note" id="calendarStatus" role="status"></p><details id="calendarSetup"><summary>One-time iPhone setup</summary><p class="note">Use a separate shortcut named <strong>Leave for Work Calendar</strong>. Your alarm shortcut stays separate. Shortcuts opens briefly during import and requests a return to this app. No downloading or Siri Suggestions is needed.</p><p class="note">One action at a time. Your progress is saved on this device. “What you should see” describes the checkpoint; if it differs, send that screen before continuing.</p><p class="note" id="calendarGuideProgress"></p><h3 id="calendarGuideTitle"></h3><div class="note" id="calendarGuideInstruction"></div><div class="calendar-issue"><strong>What you should see</strong><p class="note" id="calendarGuideExpected"></p></div><div class="row help-nav"><button class="btn" id="calendarGuideBack" type="button">Back</button><button class="btn primary" id="calendarGuideNext" type="button">Next step</button></div><button class="btn small" id="calendarGuideResume" type="button">Continue from my screenshot</button><p class="note">These controls can vary with iOS. The test checks your phone before sending a full roster. If Calendar opens an editor for every event, check the expanded Add New Event action and turn its compose screen off.</p><button class="btn wide" id="calendarTest" type="button">Test with one event</button><button class="btn wide" id="calendarSetupDone" type="button">I checked the test</button></details><details style="margin-top:16px"><summary>Other options &amp; roster changes</summary><p class="note">This makes a copy, not a live subscription. A completed import is remembered on this device to help prevent duplicates. Changed duties need their previous calendar events removed before you import them again. An interrupted shortcut can leave some events added: check Calendar before retrying.</p><button class="btn wide" id="calendarDownload" type="button">Download .ics file instead</button><p class="note">File import depends on the app opening the file; Safari and Files may only preview it. The shortcut above avoids that route.</p><button class="btn wide" id="calendarResetHistory" type="button">Allow a fresh import</button></details></div></dialog><dialog aria-labelledby="alarmHelpTitle" id="alarmHelp"><div class="help-shell"><header><h2 id="alarmHelpTitle">Set up iPhone alarms</h2><button class="btn small" id="closeAlarmHelp" type="button">Close</button></header><p class="note" id="alarmHelpProgress"></p><div id="alarmHelpContent"></div><p class="note" id="alarmHelpStatus" role="status"></p><div class="row help-nav"><button class="btn" id="alarmHelpBack" type="button">Back</button><button class="btn primary" id="alarmHelpNext" type="button">Next</button></div></div></dialog><footer class="note" style="text-align:center;padding:8px 10px">Version 203 · 16 Nov 2026</footer></main>
 <script>
 (() => {
  const $ = id => document.getElementById(id);
@@ -2192,7 +2192,8 @@ function ipadExtractCrewFromTSV(tsv,flightRows){
  if(Array.isArray(tsv)){
   const parsed=tsv.map(x=>ipadExtractCrewFromTSV(x,flightRows));
   const n=rows=>new Set(rows.flat().map(p=>p.name.toUpperCase())).size;
-  return parsed.sort((a,b)=>n(b)-n(a))[0]||Array.from({length:flightRows.length},()=>[]);
+  const score=rows=>n(rows)*100+rows.reduce((count,list)=>count+list.length,0);
+  return parsed.sort((a,b)=>score(b)-score(a))[0]||Array.from({length:flightRows.length},()=>[]);
  }
  const empty=Array.from({length:flightRows.length},()=>[]);
  if(typeof tsv!=='string'||!tsv.trim()||!flightRows.length)return empty;
@@ -2222,8 +2223,14 @@ function ipadExtractCrewFromTSV(tsv,flightRows){
  const gap=flights.length>1?Math.min(...headers.slice(1).map((w,i)=>w.cx-headers[i].cx)):Math.max(70,firstX*.12);
  const headerWords=words.filter(w=>Math.abs(w.cy-headY)<Math.max(18,w.h));
  const nameHeading=headerWords.filter(w=>/^(?:NAME|NAMES)$/i.test(w.text)&&w.cx<firstX).sort((a,b)=>b.cx-a.cx)[0];
- if(!nameHeading)return empty;
- const nameX=nameHeading.x;
+ // Tesseract can miss the narrow 'Name' label, even when all crew names
+ // below it are legible. Recover that column from aligned surname tokens,
+ // never by borrowing a name from an earlier duty.
+ const surnameWords=words.filter(w=>w.cy>headY+10&&w.cx<firstX&&
+   /^[A-Z][A-Z'’\-]{1,35},$/i.test(w.text.trim()));
+ const surnameX=surnameWords.length?surnameWords.map(w=>w.x).sort((a,b)=>a-b)[Math.floor(surnameWords.length/2)]:null;
+ const nameX=nameHeading?.x??surnameX;
+ if(!Number.isFinite(nameX))return empty;
  const nameRight=firstX-Math.max(22,gap*.36);
  const medianH=words.map(w=>w.h).sort((a,b)=>a-b)[Math.floor(words.length/2)]||15;
  const rowBand=Math.max(9,Math.min(24,medianH*.8));
@@ -2501,8 +2508,9 @@ function ipadCbrWeather(visit){
   // Do not use a TAF issued after the relevant airport event.
   if(issued>event)continue;
   const groups=[];
+  const forecastBody=raw.split(/\bRMK\b/i)[0];
   const re=/\b(FM(\d{2})(\d{2})(\d{2})|(?:BECMG|TEMPO|INTER|PROB30|PROB40)(?:\s+(?:TEMPO|INTER))?\s+(\d{2})(\d{2})\/(\d{2})(\d{2}))\b/gi;
-  let m;while((m=re.exec(raw))){
+  let m;while((m=re.exec(forecastBody))){
    const fm=!!m[2],start=fm?crewWxDDHH(+m[2],+m[3],+m[4],from):crewWxDDHH(+m[5],+m[6],0,from);
    let end=fm?to:crewWxDDHH(+m[7],+m[8],0,start);
    if(!fm&&end<=start)end=crewWxDDHH(+m[7],+m[8],0,new Date(start.getTime()+86400000));
@@ -3030,6 +3038,10 @@ async function ipadShareCBR(){
   ipadCBRRender();
   const canvas=ipadImageCanvas;
   if(!canvas)throw Error('Import a CBR before exporting.');
+  if((window.crewIpadSchedule?.rows()||[]).length&&!Object.values(ipadCrewRows).some(list=>list?.length)){
+   alert('No crew assignments were recovered from this CBR. Review / add crew before sharing, so the export cannot silently show an empty crew table.');
+   ipadCrewReview();return;
+  }
   if(canvas.dataset.overflow==='true')throw Error('Briefing content exceeds the calibrated wallpaper area. Please reduce or abbreviate the selected briefing text before export.');
   const blob=await new Promise((resolve,reject)=>canvas.toBlob(b=>b?resolve(b):reject(Error('PNG encoding failed')),'image/png'));
   const file=new File([blob],'CrewFocus_iPad_CBR.png',{type:'image/png'});
@@ -3129,16 +3141,27 @@ function ipadInit(){
  const clear=document.getElementById('ipadCBRClear');if(clear)clear.onclick=()=>{if(confirm('Remove all selected NOTAMs from the iPad draft? The original briefing will be unchanged.')){ipadSelections={};ipadSave();ipadCBRRender();ipadUpdateButtons()}};
  ipadCBRRender();ipadUpdateButtons();}
 
-window.crewIpadDraft={init:ipadInit,render:ipadCBRRender,updateButtons:ipadUpdateButtons,importCrew:ipadImportCrewFromCBR};
+window.crewIpadDraft={init:ipadInit,render:ipadCBRRender,updateButtons:ipadUpdateButtons,importCrew:ipadImportCrewFromCBR,crewAssignmentCount:()=>Object.values(ipadCrewRows).reduce((n,list)=>n+(list?.length||0),0)};
 
 /* v119 — Australian TAF validity, change groups and T/Q forecast points.
    Screening is advisory; original NAIPS reports are never modified. */
 /* v126 — persistent manual duty screening override, independent of CBR. */
 /* v127: confirmed screening window is the shared source for Wx/NOTAM review. */
 const crewWxModeKey='crewFocusWeatherScreeningModeV136';
-function crewWxMode(){try{return localStorage.getItem(crewWxModeKey)==='sector'?'sector':'cbr';}catch(e){return 'cbr';}}
+function crewWxMode(){
+ // v203: LIVE always assesses the imported CBR. Saved single-sector test
+ // selections cannot suppress sector markers for a real duty.
+ const top=document.getElementById('cbrTestTop');
+ if(top&&!top.checked)return 'cbr';
+ try{return localStorage.getItem(crewWxModeKey)==='sector'?'sector':'cbr';}catch(e){return 'cbr'}
+}
 function crewWxSetMode(mode){
  if(!['cbr','sector'].includes(mode))return;
+ if(mode==='sector'&&!document.getElementById('cbrTestTop')?.checked){
+  mode='cbr';
+  const status=document.getElementById('crewWxModeStatus');
+  if(status)status.textContent='Single-sector screening requires TEST mode. LIVE uses the imported CBR.';
+ }
  try{localStorage.setItem(crewWxModeKey,mode);}catch(e){}
  document.querySelectorAll('input[name="crewWxMode"]').forEach(el=>el.checked=el.value===mode);
  const status=document.getElementById('crewWxModeStatus');
@@ -3184,7 +3207,8 @@ function crewScreeningRefreshWeather(){
  return false;
 }
 window.crewWxSyncConfirmedCBR=function(live){
- if(live&&crewWxMode()==='sector')crewWxSetMode('cbr');
+ // Confirming a real CBR resets any saved single-sector testing selection.
+ if(live)crewWxSetMode('cbr');
  else crewScreeningRefreshWeather();
 };
 function crewWxDutyWindow(){
@@ -3262,8 +3286,12 @@ function crewWxTafAnalysis(raw){
   }
  }
  const groups=[];
+ // v203: A "FM" timestamp inside RMK (e.g. turbulence below 5000 ft)
+ // is not a change group. Counting it displaced the sector badge onto an
+ // invisible group instead of the true FM162000 line.
+ const forecastBody=raw.split(/\bRMK\b/i)[0];
  const re=/\b(FM(\d{2})(\d{2})(\d{2})|(?:BECMG|TEMPO|INTER|PROB30|PROB40)(?:\s+(?:TEMPO|INTER))?\s+(\d{2})(\d{2})\/(\d{2})(\d{2}))\b/gi;
- let m;while((m=re.exec(raw))){
+ let m;while((m=re.exec(forecastBody))){
   const isFM=!!m[2];
   const start=isFM?crewWxDDHH(+m[2],+m[3],+m[4],validFrom):crewWxDDHH(+m[5],+m[6],0,validFrom);
   let end=isFM?validTo:crewWxDDHH(+m[7],+m[8],0,start);
@@ -3456,7 +3484,12 @@ function crewWxRenderMarkedTaf(raw,parent,make){
  const clean=ipadTafNormalize(raw);
  const analysis=crewWxTafAnalysis(clean);
  const pre=make('div','crew-wx-marked-taf','',parent);
- if(!analysis||!analysis.airportEvents?.length){make('pre','crew-wx-raw-unmarked',clean,pre);return;}
+ if(!analysis||!analysis.airportEvents?.length){
+  make('pre','crew-wx-raw-unmarked',clean,pre);
+  if(document.getElementById('cbrTestTop')?.checked)make('p','note','No applicable CBR airport event in the current TEST timeline; forecast left unmarked.',pre);
+  else make('p','note','No matching airport event was recovered from the current CBR. Recheck the confirmed duty date and sectors.',pre);
+  return;
+ }
  const body=clean.split(/\bRMK\b/i)[0];
  const header=body.match(/^\s*TAF(?:\s+(?:AMD|COR))?\s+[A-Z]{4}\s+\d{6}Z?\s+\d{4}\/\d{4}\s*/i);
  if(!header){make('pre','crew-wx-raw-unmarked',clean,pre);return;}
@@ -3996,7 +4029,8 @@ function parse(crewTSV){
   if($c('cbrDate').value){const date=document.getElementById('flightDate');if(date)date.value=$c('cbrDate').value;}
   const time=document.getElementById('flightTime');if(time)time.value=first[2];
   $c('cbrReviewDetails').open=false;
-  $c('cbrStatus').textContent=parsed.length+' sectors extracted · '+codes.join(' · ')+(missing?' · '+missing+' registration(s) need checking':'')+'. Verify the summary below and confirm the CBR.';
+  const found=window.crewIpadDraft?.crewAssignmentCount?.()||0;
+  $c('cbrStatus').textContent=parsed.length+' sectors extracted · '+codes.join(' · ')+(missing?' · '+missing+' registration(s) need checking':'')+'. '+(found?found+' crew-to-sector assignments extracted. Check the names in iPad CBR preview.':'Crew table not read: open Review / add crew before sharing.')+' Verify the summary below and confirm the CBR.';
  }
  cbrSyncImportConfirmation(parsed.length>0);
  return parsed.length;
@@ -4056,6 +4090,12 @@ async function cbrOCR(canvas){
    const crewImage=cbrCrop(canvas,top,canvas.height-top,canvas.width<1100?1.5:1);
    const detail=(await worker.recognize(crewImage,{}, {tsv:true})).data;
    if(detail.tsv)cbrCrewTableTSV.push(detail.tsv);
+   // A second, lower crop isolates the crew table itself; no image is
+   // downscaled and no previous-duty crew data is consulted.
+   const tightTop=Math.max(0,Math.floor(canvas.height*.71));
+   const tight=cbrCrop(canvas,tightTop,canvas.height-tightTop,canvas.width<1100?1.5:1);
+   const tightResult=(await worker.recognize(tight,{}, {tsv:true})).data;
+   if(tightResult.tsv)cbrCrewTableTSV.push(tightResult.tsv);
   }catch(e){console.warn('Additional crew OCR not available',e)}
   return text;
  }finally{if(worker)await worker.terminate()}
