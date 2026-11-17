@@ -5,7 +5,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <meta content="#15283f" name="theme-color"/>
-<title>CrewFocus v221 — 3D CBR Window Shading</title>
+<title>CrewFocus v222 — Grey CBR Header & Duty Duration</title>
 <style>
 :root{color-scheme:light dark;--bg:#f3f6fa;--card:#fff;--ink:#15283f;--muted:#637184;--line:#dce3eb;--accent:#176b87;--soft:#e9f4f7;--danger:#b13e3e}
 @media(prefers-color-scheme:dark){:root{--bg:#101820;--card:#1a2632;--ink:#edf4fb;--muted:#aab8c6;--line:#344454;--accent:#72c7df;--soft:#203a46;--danger:#ff9b9b}}
@@ -96,7 +96,9 @@ main{overflow-x:clip}
 
 /* v102: airport visits and flight-sector crew are separate aligned grids */
 .ipad-wallpaper{display:flex;flex-direction:column}
-.ipad-upper-info-window{margin:0 5px 5px!important;min-height:180px;height:clamp(180px,18vw,255px)!important;box-sizing:border-box!important;border:1px solid #d2dfe8!important;border-radius:19px!important;background:linear-gradient(180deg,#ffffff 0%,#f5f8fb 100%)!important;box-shadow:0 10px 18px rgba(29,61,91,.16), inset 0 1px 0 rgba(255,255,255,.82), inset 0 -1px 0 rgba(127,149,173,.12)!important;flex:0 0 auto!important}
+.ipad-upper-info-window{margin:0 5px 5px!important;min-height:180px;height:clamp(180px,18vw,255px)!important;box-sizing:border-box!important;border:1px solid #d2dfe8!important;border-radius:19px!important;background:linear-gradient(180deg,#ffffff 0%,#f5f8fb 100%)!important;box-shadow:0 10px 18px rgba(29,61,91,.16), inset 0 1px 0 rgba(255,255,255,.82), inset 0 -1px 0 rgba(127,149,173,.12)!important;flex:0 0 auto!important;padding:24px 26px!important}
+.ipad-upper-info-window .ipad-upper-duty-heading{font:bold 18px/1.25 Arial,Helvetica,sans-serif!important;color:#172438!important;letter-spacing:0!important}
+.ipad-upper-info-window .ipad-upper-duty-value{font:bold 23px/1.25 Arial,Helvetica,sans-serif!important;color:#172438!important;margin-top:8px!important}
 #ipadCBRPreview .ipad-upper-info-window{width:calc(100% - 10px)!important}
 .ipad-visit-columns{display:grid;grid-template-columns:repeat(var(--ipad-count,4),minmax(0,1fr));gap:6px;width:100%;min-width:0;min-height:0;align-items:stretch}
 .ipad-visit{width:auto;min-width:0;max-width:none;min-height:130px;overflow-wrap:anywhere}
@@ -710,7 +712,7 @@ VA 1101 0705 NTL BNE 0720" rows="7"></textarea><p class="note">Check the year, d
 <h2>Calculation notes</h2>
 <p class="note">The sign on date and time are used exactly as entered, including for future planning. The countdown is relative to the current local time. Schedule times use the selected sign-on time zone; the live clock uses your device's local time zone. Your selections are remembered on this device. Past sign-on dates advance to today when reopening.</p>
 <p class="note">Hotel transport times can be saved and updated. This prototype saves them in the browser's local storage; downloaded-file previews may not retain settings. A hosted version can make saving more reliable across sessions and devices.</p>
-</section></details><p class="note" id="planApplyStatus" role="status"></p><button class="btn primary wide" id="applyPlan" type="button">Use this plan</button></div></dialog><dialog aria-labelledby="calendarTitle" id="calendarDialog"><div class="modal-shell"><header><h2 id="calendarTitle">Add to Calendar</h2><button class="btn small" id="closeCalendar" type="button">Close</button></header><label for="calendarScope">Include</label><select id="calendarScope"><option value="current">Accepted duty</option><option value="upcoming">Upcoming roster duties</option><option value="all">Whole roster</option></select><h3 id="calendarCount"></h3><p class="note" id="calendarSkipped" role="status"></p><div id="calendarIssues"></div><p class="note">One event per duty. Titles show local sign-on and sign-off times and finishing location; full sector details remain in Notes. No hotels or reminders.</p><button class="btn primary wide" id="calendarExport" type="button">Add roster to Calendar</button><p class="note" id="calendarStatus" role="status"></p><details id="calendarSetup"><summary>One-time iPhone setup</summary><p class="note">Use a separate shortcut named <strong>Leave for Work Calendar</strong>. Your alarm shortcut stays separate. Shortcuts opens briefly during import and requests a return to this app. No downloading or Siri Suggestions is needed.</p><p class="note">One action at a time. Your progress is saved on this device. “What you should see” describes the checkpoint; if it differs, send that screen before continuing.</p><p class="note" id="calendarGuideProgress"></p><h3 id="calendarGuideTitle"></h3><div class="note" id="calendarGuideInstruction"></div><div class="calendar-issue"><strong>What you should see</strong><p class="note" id="calendarGuideExpected"></p></div><div class="row help-nav"><button class="btn" id="calendarGuideBack" type="button">Back</button><button class="btn primary" id="calendarGuideNext" type="button">Next step</button></div><button class="btn small" id="calendarGuideResume" type="button">Continue from my screenshot</button><p class="note">These controls can vary with iOS. The test checks your phone before sending a full roster. If Calendar opens an editor for every event, check the expanded Add New Event action and turn its compose screen off.</p><button class="btn wide" id="calendarTest" type="button">Test with one event</button><button class="btn wide" id="calendarSetupDone" type="button">I checked the test</button></details><details style="margin-top:16px"><summary>Other options &amp; roster changes</summary><p class="note">This makes a copy, not a live subscription. A completed import is remembered on this device to help prevent duplicates. Changed duties need their previous calendar events removed before you import them again. An interrupted shortcut can leave some events added: check Calendar before retrying.</p><button class="btn wide" id="calendarDownload" type="button">Download .ics file instead</button><p class="note">File import depends on the app opening the file; Safari and Files may only preview it. The shortcut above avoids that route.</p><button class="btn wide" id="calendarResetHistory" type="button">Allow a fresh import</button></details></div></dialog><dialog aria-labelledby="alarmHelpTitle" id="alarmHelp"><div class="help-shell"><header><h2 id="alarmHelpTitle">Set up iPhone alarms</h2><button class="btn small" id="closeAlarmHelp" type="button">Close</button></header><p class="note" id="alarmHelpProgress"></p><div id="alarmHelpContent"></div><p class="note" id="alarmHelpStatus" role="status"></p><div class="row help-nav"><button class="btn" id="alarmHelpBack" type="button">Back</button><button class="btn primary" id="alarmHelpNext" type="button">Next</button></div></div></dialog><footer class="note" style="text-align:center;padding:8px 10px">Version 221 · 17 Nov 2026</footer></main>
+</section></details><p class="note" id="planApplyStatus" role="status"></p><button class="btn primary wide" id="applyPlan" type="button">Use this plan</button></div></dialog><dialog aria-labelledby="calendarTitle" id="calendarDialog"><div class="modal-shell"><header><h2 id="calendarTitle">Add to Calendar</h2><button class="btn small" id="closeCalendar" type="button">Close</button></header><label for="calendarScope">Include</label><select id="calendarScope"><option value="current">Accepted duty</option><option value="upcoming">Upcoming roster duties</option><option value="all">Whole roster</option></select><h3 id="calendarCount"></h3><p class="note" id="calendarSkipped" role="status"></p><div id="calendarIssues"></div><p class="note">One event per duty. Titles show local sign-on and sign-off times and finishing location; full sector details remain in Notes. No hotels or reminders.</p><button class="btn primary wide" id="calendarExport" type="button">Add roster to Calendar</button><p class="note" id="calendarStatus" role="status"></p><details id="calendarSetup"><summary>One-time iPhone setup</summary><p class="note">Use a separate shortcut named <strong>Leave for Work Calendar</strong>. Your alarm shortcut stays separate. Shortcuts opens briefly during import and requests a return to this app. No downloading or Siri Suggestions is needed.</p><p class="note">One action at a time. Your progress is saved on this device. “What you should see” describes the checkpoint; if it differs, send that screen before continuing.</p><p class="note" id="calendarGuideProgress"></p><h3 id="calendarGuideTitle"></h3><div class="note" id="calendarGuideInstruction"></div><div class="calendar-issue"><strong>What you should see</strong><p class="note" id="calendarGuideExpected"></p></div><div class="row help-nav"><button class="btn" id="calendarGuideBack" type="button">Back</button><button class="btn primary" id="calendarGuideNext" type="button">Next step</button></div><button class="btn small" id="calendarGuideResume" type="button">Continue from my screenshot</button><p class="note">These controls can vary with iOS. The test checks your phone before sending a full roster. If Calendar opens an editor for every event, check the expanded Add New Event action and turn its compose screen off.</p><button class="btn wide" id="calendarTest" type="button">Test with one event</button><button class="btn wide" id="calendarSetupDone" type="button">I checked the test</button></details><details style="margin-top:16px"><summary>Other options &amp; roster changes</summary><p class="note">This makes a copy, not a live subscription. A completed import is remembered on this device to help prevent duplicates. Changed duties need their previous calendar events removed before you import them again. An interrupted shortcut can leave some events added: check Calendar before retrying.</p><button class="btn wide" id="calendarDownload" type="button">Download .ics file instead</button><p class="note">File import depends on the app opening the file; Safari and Files may only preview it. The shortcut above avoids that route.</p><button class="btn wide" id="calendarResetHistory" type="button">Allow a fresh import</button></details></div></dialog><dialog aria-labelledby="alarmHelpTitle" id="alarmHelp"><div class="help-shell"><header><h2 id="alarmHelpTitle">Set up iPhone alarms</h2><button class="btn small" id="closeAlarmHelp" type="button">Close</button></header><p class="note" id="alarmHelpProgress"></p><div id="alarmHelpContent"></div><p class="note" id="alarmHelpStatus" role="status"></p><div class="row help-nav"><button class="btn" id="alarmHelpBack" type="button">Back</button><button class="btn primary" id="alarmHelpNext" type="button">Next</button></div></div></dialog><footer class="note" style="text-align:center;padding:8px 10px">Version 222 · 17 Nov 2026</footer></main>
 <script>
 (() => {
  const $ = id => document.getElementById(id);
@@ -2022,8 +2024,8 @@ function ipadSave(){try{localStorage.setItem(IPAD_DRAFT_KEY,JSON.stringify(ipadS
 /* v189: one airport-local-to-UTC chronological timeline for the whole imported duty.
    Each sector inherits the correct local date, including midnight and DST crossings.
    No replacement times are guessed when an airport/time is unsupported. */
-function crewCBRUtcTimeline(){
- const source=window.crewIpadSchedule,rs=source?.rows()||[],base=source?.date()||'',out=[];
+function crewCBRUtcTimeline(dateOverride){
+ const source=window.crewIpadSchedule,rs=source?.rows()||[],base=dateOverride||source?.date()||'',out=[];
  if(!/^\d{4}-\d{2}-\d{2}$/.test(base))return out;
  let previous=null;
  for(let i=0;i<rs.length;i++){
@@ -2042,6 +2044,23 @@ function crewCBRUtcTimeline(){
   out.push({flight:r[0],departure:events[0],arrival:events[1]});
  }
  return out;
+}
+// v222: The sign-on/off figures in the requested CBR summary are derived
+// from sector schedule: 60 minutes before first departure, 30 minutes after
+// final landing. Use source (printed) duty date so TEST's fake date cannot
+// alter the computed duration around DST transitions.
+function ipadCBRDutyDuration(){
+ const source=window.crewIpadSchedule,rows=source?.rows()||[];
+ if(!rows.length)return null;
+ const reportDate=source?.sourceDate?.()||source?.date?.()||'';
+ const timeline=crewCBRUtcTimeline(reportDate);
+ if(timeline.length!==rows.length||timeline.some(item=>!(item?.departure?.instant instanceof Date)||!(item?.arrival?.instant instanceof Date)))return null;
+ const start=new Date(timeline[0].departure.instant.getTime()-60*60000);
+ const finish=new Date(timeline[timeline.length-1].arrival.instant.getTime()+30*60000);
+ const minutes=Math.round((finish.getTime()-start.getTime())/60000);
+ if(!Number.isFinite(minutes)||minutes<=0)return null;
+ const hh=Math.floor(minutes/60),mm=minutes%60;
+ return {start,finish,minutes,label:hh+'h '+String(mm).padStart(2,'0')+'m'};
 }
 function ipadVisitList(){
  const source=window.crewIpadSchedule,rs=source?.rows()||[],timeline=crewCBRUtcTimeline(),visits=[];
@@ -2934,7 +2953,7 @@ function ipadAlternateForecastSummary(code,window,reports){
    const line=schedule[i],next=schedule[i+1]?.start?.getTime()??f.to.getTime();
    const begin=Math.max(lo,f.from.getTime(),line.start.getTime()),finish=Math.min(hi,f.to.getTime(),next);
    if(begin>=finish||!line.weather)continue;
-   const period=(line.kind==='BASE'?'BASE ':line.kind==='BECMG-END'?'AFTER ':'')+(line.kind==='BASE'?'':line.token+' ')+ipadWxUtcStamp(new Date(begin))+'–'+ipadWxUtcStamp(new Date(finish));
+   const period=(line.kind==='BECMG-END'?'AFTER ':'')+(line.kind==='BASE'?'':line.token+' ')+ipadWxUtcStamp(new Date(begin))+'–'+ipadWxUtcStamp(new Date(finish));
    result.push({text:period+' '+ipadCbrCompactWx(line.weather),color:line.kind==='BECMG-END'?'#135667':'#17202b',changeBar:crewWxChangedFor(code,f.raw,line.token)});
   }
   for(const b of f.blocks){
@@ -3240,88 +3259,24 @@ function ipadCanvasRender(source){
  const crewY=top+Math.max(0,weatherArea)+separator;
  ctx.fillStyle=visual.background;ctx.fillRect(0,0,W,H);
  // The clock-calibrated top band remains untouched geometrically.
- // v199: draw a detailed test image across the entire top band so wallpaper blur
- // can be judged against real image content rather than a flat colour block.
- (function drawTopBandImage(){
-  const topH=G.clockBottom;
-  const sky=ctx.createLinearGradient(0,0,0,topH);
-  sky.addColorStop(0,'#d7ecfb');
-  sky.addColorStop(.34,'#b9daf3');
-  sky.addColorStop(.66,'#87b6dd');
-  sky.addColorStop(1,'#4e7fa7');
-  ctx.fillStyle=sky;ctx.fillRect(0,0,W,topH);
-
-  function cloud(cx,cy,s,alpha){
-   ctx.save();
-   ctx.globalAlpha=alpha;
-   const g=ctx.createRadialGradient(cx,cy,s*.2,cx,cy,s);
-   g.addColorStop(0,'rgba(255,255,255,.98)');
-   g.addColorStop(.7,'rgba(255,255,255,.75)');
-   g.addColorStop(1,'rgba(255,255,255,0)');
-   ctx.fillStyle=g;
-   for(const [dx,dy,r] of [[-1.15,-.05,.72],[-.38,-.28,.86],[.22,-.05,.94],[.9,.08,.7],[-.02,.2,1.08]]){
-    ctx.beginPath();
-    ctx.arc(cx+dx*s,cy+dy*s,r*s,0,Math.PI*2);
-    ctx.fill();
-   }
-   ctx.restore();
-  }
-  cloud(290,135,96,.9); cloud(690,200,126,.72); cloud(1120,118,110,.84);
-  cloud(1590,190,140,.7); cloud(1980,135,104,.85);
-
-  const glow=ctx.createRadialGradient(W*0.78,160,20,W*0.78,160,280);
-  glow.addColorStop(0,'rgba(255,245,210,.96)');
-  glow.addColorStop(.5,'rgba(255,240,190,.42)');
-  glow.addColorStop(1,'rgba(255,240,190,0)');
-  ctx.fillStyle=glow;ctx.fillRect(0,0,W,topH);
-  ctx.beginPath();ctx.arc(W*0.78,160,58,0,Math.PI*2);
-  ctx.fillStyle='rgba(255,246,214,.95)';ctx.fill();
-
-  const far=ctx.createLinearGradient(0,topH*.46,0,topH*.72);
-  far.addColorStop(0,'#6f90ae'); far.addColorStop(1,'#4f6e8a');
-  ctx.fillStyle=far;ctx.beginPath();
-  ctx.moveTo(0,topH*.69);
-  for(let x=0;x<=W;x+=140){
-   const y=topH*.58 + Math.sin(x/170)*18 + Math.cos(x/230)*12;
-   ctx.lineTo(x,y);
-  }
-  ctx.lineTo(W,topH*.79); ctx.lineTo(0,topH*.79); ctx.closePath(); ctx.fill();
-
-  const mid=ctx.createLinearGradient(0,topH*.60,0,topH*.87);
-  mid.addColorStop(0,'#44657d'); mid.addColorStop(1,'#243d53');
-  ctx.fillStyle=mid;ctx.beginPath();
-  ctx.moveTo(0,topH*.82);
-  for(let x=0;x<=W;x+=110){
-   const y=topH*.67 + Math.sin(x/95)*22 + Math.cos(x/145)*16;
-   ctx.lineTo(x,y);
-  }
-  ctx.lineTo(W,topH*.92); ctx.lineTo(0,topH*.92); ctx.closePath(); ctx.fill();
-
-  const water=ctx.createLinearGradient(0,topH*.70,0,topH);
-  water.addColorStop(0,'rgba(83,127,165,.25)');
-  water.addColorStop(.2,'rgba(80,125,163,.58)');
-  water.addColorStop(1,'rgba(22,53,88,.96)');
-  ctx.fillStyle=water;ctx.fillRect(0,topH*.71,W,topH*.29);
-
-  ctx.save(); ctx.globalAlpha=.22; ctx.strokeStyle='#eef6ff';
-  for(let y=topH*.76;y<topH*.985;y+=11){
-   ctx.lineWidth=(y%22===0)?2:1;
-   ctx.beginPath();
-   ctx.moveTo(0,y);
-   for(let x=0;x<=W;x+=70){
-    ctx.lineTo(x,y+Math.sin((x+y)/75)*2.4);
-   }
-   ctx.stroke();
-  }
-  ctx.restore();
-
-  ctx.fillStyle='rgba(255,255,255,.22)';
-  for(const [x,y,w,h] of [[210,topH-118,190,8],[460,topH-98,165,6],[980,topH-128,220,8],[1490,topH-106,170,7],[1880,topH-122,210,8]]){
-   ctx.fillRect(x,y,w,h);
-  }
- })();
+ // v222: replace the former illustrated upper wallpaper with the same
+ // muted grey surround already used below the clock. Keep the bitmap
+ // dimensions, clock geometry and the new information window untouched.
+ const surround=ctx.createLinearGradient(0,0,0,G.clockBottom);
+ surround.addColorStop(0,'#e7eff6');
+ surround.addColorStop(.7,'#edf4f9');
+ surround.addColorStop(1,visual.background);
+ ctx.fillStyle=surround;ctx.fillRect(0,0,W,G.clockBottom);
  ctx.fillStyle=visual.line;ctx.fillRect(0,G.clockBottom-1,W,1);
- if(upperInfoHeight>0)border(outerMargin,upperInfoTop,W-2*outerMargin,upperInfoHeight,'airport');
+ if(upperInfoHeight>0){
+  border(outerMargin,upperInfoTop,W-2*outerMargin,upperInfoHeight,'airport');
+  // Same typography and left padding used by the sector windows.
+  const heading=source.querySelector('.ipad-upper-duty-heading')?.textContent?.trim()||'TOTAL DUTY';
+  const total=source.querySelector('.ipad-upper-duty-value')?.textContent?.trim()||'—';
+  const textX=outerMargin+pad+12,headingY=upperInfoTop+pad+18;
+  write([heading],textX,headingY,typography.airportTitle,visual.ink,true);
+  write([total],textX,headingY+typography.airportTitle*1.5,typography.airportTitle,visual.ink,true);
+ }
  airports.forEach((a,i)=>{
   const x=outerMargin+i*airW;let y=top+pad;
   border(x,top,airW,Math.max(0,weatherArea),'airport');
@@ -3417,11 +3372,15 @@ function ipadCBRRender(){
  ipadCrewEnsureCurrent();
  const root=document.getElementById('ipadCBRPreview'),status=document.getElementById('ipadCBRStatus');if(!root)return;
  const visits=ipadVisitList();root.replaceChildren();const summary=document.getElementById('ipadCBRSelectionSummary');if(summary){const count=Object.keys(ipadSelections).length;summary.textContent=count+' NOTAM'+(count===1?'':'s')+' selected for the iPad CBR.';}
- if(!visits.length){const warning=document.createElement('p');warning.className='cbr-warning';warning.textContent='No CBR sectors available yet. Upload a CBR, or open Review / modify imported CBR and enter the sector airports and times. Then return to this preview.';root.append(warning);const placeholder=document.createElement('div');placeholder.className='ipad-wallpaper cbr171';placeholder.innerHTML='<div class="ipad-reserved">iPad Air 5 · clock safe area</div><div class="ipad-upper-info-window" aria-hidden="true"></div><div class="ipad-visit-columns"><section class="ipad-visit"><strong>Waiting for imported airports</strong><div class="ipad-visit-heading">WEATHER</div><div class="ipad-visit-heading">NOTAMs</div><div class="ipad-visit-heading">OPERATIONAL</div></section></div>';root.append(placeholder);status.textContent='Waiting for CBR sectors. Preview is visible and will populate after import.';return;}
+ if(!visits.length){const warning=document.createElement('p');warning.className='cbr-warning';warning.textContent='No CBR sectors available yet. Upload a CBR, or open Review / modify imported CBR and enter the sector airports and times. Then return to this preview.';root.append(warning);const placeholder=document.createElement('div');placeholder.className='ipad-wallpaper cbr171';placeholder.innerHTML='<div class="ipad-reserved">iPad Air 5 · clock safe area</div><div class="ipad-upper-info-window" aria-hidden="true"><div class="ipad-upper-duty-heading">TOTAL DUTY</div><div class="ipad-upper-duty-value">—</div></div><div class="ipad-visit-columns"><section class="ipad-visit"><strong>Waiting for imported airports</strong><div class="ipad-visit-heading">WEATHER</div><div class="ipad-visit-heading">NOTAMs</div><div class="ipad-visit-heading">OPERATIONAL</div></section></div>';root.append(placeholder);status.textContent='Waiting for CBR sectors. Preview is visible and will populate after import.';return;}
  const frame=document.createElement('div');frame.className='ipad-wallpaper cbr171';frame.style.setProperty('--ipad-count',String(visits.length));frame.style.setProperty('--ipad-sectors',String((window.crewIpadSchedule?.rows()||[]).length));
  const slider=document.getElementById('ipadLayoutOffset');frame.style.setProperty('--ipad-offset','0px');
  const reserve=document.createElement('div');reserve.className='ipad-reserved';reserve.textContent='';frame.append(reserve);
- const upperPanel=document.createElement('div');upperPanel.className='ipad-upper-info-window';upperPanel.setAttribute('aria-label','Upper CBR information window');frame.append(upperPanel);
+ const upperPanel=document.createElement('div');upperPanel.className='ipad-upper-info-window';upperPanel.setAttribute('aria-label','Upper CBR information window');
+ const dutyDuration=ipadCBRDutyDuration();
+ const dutyHeading=document.createElement('div');dutyHeading.className='ipad-upper-duty-heading';dutyHeading.textContent='TOTAL DUTY';upperPanel.append(dutyHeading);
+ const dutyValue=document.createElement('div');dutyValue.className='ipad-upper-duty-value';dutyValue.textContent=dutyDuration?.label||'—';upperPanel.append(dutyValue);
+ frame.append(upperPanel);
  const columns=document.createElement('div');columns.className='ipad-visit-columns';
  for(const visit of visits){const col=document.createElement('section');col.className='ipad-visit';const title=document.createElement('strong');title.textContent=visit.label;col.append(title);
   // Each departure has its own aircraft slot; a same-airport turnaround is shown
