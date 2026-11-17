@@ -5,7 +5,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <meta content="#15283f" name="theme-color"/>
-<title>CrewFocus v217 — Updated TAFs and Forecast Change Bars</title>
+<title>CrewFocus v221 — 3D CBR Window Shading</title>
 <style>
 :root{color-scheme:light dark;--bg:#f3f6fa;--card:#fff;--ink:#15283f;--muted:#637184;--line:#dce3eb;--accent:#176b87;--soft:#e9f4f7;--danger:#b13e3e}
 @media(prefers-color-scheme:dark){:root{--bg:#101820;--card:#1a2632;--ink:#edf4fb;--muted:#aab8c6;--line:#344454;--accent:#72c7df;--soft:#203a46;--danger:#ff9b9b}}
@@ -96,6 +96,8 @@ main{overflow-x:clip}
 
 /* v102: airport visits and flight-sector crew are separate aligned grids */
 .ipad-wallpaper{display:flex;flex-direction:column}
+.ipad-upper-info-window{margin:0 5px 5px!important;min-height:180px;height:clamp(180px,18vw,255px)!important;box-sizing:border-box!important;border:1px solid #d2dfe8!important;border-radius:19px!important;background:linear-gradient(180deg,#ffffff 0%,#f5f8fb 100%)!important;box-shadow:0 10px 18px rgba(29,61,91,.16), inset 0 1px 0 rgba(255,255,255,.82), inset 0 -1px 0 rgba(127,149,173,.12)!important;flex:0 0 auto!important}
+#ipadCBRPreview .ipad-upper-info-window{width:calc(100% - 10px)!important}
 .ipad-visit-columns{display:grid;grid-template-columns:repeat(var(--ipad-count,4),minmax(0,1fr));gap:6px;width:100%;min-width:0;min-height:0;align-items:stretch}
 .ipad-visit{width:auto;min-width:0;max-width:none;min-height:130px;overflow-wrap:anywhere}
 .ipad-sector-crew-section{margin-top:12px;border-top:2px solid #9aaabd;padding-top:9px;min-width:0}
@@ -141,7 +143,7 @@ main{overflow-x:clip}
 .ipad-wallpaper .ipad-sector-crew-section{margin-top:5px!important;padding-top:5px!important;border-top:1px solid #9aaabd!important;flex:0 0 auto!important;min-height:0!important}
 .ipad-wallpaper .ipad-sector-crew-title{display:none!important}
 .ipad-wallpaper .ipad-sector-crew-columns{gap:5px!important;align-items:start!important}
-.ipad-wallpaper .ipad-sector-crew-card{padding:5px 7px!important;border-width:1px!important;border-radius:5px!important;min-height:0!important}
+.ipad-wallpaper .ipad-sector-crew-card{padding:5px 7px!important;border-width:1px!important;border-radius:5px!important;min-height:0!important;box-shadow:0 4px 10px rgba(29,61,91,.10), inset 0 1px 0 rgba(255,255,255,.78), inset 0 -1px 0 rgba(127,149,173,.10)!important;background:linear-gradient(180deg,#ffffff 0%,#f5f8fb 100%)!important}
 .ipad-wallpaper .ipad-crew-details-card>strong,.ipad-wallpaper .ipad-sector-crew-card>strong{height:27px!important;min-height:27px!important;max-height:27px!important;line-height:1.05!important;font-size:var(--ipad-crew-font,14px)!important;padding:0!important;margin:0!important;display:flex!important;align-items:center!important}
 .ipad-wallpaper .ipad-crew-details-table .ipad-crew-details-row:first-child{height:23px!important;min-height:23px!important;max-height:23px!important;padding:0!important;line-height:1!important;font-size:11px!important}
 .ipad-wallpaper .ipad-crew-names{padding-top:23px!important;gap:0!important;margin:0!important}
@@ -149,7 +151,7 @@ main{overflow-x:clip}
 .ipad-wallpaper .ipad-crew-details-table .ipad-aligned-crew-row{font-size:11px!important}
 .ipad-wallpaper .ipad-sector-crew-card .ipad-crew-name{font-size:var(--ipad-crew-font,14px)!important;line-height:1.05!important;padding:0 2px!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
 .ipad-wallpaper .ipad-visit-columns{gap:5px!important}
-.ipad-wallpaper .ipad-visit{padding:6px!important;min-height:0!important;box-sizing:border-box!important}
+.ipad-wallpaper .ipad-visit{padding:6px!important;min-height:0!important;box-sizing:border-box!important;box-shadow:0 8px 16px rgba(29,61,91,.14), inset 0 1px 0 rgba(255,255,255,.82), inset 0 -1px 0 rgba(127,149,173,.12)!important;background:linear-gradient(180deg,#ffffff 0%,#f5f8fb 100%)!important}
 .ipad-wallpaper .ipad-visit>strong{min-height:0!important;height:auto!important;margin:0 0 3px!important;padding:0 0 3px!important;line-height:1.15!important}
 .ipad-wallpaper .ipad-visit-heading{margin:3px 0 0!important;padding:3px 0!important;line-height:1.1!important;min-height:0!important}
 .ipad-wallpaper .ipad-selected{padding:2px 0!important;margin:0!important;line-height:1.15!important}
@@ -231,7 +233,7 @@ main{overflow-x:clip}
 .ipad-wallpaper .ipad-visit-heading{font-weight:700!important;border-top:1px solid #d3dce6!important;padding:2px 0 1px!important;margin:2px 0 0!important}
 .ipad-wallpaper .ipad-notam-text,.ipad-wallpaper .ipad-notam-text span{color:#1659ad!important}
 .ipad-wallpaper .ipad-crew-details-row:first-child span{font-weight:700!important}
-.ipad-wallpaper .ipad-crew-details-card{position:relative!important}
+.ipad-wallpaper .ipad-crew-details-card{position:relative!important;box-shadow:0 4px 10px rgba(29,61,91,.10), inset 0 1px 0 rgba(255,255,255,.78), inset 0 -1px 0 rgba(127,149,173,.10)!important;background:linear-gradient(180deg,#ffffff 0%,#f5f8fb 100%)!important}
 .ipad-wallpaper .ipad-crew-details-table{padding-top:0!important}
 .ipad-wallpaper .ipad-crew-names{padding-top:19px!important}
 .ipad-wallpaper .ipad-crew-details-card .ipad-crew-details-table{padding-top:23px!important}
@@ -313,7 +315,7 @@ main{overflow-x:clip}
 #ipadCBRPreview .ipad-wallpaper{height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important}
 #ipadCBRPreview .ipad-visit-columns{height:auto!important;min-height:0!important;flex:0 0 auto!important;grid-auto-rows:auto!important}
 #ipadCBRPreview .ipad-visit{height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important}
-/* v217 black forecast change marker in on-screen preview; PNG has independent raster mark */
+/* v221: add subtle 3D shading and depth to CBR windows while preserving geometry. */
 .ipad-visit .ipad-cbr-wx-line[data-wx-change-bar="true"]{border-left:4px solid #080808!important;padding-left:4px!important;box-sizing:border-box}
 </style>
 <style>
@@ -708,7 +710,7 @@ VA 1101 0705 NTL BNE 0720" rows="7"></textarea><p class="note">Check the year, d
 <h2>Calculation notes</h2>
 <p class="note">The sign on date and time are used exactly as entered, including for future planning. The countdown is relative to the current local time. Schedule times use the selected sign-on time zone; the live clock uses your device's local time zone. Your selections are remembered on this device. Past sign-on dates advance to today when reopening.</p>
 <p class="note">Hotel transport times can be saved and updated. This prototype saves them in the browser's local storage; downloaded-file previews may not retain settings. A hosted version can make saving more reliable across sessions and devices.</p>
-</section></details><p class="note" id="planApplyStatus" role="status"></p><button class="btn primary wide" id="applyPlan" type="button">Use this plan</button></div></dialog><dialog aria-labelledby="calendarTitle" id="calendarDialog"><div class="modal-shell"><header><h2 id="calendarTitle">Add to Calendar</h2><button class="btn small" id="closeCalendar" type="button">Close</button></header><label for="calendarScope">Include</label><select id="calendarScope"><option value="current">Accepted duty</option><option value="upcoming">Upcoming roster duties</option><option value="all">Whole roster</option></select><h3 id="calendarCount"></h3><p class="note" id="calendarSkipped" role="status"></p><div id="calendarIssues"></div><p class="note">One event per duty. Titles show local sign-on and sign-off times and finishing location; full sector details remain in Notes. No hotels or reminders.</p><button class="btn primary wide" id="calendarExport" type="button">Add roster to Calendar</button><p class="note" id="calendarStatus" role="status"></p><details id="calendarSetup"><summary>One-time iPhone setup</summary><p class="note">Use a separate shortcut named <strong>Leave for Work Calendar</strong>. Your alarm shortcut stays separate. Shortcuts opens briefly during import and requests a return to this app. No downloading or Siri Suggestions is needed.</p><p class="note">One action at a time. Your progress is saved on this device. “What you should see” describes the checkpoint; if it differs, send that screen before continuing.</p><p class="note" id="calendarGuideProgress"></p><h3 id="calendarGuideTitle"></h3><div class="note" id="calendarGuideInstruction"></div><div class="calendar-issue"><strong>What you should see</strong><p class="note" id="calendarGuideExpected"></p></div><div class="row help-nav"><button class="btn" id="calendarGuideBack" type="button">Back</button><button class="btn primary" id="calendarGuideNext" type="button">Next step</button></div><button class="btn small" id="calendarGuideResume" type="button">Continue from my screenshot</button><p class="note">These controls can vary with iOS. The test checks your phone before sending a full roster. If Calendar opens an editor for every event, check the expanded Add New Event action and turn its compose screen off.</p><button class="btn wide" id="calendarTest" type="button">Test with one event</button><button class="btn wide" id="calendarSetupDone" type="button">I checked the test</button></details><details style="margin-top:16px"><summary>Other options &amp; roster changes</summary><p class="note">This makes a copy, not a live subscription. A completed import is remembered on this device to help prevent duplicates. Changed duties need their previous calendar events removed before you import them again. An interrupted shortcut can leave some events added: check Calendar before retrying.</p><button class="btn wide" id="calendarDownload" type="button">Download .ics file instead</button><p class="note">File import depends on the app opening the file; Safari and Files may only preview it. The shortcut above avoids that route.</p><button class="btn wide" id="calendarResetHistory" type="button">Allow a fresh import</button></details></div></dialog><dialog aria-labelledby="alarmHelpTitle" id="alarmHelp"><div class="help-shell"><header><h2 id="alarmHelpTitle">Set up iPhone alarms</h2><button class="btn small" id="closeAlarmHelp" type="button">Close</button></header><p class="note" id="alarmHelpProgress"></p><div id="alarmHelpContent"></div><p class="note" id="alarmHelpStatus" role="status"></p><div class="row help-nav"><button class="btn" id="alarmHelpBack" type="button">Back</button><button class="btn primary" id="alarmHelpNext" type="button">Next</button></div></div></dialog><footer class="note" style="text-align:center;padding:8px 10px">Version 217 · 17 Nov 2026</footer></main>
+</section></details><p class="note" id="planApplyStatus" role="status"></p><button class="btn primary wide" id="applyPlan" type="button">Use this plan</button></div></dialog><dialog aria-labelledby="calendarTitle" id="calendarDialog"><div class="modal-shell"><header><h2 id="calendarTitle">Add to Calendar</h2><button class="btn small" id="closeCalendar" type="button">Close</button></header><label for="calendarScope">Include</label><select id="calendarScope"><option value="current">Accepted duty</option><option value="upcoming">Upcoming roster duties</option><option value="all">Whole roster</option></select><h3 id="calendarCount"></h3><p class="note" id="calendarSkipped" role="status"></p><div id="calendarIssues"></div><p class="note">One event per duty. Titles show local sign-on and sign-off times and finishing location; full sector details remain in Notes. No hotels or reminders.</p><button class="btn primary wide" id="calendarExport" type="button">Add roster to Calendar</button><p class="note" id="calendarStatus" role="status"></p><details id="calendarSetup"><summary>One-time iPhone setup</summary><p class="note">Use a separate shortcut named <strong>Leave for Work Calendar</strong>. Your alarm shortcut stays separate. Shortcuts opens briefly during import and requests a return to this app. No downloading or Siri Suggestions is needed.</p><p class="note">One action at a time. Your progress is saved on this device. “What you should see” describes the checkpoint; if it differs, send that screen before continuing.</p><p class="note" id="calendarGuideProgress"></p><h3 id="calendarGuideTitle"></h3><div class="note" id="calendarGuideInstruction"></div><div class="calendar-issue"><strong>What you should see</strong><p class="note" id="calendarGuideExpected"></p></div><div class="row help-nav"><button class="btn" id="calendarGuideBack" type="button">Back</button><button class="btn primary" id="calendarGuideNext" type="button">Next step</button></div><button class="btn small" id="calendarGuideResume" type="button">Continue from my screenshot</button><p class="note">These controls can vary with iOS. The test checks your phone before sending a full roster. If Calendar opens an editor for every event, check the expanded Add New Event action and turn its compose screen off.</p><button class="btn wide" id="calendarTest" type="button">Test with one event</button><button class="btn wide" id="calendarSetupDone" type="button">I checked the test</button></details><details style="margin-top:16px"><summary>Other options &amp; roster changes</summary><p class="note">This makes a copy, not a live subscription. A completed import is remembered on this device to help prevent duplicates. Changed duties need their previous calendar events removed before you import them again. An interrupted shortcut can leave some events added: check Calendar before retrying.</p><button class="btn wide" id="calendarDownload" type="button">Download .ics file instead</button><p class="note">File import depends on the app opening the file; Safari and Files may only preview it. The shortcut above avoids that route.</p><button class="btn wide" id="calendarResetHistory" type="button">Allow a fresh import</button></details></div></dialog><dialog aria-labelledby="alarmHelpTitle" id="alarmHelp"><div class="help-shell"><header><h2 id="alarmHelpTitle">Set up iPhone alarms</h2><button class="btn small" id="closeAlarmHelp" type="button">Close</button></header><p class="note" id="alarmHelpProgress"></p><div id="alarmHelpContent"></div><p class="note" id="alarmHelpStatus" role="status"></p><div class="row help-nav"><button class="btn" id="alarmHelpBack" type="button">Back</button><button class="btn primary" id="alarmHelpNext" type="button">Next</button></div></div></dialog><footer class="note" style="text-align:center;padding:8px 10px">Version 221 · 17 Nov 2026</footer></main>
 <script>
 (() => {
  const $ = id => document.getElementById(id);
@@ -2950,7 +2952,9 @@ function ipadAlternateAirportWeather(visits){
  const raw=ipadRetainedNaipsText(),parsed=raw?flightNaipsParse(raw):null;
  if(!parsed?.order?.length)return [];
  const dutyPorts=new Set(visits.map(v=>ipadWxICAO(v.code)));
- const window=crewWxDutyWindow();
+ // v218: additional airports screen the WHOLE CBR duty, not a manual
+ // single-sector test timeline that may still be stored from an old test.
+ const window=crewWxDutyWindow({fullCBR:true});
  return parsed.order.filter(code=>!dutyPorts.has(code)&&parsed.airports?.get(code)?.weather?.length).map(code=>{
   const station=parsed.airports.get(code);
   return {code,name:station.name||code,lines:ipadAlternateForecastSummary(code,window,station.weather)};
@@ -3007,6 +3011,10 @@ function ipadCanvasRender(source){
  const top=G.clockBottom, bottom=H;
  const outerMargin=20;
  const availableH=bottom-top-outerMargin;
+ const visibleScreenHeight=1640;
+ const upperInfoTop=Math.max(0,H-visibleScreenHeight);
+ const upperInfoBottom=top;
+ const upperInfoHeight=Math.max(0,upperInfoBottom-upperInfoTop);
  if(W!==2360||H!==2240||top!==1030||bottom-top!==1210)
   throw Error('CBR wallpaper calibration mismatch: preserve 2360 × 2240 and the 1030 px clock boundary');
  const pad=10, rowPad=7, separator=10;
@@ -3074,7 +3082,7 @@ function ipadCanvasRender(source){
  }
  // v188 visual-only canvas palette. Geometry and source content are unchanged.
  const visual={background:'#edf4f9',top:'#e2edf4',topEnd:'#f4f8fb',card:'#ffffff',
-   stroke:'#d2dfe8',shadow:'rgba(29,61,91,.12)',ink:'#172438',subtle:'#62758a',
+   stroke:'#d2dfe8',shadow:'rgba(29,61,91,.18)',ink:'#172438',subtle:'#62758a',
    teal:'#e4f5f3',tealInk:'#135667',line:'#dae4ec'};
  function rounded(x,y,w,h,r){
   r=Math.min(r,w/2,h/2);ctx.beginPath();ctx.moveTo(x+r,y);
@@ -3088,12 +3096,41 @@ function ipadCanvasRender(source){
   const radius=variant==='airport'?19:variant==='crewHeader'?10:4;
   ctx.save();
   if(variant==='airport'){
-   ctx.shadowColor=visual.shadow;ctx.shadowBlur=12;ctx.shadowOffsetY=5;
+   ctx.shadowColor=visual.shadow;ctx.shadowBlur=16;ctx.shadowOffsetY=6;
+  }else{
+   ctx.shadowColor='rgba(29,61,91,.12)';ctx.shadowBlur=8;ctx.shadowOffsetY=3;
   }
   rounded(bx,by,bw,bh,radius);
-  ctx.fillStyle=variant==='crewHeader'?visual.teal:visual.card;ctx.fill();
+  const fill=ctx.createLinearGradient(0,by,0,by+bh);
+  if(variant==='crewHeader'){
+   fill.addColorStop(0,'#f1fbfa');
+   fill.addColorStop(1,'#dcefee');
+  }else{
+   fill.addColorStop(0,'#ffffff');
+   fill.addColorStop(1,'#f5f8fb');
+  }
+  ctx.fillStyle=fill;ctx.fill();
   ctx.shadowColor='transparent';ctx.shadowBlur=0;ctx.shadowOffsetY=0;
-  ctx.lineWidth=1.15;ctx.strokeStyle=visual.stroke;ctx.stroke();ctx.restore();
+  ctx.lineWidth=1.15;ctx.strokeStyle=visual.stroke;ctx.stroke();
+  ctx.save();
+  rounded(bx,by,bw,bh,radius);ctx.clip();
+  ctx.lineWidth=1;
+  ctx.strokeStyle='rgba(255,255,255,.85)';
+  ctx.beginPath();
+  ctx.moveTo(bx+radius*0.45,by+1);
+  ctx.lineTo(bx+bw-radius*0.45,by+1);
+  ctx.moveTo(bx+1,by+radius*0.45);
+  ctx.lineTo(bx+1,by+bh-radius*0.45);
+  ctx.stroke();
+  ctx.strokeStyle='rgba(120,142,166,.22)';
+  ctx.beginPath();
+  ctx.moveTo(bx+radius*0.45,by+bh-1);
+  ctx.lineTo(bx+bw-radius*0.45,by+bh-1);
+  ctx.moveTo(bx+bw-1,by+radius*0.45);
+  ctx.lineTo(bx+bw-1,by+bh-radius*0.45);
+  ctx.stroke();
+  ctx.restore();
+  ctx.restore();
  }
  // Classify source crew by the highest duty they perform on any sector.
  // Never mutate the imported/reviewed crew lists; this is display-only.
@@ -3284,6 +3321,7 @@ function ipadCanvasRender(source){
   }
  })();
  ctx.fillStyle=visual.line;ctx.fillRect(0,G.clockBottom-1,W,1);
+ if(upperInfoHeight>0)border(outerMargin,upperInfoTop,W-2*outerMargin,upperInfoHeight,'airport');
  airports.forEach((a,i)=>{
   const x=outerMargin+i*airW;let y=top+pad;
   border(x,top,airW,Math.max(0,weatherArea),'airport');
@@ -3352,6 +3390,8 @@ function ipadCanvasRender(source){
  canvas.dataset.crewOmittedRoles=omitted.map(p=>['PAX','CC','CM','FO','CPT'][p.priority]).join(',');
  canvas.dataset.clockBottom=String(G.clockBottom);
  canvas.dataset.outerMargin=String(outerMargin);
+ canvas.dataset.upperInfoTop=String(upperInfoTop);
+ canvas.dataset.upperInfoHeight=String(upperInfoHeight);
  return canvas;
 }
 function ipadCanvasRefresh(){
@@ -3377,10 +3417,11 @@ function ipadCBRRender(){
  ipadCrewEnsureCurrent();
  const root=document.getElementById('ipadCBRPreview'),status=document.getElementById('ipadCBRStatus');if(!root)return;
  const visits=ipadVisitList();root.replaceChildren();const summary=document.getElementById('ipadCBRSelectionSummary');if(summary){const count=Object.keys(ipadSelections).length;summary.textContent=count+' NOTAM'+(count===1?'':'s')+' selected for the iPad CBR.';}
- if(!visits.length){const warning=document.createElement('p');warning.className='cbr-warning';warning.textContent='No CBR sectors available yet. Upload a CBR, or open Review / modify imported CBR and enter the sector airports and times. Then return to this preview.';root.append(warning);const placeholder=document.createElement('div');placeholder.className='ipad-wallpaper cbr171';placeholder.innerHTML='<div class="ipad-reserved">iPad Air 5 · clock safe area</div><div class="ipad-visit-columns"><section class="ipad-visit"><strong>Waiting for imported airports</strong><div class="ipad-visit-heading">WEATHER</div><div class="ipad-visit-heading">NOTAMs</div><div class="ipad-visit-heading">OPERATIONAL</div></section></div>';root.append(placeholder);status.textContent='Waiting for CBR sectors. Preview is visible and will populate after import.';return;}
+ if(!visits.length){const warning=document.createElement('p');warning.className='cbr-warning';warning.textContent='No CBR sectors available yet. Upload a CBR, or open Review / modify imported CBR and enter the sector airports and times. Then return to this preview.';root.append(warning);const placeholder=document.createElement('div');placeholder.className='ipad-wallpaper cbr171';placeholder.innerHTML='<div class="ipad-reserved">iPad Air 5 · clock safe area</div><div class="ipad-upper-info-window" aria-hidden="true"></div><div class="ipad-visit-columns"><section class="ipad-visit"><strong>Waiting for imported airports</strong><div class="ipad-visit-heading">WEATHER</div><div class="ipad-visit-heading">NOTAMs</div><div class="ipad-visit-heading">OPERATIONAL</div></section></div>';root.append(placeholder);status.textContent='Waiting for CBR sectors. Preview is visible and will populate after import.';return;}
  const frame=document.createElement('div');frame.className='ipad-wallpaper cbr171';frame.style.setProperty('--ipad-count',String(visits.length));frame.style.setProperty('--ipad-sectors',String((window.crewIpadSchedule?.rows()||[]).length));
  const slider=document.getElementById('ipadLayoutOffset');frame.style.setProperty('--ipad-offset','0px');
  const reserve=document.createElement('div');reserve.className='ipad-reserved';reserve.textContent='';frame.append(reserve);
+ const upperPanel=document.createElement('div');upperPanel.className='ipad-upper-info-window';upperPanel.setAttribute('aria-label','Upper CBR information window');frame.append(upperPanel);
  const columns=document.createElement('div');columns.className='ipad-visit-columns';
  for(const visit of visits){const col=document.createElement('section');col.className='ipad-visit';const title=document.createElement('strong');title.textContent=visit.label;col.append(title);
   // Each departure has its own aircraft slot; a same-airport turnaround is shown
@@ -3699,13 +3740,16 @@ window.crewWxSyncConfirmedCBR=function(live){
  if(live)crewWxSetMode('cbr');
  else crewScreeningRefreshWeather();
 };
-function crewWxDutyWindow(){
- if(crewWxMode()==='sector'){
+function crewWxDutyWindow(options={}){
+ // v218: Alternates are assessed over the COMPLETE imported CBR, even if
+ // TEST mode has an unrelated single-sector experiment saved. A missing
+ // TEST timeline must never invalidate a fully populated imported CBR.
+ if(!options.fullCBR&&crewWxMode()==='sector'){
   const events=crewSectorTimelineRead();
-  if(!events?.length)return null;
-  const times=events.map(e=>crewScreeningUTC(e.date,e.time,e.port)).filter(Boolean).sort((a,b)=>a-b);
-  if(!times.length)return null;
-  return {start:times[0],finish:times[times.length-1],source:'confirmed single sector',testSector:true};
+  const times=(events||[]).map(e=>crewScreeningUTC(e.date,e.time,e.port)).filter(Boolean).sort((a,b)=>a-b);
+  if(times.length>=2&&times[times.length-1]>times[0])
+   return {start:times[0],finish:times[times.length-1],source:'confirmed single sector',testSector:true};
+  // No confirmed or complete test sector: use the imported CBR below.
  }
  // A retained imported CBR is authoritative even if the review form is collapsed.
  // Never require the user to reimport it to review the weather.
@@ -3715,8 +3759,11 @@ function crewWxDutyWindow(){
   const complete=r=>Array.isArray(r)&&r[1]&&r[2]&&r[3]&&r[4];
   const liveRows=live.filter(complete),savedRows=(saved.rows||[]).filter(complete);
   const rs=liveRows.length?liveRows:savedRows;
-  const test=!!(document.getElementById('cbrTestDateOverride')?.checked||saved.testDateOverride);
-  const date=test?cbrToday():(document.getElementById('cbrDate')?.value||saved.date);
+  const testInput=document.getElementById('cbrTestDateOverride');
+  const test=testInput?testInput.checked:!!saved.testDateOverride;
+  // v218: cbrToday() exists only inside the separate CBR preview closure.
+  // melbourneToday() is this module's timezone-correct equivalent.
+  const date=test?melbourneToday():(document.getElementById('cbrDate')?.value||saved.date);
   const signon=document.getElementById('cbrSignon')?.value||saved.signon;
   const signoff=document.getElementById('cbrSignoff')?.value||saved.signoff;
   const signoffPort=document.getElementById('cbrSignoffPort')?.value||saved.signoffPort;
@@ -4006,7 +4053,7 @@ function crewWxRenderMarkedTaf(raw,parent,make){
  const pre=make('div','crew-wx-marked-taf','',parent);
  if(!analysis||!analysis.airportEvents?.length){
   // An additional airport has no flight event, but its TAF can still have
-  // meaningful changes. Render unchanged source groups with change bars.
+  // meaningful changes. Render the full source without change bars.
   const tafBody=clean.split(/\bRMK\b/i)[0];
   const head=tafBody.match(/^TAF(?:\s+(?:AMD|COR))?\s+[A-Z]{4}\s+\d{6}Z?\s+\d{4}\/\d{4}\s*/i);
   if(head){
@@ -4021,7 +4068,7 @@ function crewWxRenderMarkedTaf(raw,parent,make){
     const row=make('div','crew-wx-taf-row','',pre);
     const label=document.createElement('span');label.className='crew-wx-sector-number';row.append(label);
     const value=document.createElement('span');value.className='crew-wx-taf-text';value.textContent=seg.text;row.append(value);
-    if(seg.key&&crewWxChangedFor(airport,clean,seg.key)){row.style.borderLeft='5px solid #080808';row.style.paddingLeft='4px';row.title='Forecast changed since previous imported TAF';}
+    // Full imported TAF remains unmarked; change bars are CBR-preview/export only.
    }
   }else make('pre','crew-wx-raw-unmarked',clean,pre);
   const tafAirport=(clean.match(/^TAF(?:\s+(?:AMD|COR))?\s+([A-Z]{4})\b/i)||[])[1]||'';
@@ -4073,7 +4120,7 @@ function crewWxRenderMarkedTaf(raw,parent,make){
   if(overlap)value.classList.add('crew-wx-screening-text');
   const key=seg.kind==='initial'?'BASE':group?.token||'';
   const station=(clean.match(/^TAF(?:\s+(?:AMD|COR))?\s+([A-Z]{4})/)||[])[1]||'';
-  if(key&&crewWxChangedFor(station,clean,key)){line.style.borderLeft='5px solid #080808';line.style.paddingLeft='4px';line.title='Forecast changed since previous imported TAF';}
+  // Keep original full TAF text and sector badges free of change bars.
   line.append(badge,value);pre.append(line);
  }
 }
@@ -4241,7 +4288,7 @@ $('flightInterpret').addEventListener('click',()=>{
   // v193: one action imports NAIPS and transfers applicable UTC-screened WX into the CBR.
   // Retain every imported NOTAM and do not manufacture WX when a TAF is out of validity.
   try{ipadAddWeatherToCBR();}catch(e){console.warn('CBR weather transfer pending',e);const st=document.getElementById('ipadCBRWeatherStatus');if(st)st.textContent='Briefing imported; CBR weather transfer needs review: '+e.message;}
-  $('flightStatus').textContent='NAIPS imported: '+parsed.order.join(', ')+'. '+(updatedForecastCount?updatedForecastCount+' airport(s) with updated forecast lines (black change bars). ':'')+parsed.order.reduce((n,c)=>n+parsed.airports.get(c).notams.length,0)+' NOTAMs in original briefing. Time-based shortlist displayed; uncertain NOTAMs retained. '+($('flightStatus').dataset.ipadShortlist||'');
+  $('flightStatus').textContent='NAIPS imported: '+parsed.order.join(', ')+'. '+(updatedForecastCount?updatedForecastCount+' airport(s) with updated forecast lines (black change bars on iPad CBR only). ':'')+parsed.order.reduce((n,c)=>n+parsed.airports.get(c).notams.length,0)+' NOTAMs in original briefing. Time-based shortlist displayed; uncertain NOTAMs retained. '+($('flightStatus').dataset.ipadShortlist||'');
  }else{
   $('flightStatus').textContent='Not a complete NAIPS location briefing. Paste the entire email including WEATHER INFORMATION and NOTAM INFORMATION headings.';
  }
