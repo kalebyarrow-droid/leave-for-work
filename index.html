@@ -5,7 +5,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <meta content="#15283f" name="theme-color"/>
-<title>CrewFocus v249 — Collapsible CBR and Screened Alternate TAFs</title>
+<title>CrewFocus v252 — Airport Arrival and Departure Screening</title>
 <style>
 :root{color-scheme:light dark;--bg:#f3f6fa;--card:#fff;--ink:#15283f;--muted:#637184;--line:#dce3eb;--accent:#176b87;--soft:#e9f4f7;--danger:#b13e3e}
 @media(prefers-color-scheme:dark){:root{--bg:#101820;--card:#1a2632;--ink:#edf4fb;--muted:#aab8c6;--line:#344454;--accent:#72c7df;--soft:#203a46;--danger:#ff9b9b}}
@@ -943,20 +943,65 @@ html,body{margin:0;padding:0}
 #crewFlight .crew-cbr-collapse-sub249{font-size:11px;font-weight:500;color:var(--muted);margin-left:auto}
 #crewFlight .crew-cbr-collapse249 #cbrPanel{padding:14px 16px 17px}
 </style>
-</head>
+<style id="crewHelpStyle250">
+#crewHelp .crew-help-start,#crewHelp .crew-help-reference{max-width:100%;min-width:0}
+#crewHelp .crew-help-start h3,#crewHelp .crew-help-reference h3{font-size:18px;margin:3px 0 10px}
+#crewHelp .crew-help-reference p.note{line-height:1.55}
+#crewHelp .crew-help-search-row{display:flex;align-items:stretch;gap:8px;margin:9px 0 7px}
+#crewHelp .crew-help-search-row input{flex:1;min-width:0;font-size:14px}
+#crewHelp .crew-help-search-row button{flex:0 0 auto}
+#crewHelp .crew-help-count{margin:5px 0 16px!important;font-size:11px}
+#crewHelp .crew-help-group{border-top:1px solid var(--line);padding:11px 0 2px}
+#crewHelp .crew-help-group>summary{font-size:14px;font-weight:780;margin:2px 0;padding:8px 2px;min-height:39px;color:var(--accent);line-height:1.4;cursor:pointer}
+#crewHelp .crew-help-group>summary small{float:right;color:var(--muted);font-size:11px;font-weight:500;margin-left:6px}
+#crewHelp .crew-help-group[open]>summary{margin-bottom:8px}
+#crewHelp .crew-help-group:not([open]){padding-bottom:8px}
+#crewHelp .crew-help-entry{border:1px solid var(--line);border-radius:11px;margin:8px 0;overflow:hidden;background:var(--card)}
+#crewHelp .crew-help-entry>summary{padding:12px 13px;min-height:45px;cursor:pointer;font-size:13px;font-weight:680;color:var(--ink);line-height:1.45}
+#crewHelp .crew-help-entry[open]>summary{background:var(--soft);border-bottom:1px solid var(--line)}
+#crewHelp .crew-help-answer{padding:5px 14px 14px;font-size:12.5px;line-height:1.6;color:var(--ink)}
+#crewHelp .crew-help-answer p{margin:10px 0 0}
+#crewHelp .crew-help-source{font-size:11px;margin-top:17px!important}
+#crewHelp .crew-help-group[hidden],#crewHelp .crew-help-entry[hidden]{display:none!important}
+@media(max-width:420px){#crewHelp .crew-panel{padding:14px}#crewHelp .crew-help-entry>summary{font-size:12.5px;padding:11px 10px}}
+</style></head>
 <body>
 <main>
 <span class="hidden" id="dayLabel">Local time</span>
-<div class="crew-topbar"><span class="crew-version-tag" aria-label="CrewFocus version 249">v249</span><nav aria-label="Main navigation" class="crew-tabs"><span class="crew-tab-highlight" aria-hidden="true"></span><button class="crew-tab selected" data-page="home" type="button">Focus</button><button class="crew-tab" data-page="tools" type="button">Dashboard</button></nav><label class="crew-test-control" for="cbrTestTop"><span class="crew-mode-led" id="cbrModeLED" aria-hidden="true"></span><span class="crew-test-text" id="cbrModeText">LIVE</span><input id="cbrTestTop" type="checkbox" role="switch" aria-label="Test mode"/><span class="crew-switch-track" aria-hidden="true"></span></label></div>
+<div class="crew-topbar"><span class="crew-version-tag" aria-label="CrewFocus version 252">v252</span><nav aria-label="Main navigation" class="crew-tabs"><span class="crew-tab-highlight" aria-hidden="true"></span><button class="crew-tab selected" data-page="home" type="button">Focus</button><button class="crew-tab" data-page="tools" type="button">Dashboard</button></nav><label class="crew-test-control" for="cbrTestTop"><span class="crew-mode-led" id="cbrModeLED" aria-hidden="true"></span><span class="crew-test-text" id="cbrModeText">LIVE</span><input id="cbrTestTop" type="checkbox" role="switch" aria-label="Test mode"/><span class="crew-switch-track" aria-hidden="true"></span></label></div>
 <section class="crew-page" id="crewHome">
 <div class="crew-panel" id="homeFocusPanel"><div class="crew-kicker">FOCUS <span class="crew-status" id="focusModeBadge">Automatic</span></div><h2 id="focusName"></h2><p class="note" id="focusDesc"></p><button class="btn primary" id="focusOpen" type="button">Open focus</button></div>
 <div class="crew-panel" id="homeCurrentPanel"><div class="crew-kicker">CURRENT DUTY <span class="crew-status" id="homeAccepted">Needs review</span></div><div class="crew-focus-duty-layout"><div class="crew-focus-duty-original"><h2 id="homeDutyTitle">Today</h2><p class="note" id="homeDutyDate"></p><p class="crew-time" id="homeDutyTime"></p><div id="homeDutySectors"></div><div class="crew-home-actions"><button class="btn primary" id="homeOpenDuty" type="button">Departure times</button><button class="btn" id="homeReview" type="button">Review &amp; accept</button></div></div><div class="crew-focus-duty-metrics" id="homeCurrentMetrics" aria-label="Current duty and rest estimates"></div></div><p class="focus-estimate-disclaimer">Reference estimates only. Confirm against approved duty and rest requirements.</p></div>
 <div class="crew-panel" id="homeNextPanel"><div class="crew-kicker">NEXT DUTY <span class="crew-status" id="homeNextStatus">Upcoming</span></div><div class="crew-focus-duty-layout"><div class="crew-focus-duty-original"><h2 id="homeNextDate"></h2><p class="hidden" id="homeNextCalendarDate"></p><p class="crew-next hidden" id="homeNextDuty"></p><div id="homeNextSectors"></div><button class="btn" id="homeViewNext" type="button">Review &amp; accept</button></div><div class="crew-focus-duty-metrics" id="homeNextMetrics" aria-label="Next duty and rest estimates"></div></div><p class="focus-estimate-disclaimer">Reference estimates only. Confirm against approved duty and rest requirements.</p></div>
 </section>
-<section class="crew-page hidden" id="crewTools"><div class="crew-section-heading"><h2 class="crew-page-title">Dashboard <small style="font-size:11px;font-weight:500;color:var(--muted)">v249</small></h2><button class="btn small" id="dashBack" type="button">← Focus</button></div><div class="crew-dashboard-reorder"><button class="btn small" type="button" id="dashTileEdit" aria-pressed="false">Edit tiles</button><div class="crew-dashboard-reorder-tools hidden" id="dashReorderTools"><span id="dashTileSelected" aria-live="polite">Select a tile or drag it</span><div class="crew-dashboard-arrows"><button class="btn small" type="button" id="dashTileLeft" aria-label="Move selected tile left">←</button><button class="btn small" type="button" id="dashTileUp" aria-label="Move selected tile up">↑</button><button class="btn small" type="button" id="dashTileDown" aria-label="Move selected tile down">↓</button><button class="btn small" type="button" id="dashTileRight" aria-label="Move selected tile right">→</button></div><button class="btn small" type="button" id="dashTileReset">Reset order</button></div></div><button class="crew-dashboard-done-floating244 hidden" type="button" id="dashTileDoneFixed244" aria-label="Finish rearranging Dashboard tiles">Done ✓</button><p class="note" id="dashTileHint">Touch and hold any tile to rearrange it. Your order is saved on this device.</p><p class="note crew-dashboard-ideas-hint">Each tile has its own editable <strong>Things to Come</strong> list. Open a tile and tap <strong>Ideas</strong> to add notes. Existing tools continue to work.</p>
+<section class="crew-page hidden" id="crewTools"><div class="crew-section-heading"><h2 class="crew-page-title">Dashboard <small style="font-size:11px;font-weight:500;color:var(--muted)">v252</small></h2><button class="btn small" id="dashBack" type="button">← Focus</button></div><div class="crew-dashboard-reorder"><button class="btn small" type="button" id="dashTileEdit" aria-pressed="false">Edit tiles</button><div class="crew-dashboard-reorder-tools hidden" id="dashReorderTools"><span id="dashTileSelected" aria-live="polite">Select a tile or drag it</span><div class="crew-dashboard-arrows"><button class="btn small" type="button" id="dashTileLeft" aria-label="Move selected tile left">←</button><button class="btn small" type="button" id="dashTileUp" aria-label="Move selected tile up">↑</button><button class="btn small" type="button" id="dashTileDown" aria-label="Move selected tile down">↓</button><button class="btn small" type="button" id="dashTileRight" aria-label="Move selected tile right">→</button></div><button class="btn small" type="button" id="dashTileReset">Reset order</button></div></div><button class="crew-dashboard-done-floating244 hidden" type="button" id="dashTileDoneFixed244" aria-label="Finish rearranging Dashboard tiles">Done ✓</button><p class="note" id="dashTileHint">Touch and hold any tile to rearrange it. Your order is saved on this device.</p><p class="note crew-dashboard-ideas-hint">Each tile has its own editable <strong>Things to Come</strong> list. Open a tile and tap <strong>Ideas</strong> to add notes. Existing tools continue to work.</p>
 <div class="crew-tool-grid" id="crewTileGrid">
-<button class="crew-tile" data-tool="duty"><span>▤</span><strong>Roster &amp; Duty</strong><small>Available</small></button><button class="crew-tile" data-tool="drive"><span>🚗</span><strong>Travel Times</strong><small>Available</small></button><button class="crew-tile" data-tool="calendar"><span>▣</span><strong>Export to Calendar</strong><small>Available</small></button><button class="crew-tile" data-tool="import"><span>⇧</span><strong>Import Roster</strong><small>Available</small></button><button class="crew-tile" data-tool="help"><span>◷</span><strong>Alarms &amp; Help</strong><small>Available</small></button><button class="crew-tile" data-tool="flight"><span>✈</span><strong>Flight Planning</strong><small>Beta</small></button><button class="crew-tile" data-tool="commuter"><span>🛫</span><strong>Commuter</strong><small>Planned</small></button><button class="crew-tile" data-tool="hotels"><span>▥</span><strong>Hotels &amp; CATS</strong><small>Planned</small></button><button class="crew-tile" data-tool="eba"><span>⚖</span><strong>EBA &amp; Rest</strong><small>Planned</small></button><button class="crew-tile" data-tool="fdp"><span>✈️⏱️</span><strong>Calculators</strong><small>FDP &amp; rest</small></button><button class="crew-tile" data-tool="pay"><span>$</span><strong>Pay Calculator</strong><small>Planned</small></button><button class="crew-tile" data-tool="packing"><span>▣</span><strong>Trip Checklist</strong><small>Available</small></button><button class="crew-tile" data-tool="aircraft"><span>✈</span><strong>Aircraft Tracking</strong><small>Planned</small></button><button class="crew-tile" data-tool="logbook" type="button"><span>📖</span><strong>Logbook</strong><small>Ideas</small></button><button class="crew-tile" id="dashDocuments" type="button"><span>📁</span><strong>Document Library</strong><small>Available</small></button><button class="crew-tile" id="dashSettings" type="button"><span>⚙</span><strong>Settings</strong><small>Available</small></button></div></section>
-<section class="crew-page hidden" id="crewDocuments"><div class="crew-section-heading"><h2 class="crew-page-title">Aviation Document Library</h2><button class="btn small" id="documentsBack" type="button">← Dashboard</button></div><div class="crew-panel"><h3>Upload aviation documents</h3><p class="note">A central library for manuals, procedures, EBA documents, operational references and other aviation material. Files are stored locally in this browser on this device; they are not yet interpreted or applied to flight planning. Always verify against current approved sources.</p><div class="field"><label for="documentCategory">Document category</label><select id="documentCategory"><option value="Operations manuals">Operations manuals</option><option value="AIP and charts">AIP and charts</option><option value="Aircraft manuals">Aircraft manuals</option><option value="EBA and rostering">EBA and rostering</option><option value="Airport procedures">Airport procedures</option><option value="Other aviation references">Other aviation references</option></select></div><div class="field"><label for="documentFiles">Choose documents</label><input id="documentFiles" type="file" accept=".pdf,.txt,.doc,.docx,.html,.htm,.csv,.json,image/*" multiple></div><button class="btn primary" id="documentsSave" type="button">Save to document library</button><p class="note" id="documentsStatus" role="status">Choose one or more documents to save locally.</p></div><div class="crew-panel"><h3>Saved documents</h3><div id="documentsList" class="note">Loading library…</div></div></section><section class="crew-page hidden" id="crewSettings"><div class="crew-section-heading"><h2 class="crew-page-title">Settings</h2><button class="btn small" id="settingsBack" type="button">← Dashboard</button></div><details class="crew-panel crew-settings-subsection"><summary>General Settings</summary><div class="crew-settings-inner"><label for="crewRole">Crew role</label><select id="crewRole"><option value="fc">Flight crew</option><option value="cc">Cabin crew</option></select><label for="crewAirline">Airline</label><select id="crewAirline"><option value="va">Virgin Australia</option><option value="qf">Qantas (planned)</option><option value="jq">Jetstar (planned)</option></select><label for="crewHomeBaseGeneral">Home base (airport code)</label><select id="crewHomeBaseGeneral" aria-label="Home base for roster checks"><option value="MEL">MEL</option></select><p class="note">Used for the home-base rest check. The rule below is a preliminary 15-hour check; other roster requirements are not yet assessed.</p><label for="crewResumeMinutes">Return to the previous page after leaving CrewFocus</label><select id="crewResumeMinutes"><option value="0">Off · always open Focus</option><option value="1">1 minute</option><option value="2">2 minutes</option><option value="5" selected>5 minutes (default)</option><option value="10">10 minutes</option><option value="15">15 minutes</option><option value="30">30 minutes</option><option value="60">1 hour</option></select><p class="note">If you switch to NAIPS, Safari can restore the same CrewFocus screen and scroll position when you return within this period.</p><button class="btn" id="settingsPlan" type="button">Edit addresses &amp; transport</button></div></details><details class="crew-panel crew-settings-subsection"><summary>Focus settings</summary><div class="crew-settings-inner"><p class="note">Choose which Focus pages appear and how long before the next duty sign-on they become active. Tap Hours or Minutes for the iPhone/iPad scrolling picker. The most recently reached stage takes priority; pages do not open automatically.</p><div class="focus-timing-list" id="focusEnabledOptions" aria-label="Automatic Focus timing"></div><p class="note focus-timing-help">Days off is the automatic fallback when no timed pre-duty stage applies. Times are saved on this device and use each duty's local sign-on time zone.</p><label for="focusChoice">Current focus</label><select id="focusChoice"><option value="duty">Departure planning</option><option value="flight">Flight preparation</option><option value="commuter">Commuter</option><option value="hotel">Hotel &amp; transport</option><option value="packing">Trip preparation</option><option value="off">Days off</option></select><div class="crew-home-actions"><button class="btn primary" id="setManualFocus" type="button">Set manual focus</button><button class="btn" id="setAutoFocus" type="button">Use automatic</button></div><p class="note" id="focusSettingStatus"></p></div></details><details class="crew-panel crew-settings-subsection"><summary>Flight Planning settings</summary><div class="crew-settings-inner"><div class="field"><label for="crewAircraftType">Aircraft type for NOTAM screening</label><select id="crewAircraftType"><option value="B738">Boeing 737-800 (B738)</option><option value="B38M">Boeing 737 MAX 8 (B38M)</option><option value="B3XM">Boeing 737 MAX 10 (B3XM)</option></select></div><p class="note" id="crewAircraftDetails"></p><p class="note">Aircraft reference code 4C. Wingspan varies with wingtip configuration; confirm the specific aircraft dimensions before applying a numeric wingspan exclusion. Only clearly aircraft-specific NOTAMs are screened out; all screened-out entries remain available for review.</p><p class="note">Adjustable hours either side of duty sign-on. The NOTAM shortlist uses duty times and progresses as sectors finish. Original briefing remains available.</p><div class="fields"><div class="field"><label for="cbrBefore">Hours before duty commencement</label><select id="cbrBefore"></select></div><div class="field"><label for="cbrAfter">Hours after duty completion</label><select id="cbrAfter"></select></div><div class="field"><label for="cbrSectorBefore">Hours before each sector departure</label><select id="cbrSectorBefore"><option value="0">0</option><option value="0.5">0.5</option><option value="1" selected>1</option><option value="1.5">1.5</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select></div><div class="field"><label for="cbrSectorAfter">Hours after each sector arrival</label><select id="cbrSectorAfter"><option value="0">0</option><option value="0.5">0.5</option><option value="1">1</option><option value="1.5">1.5</option><option value="2" selected>2</option><option value="3">3</option><option value="4">4</option></select></div></div></div></details></section>
+<button class="crew-tile" data-tool="duty"><span>▤</span><strong>Roster &amp; Duty</strong><small>Available</small></button><button class="crew-tile" data-tool="drive"><span>🚗</span><strong>Travel Times</strong><small>Available</small></button><button class="crew-tile" data-tool="calendar"><span>▣</span><strong>Export to Calendar</strong><small>Available</small></button><button class="crew-tile" data-tool="import"><span>⇧</span><strong>Import Roster</strong><small>Available</small></button><button class="crew-tile" data-tool="help"><span>◷</span><strong>Help</strong><small>Available</small></button><button class="crew-tile" data-tool="flight"><span>✈</span><strong>Flight Planning</strong><small>Beta</small></button><button class="crew-tile" data-tool="commuter"><span>🛫</span><strong>Commuter</strong><small>Planned</small></button><button class="crew-tile" data-tool="hotels"><span>▥</span><strong>Hotels &amp; CATS</strong><small>Planned</small></button><button class="crew-tile" data-tool="eba"><span>⚖</span><strong>EBA &amp; Rest</strong><small>Planned</small></button><button class="crew-tile" data-tool="fdp"><span>✈️⏱️</span><strong>Calculators</strong><small>FDP &amp; rest</small></button><button class="crew-tile" data-tool="pay"><span>$</span><strong>Pay Calculator</strong><small>Planned</small></button><button class="crew-tile" data-tool="packing"><span>▣</span><strong>Trip Checklist</strong><small>Available</small></button><button class="crew-tile" data-tool="aircraft"><span>✈</span><strong>Aircraft Tracking</strong><small>Planned</small></button><button class="crew-tile" data-tool="logbook" type="button"><span>📖</span><strong>Logbook</strong><small>Ideas</small></button><button class="crew-tile" id="dashDocuments" type="button"><span>📁</span><strong>Document Library</strong><small>Available</small></button><button class="crew-tile" id="dashSettings" type="button"><span>⚙</span><strong>Settings</strong><small>Available</small></button></div></section>
+<section class="crew-page hidden" id="crewHelp" aria-label="CrewFocus Help">
+<div class="crew-section-heading"><h2 class="crew-page-title">Help</h2><button class="btn small" id="crewHelpBack" type="button">← Dashboard</button></div>
+<div class="crew-panel crew-help-start"><h3>Alarms &amp; Shortcuts</h3><p class="note">Open the existing step-by-step guide for setting up and checking iPhone Clock alarms.</p><button class="btn primary" id="crewHelpAlarmGuide" type="button">Open alarm setup guide</button></div>
+<div class="crew-panel crew-help-reference"><h3>How CrewFocus Works</h3><p class="note">Practical rules from the current CrewFocus code. Choose a topic, then open only the question you need. Experimental behaviour and planned features are identified.</p><label for="crewHelpSearch">Search help topics</label><div class="crew-help-search-row"><input type="search" id="crewHelpSearch" placeholder="e.g. alternate TAF, previous sector, NOTAM" aria-label="Search help content"><button type="button" class="btn small" id="crewHelpClear">Clear</button></div><p class="note crew-help-count" id="crewHelpCount" role="status" aria-live="polite"></p>
+<details class="crew-help-group" data-help-group="Getting around CrewFocus"><summary>Getting around CrewFocus <small>4 topics</small></summary><div class="crew-help-entries"><details class="crew-help-entry"><summary>Focus and Dashboard</summary><div class="crew-help-answer"><p><b>Focus</b> shows the currently selected preparation stage, a current duty when applicable, and the next duty. <b>Dashboard</b> contains the working tools and planned modules. The main Focus/Dashboard tabs remain available at the top.</p></div></details><details class="crew-help-entry"><summary>Automatic Focus timings</summary><div class="crew-help-answer"><p>Dashboard → Settings → Focus settings lets you enable stages and set each stage’s lead time before sign-on. The stages include Trip Preparation, Flight Planning, Hotel &amp; Transport, Commuter, and Departure Planning. As sign-on approaches, the enabled stage with the shortest reached lead time is selected. Days Off is the fallback. Selecting a manual Focus overrides automatic selection until automatic mode is restored.</p><p>Some stages are placeholders; selecting them does not make their planned features operational.</p></div></details><details class="crew-help-entry"><summary>Returning to where you were</summary><div class="crew-help-answer"><p>General Settings contains the page-resume duration, initially five minutes. If you leave Safari or reload within that period, CrewFocus attempts to restore the last page and scroll position. It does not automatically reopen modal dialogs. Flight Planning also rebuilds the saved NAIPS weather/NOTAM list without another Import tap. A full-screen iPad CBR preview is restored within the configured interval when possible. An alarm Shortcut return has its own departure-times restoration rule.</p></div></details><details class="crew-help-entry"><summary>LIVE and TEST</summary><div class="crew-help-answer"><p>The switch in the header changes the CBR testing context. In TEST, the displayed schedule can be treated as today where the date override is enabled. A test schedule is not an amended operational roster. Check that LIVE is selected for an actual duty.</p></div></details></div></details>
+<details class="crew-help-group" data-help-group="Roster and duty"><summary>Roster and duty <small>4 topics</small></summary><div class="crew-help-entries"><details class="crew-help-entry"><summary>Importing and reviewing the roster</summary><div class="crew-help-answer"><p>Import a roster file or paste roster text. The parser creates dated duties and preserves the original sector text. Review and accept a duty before using its times for departure planning. Manually confirm every date, port, sector and local time; imported or scanned text may be misread.</p></div></details><details class="crew-help-entry"><summary>Current duty, next duty and completed sectors</summary><div class="crew-help-answer"><p>Focus chooses current/upcoming duties from the saved roster. Original roster sector lines remain in their existing format. A sector is struck through once its calculated arrival instant has passed, using the relevant airport time zones. Long turnarounds are highlighted.</p></div></details><details class="crew-help-entry"><summary>Standby and call-outs</summary><div class="crew-help-answer"><p>Standby displays its start and finish without automatically creating alarms. Recognised call-out flying is separated from standby where possible so the original standby record can be retained for duty calculations. The user must confirm any roster interpretation.</p></div></details><details class="crew-help-entry"><summary>Duty, maximum FDP and rest tiles</summary><div class="crew-help-answer"><p>The Focus summary shows scheduled duty duration, a preliminary maximum FDP, calculated interval to the following sign-on, and preliminary minimum rest. The duty figure is amber at 60 minutes or less below the estimated FDP limit and red at 15 minutes or less (including exceedance). The rest figure is amber within 60 minutes above minimum and red within 15 minutes (including shortfall).</p><p>The maximum FDP is currently a <b>Table A reference</b> and cannot account for every acclimatisation, standby, early-start, disruption or special-duty rule. Do not use a green or neutral figure as an operational clearance.</p></div></details></div></details>
+<details class="crew-help-group" data-help-group="Departure planning, alarms and Calendar"><summary>Departure planning, alarms and Calendar <small>3 topics</small></summary><div class="crew-help-entries"><details class="crew-help-entry"><summary>Home and hotel departure times</summary><div class="crew-help-answer"><p>Departure Planning works back from sign-on using travel/transport time, security or checkout allowance, and your adjustable earlier-time labels. Home travel can use configured routing, with manual override; hotel transport times can be stored and overridden. Check the actual transport arrangements and journey time.</p></div></details><details class="crew-help-entry"><summary>Creating and changing alarms</summary><div class="crew-help-answer"><p>The Set Alarm controls call an Apple Shortcut. CrewFocus cannot silently create, inspect, delete or amend Clock alarms. Creating a replacement alarm does <b>not</b> remove an old one, so review Clock for duplicates and repeating settings. The Shortcut return should restore Departure Times. Use <b>Alarms &amp; Shortcuts</b> at the top of this Help page for the step-by-step setup guide.</p></div></details><details class="crew-help-entry"><summary>Calendar export and changes</summary><div class="crew-help-answer"><p>Calendar export is a manual copy of selected roster duties, not a live roster subscription. The app can use the configured iPhone Shortcut or offer an .ics file. Check previously imported events if the roster changes; duplicate-prevention tracking cannot guarantee a partly completed Shortcut added no events.</p></div></details></div></details>
+<details class="crew-help-group" data-help-group="Crew Briefing Report (CBR)"><summary>Crew Briefing Report (CBR) <small>4 topics</small></summary><div class="crew-help-entries"><details class="crew-help-entry"><summary>Selecting and confirming a CBR</summary><div class="crew-help-answer"><p>Flight Planning → Duty → Update CBR lets you inspect the selected screenshot/PDF before using it. Text is extracted locally by the importer, then the date, sign-on and flight sectors must be reviewed and confirmed. If the image or parser is unclear, keep the existing confirmed CBR rather than accepting an unverified schedule.</p></div></details><details class="crew-help-entry"><summary>A new duty versus an update to the same duty</summary><div class="crew-help-answer"><p>When the <b>confirmed duty date changes</b>, CrewFocus starts a new briefing by clearing the previous weather archive, selected NOTAMs and alternate display. A same-day update retains briefing content. You can also request Start Fresh explicitly when selecting the file, or use Clear Previous Briefing to remove weather and selections without erasing your roster or CBR schedule.</p></div></details><details class="crew-help-entry"><summary>Crew details and employee numbers</summary><div class="crew-help-answer"><p>CBR crew extraction is reviewed separately. The generated sector columns order crew by role, with Captain first, then FO, cabin management, cabin crew and positioning crew as applicable. The importer attempts to distinguish current from previous employment numbers and may leave ambiguous fields blank for review. ORIG is the shortened crew-table header.</p></div></details><details class="crew-help-entry"><summary>Operational notes and output</summary><div class="crew-help-answer"><p>Operational notes are entered by sector and displayed in black under OPERATIONAL. The iPad CBR uses a fixed landscape PNG canvas (2360 × 2240 pixels) with a clock-safe area; it can be shared/opened as an image. The original CBR and a generated briefing are separate. A generated PNG is a planning aid, not an authoritative company briefing.</p></div></details></div></details>
+<details class="crew-help-group" data-help-group="Weather: source and updates"><summary>Weather: source and updates <small>4 topics</small></summary><div class="crew-help-entries"><details class="crew-help-entry"><summary>Where weather comes from</summary><div class="crew-help-answer"><p>Weather is imported from a NAIPS location briefing pasted into Flight Planning. Automatic NAIPS fetching is <b>not connected</b>. All TAF, METAR/SPECI and ATIS information depends on what the imported source contains. A missing or invalid TAF is flagged for verification rather than treated as good weather.</p></div></details><details class="crew-help-entry"><summary>Updating one airport without erasing other sectors</summary><div class="crew-help-answer"><p>CrewFocus stores weather by airport. A new briefing for BNE can add newer BNE products while the previously imported MEL/ROK products remain available to their sectors. It keeps a limited archive of original weather reports per airport and chooses products applicable at each visit time. <b>Do not mistake a retained historical TAF for a current operational forecast.</b></p></div></details><details class="crew-help-entry"><summary>Previous sector weather after a new TAF</summary><div class="crew-help-answer"><p>After the airport arrival instant has passed, the sector is struck through on Focus. Updating later weather does not automatically delete an earlier report that was used for an already completed sector. At a turnaround, the compact CBR shows arrival and departure weather separately, and screens temporary changes against each configured event window. Historic weather remains available to reconstruct earlier sectors where relevant.</p></div></details><details class="crew-help-entry"><summary>Current TAF, SPECI and changes</summary><div class="crew-help-answer"><p>TAF validity is checked against the airport event, in UTC. FM/BECMG and temporary/probability groups are interpreted in their specified periods; an INTER/TEMPO group that only intersects a broader screening window is not automatically considered active at the exact flight event. SPECI is an observation, not a replacement TAF. Changed forecast groups can receive a black revision bar; significant groups use distinct colour highlighting.</p></div></details></div></details>
+<details class="crew-help-group" data-help-group="Weather screening and alternates"><summary>Weather screening and alternates <small>4 topics</small></summary><div class="crew-help-entries"><details class="crew-help-entry"><summary>Duty screening window</summary><div class="crew-help-answer"><p>For imported CBR weather, the overall window starts a configurable number of hours before sign-on (default <b>1 hour</b>) and ends after sign-off (default <b>4 hours</b>). Each airport has independently adjustable before/after arrival and before/after departure windows. Those event windows determine screening; the broad duty window alone does not prove applicability at an airport. Times from different ports are converted to UTC for comparison.</p></div></details><details class="crew-help-entry"><summary>How alternate airports are chosen</summary><div class="crew-help-answer"><p>ALTERNATES uses airports in the <b>most recently accepted NAIPS briefing</b> that are not already CBR duty-visit airports. It does not pull old alternate airports back out of the archived sector-weather cache. A new duty confirmation clears the earlier alternate selection.</p></div></details><details class="crew-help-entry"><summary>Which alternate TAF groups appear</summary><div class="crew-help-answer"><p>The alternates column screens each TAF against the <b>complete confirmed CBR duty window</b> (there is no scheduled alternate arrival/departure time) and selects the latest issue for each covered portion. It displays the applicable prevailing and overlapping FM/BECMG/INTER/TEMPO/PROB groups, without the raw TAF issue header, temperature, QNH or out-of-window change groups. Black change bars and weather colours are retained. Buffer-only temporary changes are amber; overlapping core-duty significant changes are red.</p></div></details><details class="crew-help-entry"><summary>Why an alternate may be absent or flagged</summary><div class="crew-help-answer"><p>An alternate does not appear if it is not present as a TAF airport in the last briefing, or if it is already one of the duty airports. A forecast that does not cover the screened period is flagged for verification. CrewFocus does not invent a replacement forecast or assume an airport has acceptable alternate weather.</p></div></details></div></details>
+<details class="crew-help-group" data-help-group="NOTAM screening and selection"><summary>NOTAM screening and selection <small>6 topics</small></summary><div class="crew-help-entries"><details class="crew-help-entry"><summary>Imported NOTAMs and age categories</summary><div class="crew-help-answer"><p>NOTAMs come from the imported NAIPS briefing. The advisory shortlist evaluates recognised validity dates and UTC operating periods against the saved duty. Clearly applicable items remain prominent; excluded or expired items are moved lower (red), and uncertain timing/overlap is retained for manual review (amber). Low-priority notices may be grouped separately. The original text remains accessible for verification.</p></div></details><details class="crew-help-entry"><summary>Which operating schedules can be assessed</summary><div class="crew-help-answer"><p>The parser recognises some explicit start/end UTC dates, plain DAILY time ranges (including overnight), and selected HJ/HN daylight-only periods where airport coordinates are supported. Combined, weekday-specific or unrecognised schedules require manual review; a questionable time rule must not silently exclude an item.</p></div></details><details class="crew-help-entry"><summary>NOTAM settings and sector windows</summary><div class="crew-help-answer"><p>Flight Planning Settings has four independent airport screening windows: arrival before/after and departure before/after (default 1 h / 2 h and 1 h / 1 h). Airport events are compared in UTC; a long turnaround does not create an uninterrupted screening period. The separate duty-wide window remains reference context for alternates.</p></div></details><details class="crew-help-entry"><summary>Selecting a NOTAM for a specific sector</summary><div class="crew-help-answer"><p>Shortlisting does not automatically add a NOTAM to the iPad CBR. The pilot selects relevant items. Assignment checks the matching airport and its independently configured arrival/departure screening windows, including recognised daily activation periods. Unknown times require review; an item outside both windows is not assigned simply because the airport matches.</p></div></details><details class="crew-help-entry"><summary>Aircraft-specific exclusions</summary><div class="crew-help-answer"><p>The aircraft selector currently includes B737-800, MAX 8 and MAX 10. Conservative screening can exclude clearly A380-only, higher-code-only or certain above-wingspan restrictions. A maximum-permitted Code E notice still includes Code C and should not be screened out on that basis. This is a limited filter, not a comprehensive aircraft-performance or regulatory assessment.</p></div></details><details class="crew-help-entry"><summary>NOTAM learning: what works now</summary><div class="crew-help-answer"><p>When manually adding a NOTAM, CrewFocus can record why it mattered (runway, approach, performance, operational or other), the original text and airport visits. These decisions can be backed up and restored. <b>Automatic learning-based selection is planned, not active</b>; saved decisions do not currently train a live model that can authorise future selections.</p></div></details></div></details>
+<details class="crew-help-group" data-help-group="Duty and rest calculators"><summary>Duty and rest calculators <small>3 topics</small></summary><div class="crew-help-entries"><details class="crew-help-entry"><summary>Maximum FDP calculator</summary><div class="crew-help-answer"><p>Dashboard → Calculators → Maximum FDP uses sign-on date/time and zone, duty type, sector count and acclimatisation inputs to display a reference result. Standby and special circumstances require additional conditions. Table A assumptions are not a substitute for approved operational documents or fatigue assessments.</p></div></details><details class="crew-help-entry"><summary>Required Rest calculator</summary><div class="crew-help-answer"><p>The Required Rest calculator can load a rostered duty or accept manual times. Sign-off is estimated as final landing plus 30 minutes for domestic or international flying duty; the code adds 30 minutes to minimum rest after an international final sector. Other conditions (including actual delays, local nights, standby and special duty) still require checking.</p></div></details><details class="crew-help-entry"><summary>How Focus obtains its rest figures</summary><div class="crew-help-answer"><p>Focus estimates duty from rostered sign-on to sign-off and rest from that sign-off to the <b>next rostered sign-on</b>. Where required duty data, sector classification or next sign-on is absent, it shows a dash rather than creating a number. The provisional minimum uses the greater of 12 hours or preceding duty duration, plus the applicable international final-sector increment; not every required rest rule is modelled.</p></div></details></div></details>
+<details class="crew-help-group" data-help-group="Checklist, tiles, ideas and documents"><summary>Checklist, tiles, ideas and documents <small>4 topics</small></summary><div class="crew-help-entries"><details class="crew-help-entry"><summary>Trip Checklist</summary><div class="crew-help-answer"><p>The packing checklist supports packed, not-coming and undecided states, custom rows and reorder controls. Choices are saved in this browser. Clearing ticks does not delete the checklist itself.</p></div></details><details class="crew-help-entry"><summary>Rearranging Dashboard tiles</summary><div class="crew-help-answer"><p>Hold a Dashboard tile to enter the wobbling edit mode. Hold again to lift and move it; normal swipes should scroll the page without moving tiles. A persistent Done button exits edit mode. Your custom ordering is stored locally and can be reset.</p></div></details><details class="crew-help-entry"><summary>Editable Things to Come</summary><div class="crew-help-answer"><p>Every Dashboard tile has its own collapsed, editable Things to Come list. Expand to read bullet points, choose Edit, then Save &amp; collapse. These are project notes only and do not activate new functionality. Export an ideas backup to preserve or transfer them.</p></div></details><details class="crew-help-entry"><summary>Document Library</summary><div class="crew-help-answer"><p>The library stores selected aviation documents locally in the browser. Uploaded documents are not automatically interpreted or applied to CBR weather, NOTAM decisions or the FDP calculator. Confirm you are using current approved references independently.</p></div></details></div></details>
+<details class="crew-help-group" data-help-group="Data, limitations and troubleshooting"><summary>Data, limitations and troubleshooting <small>4 topics</small></summary><div class="crew-help-entries"><details class="crew-help-entry"><summary>What is stored on the device?</summary><div class="crew-help-answer"><p>Most preferences, roster state, imported briefing text, weather archive, CBR selections, tile order and ideas use browser storage; some library documents use local IndexedDB. It is <b>not</b> a multi-device synchronisation service. Removing Safari website data can remove the saved information. Back up important ideas and learning records separately.</p></div></details><details class="crew-help-entry"><summary>Missing weather or briefing changes</summary><div class="crew-help-answer"><p>First check the confirmed duty date and its time zones, then verify the source NAIPS briefing contains the required airport and a TAF valid at its visit time. The latest NAIPS import controls alternates; the archive is retained only for sector weather history. A new-day CBR confirmation or explicit Clear Previous Briefing resets those products and selections.</p></div></details><details class="crew-help-entry"><summary>Planned versus available tools</summary><div class="crew-help-answer"><p>Commuter flight search, hotel/CATS automation, Pay Calculator, Aircraft Tracking and Logbook automation are development ideas or placeholders. The Logbook stores ideas only. Automatic NAIPS retrieval and self-learning NOTAM selection are not connected. Working modules should not be described as complete until independently validated.</p></div></details><details class="crew-help-entry"><summary>Safety, source of truth and feedback</summary><div class="crew-help-answer"><p>CrewFocus is a personal planning assistant and some calculations and weather/NOTAM interpretations are experimental. Use the current official operational documents, NAIPS briefing, company procedures and human cross-checks as the source of truth. For a suspected problem, retain the original source, report the affected airport/sector, and note the CrewFocus version.</p></div></details></div></details>
+<p class="note crew-help-source">Reference: CrewFocus v252 implementation. Guidance is descriptive, not operational approval. Use current authorised aviation material for decisions.</p></div></section>
+<section class="crew-page hidden" id="crewDocuments"><div class="crew-section-heading"><h2 class="crew-page-title">Aviation Document Library</h2><button class="btn small" id="documentsBack" type="button">← Dashboard</button></div><div class="crew-panel"><h3>Upload aviation documents</h3><p class="note">A central library for manuals, procedures, EBA documents, operational references and other aviation material. Files are stored locally in this browser on this device; they are not yet interpreted or applied to flight planning. Always verify against current approved sources.</p><div class="field"><label for="documentCategory">Document category</label><select id="documentCategory"><option value="Operations manuals">Operations manuals</option><option value="AIP and charts">AIP and charts</option><option value="Aircraft manuals">Aircraft manuals</option><option value="EBA and rostering">EBA and rostering</option><option value="Airport procedures">Airport procedures</option><option value="Other aviation references">Other aviation references</option></select></div><div class="field"><label for="documentFiles">Choose documents</label><input id="documentFiles" type="file" accept=".pdf,.txt,.doc,.docx,.html,.htm,.csv,.json,image/*" multiple></div><button class="btn primary" id="documentsSave" type="button">Save to document library</button><p class="note" id="documentsStatus" role="status">Choose one or more documents to save locally.</p></div><div class="crew-panel"><h3>Saved documents</h3><div id="documentsList" class="note">Loading library…</div></div></section><section class="crew-page hidden" id="crewSettings"><div class="crew-section-heading"><h2 class="crew-page-title">Settings</h2><button class="btn small" id="settingsBack" type="button">← Dashboard</button></div><details class="crew-panel crew-settings-subsection"><summary>General Settings</summary><div class="crew-settings-inner"><label for="crewRole">Crew role</label><select id="crewRole"><option value="fc">Flight crew</option><option value="cc">Cabin crew</option></select><label for="crewAirline">Airline</label><select id="crewAirline"><option value="va">Virgin Australia</option><option value="qf">Qantas (planned)</option><option value="jq">Jetstar (planned)</option></select><label for="crewHomeBaseGeneral">Home base (airport code)</label><select id="crewHomeBaseGeneral" aria-label="Home base for roster checks"><option value="MEL">MEL</option></select><p class="note">Used for the home-base rest check. The rule below is a preliminary 15-hour check; other roster requirements are not yet assessed.</p><label for="crewResumeMinutes">Return to the previous page after leaving CrewFocus</label><select id="crewResumeMinutes"><option value="0">Off · always open Focus</option><option value="1">1 minute</option><option value="2">2 minutes</option><option value="5" selected>5 minutes (default)</option><option value="10">10 minutes</option><option value="15">15 minutes</option><option value="30">30 minutes</option><option value="60">1 hour</option></select><p class="note">If you switch to NAIPS, Safari can restore the same CrewFocus screen and scroll position when you return within this period.</p><button class="btn" id="settingsPlan" type="button">Edit addresses &amp; transport</button></div></details><details class="crew-panel crew-settings-subsection"><summary>Focus settings</summary><div class="crew-settings-inner"><p class="note">Choose which Focus pages appear and how long before the next duty sign-on they become active. Tap Hours or Minutes for the iPhone/iPad scrolling picker. The most recently reached stage takes priority; pages do not open automatically.</p><div class="focus-timing-list" id="focusEnabledOptions" aria-label="Automatic Focus timing"></div><p class="note focus-timing-help">Days off is the automatic fallback when no timed pre-duty stage applies. Times are saved on this device and use each duty's local sign-on time zone.</p><label for="focusChoice">Current focus</label><select id="focusChoice"><option value="duty">Departure planning</option><option value="flight">Flight preparation</option><option value="commuter">Commuter</option><option value="hotel">Hotel &amp; transport</option><option value="packing">Trip preparation</option><option value="off">Days off</option></select><div class="crew-home-actions"><button class="btn primary" id="setManualFocus" type="button">Set manual focus</button><button class="btn" id="setAutoFocus" type="button">Use automatic</button></div><p class="note" id="focusSettingStatus"></p></div></details><details class="crew-panel crew-settings-subsection"><summary>Flight Planning settings</summary><div class="crew-settings-inner"><div class="field"><label for="crewAircraftType">Aircraft type for NOTAM screening</label><select id="crewAircraftType"><option value="B738">Boeing 737-800 (B738)</option><option value="B38M">Boeing 737 MAX 8 (B38M)</option><option value="B3XM">Boeing 737 MAX 10 (B3XM)</option></select></div><p class="note" id="crewAircraftDetails"></p><p class="note">Aircraft reference code 4C. Wingspan varies with wingtip configuration; confirm the specific aircraft dimensions before applying a numeric wingspan exclusion. Only clearly aircraft-specific NOTAMs are screened out; all screened-out entries remain available for review.</p><p class="note">Weather and NOTAMs use separate UTC windows around each <strong>airport arrival</strong> and <strong>airport departure</strong>. These are four independent controls—not a window spanning the whole flight or turnaround. The duty-wide limits below remain reference limits and are used for alternates without a specific airport event.</p>
+<div class="fields">
+<div class="field"><label for="cbrBefore">Hours before duty commencement · alternate reference</label><select id="cbrBefore"></select></div>
+<div class="field"><label for="cbrAfter">Hours after duty completion · alternate reference</label><select id="cbrAfter"></select></div>
+</div>
+<h3 style="margin:17px 0 8px">Airport arrival screening</h3>
+<div class="fields"><div class="field"><label for="cbrArrBefore">Before arrival</label><select id="cbrArrBefore" aria-label="Weather and NOTAM screening hours before airport arrival"></select></div><div class="field"><label for="cbrArrAfter">After arrival</label><select id="cbrArrAfter" aria-label="Weather and NOTAM screening hours after airport arrival"></select></div></div>
+<h3 style="margin:17px 0 8px">Airport departure screening</h3>
+<div class="fields"><div class="field"><label for="cbrDepBefore">Before departure</label><select id="cbrDepBefore" aria-label="Weather and NOTAM screening hours before airport departure"></select></div><div class="field"><label for="cbrDepAfter">After departure</label><select id="cbrDepAfter" aria-label="Weather and NOTAM screening hours after airport departure"></select></div></div>
+<p class="note">For a turnaround both windows are checked; any gap between them is not automatically screened. An origin has departure only; a final destination has arrival only. Uncertain NOTAM timing stays available for review. A changed screening setting refreshes the weather/NOTAM interpretation without importing a new NAIPS briefing.</p></div></div></details></section>
 <section class="crew-page hidden" id="crewFlight"><p id="cbrModeNotice" class="cbr-mode-notice" hidden style="display:none!important"></p><div class="crew-section-heading"><h2 class="crew-page-title">Flight Planning</h2><button class="btn small" id="flightBack" type="button" hidden>← Dashboard</button></div><div id="flightCompactHome" class="flight-compact-home"><div class="crew-panel flight-duty-reference" id="flightDutyReference" hidden style="display:none!important"><div class="flight-reference-title">Duty screening <span class="flight-compact-stamp">Reference for WX / NOTAMs</span></div><div id="flightDutyWindowText" class="note">Import or review a CBR to establish the UTC screening window.</div>
 <div class="crew-screening-mode" id="crewScreeningModePanel"><strong>Weather screening mode</strong><label><input type="radio" name="crewWxMode" value="cbr"> Imported CBR duty</label><label><input type="radio" name="crewWxMode" value="sector"> Single-sector test</label><p class="note" id="crewWxModeStatus" role="status">Select the source for weather screening. Saved times are retained when switching.</p></div><details id="flightManualDuty"><summary>Single Sector Test · airport times</summary><p class="note">Enter the departure and arrival airport, local date and time. Each airport is independently converted to UTC. The imported CBR is not changed.</p><div id="crewTestTimeline" class="card" style="margin-top:14px;padding:12px"><h3 style="margin:0 0 8px">Test sector</h3><div id="crewTestTimelineRows"></div><p class="note" id="crewTestTimelineStatus" role="status"></p><button class="btn primary" id="crewTestTimelineSave" type="button">Confirm test sector</button><button class="btn" id="crewTestTimelineReset" type="button">Reset test sector</button></div></details></div>
 <section class="crew-panel flight-compact-card" id="flightCBRCard"><h3>Duty <span class="flight-arrow" aria-hidden="true">⌄</span></h3><div class="flight-summary-line"><span id="flightDutySummary">No CBR imported</span><span id="flightCbrUpdated" class="flight-compact-stamp">Not imported</span></div><div class="crew-home-actions"><button class="btn primary" type="button" id="flightOpenCBRReview">Update CBR</button><button class="btn primary" type="button" id="flightOpenCBRView">View CBR</button></div></section>
@@ -1159,7 +1204,7 @@ VA 1101 0705 NTL BNE 0720" rows="7"></textarea><p class="note">Check the year, d
 <h2>Calculation notes</h2>
 <p class="note">The sign on date and time are used exactly as entered, including for future planning. The countdown is relative to the current local time. Schedule times use the selected sign-on time zone; the live clock uses your device's local time zone. Your selections are remembered on this device. Past sign-on dates advance to today when reopening.</p>
 <p class="note">Hotel transport times can be saved and updated. This prototype saves them in the browser's local storage; downloaded-file previews may not retain settings. A hosted version can make saving more reliable across sessions and devices.</p>
-</section></details><p class="note" id="planApplyStatus" role="status"></p><button class="btn primary wide" id="applyPlan" type="button">Use this plan</button></div></dialog><dialog aria-labelledby="calendarTitle" id="calendarDialog"><div class="modal-shell"><header><h2 id="calendarTitle">Add to Calendar</h2><button class="btn small" id="closeCalendar" type="button">Close</button></header><label for="calendarScope">Include</label><select id="calendarScope"><option value="current">Accepted duty</option><option value="upcoming">Upcoming roster duties</option><option value="all">Whole roster</option></select><h3 id="calendarCount"></h3><p class="note" id="calendarSkipped" role="status"></p><div id="calendarIssues"></div><p class="note">One event per duty. Titles show local sign-on and sign-off times and finishing location; full sector details remain in Notes. No hotels or reminders.</p><button class="btn primary wide" id="calendarExport" type="button">Add roster to Calendar</button><p class="note" id="calendarStatus" role="status"></p><details id="calendarSetup"><summary>One-time iPhone setup</summary><p class="note">Use a separate shortcut named <strong>Leave for Work Calendar</strong>. Your alarm shortcut stays separate. Shortcuts opens briefly during import and requests a return to this app. No downloading or Siri Suggestions is needed.</p><p class="note">One action at a time. Your progress is saved on this device. “What you should see” describes the checkpoint; if it differs, send that screen before continuing.</p><p class="note" id="calendarGuideProgress"></p><h3 id="calendarGuideTitle"></h3><div class="note" id="calendarGuideInstruction"></div><div class="calendar-issue"><strong>What you should see</strong><p class="note" id="calendarGuideExpected"></p></div><div class="row help-nav"><button class="btn" id="calendarGuideBack" type="button">Back</button><button class="btn primary" id="calendarGuideNext" type="button">Next step</button></div><button class="btn small" id="calendarGuideResume" type="button">Continue from my screenshot</button><p class="note">These controls can vary with iOS. The test checks your phone before sending a full roster. If Calendar opens an editor for every event, check the expanded Add New Event action and turn its compose screen off.</p><button class="btn wide" id="calendarTest" type="button">Test with one event</button><button class="btn wide" id="calendarSetupDone" type="button">I checked the test</button></details><details style="margin-top:16px"><summary>Other options &amp; roster changes</summary><p class="note">This makes a copy, not a live subscription. A completed import is remembered on this device to help prevent duplicates. Changed duties need their previous calendar events removed before you import them again. An interrupted shortcut can leave some events added: check Calendar before retrying.</p><button class="btn wide" id="calendarDownload" type="button">Download .ics file instead</button><p class="note">File import depends on the app opening the file; Safari and Files may only preview it. The shortcut above avoids that route.</p><button class="btn wide" id="calendarResetHistory" type="button">Allow a fresh import</button></details></div></dialog><dialog aria-labelledby="alarmHelpTitle" id="alarmHelp"><div class="help-shell"><header><h2 id="alarmHelpTitle">Set up iPhone alarms</h2><button class="btn small" id="closeAlarmHelp" type="button">Close</button></header><p class="note" id="alarmHelpProgress"></p><div id="alarmHelpContent"></div><p class="note" id="alarmHelpStatus" role="status"></p><div class="row help-nav"><button class="btn" id="alarmHelpBack" type="button">Back</button><button class="btn primary" id="alarmHelpNext" type="button">Next</button></div></div></dialog><footer class="note" style="text-align:center;padding:8px 10px">Version 249 · 19 Nov 2026</footer></main>
+</section></details><p class="note" id="planApplyStatus" role="status"></p><button class="btn primary wide" id="applyPlan" type="button">Use this plan</button></div></dialog><dialog aria-labelledby="calendarTitle" id="calendarDialog"><div class="modal-shell"><header><h2 id="calendarTitle">Add to Calendar</h2><button class="btn small" id="closeCalendar" type="button">Close</button></header><label for="calendarScope">Include</label><select id="calendarScope"><option value="current">Accepted duty</option><option value="upcoming">Upcoming roster duties</option><option value="all">Whole roster</option></select><h3 id="calendarCount"></h3><p class="note" id="calendarSkipped" role="status"></p><div id="calendarIssues"></div><p class="note">One event per duty. Titles show local sign-on and sign-off times and finishing location; full sector details remain in Notes. No hotels or reminders.</p><button class="btn primary wide" id="calendarExport" type="button">Add roster to Calendar</button><p class="note" id="calendarStatus" role="status"></p><details id="calendarSetup"><summary>One-time iPhone setup</summary><p class="note">Use a separate shortcut named <strong>Leave for Work Calendar</strong>. Your alarm shortcut stays separate. Shortcuts opens briefly during import and requests a return to this app. No downloading or Siri Suggestions is needed.</p><p class="note">One action at a time. Your progress is saved on this device. “What you should see” describes the checkpoint; if it differs, send that screen before continuing.</p><p class="note" id="calendarGuideProgress"></p><h3 id="calendarGuideTitle"></h3><div class="note" id="calendarGuideInstruction"></div><div class="calendar-issue"><strong>What you should see</strong><p class="note" id="calendarGuideExpected"></p></div><div class="row help-nav"><button class="btn" id="calendarGuideBack" type="button">Back</button><button class="btn primary" id="calendarGuideNext" type="button">Next step</button></div><button class="btn small" id="calendarGuideResume" type="button">Continue from my screenshot</button><p class="note">These controls can vary with iOS. The test checks your phone before sending a full roster. If Calendar opens an editor for every event, check the expanded Add New Event action and turn its compose screen off.</p><button class="btn wide" id="calendarTest" type="button">Test with one event</button><button class="btn wide" id="calendarSetupDone" type="button">I checked the test</button></details><details style="margin-top:16px"><summary>Other options &amp; roster changes</summary><p class="note">This makes a copy, not a live subscription. A completed import is remembered on this device to help prevent duplicates. Changed duties need their previous calendar events removed before you import them again. An interrupted shortcut can leave some events added: check Calendar before retrying.</p><button class="btn wide" id="calendarDownload" type="button">Download .ics file instead</button><p class="note">File import depends on the app opening the file; Safari and Files may only preview it. The shortcut above avoids that route.</p><button class="btn wide" id="calendarResetHistory" type="button">Allow a fresh import</button></details></div></dialog><dialog aria-labelledby="alarmHelpTitle" id="alarmHelp"><div class="help-shell"><header><h2 id="alarmHelpTitle">Set up iPhone alarms</h2><button class="btn small" id="closeAlarmHelp" type="button">Close</button></header><p class="note" id="alarmHelpProgress"></p><div id="alarmHelpContent"></div><p class="note" id="alarmHelpStatus" role="status"></p><div class="row help-nav"><button class="btn" id="alarmHelpBack" type="button">Back</button><button class="btn primary" id="alarmHelpNext" type="button">Next</button></div></div></dialog><footer class="note" style="text-align:center;padding:8px 10px">Version 252 · 19 Nov 2026</footer></main>
 <dialog id="crewCalloutDialog" aria-labelledby="crewCalloutTitle">
  <div class="crew-callout-inner">
   <h2 id="crewCalloutTitle">Possible roster call-out</h2>
@@ -2518,7 +2563,7 @@ function crewNotamWindow(){
   const first=localUTC(dutyDate,c.signon||rs[0][2],rs[0][1]);if(!first)return null;
   let last=localUTC(dutyDate,c.signoff||rs[rs.length-1][4],c.signoffPort||rs[rs.length-1][3]);
   if(!last)return null;if(last<first)last=new Date(last.getTime()+86400000);
-  const before=Number(document.getElementById('cbrBefore')?.value??1),after=Number(document.getElementById('cbrAfter')?.value??4),sub=Number(document.getElementById('cbrSectorBefore')?.value??1);
+  const before=Number(document.getElementById('cbrBefore')?.value??1),after=Number(document.getElementById('cbrAfter')?.value??4),sub=crewAirportSetting252('cbrDepBefore');
   let start=new Date(first.getTime()-before*3600000);
   const now=new Date();
   // Advance only when the scheduled arrival has passed, consistent with red strike-through.
@@ -2604,8 +2649,13 @@ function crewNotamStatus(raw,airportCode){
  }
  if(from&&isPermanent)to=new Date('9999-12-31T23:59:00Z');
  if(!from||!to||to<from)return 'uncertain';
+ // The airport itself is the screening reference. The duty-wide window must
+ // not exclude a valid ARR/DEP airport event or select an event in a long gap.
+ const visits252=ipadAirportVisits(airportCode);
+ if(visits252.length)return crewAirportNotamStatus252(txt,airportCode,from,to,visits252);
+ // Fallback for briefing airports without a confirmed CBR visit (alternates).
  if(to<window.start||from>window.finish)return 'excluded';
- // HJ/HN apply even to permanent NOTAMs. Other or combined schedules remain amber.
+  // HJ/HN apply even to permanent NOTAMs. Other or combined schedules remain amber.
  const solarSchedule=txt.match(/(?:^|\n)\s*(HJ|HN)\s*(?:\n|$)/im);
  if(solarSchedule){
   if(/(?:^|\n)\s*(?:DAILY|MON|TUE|WED|THU|FRI|SAT|SUN)\b/im.test(txt))return 'uncertain';
@@ -2643,6 +2693,7 @@ function crewAircraftNotamReason(raw){
  const text=String(raw||'').toUpperCase().replace(/\s+/g,' ');
  const is737=['B738','B38M','B3XM'].includes(selected);
  if(!is737)return '';
+  if(/\b(?:CODE|CAT|CATEGORY)\s+B\s+(?:ACFT|AIRCRAFT)\b/.test(text)&&!/\b(?:CODE|CAT|CATEGORY)\s+(?:A\s*[-–]\s*D|C|D|E|F)\b/.test(text))return 'Code/Category B aircraft-only notice: verify restriction before excluding for Code C B737';
  // Exclude only where the NOTAM's operational restriction is explicitly limited to A380.
  // Do not exclude mixed aircraft lists or unrelated A380 references.
  const a380=/(?:\bA380\b|\bA-380\b|\bAIRBUS\s*A380\b)/;
@@ -2668,6 +2719,7 @@ function crewNotamKeep(raw,code){return crewNotamStatus(raw,code)!=='excluded';}
 function crewNotamLowPriority(raw){
  const t=String(raw||'').toUpperCase().replace(/\s+/g,' ');
  // Low-priority operational advisories: evaluate only after date and aircraft screening.
+  if(/\bABN\s+(?:U\/?S|UNSERVICEABLE|NOT\s+AVBL)\b/.test(t)&&!/\b(?:RWY|ILS|VOR|DME|NDB|RNP|SID|STAR|APCH|APPROACH)\b/.test(t))return true;
  // A 'MAX CODE E AND BLW' permission includes Code C; it does not close the taxiway.
  if(/\b(?:TWY|TAXIWAY)\b/.test(t)&&/\bRESTRICTED\s+TO\s+MAX\s+(?:ICAO\s+)?CODE\s+[DEF]\s+(?:AND\s+)?(?:BLW|BELOW)\b/.test(t)&&!/\b(?:CLSD|CLOSED|U\/S|NOT\s+AVBL|NOT\s+AVAILABLE)\b/.test(t))return true;
  // Apron taxiways specifically designated for aircraft under tow and vehicles.
@@ -2907,38 +2959,11 @@ function ipadAssignmentConfirm(id,raw){
 // matching is mandatory: a NOTAM for YBRK must never be sent to another port.
 function ipadManualNotamVisits(code,raw){
  const candidates=ipadAirportVisits(code),period=ipadNotamValidity(raw),schedule=ipadNotamSchedule(raw);
- const src=window.crewIpadSchedule,rows=src?.rows?.()||[];
- const timeline=crewCBRUtcTimeline(src?.sourceDate?.()||src?.date?.());
  if(!candidates.length)return {matches:[],candidates,period,schedule,reason:'airport not found in the CBR'};
  if(!period)return {matches:[],candidates,period,schedule,reason:'validity dates could not be confirmed'};
  if(schedule.type==='review')return {matches:[],candidates,period,schedule,reason:'additional operating hours require review'};
- const margin=15*60000,dayMs=86400000;
- function overlaps(lo,hi){
-  lo=Math.max(lo,period[0]);hi=Math.min(hi,period[1]);
-  if(hi<lo)return false;
-  if(schedule.type==='continuous')return true;
-  const first=Math.floor(lo/dayMs)-1,last=Math.floor(hi/dayMs);
-  if(last-first>35)return false;
-  for(let day=first;day<=last;day++){
-   const start=day*dayMs+schedule.from*60000;
-   const end=day*dayMs+(schedule.to<=schedule.from?schedule.to+1440:schedule.to)*60000;
-   if(Math.max(lo,start)<=Math.min(hi,end))return true;
-  }
-  return false;
- }
- const matches=candidates.filter(visit=>{
-  const d=/^departure-(\d+)$/.exec(visit.key),a=/^arrival-(\d+)$/.exec(visit.key);
-  if(!d&&!a)return false;
-  const index=d?+d[1]:+a[1];
-  const relevant=[index];
-  // A turnaround visit is shared by the arriving and departing sectors.
-  if(a&&index+1<rows.length&&rows[index+1]?.[1]===visit.code)relevant.push(index+1);
-  return relevant.some(i=>{
-   const dep=timeline[i]?.departure?.instant?.getTime(),arr=timeline[i]?.arrival?.instant?.getTime();
-   return Number.isFinite(dep)&&Number.isFinite(arr)&&arr>=dep&&overlaps(dep-margin,arr+margin);
-  });
- });
- return {matches,candidates,period,schedule,reason:matches.length?'':'no overlap with sector departure-to-arrival ±15 min'};
+ const matches=candidates.filter(visit=>crewAirportEventWindows252(visit).some(w=>crewAirportNotamMatchesWindow252(period,schedule,w)));
+ return {matches,candidates,period,schedule,reason:matches.length?'':'no overlap with the configured airport ARR/DEP windows'};
 }
 function ipadOpenNotamEditor(id,raw,initial,onSave){
  document.getElementById('ipadNotamEditOverlay')?.remove();
@@ -2964,7 +2989,7 @@ function ipadChooseVisit(id,raw,abbreviated=false,airport='',displayText=''){
  const review=ipadManualNotamVisits(airport,raw);
  const choices=review.candidates.length?review.candidates:visits;
  let eligible=review.matches,needsTimingReview=false;
- if(!eligible.length&&review.candidates.length===1){
+ if(!eligible.length&&review.candidates.length===1&&(review.reason==='additional operating hours require review'||review.reason==='validity dates could not be confirmed')){
   // Manual selection identifies the airport uniquely, even where an imported
   // NOTAM has undecodable operating times. Mark as needing time verification.
   eligible=review.candidates;needsTimingReview=true;
@@ -2973,7 +2998,7 @@ function ipadChooseVisit(id,raw,abbreviated=false,airport='',displayText=''){
   for(const visit of eligible)ipadSelections[visit.key+'|'+id]={visit:visit.key,id,raw,abbreviated,display:displayText,auto:false,timingReview:needsTimingReview};
   ipadSave();ipadCBRRender();ipadUpdateButtons();
   crewNotamLearningPrompt(id,raw,()=>ipadAssignmentConfirm(id,raw));
-  const status=document.getElementById('ipadCBRStatus');if(status)status.textContent=id+' placed in '+eligible.map(v=>v.label).join('; ')+(needsTimingReview?' — verify published validity/operating hours; the ±15-minute sector window did not confirm applicability.':'. Sector matching: departure −15 min to arrival +15 min.');
+  const status=document.getElementById('ipadCBRStatus');if(status)status.textContent=id+' placed in '+eligible.map(v=>v.label).join('; ')+(needsTimingReview?' — verify published validity/operating hours; the airport ARR/DEP windows did not confirm applicability.':'. Matched to the configured airport ARR/DEP screening windows.');
   return;
  }
  // Only a genuinely ambiguous/missing airport or repeat visit needs a manual
@@ -2984,6 +3009,65 @@ function ipadChooseVisit(id,raw,abbreviated=false,airport='',displayText=''){
  const n=Number(response);if(!Number.isInteger(n)||n<1||n>choices.length){alert('Invalid visit number. NOTAM not added.');return;}
  const visit=choices[n-1];ipadSelections[visit.key+'|'+id]={visit:visit.key,id,raw,abbreviated,display:displayText,auto:false,timingReview:true};
  ipadSave();ipadCBRRender();ipadUpdateButtons();crewNotamLearningPrompt(id,raw,()=>ipadAssignmentConfirm(id,raw));
+}
+// v252: Flight planning uses ARR/DEP event windows, never the entire sector.
+// Arrival and departure periods stay separate even during a long turnaround.
+const crewAirportDefaults252={cbrArrBefore:1,cbrArrAfter:2,cbrDepBefore:1,cbrDepAfter:1};
+function crewAirportSetting252(id){
+ const def=crewAirportDefaults252[id]??1;
+ const el=document.getElementById(id);
+ let n=Number(el?.value);
+ if(!el||el.value===''){
+  try{const stored=localStorage.getItem('crewFocus_'+id);n=stored===null?def:Number(stored)}catch(e){n=def}
+ }
+ return Number.isFinite(n)&&n>=0&&n<=24?n:def;
+}
+function crewAirportEventWindows252(visit){
+ if(!visit)return [];
+ const ms=d=>d instanceof Date?d.getTime():new Date(d).getTime();
+ const arr=ms(visit.start||visit.time),dep=ms(visit.end||visit.time);
+ const events=[];
+ const hours=3600000;
+ if(visit.kind==='arrival'&&Number.isFinite(arr)){
+  events.push({type:'ARR',time:new Date(arr),start:new Date(arr-crewAirportSetting252('cbrArrBefore')*hours),finish:new Date(arr+crewAirportSetting252('cbrArrAfter')*hours)});
+ }
+ if((visit.kind==='departure'||(visit.kind==='arrival'&&Number.isFinite(dep)&&dep>arr+60000))&&Number.isFinite(dep)){
+  events.push({type:'DEP',time:new Date(dep),start:new Date(dep-crewAirportSetting252('cbrDepBefore')*hours),finish:new Date(dep+crewAirportSetting252('cbrDepAfter')*hours)});
+ }
+ return events;
+}
+function crewAirportOverlaps252(lo,hi,window){
+ const from=lo instanceof Date?lo.getTime():Number(lo),to=hi instanceof Date?hi.getTime():Number(hi);
+ return Number.isFinite(from)&&Number.isFinite(to)&&Number.isFinite(window?.start?.getTime())&&Number.isFinite(window?.finish?.getTime())&&Math.max(from,window.start.getTime())<=Math.min(to,window.finish.getTime());
+}
+// Recognised DAILY schedules must intersect at least one INDIVIDUAL airport event window.
+function crewAirportNotamMatchesWindow252(period,schedule,w){
+ if(!period||!w)return false;
+ const lo=Math.max(Number(period[0]),w.start.getTime()),hi=Math.min(Number(period[1]),w.finish.getTime());
+ if(hi<lo)return false;
+ if(schedule.type==='continuous')return true;
+ if(schedule.type!=='daily')return false;
+ const day=86400000,first=Math.floor(lo/day)-1,last=Math.floor(hi/day);
+ if(last-first>35)return false;
+ for(let d=first;d<=last;d++){
+  const a=d*day+schedule.from*60000,b=d*day+(schedule.to<=schedule.from?schedule.to+1440:schedule.to)*60000;
+  if(Math.max(a,lo)<=Math.min(b,hi))return true;
+ }
+ return false;
+}
+function crewAirportNotamStatus252(raw,code,from,to,visits){
+ const period=[from.getTime(),to.getTime()],schedule=ipadNotamSchedule(raw);
+ const windows=visits.flatMap(crewAirportEventWindows252);
+ if(!windows.length)return 'uncertain';
+ const overlapping=windows.filter(w=>crewAirportOverlaps252(period[0],period[1],w));
+ if(!overlapping.length)return 'excluded';
+ if(schedule.type==='review'){
+  const solar=String(raw).match(/(?:^|\n)\s*(HJ|HN)\s*(?:\n|$)/im);
+  if(!solar||/(?:^|\n)\s*(?:DAILY|MON|TUE|WED|THU|FRI|SAT|SUN)\b/im.test(String(raw)))return 'uncertain';
+  const statuses=overlapping.map(w=>crewDaylightStatus(from,to,{start:w.start,finish:w.finish},code,solar[1].toUpperCase()));
+  return statuses.includes('current')?'current':statuses.includes('uncertain')?'uncertain':'excluded';
+ }
+ return overlapping.some(w=>crewAirportNotamMatchesWindow252(period,schedule,w))?'current':'excluded';
 }
 function ipadAirportVisits(code){
  // v237: NAIPS uses ICAO while the CBR uses IATA; reuse the established
@@ -3073,9 +3157,37 @@ function ipadCrewBaseCode(value){
  const code=String(value||'').trim().toUpperCase();
  return /^(?:MEL|SYD|BNE|ADL|PER|CBR|HBA|OOL|CNS|DRW|TSV|LST|AVV|MCY|NTL|BME|ASP|DPO|BWT|CFS|ROK|MKY|PPP|HTI|AKL|CHC|WLG)$/.test(code)?code:'';
 }
+function ipadCrewCanonicalName251(person){
+ const input=String(person?.name||'').trim().toUpperCase().replace(/^(?:CPT|CAPT|CAPTAIN|FO|CM|CC|C)\s+/,'').replace(/[’']/g,"'");
+ if(!input)return '';
+ const name=input.includes(',') ? input.split(',').slice(1).join(' ').trim()+' '+input.split(',')[0].trim() : input;
+ return name.replace(/[^A-Z0-9]+/g,' ').trim().replace(/\s+/g,' ');
+}
 function ipadCrewIdentity(person){
+ // Never split one named person into two rows when OCR sees their old/new EMP numbers.
+ const name=ipadCrewCanonicalName251(person);
+ if(name)return 'NAME:'+name;
  const emp=String(person?.empNo||'').trim().replace(/\D/g,'');
- return emp?'EMP:'+emp:'NAME:'+String(person?.name||'').trim().replace(/\s+/g,' ').toUpperCase();
+ return emp?'EMP:'+emp:'UNKNOWN';
+}
+function ipadCrewDeduplicate251(rows){
+ let conflicts=false;
+ const result=rows.map(list=>{
+  const unique=new Map();
+  for(const p of list||[]){
+   const key=ipadCrewIdentity(p);
+   if(key==='UNKNOWN'){conflicts=true;continue;}
+   if(!unique.has(key)){unique.set(key,{...p});continue;}
+   const saved=unique.get(key);
+   const oldId=String(saved.empNo||'').trim(),newId=String(p.empNo||'').trim();
+   if(oldId&&newId&&oldId!==newId){saved.empNo='';conflicts=true;}
+   else if(!oldId&&newId)saved.empNo=newId;
+   if(!saved.base&&p.base)saved.base=p.base;
+   if(ipadCrewOrder(p.role)<ipadCrewOrder(saved.role))saved.role=p.role;
+  }
+  return [...unique.values()].sort((a,b)=>ipadCrewOrder(a.role)-ipadCrewOrder(b.role));
+ });
+ return {rows:result,conflicts};
 }
 // A fallback OCR pass may identify a name and its Base but fail to read all
 // sector roles. Capture the base only, never invent sector assignments.
@@ -3267,18 +3379,19 @@ function ipadImportCrewFromCBR(raw,flightRows,tsv='',textPasses=[]){
  // Do not overwrite coordinate-verified positions with less reliable OCR text.
  // Add only entries whose presence on every sector is independently clear.
  fallback.rows.forEach((list,i)=>{
-  const existing=new Set(extracted[i].map(p=>String(p.empNo||p.name).toUpperCase()));
-  for(const p of list){const k=String(p.empNo||p.name).toUpperCase();if(!existing.has(k)){extracted[i].push(p);existing.add(k);}}
+  const existing=new Set(extracted[i].map(ipadCrewIdentity));
+  for(const p of list){const k=ipadCrewIdentity(p);if(!existing.has(k)){extracted[i].push(p);existing.add(k);}}
   extracted[i].sort((a,b)=>ipadCrewOrder(a.role)-ipadCrewOrder(b.role));
  });
  const plainBaseHints=[raw,...(Array.isArray(textPasses)?textPasses:[])].filter(Boolean).flatMap(ipadCrewBaseHintsFromText);
  ipadCrewMergeBases(extracted,[...fallback.rows.flat(),...plainBaseHints]);
- const recovered=new Set(extracted.flat().map(p=>String(p.name||'').toUpperCase()));
- const missing=allSeen.filter(name=>!recovered.has(name));
+ const deduplicated=ipadCrewDeduplicate251(extracted);
+ const recovered=new Set(deduplicated.rows.flat().map(ipadCrewCanonicalName251));
+ const missing=allSeen.filter(name=>!recovered.has(ipadCrewCanonicalName251({name})));
  ipadCrewRows={};ipadCrew={};ipadCrewEmptyAcknowledged=false;
- extracted.forEach((list,i)=>{ipadCrewRows[i]=list;ipadCrew[i]=list.map(p=>p.role+' '+p.name).join('\n')});
- ipadCrewSource=missing.length?'partial':extracted.some(list=>list.length)?'imported':'unverified';
- ipadCrewReviewRequired=missing.length>0;
+ deduplicated.rows.forEach((list,i)=>{ipadCrewRows[i]=list;ipadCrew[i]=list.map(p=>p.role+' '+p.name).join('\n')});
+ ipadCrewSource=missing.length||deduplicated.conflicts?'partial':deduplicated.rows.some(list=>list.length)?'imported':'unverified';
+ ipadCrewReviewRequired=missing.length>0||deduplicated.conflicts;
  ipadCrewRowsSave();ipadCrewSave();ipadCrewAuditSave();
  return extracted.some(list=>list.length);
 }
@@ -3436,30 +3549,9 @@ function ipadNotamSchedule(raw){
  return {type:'continuous',description:'Throughout published validity'};
 }
 function ipadAutoVisits(code,raw){
- const v=ipadAirportVisits(code);if(!v.length)return [];
- const period=ipadNotamValidity(raw),schedule=ipadNotamSchedule(raw);
+ const visits=ipadAirportVisits(code),period=ipadNotamValidity(raw),schedule=ipadNotamSchedule(raw);
  if(!period||schedule.type==='review')return [];
- const before=Number(document.getElementById('cbrSectorBefore')?.value??1)*3600000;
- const after=Number(document.getElementById('cbrSectorAfter')?.value??2)*3600000;
- const dayMs=86400000;
- return v.filter(x=>{
-  const ms=d=>d instanceof Date?d.getTime():new Date(d).getTime();
-  const arr=ms(x.start||x.time),dep=ms(x.end||x.time);
-  if(!Number.isFinite(arr)||!Number.isFinite(dep))return false;
-  const lo=Math.max(period[0],arr-before),hi=Math.min(period[1],Math.max(arr,dep)+after);
-  if(hi<lo)return false;
-  if(schedule.type==='continuous')return true;
-  // Recognised DAILY UTC operating hours, including overnight ranges.
-  // A 2100–0500 window is checked from the preceding UTC day as required.
-  const firstDay=Math.floor(lo/dayMs)-1,lastDay=Math.floor(hi/dayMs);
-  if(lastDay-firstDay>15)return false;
-  for(let day=firstDay;day<=lastDay;day++){
-   const start=day*dayMs+schedule.from*60000;
-   const end=day*dayMs+(schedule.to<=schedule.from?schedule.to+1440:schedule.to)*60000;
-   if(Math.max(lo,start)<=Math.min(hi,end))return true;
-  }
-  return false;
- });
+ return visits.filter(v=>crewAirportEventWindows252(v).some(w=>crewAirportNotamMatchesWindow252(period,schedule,w)));
 }
 function ipadAutoAssign(parsed){
  // Screening only. Never insert a NOTAM into the wallpaper without crew selection.
@@ -3678,9 +3770,8 @@ function crewWxRecordTafUpdates(oldBriefing,newParsed){
 function ipadCbrCompactWx(text){
  return String(text||'').replace(/\bSHOWERS? OF LIGHT RAIN\b/gi,'-SHRA').replace(/\bSHOWERS? OF MODERATE RAIN\b/gi,'SHRA').replace(/\bLIGHT RAIN\b/gi,'-RN').replace(/\bMODERATE RAIN\b/gi,'RN').replace(/\bHEAVY RAIN\b/gi,'+RN').replace(/\bNO SIG WX\b/gi,'NSW').replace(/\b(\d{3}|VRB)(\d{2,3})KT\b/gi,(_,dir,spd)=>dir+'/'+Number(spd)).replace(/\s+/g,' ').trim();
 }
-function ipadCbrWeather(visit,parsed=crewWxActiveParsed()){
+function ipadCbrWeatherAtEvent252(visit,parsed,event){
  const reports=parsed?.airports?.get(ipadWxICAO(visit.code))?.weather||[];
- const event=ipadWeatherVisitEvent(visit);
  if(!Number.isFinite(event.getTime()))return [];
  const candidates=[];
  for(const rawReport of reports){
@@ -3723,19 +3814,16 @@ function ipadCbrWeather(visit,parsed=crewWxActiveParsed()){
   const prefix=m?({TEMPO:'T',INTER:'I',BECMG:'B',PROB30:'P30',PROB40:'P40'}[m[1].toUpperCase()]||'')+m[3]+'/'+m[5]+': ':'';
   result.push({text:prefix+ipadCbrCompactWx(t.weather),red:true,changeBar:crewWxChangedFor(ipadWxICAO(visit.code),raw,t.token)});
  }
- // v215: Screening periods need not coincide with the exact airport event.
- // Keep a window-only INTER/TEMPO visible as amber, not as active DEP weather.
- const windowAnalysis=crewWxTafAnalysis(raw);
- const firstEvent=windowAnalysis?.airportEvents?.slice().sort((a,b)=>a.time-b.time)[0];
- if(firstEvent&&Math.abs(firstEvent.time.getTime()-event.getTime())<61000){
-  for(const g of windowAnalysis.groups.filter(g=>g.screeningOnly)){
-   const overlap=g.dutyOverlap;
-   const layersAtScreen=crewWxForecastLayers(raw,windowAnalysis,overlap.start);
-   const layer=layersAtScreen?.temporary?.find(t=>t.token.replace(/\s+/g,' ').toUpperCase()===g.token.replace(/\s+/g,' ').toUpperCase());
-   if(!layer)continue;
-   // v216: TAF's own INTER/TEMPO validity token already communicates the
-   // period. Preserve the amber screening distinction without extra prose.
-   result.push({text:'◐ '+g.token+': '+ipadCbrCompactWx(layer.weather),color:'#a65a00',changeBar:crewWxChangedFor(ipadWxICAO(visit.code),raw,g.token)});
+ // Keep changes that overlap this ARR or DEP buffer, even when not active
+ // at the exact event. An event-only TAF is never treated as the whole duty.
+ const associated=crewAirportEventWindows252(visit).find(w=>Math.abs(w.time-event)<61000);
+ if(associated){
+  const forecast=ipadAlternateTafParse(raw,{start:associated.start,finish:associated.finish});
+  for(const g of forecast?.blocks||[]){
+   if(!g.start||!g.end||g.kind==='FM'||g.start<=event&&event<g.end)continue;
+   if(!crewAirportOverlaps252(g.start,g.end,associated))continue;
+   const line=ipadCbrCompactWx(g.weather);
+   if(line)result.push({text:'◐ '+g.token+': '+line,color:'#a65a00',changeBar:crewWxChangedFor(ipadWxICAO(visit.code),raw,g.token)});
   }
  }
  const speci=ipadCompactSpeci(visit.code);
@@ -3748,6 +3836,21 @@ function ipadCbrWeather(visit,parsed=crewWxActiveParsed()){
  const pressure=tq&&Number.isFinite(tq.qnh)?String(Math.round(tq.qnh)):'—';
  result.push({text:'T: '+temperature+'   Q: '+pressure,color:'#17202b',changeBar:crewWxChangedFor(ipadWxICAO(visit.code),raw,'TQ')});
  return result;
+}
+// For a turnaround, preserve the arrival forecast AND assess the next
+// departure, with their independent airport screening windows.
+function ipadCbrWeather(visit,parsed=crewWxActiveParsed()){
+ const events=crewAirportEventWindows252(visit);
+ if(!events.length)return [];
+ if(events.length===1)return ipadCbrWeatherAtEvent252(visit,parsed,events[0].time);
+ const all=[];
+ for(const e of events){
+  const lines=ipadCbrWeatherAtEvent252(visit,parsed,e.time);
+  if(!lines.length)continue;
+  all.push({text:e.type==='ARR'?'ARRIVAL':'DEPARTURE',color:'#176b87'});
+  all.push(...lines);
+ }
+ return all;
 }
 // v206: All additional NAIPS forecast airports are placed INSIDE the existing
 // alternates column (sector count + 2 columns remains unchanged).
@@ -4103,7 +4206,7 @@ function ipadCanvasRender(source){
   if(/^(CPT|CAPT|CAPTAIN)/.test(r))return 4;
   return 3; // Unknown category: conservative, do not cull early.
  };
- function personKey(p){return p.empNo?('EMP:'+String(p.empNo).trim()):('NAME:'+String(p.name||'').trim().toUpperCase());}
+ function personKey(p){return ipadCrewIdentity(p);}
  for(let sector=0;sector<nSectors;sector++)for(const p of (ipadCrewRows[sector]||[])){
   const key=personKey(p),priority=rolePriority(p.role);
   const existing=identities.get(key);
@@ -4146,7 +4249,8 @@ function ipadCanvasRender(source){
     if(!sec.items.length||sec.alwaysHeading)y+=heading*1.24+4;
     for(const item of sec.items){if(item.separatorBefore)y+=9;y+=wrap(item.text,airW-2*pad,txt).length*txt*1.24+5;}
    }
-   return y+pad;
+   // ALTERNATES has the additional 430 px above the clock lower boundary.
+   return y+pad-(a.alternate?(top-upperInfoTop):0);
   });
   return {required:Math.max(0,...heights),scale,title,txt,meta,heading};
  }
@@ -4215,7 +4319,7 @@ function ipadCanvasRender(source){
   // Clip the window shadow to its top edge: absolutely nothing from the
   // clock/info card may extend into the first 600 grey pixels.
   ctx.save();ctx.beginPath();ctx.rect(0,upperInfoTop,W,H-upperInfoTop);ctx.clip();
-  border(outerMargin,upperInfoTop,W-2*outerMargin,upperInfoHeight,'airport');
+  border(outerMargin,upperInfoTop,W-2*outerMargin-airW,upperInfoHeight,'airport');
   ctx.restore();
   // Same typography and left padding used by the sector windows.
   const heading=source.querySelector('.ipad-upper-duty-heading')?.textContent?.trim()||'TOTAL DUTY';
@@ -4233,8 +4337,8 @@ function ipadCanvasRender(source){
   }
  }
  airports.forEach((a,i)=>{
-  const x=outerMargin+i*airW;let y=top+pad;
-  border(x,top,airW,Math.max(0,weatherArea),'airport');
+  const x=outerMargin+i*airW;const yTop=a.alternate?upperInfoTop:top;let y=yTop+pad;
+  border(x,yTop,airW,Math.max(0,weatherArea)+(a.alternate?top-upperInfoTop:0),'airport');
   y=write(wrap(a.title,airW-2*pad,weather.title,true),x+pad,y,weather.title,visual.ink,true)+6;
   if(a.aircraft)y=write(wrap(a.aircraft,airW-2*pad,weather.meta),x+pad,y,weather.meta,visual.subtle)+5;
   if(a.alternateText)y=write(wrap(a.alternateText,airW-2*pad,weather.txt),x+pad,y,weather.txt)+5;
@@ -4410,7 +4514,7 @@ function ipadCBRRender(){
  const crewColumns=document.createElement('div');crewColumns.className='ipad-crew-matrix';
  crewColumns.style.setProperty('--ipad-crew-columns',String(flightRows.length));
  const unique=new Map();
- const personKey=p=>p.empNo?('EMP:'+p.empNo):('NAME:'+String(p.name||'').trim().toUpperCase());
+ const personKey=ipadCrewIdentity;
  flightRows.forEach((f,i)=>(ipadCrewRows[i]||[]).forEach(p=>{
   const k=personKey(p),rank=ipadCrewOrder(String(p.role||'').trim().toUpperCase());
   if(!unique.has(k))unique.set(k,{...p,base:ipadCrewBaseCode(p.base),_crewRank:rank,_crewFirstSeen:unique.size});
@@ -4618,7 +4722,28 @@ function ipadInit(){
  for(const id of ['ipadAlternateText','ipadAircraftConfig']){const el=document.getElementById(id);if(!el)continue;try{el.value=localStorage.getItem('crewFocus_'+id)||''}catch(e){}el.addEventListener('change',()=>{try{localStorage.setItem('crewFocus_'+id,el.value)}catch(e){}ipadCBRRender()})}
 
 
- const addWx=document.getElementById('ipadCBRAddWeather');if(addWx)addWx.onclick=ipadAddWeatherToCBR;const review=document.getElementById('ipadCrewReviewBtn');if(review)review.onclick=ipadCrewReview;const share=document.getElementById('ipadCBRExport');if(share)share.onclick=ipadShareCBR;const openPng=document.getElementById('ipadCBROpenPng');if(openPng)openPng.onclick=()=>ipadOpenPngImage();for(const [id,def] of [['cbrSectorBefore','1'],['cbrSectorAfter','2']]){const el=document.getElementById(id);if(!el)continue;try{el.value=localStorage.getItem('crewFocus_'+id)||def}catch(e){}el.addEventListener('change',()=>{try{localStorage.setItem('crewFocus_'+id,el.value)}catch(e){}ipadCBRRender()})}
+ const addWx=document.getElementById('ipadCBRAddWeather');if(addWx)addWx.onclick=ipadAddWeatherToCBR;const review=document.getElementById('ipadCrewReviewBtn');if(review)review.onclick=ipadCrewReview;const share=document.getElementById('ipadCBRExport');if(share)share.onclick=ipadShareCBR;const openPng=document.getElementById('ipadCBROpenPng');if(openPng)openPng.onclick=()=>ipadOpenPngImage();for(const [id,def] of Object.entries(crewAirportDefaults252)){
+ const el=document.getElementById(id);if(!el)continue;
+ for(let half=0;half<=24;half++){
+  const o=document.createElement('option');o.value=String(half/2);o.textContent=half%2?((half/2)+' hours'):((half/2)+' '+(half===2?'hour':'hours'));
+  el.append(o);
+ }
+ let value=def;
+ try{
+  const saved=localStorage.getItem('crewFocus_'+id);
+  if(saved!==null)value=Number(saved);
+  // Migration: keep the previous pre-departure and post-arrival preferences.
+  else if(id==='cbrDepBefore')value=Number(localStorage.getItem('crewFocus_cbrSectorBefore')??def);
+  else if(id==='cbrArrAfter')value=Number(localStorage.getItem('crewFocus_cbrSectorAfter')??def);
+ }catch(e){}
+ el.value=String(Number.isFinite(value)&&value>=0&&value<=12?value:def);
+ el.addEventListener('change',()=>{
+  try{localStorage.setItem('crewFocus_'+id,el.value)}catch(e){}
+  try{if(typeof crewScreeningRefreshWeather==='function')crewScreeningRefreshWeather();}catch(e){console.warn('Airport screen refresh',e)}
+  try{if(typeof window.crewWxRestore251==='function')window.crewWxRestore251();}catch(e){}
+  try{ipadCBRRender();ipadUpdateButtons();}catch(e){}
+ });
+}
  const show=document.getElementById('ipadCBRShow'),close=document.getElementById('ipadCBRClose'),container=document.getElementById('ipadCBRPanel');
  // The swipeable Focus/Dashboard pages use transforms; fixed-position children of
  // transformed elements are trapped in that element on iOS Safari. Move the
@@ -4888,8 +5013,13 @@ function crewWxTafAnalysis(raw){
  const assessed=groups.map(g=>{
   const applicable=airportEvents.length?airportEvents.some(e=>e.time>=g.start&&e.time<g.end):null;
   const temporary=/^(?:INTER|TEMPO|PROB30|PROB40)\b/i.test(g.token);
-  const dutyOverlap=temporary?crewWxWindowOverlap(g,window):null;
-  return {...g,applicable,screeningOnly:!!(dutyOverlap&&applicable===false),dutyOverlap};
+  const airportWindows=airportEvents.map(e=>{
+   const prefix=e.type==='ARR'?'cbrArr':'cbrDep';
+   return {start:new Date(e.time.getTime()-crewAirportSetting252(prefix+'Before')*3600000),finish:new Date(e.time.getTime()+crewAirportSetting252(prefix+'After')*3600000)};
+  });
+  const overlapping=temporary?airportWindows.map(w=>crewWxWindowOverlap(g,w)).filter(Boolean):[];
+  const screenOverlap=overlapping[0]||null;
+  return {...g,applicable,screeningOnly:!!(screenOverlap&&applicable===false),dutyOverlap:screenOverlap};
  });
  return {window,airportEvents,testTimelineActive,untestedAirport,issued,validFrom,validTo,groups:assessed,points,warning:gaps.join(' · '),tempFound:temps.length===4,qnhFound:qnh.length===4};
 }
@@ -5133,7 +5263,7 @@ function crewWxRenderMarkedTaf(raw,parent,make){
   badge.textContent=nums.join(', ')||(overlap?'◐':'');
   if(overlap)badge.classList.add('crew-wx-screening-badge');
   const value=document.createElement('span');value.className='crew-wx-taf-text';
-  value.textContent=seg.text.replace(/\s+/g,' ').trim()+(overlap?'  [DUTY SCREEN '+crewWxScreeningLabel(overlap)+'; NOT ACTIVE AT SCHEDULED AIRPORT EVENT]':'');
+  value.textContent=seg.text.replace(/\s+/g,' ').trim()+(overlap?'  [AIRPORT SCREEN '+crewWxScreeningLabel(overlap)+'; NOT ACTIVE AT ARRIVAL/DEPARTURE]':'');
   if(overlap)value.classList.add('crew-wx-screening-text');
   const key=seg.kind==='initial'?'BASE':group?.token||'';
   const station=(clean.match(/^TAF(?:\s+(?:AMD|COR))?\s+([A-Z]{4})/)||[])[1]||'';
@@ -5141,6 +5271,16 @@ function crewWxRenderMarkedTaf(raw,parent,make){
   line.append(badge,value);pre.append(line);
  }
 }
+// v252: public bridge for the page-resume controller (weather parser is scoped).
+// Rebuild the SAVED NAIPS view without importing or mutating the archive.
+window.crewWxRestore251=function(){
+ const parsed=crewWxActiveParsed();
+ if(!parsed?.order?.length)return false;
+ const root=document.getElementById('flightResults');
+ if(root&&!root.querySelector('.flight-briefing'))flightRenderNaips(parsed);
+ if(typeof ipadBuildWeatherAssignments==='function')ipadBuildWeatherAssignments(ipadVisitList(),parsed);
+ return true;
+};
 function flightRenderNaips(parsed){
  const root=$('flightResults');root.replaceChildren();
  const sheet=document.createElement('section');sheet.className='flight-briefing';
@@ -5468,7 +5608,7 @@ function renderEntireRoster(){
  }
 }
 // V15 navigation: original roster, calendar, route and alarm logic remains intact.
-const crewPages={home:'crewHome',roster:'crewRosterAll',duty:'crewDuty',tools:'crewTools',settings:'crewSettings',documents:'crewDocuments',placeholder:'crewPlaceholder',flight:'crewFlight',fdp:'crewFDP',packing:'crewPacking',logbook:'crewLogbook'};
+const crewPages={home:'crewHome',roster:'crewRosterAll',duty:'crewDuty',tools:'crewTools',settings:'crewSettings',documents:'crewDocuments',help:'crewHelp',placeholder:'crewPlaceholder',flight:'crewFlight',fdp:'crewFDP',packing:'crewPacking',logbook:'crewLogbook'};
 const crewFocusInfo={duty:['Departure planning','Review duty times, route and alarms.'],flight:['Flight planning','Review your CBR, weather, NOTAMs and flight briefing.'],fdp:['FDP Calculator','Independent maximum duty and time-zone calculator.'],commuter:['Commuter','Live flight search is planned.'],hotel:['Hotel & transport','Review hotel and transport arrangements.'],packing:['Trip preparation','Custom checklists are planned.'],off:['Days off','Your next duty is shown below.']};
 const focusOrder=['duty','flight','commuter','hotel','packing','off'];
 // v242: every timed Focus page has an editable pre-sign-on lead (minutes).
@@ -5646,6 +5786,22 @@ function crewFocusRenderDutyMetrics(node,d,ordered){
  if(all.length!==4){node.replaceChildren();for(let n=0;n<4;n++){let tile=document.createElement('div');tile.className='crew-focus-duty-metric';tile.append(document.createElement('span'),document.createElement('strong'));node.append(tile);}}
  groups.forEach(([label,minutes,severity,reason],i)=>{const tile=node.children[i];tile.dataset.severity=severity;tile.children[0].textContent=label;tile.children[1].textContent=fmt(minutes);tile.title=reason+' · '+v.reason;tile.setAttribute('aria-label',label+': '+fmt(minutes)+(severity==='red'?', red warning':severity==='amber'?', amber warning':''));});
 }
+function crewAlignDutyMetrics250(){
+ for(const [sectorId,metricId] of [['homeCurrentSectors','homeCurrentMetrics'],['homeNextSectors','homeNextMetrics']]){
+  const sectors=document.getElementById(sectorId),metrics=document.getElementById(metricId);
+  if(!sectors||!metrics||metrics.closest('.hidden'))continue;
+  const line=sectors.querySelector('.duty-roster-lines');
+  const layout=metrics.closest('.crew-focus-duty-layout');
+  if(!line||!layout||!line.textContent.trim()){
+   metrics.style.marginTop='0px';continue;
+  }
+  const target=line.getBoundingClientRect().top;
+  const top=layout.getBoundingClientRect().top;
+  const offset=Math.max(0,Math.round(target-top));
+  metrics.style.marginTop=offset+'px';
+ }
+}
+window.addEventListener('resize',()=>requestAnimationFrame(crewAlignDutyMetrics250));
 function crewRefreshHome(){
  const ordered=dutyOrder(),now=Date.now();
  const today=todayISO();
@@ -5684,6 +5840,7 @@ function crewRefreshHome(){
   $('homeViewNext').classList.toggle('hidden',!!next.confirmed);
  }
  crewFocusRenderDutyMetrics($('homeCurrentMetrics'),current||null,ordered);crewFocusRenderDutyMetrics($('homeNextMetrics'),next||null,ordered);
+ requestAnimationFrame(crewAlignDutyMetrics250);
  crewRenderFocus();const f=activeFocus();$('homeFocusPanel').classList.toggle('hidden',f==='off');
 }
 function autoFocus(now=Date.now()){
@@ -5726,7 +5883,7 @@ function crewTool(tool){
  if(tool==='packing'){crewNavigate('packing');window.crewTripRender?.();ideas('crewPacking');return;}
  if(tool==='calendar'){$('openCalendar').click();ideas('calendarDialog');return;}
  if(tool==='import'){$('openRosterImport').click();ideas('rosterImportDialog');return;}
- if(tool==='help'){$('openAlarmHelp').click();ideas('alarmHelp');return;}
+ if(tool==='help'){crewNavigate('help');ideas('crewHelp');return;}
  const info=crewFocusInfo[tool]||[tool.charAt(0).toUpperCase()+tool.slice(1),'This feature is planned.'];
  $('placeholderTitle').textContent=info[0];$('placeholderText').textContent=info[1]+' Existing roster and departure functions remain available through Dashboard.';$('flightIdeas').classList.toggle('hidden',tool!=='flight');$('ebaIdeas').classList.toggle('hidden',tool!=='eba');crewNavigate('placeholder');ideas('crewPlaceholder');
 }
@@ -7240,7 +7397,7 @@ try{
 (function crewIdeas246(){
  'use strict';
  const STORE='crewFocusTileIdeasV246';
- const labels={duty:'Roster & Duty',drive:'Travel Times',calendar:'Export to Calendar',import:'Import Roster',help:'Alarms & Help',flight:'Flight Planning',commuter:'Commuter',hotels:'Hotels & CATS',eba:'EBA & Rest',fdp:'Calculators',pay:'Pay Calculator',packing:'Trip Checklist',aircraft:'Aircraft Tracking',logbook:'Logbook',dashDocuments:'Document Library',dashSettings:'Settings',hotel:'Hotel & Transport'};
+ const labels={duty:'Roster & Duty',drive:'Travel Times',calendar:'Export to Calendar',import:'Import Roster',help:'Help',flight:'Flight Planning',commuter:'Commuter',hotels:'Hotels & CATS',eba:'EBA & Rest',fdp:'Calculators',pay:'Pay Calculator',packing:'Trip Checklist',aircraft:'Aircraft Tracking',logbook:'Logbook',dashDocuments:'Document Library',dashSettings:'Settings',hotel:'Hotel & Transport'};
  const seed={
    logbook:['Automatically populate the logbook from the Crew Briefing Report (CBR) and roster summary, including crew names, aircraft registration, flight times, and day and night flying hours.']
  };
@@ -7343,40 +7500,101 @@ try{
  };
 })();
 </script>
-<script id="crewResume247">
+<script id="crewResume251">
 (function(){
- const storageKey='crewFocusResumePageV247',settingKey='crewFocusResumeMinutesV247';
- const get=id=>document.getElementById(id);
- const field=get('crewResumeMinutes');if(!field)return;
+ const key='crewFocusResumePageV247',settingKey='crewFocusResumeMinutesV247',by=id=>document.getElementById(id);
+ const field=by('crewResumeMinutes');if(!field)return;
  let minutes=5;
- try{const saved=localStorage.getItem(settingKey);if(saved!==null&&['0','1','2','5','10','15','30','60'].includes(saved))minutes=Number(saved)}catch(e){}
+ try{const v=localStorage.getItem(settingKey);if(v!==null&&['0','1','2','5','10','15','30','60'].includes(v))minutes=Number(v)}catch(e){}
  field.value=String(minutes);
- field.addEventListener('change',()=>{minutes=Number(field.value);try{localStorage.setItem(settingKey,String(minutes));if(!minutes)localStorage.removeItem(storageKey);}catch(e){}});
- let current='home';
- function capture(page){
-  current=page||current;
-  if(!minutes)return;
+ const pageIds={home:'crewHome',tools:'crewTools',flight:'crewFlight',duty:'crewDuty',roster:'crewRosterAll',fdp:'crewFDP',settings:'crewSettings',documents:'crewDocuments',help:'crewHelp',packing:'crewPacking',logbook:'crewLogbook',placeholder:'crewPlaceholder'};
+ let current='home',awayAt=null;
+ const activePage=()=>Object.entries(pageIds).find(([k,id])=>by(id)&&!by(id).classList.contains('hidden'))?.[0]||current;
+ function snapshot(page){
+  current=page||activePage();if(!minutes)return;
   const panes=['flightCBRArea','flightViewArea','flightWXArea','flightOperArea'];
-  const visible=Object.fromEntries(panes.map(id=>[id,!get(id)?.hidden]));
-  try{localStorage.setItem(storageKey,JSON.stringify({page:current,at:Date.now(),scrollY:window.scrollY,panes:visible}));}catch(e){}
+  const openPreview=by('ipadCBRPanel')?.classList.contains('ipad-fullscreen')||false;
+  const preview=by('ipadCBRPreview');
+  const expanded=['flightCBRCard','flightWXCard','flightOperationalCard'].filter(id=>by(id)?.classList.contains('flight-expanded'));
+  const stamp=Date.now();
+  const data={page:current,at:stamp,scrollY:window.scrollY,
+   panes:Object.fromEntries(panes.map(id=>[id,!by(id)?.hidden])),expanded,
+   preview:{open:openPreview,scrollTop:preview?.scrollTop||0,scrollLeft:preview?.scrollLeft||0}};
+  try{localStorage.setItem(key,JSON.stringify(data));}catch(e){}
  }
- window.crewResumeCapture=capture;
- document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')capture(current)});
- window.addEventListener('pagehide',()=>capture(current));
- if(window.__crewFocusAlarmResumed||window.__crewFocusAlarmReturn?.page==='duty')return; // Alarm return retains priority.
- try{
-  const saved=JSON.parse(localStorage.getItem(storageKey)||'null');
-  if(!minutes||!saved||!saved.page||Date.now()-saved.at>minutes*60000||Date.now()<saved.at)return;
-  if(saved.page==='home')return;
-  const pageIds={tools:'crewTools',flight:'crewFlight',duty:'crewDuty',roster:'crewRosterAll',fdp:'crewFDP',settings:'crewSettings',documents:'crewDocuments',packing:'crewPacking',logbook:'crewLogbook',placeholder:'crewPlaceholder'};
-  if(!pageIds[saved.page]||!get(pageIds[saved.page]))return;
-  // Only restore an existing page. Never open modal dialogs without explicit consent.
-  window.crewNavigateForResume?.(saved.page);
-  if(saved.page==='flight'&&saved.panes){for(const [id,visible] of Object.entries(saved.panes)){const e=get(id);if(e)e.hidden=!visible;}}
+ window.crewResumeCapture=snapshot;
+ field.addEventListener('change',()=>{minutes=Number(field.value);try{localStorage.setItem(settingKey,String(minutes));if(!minutes)localStorage.removeItem(key);else snapshot(activePage());}catch(e){}});
+ function rebuildFlight(){
+  try{window.crewWxRestore251?.();}
+  catch(e){console.warn('Restoring saved NAIPS view failed',e)}
+ }
+ function restore(saved){
+  if(!saved||!pageIds[saved.page]||!by(pageIds[saved.page]))return;
+  rebuildFlight();
+  if(saved.page!=='home')window.crewNavigateForResume?.(saved.page);
+  current=saved.page;
+  if(saved.page==='flight'){
+   for(const [id,show] of Object.entries(saved.panes||{})){const el=by(id);if(el)el.hidden=!show;}
+   for(const id of ['flightCBRCard','flightWXCard','flightOperationalCard'])by(id)?.classList.toggle('flight-expanded',(saved.expanded||[]).includes(id));
+  }
   const y=Math.max(0,Number(saved.scrollY)||0);
-  requestAnimationFrame(()=>window.scrollTo(0,y));
-  setTimeout(()=>window.scrollTo(0,y),170);
- }catch(e){console.warn('Page resume unavailable',e)}
+  const position=()=>window.scrollTo(0,y);
+  requestAnimationFrame(position);setTimeout(position,160);setTimeout(position,420);
+  if(saved.page==='flight'&&saved.preview?.open){
+   setTimeout(()=>{
+    try{
+     if(!by('ipadCBRPanel')?.classList.contains('ipad-fullscreen'))by('ipadCBRShow')?.click();
+     const preview=by('ipadCBRPreview');
+     if(preview){preview.scrollTop=saved.preview.scrollTop||0;preview.scrollLeft=saved.preview.scrollLeft||0;}
+    }catch(e){console.warn('CBR preview restore failed',e)}
+   },200);
+  }
+ }
+ document.addEventListener('visibilitychange',()=>{
+  if(document.hidden){awayAt=Date.now();snapshot(activePage());return;}
+  const wasAway=awayAt;awayAt=null;
+  if(!minutes)return;
+  if(wasAway&&Date.now()-wasAway>minutes*60000){
+   if(by('ipadCBRPanel')?.classList.contains('ipad-fullscreen'))document.querySelector('.ipad-preview-exit')?.click();
+   window.crewNavigateForResume?.('home');current='home';window.scrollTo(0,0);snapshot('home');return;
+  }
+  rebuildFlight(); // Return from NAIPS must never require another Import tap.
+ });
+ window.addEventListener('pagehide',()=>snapshot(activePage()));
+ window.addEventListener('pageshow',()=>{if(!document.hidden)rebuildFlight()});
+ if(window.__crewFocusAlarmResumed||window.__crewFocusAlarmReturn?.page==='duty')return;
+ try{
+  const saved=JSON.parse(localStorage.getItem(key)||'null');
+  if(minutes&&saved&&saved.at<=Date.now()&&Date.now()-saved.at<=minutes*60000)restore(saved);
+  else if(saved&&Date.now()-saved.at>minutes*60000)localStorage.removeItem(key);
+  else rebuildFlight();
+ }catch(e){console.warn('Page resume unavailable',e);rebuildFlight()}
+})();
+</script>
+<script id="crewHelpController250">
+(function(){
+ const doc=document, by=id=>doc.getElementById(id), search=by('crewHelpSearch'),count=by('crewHelpCount');
+ if(!search)return;
+ const groups=[...doc.querySelectorAll('#crewHelp .crew-help-group')];
+ const all=groups.flatMap(g=>[...g.querySelectorAll('.crew-help-entry')]);
+ let lastSearch=false;
+ function update(){
+  const query=search.value.trim().toLocaleLowerCase();let hits=0,groupHits=0;
+  for(const group of groups){let match=0;
+   for(const entry of group.querySelectorAll('.crew-help-entry')){
+    const hay=(entry.textContent+' '+group.dataset.helpGroup).toLocaleLowerCase();
+    const yes=!query||query.split(/\s+/).every(word=>hay.includes(word));
+    entry.hidden=!yes;if(yes)match++;
+   }
+   group.hidden=match===0;if(query)group.open=match>0;else if(lastSearch)group.open=false;if(match){groupHits++;hits+=match;}
+  }
+  lastSearch=!!query;
+  count.textContent=query?hits+' matching topics in '+groupHits+' sections':all.length+' topics in '+groups.length+' sections · Open a category, then a question';
+ }
+ search.addEventListener('input',update);by('crewHelpClear').addEventListener('click',()=>{search.value='';update();search.focus();});
+ by('crewHelpBack').addEventListener('click',()=>window.crewNavigateForResume?.('tools'));
+ by('crewHelpAlarmGuide').addEventListener('click',()=>by('openAlarmHelp')?.click());
+ update();
 })();
 </script>
 </body></html>
