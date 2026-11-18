@@ -5,7 +5,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <meta content="#15283f" name="theme-color"/>
-<title>CrewFocus v238 — Reliable iPad CBR Save & Share</title>
+<title>CrewFocus v241 — Reliable Airport Weather Updates</title>
 <style>
 :root{color-scheme:light dark;--bg:#f3f6fa;--card:#fff;--ink:#15283f;--muted:#637184;--line:#dce3eb;--accent:#176b87;--soft:#e9f4f7;--danger:#b13e3e}
 @media(prefers-color-scheme:dark){:root{--bg:#101820;--card:#1a2632;--ink:#edf4fb;--muted:#aab8c6;--line:#344454;--accent:#72c7df;--soft:#203a46;--danger:#ff9b9b}}
@@ -586,7 +586,7 @@ html,body{margin:0;padding:0}
 #ipadCBRPreview .ipad-wallpaper.cbr171 .ipad-aircraft-details{font:12px/1.25 Arial,sans-serif!important;color:#42546a!important;margin:0 0 4px!important;padding:0 0 3px!important;white-space:normal!important}
 #ipadCBRPreview .ipad-wallpaper.cbr171 .ipad-cbr-section{display:block!important;position:static!important;flex:0 0 auto!important;height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important;border-top:1px solid #d7dee8!important;padding:4px 0 6px!important;margin:0!important}
 #ipadCBRPreview .ipad-wallpaper.cbr171 .ipad-cbr-section .ipad-visit-heading{display:block!important;font:bold 12px/1.2 Arial,sans-serif!important;position:static!important;min-height:0!important;height:auto!important;border:0!important;padding:0!important;margin:0 0 3px!important}
-#ipadCBRPreview .ipad-wallpaper.cbr171 .ipad-cbr-populated>.ipad-visit-heading{display:none!important}
+#ipadCBRPreview .ipad-wallpaper.cbr171 .ipad-cbr-populated>.ipad-visit-heading{display:block!important}
 #ipadCBRPreview .ipad-wallpaper.cbr171 .ipad-cbr-section .ipad-cbr-wx-line,#ipadCBRPreview .ipad-wallpaper.cbr171 .ipad-cbr-section .ipad-selected{display:block!important;font:13px/1.28 Arial,sans-serif!important;position:static!important;height:auto!important;min-height:0!important;max-height:none!important;flex:0 0 auto!important;overflow:visible!important;white-space:normal!important;overflow-wrap:anywhere!important;word-break:normal!important;margin:2px 0!important;padding:0!important}
 #ipadCBRPreview .ipad-wallpaper.cbr171 .ipad-notam-text,#ipadCBRPreview .ipad-wallpaper.cbr171 .ipad-notam-text span{color:#1659ad!important;white-space:normal!important;font:inherit!important;overflow-wrap:anywhere!important}
 #ipadCBRPreview .ipad-wallpaper.cbr171 .ipad-cbr-wx-alert{color:#bd202c!important;font-weight:700!important}
@@ -620,6 +620,9 @@ html,body{margin:0;padding:0}
 #ipadSaveImageDialog238 .ipad-save-image-actions button{flex:1 1 auto}
 #ipadCBRSaveHint{font-size:12px;margin:8px 0}
 #ipadCBRSaveStatus:not(:empty){font-size:12px;font-weight:650;margin:8px 0}
+</style><style id="crewWxHeading241">
+/* v241: distinguish forecast text from the existing blue NOTAM entries. */
+#ipadCBRPreview .ipad-wallpaper.cbr171 .ipad-cbr-section.ipad-cbr-populated>.ipad-visit-heading{display:block!important}
 </style><style id="cbrPhotoDiagnosticV195">
 /* Isolated to screenshot import; no CBR wallpaper/layout modifications. */
 #cbrSourceCheck{margin-top:12px;padding:12px;border:1px solid var(--line);border-radius:13px;background:var(--card)}
@@ -702,6 +705,15 @@ html,body{margin:0;padding:0}
 #crewPacking .trip-item.trip-editing .trip-status{margin-left:auto}
 #crewPacking .trip-note{font-size:12px;color:var(--muted);line-height:1.5}
 @media(max-width:440px){#crewPacking .trip-item{gap:8px;padding:8px}#crewPacking .trip-status{min-width:103px;max-width:103px;width:103px}#crewPacking .trip-edit-actions{width:100%;justify-content:flex-end}}
+.crew-topbar .crew-version-tag{position:absolute;top:calc(100% + 1px);right:4px;font-size:9px;line-height:1.1;font-weight:650;color:var(--muted);pointer-events:none;z-index:1}
+/* v240: rest duty source buttons and inline sign-off estimate. */
+#fdpRestPanel .fdp-rest-mode-switch{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0 10px}
+#fdpRestPanel .fdp-rest-mode-switch button{min-height:48px;font-size:15px}
+#fdpRestPanel #fdpRestImportStatus{line-height:1.45;margin:7px 0 17px;min-height:18px}
+#fdpRestPanel .fdp-rest-signoff-note{font-size:12px;line-height:1.5;padding:10px 12px;background:#edf5f9;border:1px solid #d2e2ea;border-radius:10px;color:#23495c;margin:13px 0}
+#fdpRestPanel .fdp-rest-verified{margin-top:14px;cursor:pointer}
+#fdpRestPanel #fdpRestResult .fdp-rest-earliest{margin-top:9px;padding-top:10px}
+#fdpRestPanel #fdpRestResult .fdp-rest-warning{margin:9px 0 0}
 </style><style id="crewRosterCallout228">
 #crewRosterAll .roster-full-month{font-size:14px;font-weight:800;color:var(--ink);padding:12px 4px 6px}
 #crewRosterAll .roster-full-day{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:10px 13px;margin:6px 0}
@@ -758,13 +770,13 @@ html,body{margin:0;padding:0}
 <body>
 <main>
 <span class="hidden" id="dayLabel">Local time</span>
-<div class="crew-topbar"><nav aria-label="Main navigation" class="crew-tabs"><span class="crew-tab-highlight" aria-hidden="true"></span><button class="crew-tab selected" data-page="home" type="button">Focus</button><button class="crew-tab" data-page="tools" type="button">Dashboard</button></nav><label class="crew-test-control" for="cbrTestTop"><span class="crew-mode-led" id="cbrModeLED" aria-hidden="true"></span><span class="crew-test-text" id="cbrModeText">LIVE</span><input id="cbrTestTop" type="checkbox" role="switch" aria-label="Test mode"/><span class="crew-switch-track" aria-hidden="true"></span></label></div>
+<div class="crew-topbar"><span class="crew-version-tag" aria-label="CrewFocus version 241">v241</span><nav aria-label="Main navigation" class="crew-tabs"><span class="crew-tab-highlight" aria-hidden="true"></span><button class="crew-tab selected" data-page="home" type="button">Focus</button><button class="crew-tab" data-page="tools" type="button">Dashboard</button></nav><label class="crew-test-control" for="cbrTestTop"><span class="crew-mode-led" id="cbrModeLED" aria-hidden="true"></span><span class="crew-test-text" id="cbrModeText">LIVE</span><input id="cbrTestTop" type="checkbox" role="switch" aria-label="Test mode"/><span class="crew-switch-track" aria-hidden="true"></span></label></div>
 <section class="crew-page" id="crewHome">
 <div class="crew-panel" id="homeFocusPanel"><div class="crew-kicker">FOCUS <span class="crew-status" id="focusModeBadge">Automatic</span></div><h2 id="focusName"></h2><p class="note" id="focusDesc"></p><button class="btn primary" id="focusOpen" type="button">Open focus</button></div>
 <div class="crew-panel" id="homeCurrentPanel"><div class="crew-kicker">CURRENT DUTY <span class="crew-status" id="homeAccepted">Needs review</span></div><h2 id="homeDutyTitle">Today</h2><p class="note" id="homeDutyDate"></p><p class="crew-time" id="homeDutyTime"></p><div id="homeDutySectors"></div><div class="crew-home-actions"><button class="btn primary" id="homeOpenDuty" type="button">Departure times</button><button class="btn" id="homeReview" type="button">Review &amp; accept</button></div></div>
 <div class="crew-panel" id="homeNextPanel"><div class="crew-kicker">NEXT DUTY <span class="crew-status" id="homeNextStatus">Upcoming</span></div><h2 id="homeNextDate"></h2><p class="hidden" id="homeNextCalendarDate"></p><p class="crew-next hidden" id="homeNextDuty"></p><div id="homeNextSectors"></div><button class="btn" id="homeViewNext" type="button">Review &amp; accept</button></div>
 </section>
-<section class="crew-page hidden" id="crewTools"><div class="crew-section-heading"><h2 class="crew-page-title">Dashboard <small style="font-size:11px;font-weight:500;color:var(--muted)">v230</small></h2><button class="btn small" id="dashBack" type="button">← Focus</button></div><div class="crew-tool-grid">
+<section class="crew-page hidden" id="crewTools"><div class="crew-section-heading"><h2 class="crew-page-title">Dashboard <small style="font-size:11px;font-weight:500;color:var(--muted)">v241</small></h2><button class="btn small" id="dashBack" type="button">← Focus</button></div><div class="crew-tool-grid">
 <button class="crew-tile" data-tool="duty"><span>▤</span><strong>Roster &amp; Duty</strong><small>Available</small></button><button class="crew-tile" data-tool="drive"><span>🚗</span><strong>Travel Times</strong><small>Available</small></button><button class="crew-tile" data-tool="calendar"><span>▣</span><strong>Export to Calendar</strong><small>Available</small></button><button class="crew-tile" data-tool="import"><span>⇧</span><strong>Import Roster</strong><small>Available</small></button><button class="crew-tile" data-tool="help"><span>◷</span><strong>Alarms &amp; Help</strong><small>Available</small></button><button class="crew-tile" data-tool="flight"><span>✈</span><strong>Flight Planning</strong><small>Beta</small></button><button class="crew-tile" data-tool="commuter"><span>🛫</span><strong>Commuter</strong><small>Planned</small></button><button class="crew-tile" data-tool="hotels"><span>▥</span><strong>Hotels &amp; CATS</strong><small>Planned</small></button><button class="crew-tile" data-tool="eba"><span>⚖</span><strong>EBA &amp; Rest</strong><small>Planned</small></button><button class="crew-tile" data-tool="fdp"><span>✈️⏱️</span><strong>Calculators</strong><small>FDP &amp; rest</small></button><button class="crew-tile" data-tool="pay"><span>$</span><strong>Pay Calculator</strong><small>Planned</small></button><button class="crew-tile" data-tool="packing"><span>▣</span><strong>Trip Checklist</strong><small>Available</small></button><button class="crew-tile" data-tool="aircraft"><span>✈</span><strong>Aircraft Tracking</strong><small>Planned</small></button><button class="crew-tile" id="dashDocuments" type="button"><span>📁</span><strong>Document Library</strong><small>Available</small></button><button class="crew-tile" id="dashSettings" type="button"><span>⚙</span><strong>Settings</strong><small>Available</small></button></div></section>
 <section class="crew-page hidden" id="crewDocuments"><div class="crew-section-heading"><h2 class="crew-page-title">Aviation Document Library</h2><button class="btn small" id="documentsBack" type="button">← Dashboard</button></div><div class="crew-panel"><h3>Upload aviation documents</h3><p class="note">A central library for manuals, procedures, EBA documents, operational references and other aviation material. Files are stored locally in this browser on this device; they are not yet interpreted or applied to flight planning. Always verify against current approved sources.</p><div class="field"><label for="documentCategory">Document category</label><select id="documentCategory"><option value="Operations manuals">Operations manuals</option><option value="AIP and charts">AIP and charts</option><option value="Aircraft manuals">Aircraft manuals</option><option value="EBA and rostering">EBA and rostering</option><option value="Airport procedures">Airport procedures</option><option value="Other aviation references">Other aviation references</option></select></div><div class="field"><label for="documentFiles">Choose documents</label><input id="documentFiles" type="file" accept=".pdf,.txt,.doc,.docx,.html,.htm,.csv,.json,image/*" multiple></div><button class="btn primary" id="documentsSave" type="button">Save to document library</button><p class="note" id="documentsStatus" role="status">Choose one or more documents to save locally.</p></div><div class="crew-panel"><h3>Saved documents</h3><div id="documentsList" class="note">Loading library…</div></div></section><section class="crew-page hidden" id="crewSettings"><div class="crew-section-heading"><h2 class="crew-page-title">Settings</h2><button class="btn small" id="settingsBack" type="button">← Dashboard</button></div><details class="crew-panel crew-settings-subsection"><summary>General Settings</summary><div class="crew-settings-inner"><label for="crewRole">Crew role</label><select id="crewRole"><option value="fc">Flight crew</option><option value="cc">Cabin crew</option></select><label for="crewAirline">Airline</label><select id="crewAirline"><option value="va">Virgin Australia</option><option value="qf">Qantas (planned)</option><option value="jq">Jetstar (planned)</option></select><label for="crewHomeBaseGeneral">Home base (airport code)</label><select id="crewHomeBaseGeneral" aria-label="Home base for roster checks"><option value="MEL">MEL</option></select><p class="note">Used for the home-base rest check. The rule below is a preliminary 15-hour check; other roster requirements are not yet assessed.</p><button class="btn" id="settingsPlan" type="button">Edit addresses &amp; transport</button></div></details><details class="crew-panel crew-settings-subsection"><summary>Focus settings</summary><div class="crew-settings-inner"><p class="note">Enable the pages that automatic Focus may choose. Planned pages show a placeholder until developed.</p><div class="focus-checks" id="focusEnabledOptions"></div><label for="focusChoice">Current focus</label><select id="focusChoice"><option value="duty">Departure planning</option><option value="flight">Flight preparation</option><option value="commuter">Commuter</option><option value="hotel">Hotel &amp; transport</option><option value="packing">Trip preparation</option><option value="off">Days off</option></select><div class="crew-home-actions"><button class="btn primary" id="setManualFocus" type="button">Set manual focus</button><button class="btn" id="setAutoFocus" type="button">Use automatic</button></div><p class="note" id="focusSettingStatus"></p></div></details><details class="crew-panel crew-settings-subsection"><summary>Flight Planning settings</summary><div class="crew-settings-inner"><div class="field"><label for="crewAircraftType">Aircraft type for NOTAM screening</label><select id="crewAircraftType"><option value="B738">Boeing 737-800 (B738)</option><option value="B38M">Boeing 737 MAX 8 (B38M)</option><option value="B3XM">Boeing 737 MAX 10 (B3XM)</option></select></div><p class="note" id="crewAircraftDetails"></p><p class="note">Aircraft reference code 4C. Wingspan varies with wingtip configuration; confirm the specific aircraft dimensions before applying a numeric wingspan exclusion. Only clearly aircraft-specific NOTAMs are screened out; all screened-out entries remain available for review.</p><p class="note">Adjustable hours either side of duty sign-on. The NOTAM shortlist uses duty times and progresses as sectors finish. Original briefing remains available.</p><div class="fields"><div class="field"><label for="cbrBefore">Hours before duty commencement</label><select id="cbrBefore"></select></div><div class="field"><label for="cbrAfter">Hours after duty completion</label><select id="cbrAfter"></select></div><div class="field"><label for="cbrSectorBefore">Hours before each sector departure</label><select id="cbrSectorBefore"><option value="0">0</option><option value="0.5">0.5</option><option value="1" selected>1</option><option value="1.5">1.5</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select></div><div class="field"><label for="cbrSectorAfter">Hours after each sector arrival</label><select id="cbrSectorAfter"><option value="0">0</option><option value="0.5">0.5</option><option value="1">1</option><option value="1.5">1.5</option><option value="2" selected>2</option><option value="3">3</option><option value="4">4</option></select></div></div></div></details></section>
 <section class="crew-page hidden" id="crewFlight"><p id="cbrModeNotice" class="cbr-mode-notice" hidden style="display:none!important"></p><div class="crew-section-heading"><h2 class="crew-page-title">Flight Planning</h2><button class="btn small" id="flightBack" type="button" hidden>← Dashboard</button></div><div id="flightCompactHome" class="flight-compact-home"><div class="crew-panel flight-duty-reference" id="flightDutyReference" hidden style="display:none!important"><div class="flight-reference-title">Duty screening <span class="flight-compact-stamp">Reference for WX / NOTAMs</span></div><div id="flightDutyWindowText" class="note">Import or review a CBR to establish the UTC screening window.</div>
@@ -778,7 +790,7 @@ html,body{margin:0;padding:0}
 <div id="cbrImportSchedule"></div>
 <p id="cbrImportWarning" class="note"></p>
 <button id="cbrImportConfirm" class="btn primary" type="button">Confirm imported CBR</button>
-</section><div class="cbr-export-actions"><button class="btn primary" id="cbrPreviewBtn" type="button">Generate original CBR preview</button><button class="btn" id="cbrPrint" type="button">Print / Save PDF</button><button class="btn primary" id="cbrAirDrop" type="button">Share / AirDrop PDF</button></div></div><div id="cbrPreview"></div><div class="crew-panel" id="ipadCBRPanel"><h3>iPad CBR · landscape preview</h3><p class="note">Separate iPad landscape briefing draft. Your original imported CBR and NAIPS briefing remain unchanged. Preview the airport visits before selecting NOTAMs.</p><details class="ipad-layout-controls" style="margin:12px 0"><summary>Alternates &amp; aircraft details</summary><p class="note">The briefing layout fits automatically. Enter alternates and aircraft information here when needed.</p><div class="fields ipad-obsolete-layout"><div class="field"><label>Airport section height <output id="ipadAirportHeightValue"></output></label><input id="ipadAirportHeight" type="range" min="12" max="43" value="23" step="1"></div><div class="field"><label>Crew font size <output id="ipadCrewFontValue"></output></label><input id="ipadCrewFont" type="range" min="10" max="22" value="16" step="1"></div><div class="field"><label>Airport font size <output id="ipadAirportFontValue"></output></label><input id="ipadAirportFont" type="range" min="11" max="23" value="17" step="1"></div><div class="field"><label>Crew details column width <output id="ipadCrewDetailsWidthValue"></output></label><input id="ipadCrewDetailsWidth" type="range" min="15" max="40" value="25" step="1"></div><div class="field"><label>Clock area height <output id="ipadClockHeightValue"></output></label><input id="ipadClockHeight" type="range" min="4" max="28" value="15" step="1"></div></div><div class="field"><label for="ipadAlternateText">Alternates (en-route / destination; manually verified)</label><textarea id="ipadAlternateText" rows="2" placeholder="e.g. ENR: ... | DEST: ..."></textarea></div><div class="field"><label for="ipadFdpRefStatus">CBR FDP — acclimatisation</label><select id="ipadFdpRefStatus"><option value="unconfirmed">Not confirmed — Table A reference only</option><option value="yes">Acclimatised — Table A</option><option value="unknown">Unknown — Table B required</option></select></div><div class="field"><label for="ipadFdpRefZone">CBR FDP — acclimatised reference time zone</label><select id="ipadFdpRefZone"><option value="auto">First departure airport (provisional)</option><option value="Australia/Melbourne">Melbourne / Sydney / Hobart</option><option value="Australia/Brisbane">Brisbane / Gold Coast</option><option value="Australia/Adelaide">Adelaide</option><option value="Australia/Perth">Perth</option><option value="Australia/Darwin">Darwin</option><option value="Pacific/Auckland">Auckland</option><option value="UTC">UTC</option></select></div><div class="field"><label for="ipadAircraftConfig">Aircraft configuration (manual until registration mapping verified)</label><input id="ipadAircraftConfig" placeholder="e.g. B737-800 · 26K · SFP status unverified"></div><p class="note">Aircraft configuration is not inferred without a verified registration database. Alternate data must be reviewed.</p></details><div class="crew-home-actions"><button class="btn" id="ipadCrewReviewBtn" type="button">Review / add crew</button><button class="btn primary" id="ipadCBRShow" type="button">Open iPad landscape preview</button><button class="btn primary" id="ipadCBRExport" type="button">Save / Share CBR PNG</button><button class="btn" id="ipadCBROpenPng" type="button">Open PNG to save</button><button class="btn" id="ipadCBRClose" type="button" hidden>Close preview</button><button class="btn" id="ipadCBRClear" type="button">Clear selected items</button></div><p class="note" id="ipadCBRSaveHint">On iPad, use Save / Share → Save Image. If Save Image is unavailable, open the PNG and touch and hold the image to add it to Photos.</p><p class="note" id="ipadCBRSaveStatus" role="status" aria-live="polite"></p><p class="note" id="ipadCBRWeatherStatus" role="status">Weather is added manually after importing the CBR and NAIPS briefing.</p><p class="note" id="ipadCBRStatus">No items selected yet.</p><div id="ipadCBRSelectionSummary" class="note" aria-live="polite">Selected for generated CBR: none yet</div><div id="ipadCBRPreview"></div></div><h3>Weather &amp; NOTAMs</h3><div class="crew-panel"><label for="flightPaste">Import NAIPS location briefing</label><p class="note">Copy the complete briefing from your NAIPS email and paste it here. Weather, ATIS, warnings and NOTAMs will be grouped by airport.</p><textarea autocapitalize="off" id="flightPaste" placeholder="0911 UTC ... AIRSERVICES AUSTRALIA
+</section><div class="cbr-export-actions"><button class="btn primary" id="cbrPreviewBtn" type="button">Generate original CBR preview</button><button class="btn" id="cbrPrint" type="button">Print / Save PDF</button><button class="btn primary" id="cbrAirDrop" type="button">Share / AirDrop PDF</button></div></div><div id="cbrPreview"></div><div class="crew-panel" id="ipadCBRPanel"><h3>iPad CBR · landscape preview</h3><p class="note">Separate iPad landscape briefing draft. Your original imported CBR and NAIPS briefing remain unchanged. Preview the airport visits before selecting NOTAMs.</p><details class="ipad-layout-controls" style="margin:12px 0"><summary>Alternates &amp; aircraft details</summary><p class="note">The briefing layout fits automatically. Enter alternates and aircraft information here when needed.</p><div class="fields ipad-obsolete-layout"><div class="field"><label>Airport section height <output id="ipadAirportHeightValue"></output></label><input id="ipadAirportHeight" type="range" min="12" max="43" value="23" step="1"></div><div class="field"><label>Crew font size <output id="ipadCrewFontValue"></output></label><input id="ipadCrewFont" type="range" min="10" max="22" value="16" step="1"></div><div class="field"><label>Airport font size <output id="ipadAirportFontValue"></output></label><input id="ipadAirportFont" type="range" min="11" max="23" value="17" step="1"></div><div class="field"><label>Crew details column width <output id="ipadCrewDetailsWidthValue"></output></label><input id="ipadCrewDetailsWidth" type="range" min="15" max="40" value="25" step="1"></div><div class="field"><label>Clock area height <output id="ipadClockHeightValue"></output></label><input id="ipadClockHeight" type="range" min="4" max="28" value="15" step="1"></div></div><div class="field"><label for="ipadAlternateText">Alternates (en-route / destination; manually verified)</label><textarea id="ipadAlternateText" rows="2" placeholder="e.g. ENR: ... | DEST: ..."></textarea></div><div class="field"><label for="ipadFdpRefStatus">CBR FDP — acclimatisation</label><select id="ipadFdpRefStatus"><option value="unconfirmed">Not confirmed — Table A reference only</option><option value="yes">Acclimatised — Table A</option><option value="unknown">Unknown — Table B required</option></select></div><div class="field"><label for="ipadFdpRefZone">CBR FDP — acclimatised reference time zone</label><select id="ipadFdpRefZone"><option value="auto">First departure airport (provisional)</option><option value="Australia/Melbourne">Melbourne / Sydney / Hobart</option><option value="Australia/Brisbane">Brisbane / Gold Coast</option><option value="Australia/Adelaide">Adelaide</option><option value="Australia/Perth">Perth</option><option value="Australia/Darwin">Darwin</option><option value="Pacific/Auckland">Auckland</option><option value="UTC">UTC</option></select></div><div class="field"><label for="ipadAircraftConfig">Aircraft configuration (manual until registration mapping verified)</label><input id="ipadAircraftConfig" placeholder="e.g. B737-800 · 26K · SFP status unverified"></div><p class="note">Aircraft configuration is not inferred without a verified registration database. Alternate data must be reviewed.</p></details><div class="crew-home-actions"><button class="btn" id="ipadCrewReviewBtn" type="button">Review / add crew</button><button class="btn primary" id="ipadCBRShow" type="button">Open iPad landscape preview</button><button class="btn primary" id="ipadCBRExport" type="button">Save / Share CBR PNG</button><button class="btn" id="ipadCBROpenPng" type="button">Open PNG to save</button><button class="btn" id="ipadCBRClose" type="button" hidden>Close preview</button><button class="btn" id="ipadCBRClear" type="button">Clear selected items</button></div><p class="note" id="ipadCBRSaveHint">On iPad, use Save / Share → Save Image. If Save Image is unavailable, open the PNG and touch and hold the image to add it to Photos.</p><p class="note" id="ipadCBRSaveStatus" role="status" aria-live="polite"></p><p class="note" id="ipadCBRWeatherStatus" role="status">Weather is added manually after importing the CBR and NAIPS briefing.</p><p class="note" id="ipadCBRStatus">No items selected yet.</p><div id="ipadCBRSelectionSummary" class="note" aria-live="polite">Selected for generated CBR: none yet</div><div id="ipadCBRPreview"></div></div><h3>Weather &amp; NOTAMs</h3><div class="crew-panel"><label for="flightPaste">Import NAIPS location briefing</label><p class="note">Paste a NAIPS location briefing. You can update BNE alone: other airports retain their previous reports, marked as retained in the status. Weather remains subject to each TAF's issue and validity time. This is a manual import, not a live NAIPS feed.</p><textarea autocapitalize="off" id="flightPaste" placeholder="0911 UTC ... AIRSERVICES AUSTRALIA
 LOCATION BRIEFING
 ... WEATHER INFORMATION ...
 ... NOTAM INFORMATION ..." rows="8" spellcheck="false"></textarea><div class="crew-home-actions"><button class="btn primary" id="flightInterpret" type="button">Import briefing / Upload to CBR</button></div><p class="note" id="flightPasteStatus">On iPhone, tap the box and choose Paste.</p></div><div class="crew-section-heading hidden" style="margin-top:12px"><h3 style="margin:0">Additional airports</h3></div><div class="crew-panel hidden" id="flightAdditionalAirportsPanel"><p class="note">Weather briefing assistant · preliminary interpretation only. Airport names and common 3-letter codes are accepted. Verify all reports, times and operational requirements using approved aviation sources.</p><div class="fields"><div class="field" style="display:none"><label for="flightDeparture">Departure ICAO</label><input autocapitalize="characters" id="flightDeparture" maxlength="40" placeholder="Melbourne / MEL / YMML"/></div><div class="field" style="display:none"><label for="flightDestination">Destination ICAO</label><input autocapitalize="characters" id="flightDestination" maxlength="40" placeholder="Sydney / SYD / YSSY"/></div><div class="field"><label for="flightAlternate">Additional airport / alternate (optional)</label><input autocapitalize="characters" id="flightAlternate" maxlength="40" placeholder="Canberra / CBR / YSCB"/></div><div class="field" style="display:none"><label for="flightDate">Flight date</label><input id="flightDate" type="date"/></div><div class="field" style="display:none"><label for="flightTime">Departure (local)</label><input id="flightTime" type="time"/></div></div><div class="field" style="margin-top:12px"><label>Additional airports</label><div id="flightExtraAirports"></div><button class="btn small" id="flightAddAirport" type="button">+ Add airport</button></div><div class="crew-home-actions"><button class="btn primary" id="flightFetch" type="button">Retrieve weather</button><button class="btn" id="flightClear" type="button">Clear reports</button></div><p class="note" id="flightStatus" role="status">Enter airport codes to begin. Live retrieval requires internet and a source permitting browser access.</p></div><p class="note" id="flightShortlistStatus" role="status">Import a NAIPS briefing to shortlist NOTAMs automatically against the CBR duty window.</p><div aria-live="polite" id="flightResults"></div><div class="crew-panel"><p class="crew-kicker">FLIGHT PLANNING · FUTURE FEATURES</p><div id="flightIdeaList"></div></div></div></section><section class="crew-page hidden" id="crewFDP" aria-label="Standalone FDP Calculator">
@@ -787,7 +799,7 @@ LOCATION BRIEFING
   <summary><span>Maximum FDP</span><small>Sign-on → latest landing &amp; sign-off</small></summary>
  <div class="crew-panel fdp-fast">
   <div class="fdp-fast-inputs">
-   <div class="field fdp-wide"><label for="fdpSignonDate">Sign-on date (local)</label><div class="fdp-date-choice"><input type="date" id="fdpSignonDate"/><select id="fdpDateMode" aria-label="Choose today or another date"><option value="today" selected>Today</option><option value="other">Other date…</option></select></div></div>
+   <div class="field fdp-wide"><label for="fdpDateMode">Sign-on date (local)</label><select id="fdpDateMode" aria-label="Sign-on date selection"><option value="today" selected>Today</option><option value="other">Other date…</option></select><div id="fdpOtherDateWrap" class="hidden" style="margin-top:8px"><label for="fdpSignonDate">Select date</label><input type="date" id="fdpSignonDate"/></div></div>
    <div class="field"><label for="fdpSignonTime">Sign-on time (local)</label><input type="time" id="fdpSignonTime" value="08:00"/></div>
    <div class="field"><label for="fdpDutyType">Duty type</label><select id="fdpDutyType"><option value="rostered">Rostered</option><option value="standby">Standby</option></select></div>
    <div class="field fdp-wide"><label for="fdpTimeZone">Sign-on time zone</label><select id="fdpTimeZone"></select></div>
@@ -825,32 +837,32 @@ LOCATION BRIEFING
  </details>
  <details class="crew-calc-accordion" id="fdpRestAccordion">
   <summary><span>Required Rest</span><small>Actual duty → next sign-on</small></summary>
- <div class="crew-panel fdp-fast fdp-rest-panel" id="fdpRestPanel">
-  <p class="fdp-footnote">Use actual duty times to calculate the earliest next sign-on. You do not need to calculate maximum FDP first.</p>
-  <div class="field fdp-rest-source-field"><label for="fdpRestSource">Calculate from</label><select id="fdpRestSource"><option value="independent">Actual duty times</option><option value="fdp">Use Maximum FDP details</option></select></div>
-  <div class="fdp-rest-confirm-grid hidden" id="fdpRestLinkedOptions">
-   <label class="fdp-rest-toggle"><input type="checkbox" id="fdpRestSameSignon" checked/> Sign-on unchanged</label>
-   <label class="fdp-rest-toggle"><input type="checkbox" id="fdpRestSameSectors" checked/> Sectors unchanged</label>
+  <div class="crew-panel fdp-fast fdp-rest-panel" id="fdpRestPanel">
+   <div class="fdp-rest-mode-switch segment" role="group" aria-label="Required Rest input mode">
+    <button type="button" class="active" id="fdpRestRosteredBtn" aria-pressed="true">Rostered duty</button>
+    <button type="button" id="fdpRestManualBtn" aria-pressed="false">Manual</button>
+   </div>
+   <p class="fdp-footnote" style="margin:3px 0 8px">Sign-off is calculated automatically from the final landing time.</p>
+   <p class="note" id="fdpRestImportStatus" role="status" aria-live="polite"></p>
+   <div class="fdp-fast-inputs fdp-rest-edits">
+    <div class="field fdp-wide hidden" id="fdpRestDutyTypeWrap"><label for="fdpRestDutyType">Manual duty type</label><select id="fdpRestDutyType"><option value="rostered">Flying duty</option><option value="standby_a">Standby A call-out</option><option value="standby_18">Standby 18 assignment</option></select></div>
+    <div class="field" id="fdpRestSignonDateWrap"><label for="fdpRestSignonDate">Actual sign-on date (local)</label><input type="date" id="fdpRestSignonDate"/></div>
+    <div class="field" id="fdpRestSignonTimeWrap"><label for="fdpRestSignonTime">Actual sign-on time (local)</label><input type="time" id="fdpRestSignonTime"/></div>
+    <div class="field fdp-wide" id="fdpRestSignonZoneWrap"><label for="fdpRestSignonZone">Sign-on time zone</label><select id="fdpRestSignonZone"></select></div>
+    <div class="field hidden" id="fdpRestStandbyDateWrap"><label for="fdpRestStandbyDate">Standby A started (local date)</label><input id="fdpRestStandbyDate" type="date"/></div>
+    <div class="field hidden" id="fdpRestStandbyTimeWrap"><label for="fdpRestStandbyTime">Standby A started (local time)</label><input id="fdpRestStandbyTime" type="time"/></div>
+    <div class="field fdp-wide"><label for="fdpRestArrivalAirport">Final landing / sign-off airport (IATA)</label><input id="fdpRestArrivalAirport" maxlength="4" autocapitalize="characters" autocorrect="off" spellcheck="false" placeholder="e.g. MEL"/></div>
+    <div class="field fdp-wide"><label for="fdpRestOutputZone">Final landing airport time zone</label><select id="fdpRestOutputZone"></select></div>
+    <div class="field fdp-wide"><label for="fdpRestSectorType">Final flight sector</label><select id="fdpRestSectorType"><option value="unknown">Choose domestic or international</option><option value="domestic">Domestic</option><option value="international">International</option></select></div>
+    <div class="field"><label for="fdpRestLandingDate">Final landing date (local)</label><input type="date" id="fdpRestLandingDate"/></div>
+    <div class="field"><label for="fdpRestLandingTime">Final landing time (local)</label><input type="time" id="fdpRestLandingTime"/></div>
+   </div>
+   <p class="fdp-footnote" id="fdpRestZoneHint" role="status"></p>
+   <p class="fdp-rest-signoff-note" id="fdpRestSignoffInfo" role="status">Sign-off is calculated as landing +30 minutes.</p>
+   <label class="fdp-rest-toggle fdp-rest-verified"><input type="checkbox" id="fdpRestConfirmed"/> Actual times and final sector checked</label>
+   <div class="fdp-rest-result" id="fdpRestResult" role="status" aria-live="polite"></div>
+   <p class="fdp-footnote">VA Narrow Body EA 2024 clause 18.1: 30 minutes after landing for domestic and international. Clause 18.2 adds 30 minutes to minimum rest when signing off after an international sector. Confirm operational delays, positioning, accommodation and local-night requirements separately.</p>
   </div>
-  <div class="fdp-fast-inputs fdp-rest-edits">
-   <div class="field fdp-wide" id="fdpRestDutyTypeWrap"><label for="fdpRestDutyType">Duty type</label><select id="fdpRestDutyType"><option value="rostered">Rostered flying duty</option><option value="standby_a">Standby A call-out</option><option value="standby_18">Standby 18 assignment</option></select></div>
-   <div class="field" id="fdpRestSignonDateWrap"><label for="fdpRestSignonDate">Actual flight sign-on date (local)</label><input type="date" id="fdpRestSignonDate"/></div>
-   <div class="field" id="fdpRestSignonTimeWrap"><label for="fdpRestSignonTime">Actual flight sign-on time (local)</label><input type="time" id="fdpRestSignonTime"/></div>
-   <div class="field fdp-wide" id="fdpRestSignonZoneWrap"><label for="fdpRestSignonZone">Flight sign-on time zone</label><select id="fdpRestSignonZone"></select></div>
-   <div class="field hidden" id="fdpRestStandbyDateWrap"><label for="fdpRestStandbyDate">Standby A start date (local)</label><input type="date" id="fdpRestStandbyDate"/></div>
-   <div class="field hidden" id="fdpRestStandbyTimeWrap"><label for="fdpRestStandbyTime">Standby A start time (local)</label><input type="time" id="fdpRestStandbyTime"/></div>
-   <div class="field fdp-wide hidden" id="fdpRestSectorsWrap"><label for="fdpRestSectors">Actual number of sectors</label><select id="fdpRestSectors"><option value="1">1 sector</option><option value="2">2 sectors</option><option value="3">3 sectors</option><option value="4">4 sectors</option><option value="5">5 sectors</option><option value="6">6 sectors</option></select></div>
-   <div class="field fdp-wide"><label for="fdpRestOutputZone">Landing &amp; sign-off time zone</label><select id="fdpRestOutputZone"></select></div>
-   <div class="field"><label for="fdpRestLandingDate">Actual landing date (local)</label><input type="date" id="fdpRestLandingDate"/></div>
-   <div class="field"><label for="fdpRestLandingTime">Actual landing time (local)</label><input type="time" id="fdpRestLandingTime"/></div>
-   <div class="field"><label for="fdpRestSignoffDate">Actual sign-off date (local)</label><input type="date" id="fdpRestSignoffDate"/></div>
-   <div class="field"><label for="fdpRestSignoffTime">Actual sign-off time (local)</label><input type="time" id="fdpRestSignoffTime"/></div>
-  </div>
-  <div class="fdp-rest-actions"><button type="button" class="btn small" id="fdpRestUse30">Set sign-off to landing +30m</button><span id="fdpRestZoneHint" class="fdp-hint"></span></div>
-  <label class="fdp-rest-toggle fdp-rest-verified"><input type="checkbox" id="fdpRestConfirmed"/> I have checked the actual landing and sign-off times</label>
-  <div class="fdp-rest-result" id="fdpRestResult" role="status" aria-live="polite"></div>
-  <p class="fdp-footnote">Base rule: rest is the longer of 12 hours or the preceding total duty. A duty over 15 hours also requires a local night; additional exceptions, reduced rest and cumulative limits are not automatically cleared.</p>
- </div>
  </details>
  <dialog id="fdpStandbyHelp" class="fdp-standby-dialog" aria-labelledby="fdpStandbyHelpTitle">
   <div class="fdp-standby-dialog-inner"><h3 id="fdpStandbyHelpTitle">Standby types</h3>
@@ -1797,18 +1809,23 @@ $('closeAlarmHelp').addEventListener('click',()=>$('alarmHelp').close());
 $('alarmHelpBack').addEventListener('click',()=>{helpStep=Math.max(0,helpStep-1);showHelpStep();});
 $('alarmHelpNext').addEventListener('click',()=>{if(helpStep===helpSteps.length-1){$('alarmHelp').close();return;}helpStep++;showHelpStep();});
 
+// v239: preserve the departure-times view across the iOS Shortcuts x-callback reload.
 const ALARM_PENDING_KEY='leaveForWorkPendingAlarmV24';
 function runAlarmShortcut(target,isTest=false){
  let base;try{base=new URL(window.location.href);}catch(e){$('alarmStatus').textContent='Open the hosted app in Safari to use alarm buttons.';return;}
  if(!/^https?:$/.test(base.protocol)){$('alarmStatus').textContent='Open the hosted app in Safari to use alarm buttons.';return;}
- ['lfwAlarm','lfwAlarmRequest','result','errorCode','errorMessage','errorDomain'].forEach(key=>base.searchParams.delete(key));
+ ['lfwAlarm','lfwAlarmRequest','lfwAlarmPage','lfwAlarmScroll','result','errorCode','errorMessage','errorDomain'].forEach(key=>base.searchParams.delete(key));
+ const returnPage=!isTest&&!$('crewDuty').classList.contains('hidden')?'duty':null;
+ const returnScrollY=returnPage?Math.max(0,Math.round(window.scrollY)):0;
+ // Save current departure selections before handing control to Shortcuts.
+ if(returnPage)saveSelections();
  const id=Date.now().toString(36)+'-'+Math.random().toString(36).slice(2);
- const callback=status=>{const url=new URL(base.href);url.searchParams.set('lfwAlarm',status);url.searchParams.set('lfwAlarmRequest',id);return url.href;};
- try{localStorage.setItem(ALARM_PENDING_KEY,JSON.stringify({id,isTest,time:target.toISOString(),startedAt:Date.now()}));}catch(e){}
+ const callback=status=>{const url=new URL(base.href);url.searchParams.set('lfwAlarm',status);url.searchParams.set('lfwAlarmRequest',id);if(returnPage){url.searchParams.set('lfwAlarmPage',returnPage);url.searchParams.set('lfwAlarmScroll',String(returnScrollY));}return url.href;};
+ try{localStorage.setItem(ALARM_PENDING_KEY,JSON.stringify({id,isTest,time:target.toISOString(),startedAt:Date.now(),returnPage,returnScrollY}));}catch(e){}
  const url=new URL('shortcuts://x-callback-url/run-shortcut');
  url.searchParams.set('name','Leave for Work Alarm');url.searchParams.set('input','text');url.searchParams.set('text',target.toISOString());
  url.searchParams.set('x-success',callback('success'));url.searchParams.set('x-cancel',callback('cancel'));url.searchParams.set('x-error',callback('error'));
- $('alarmStatus').textContent='Sending alarm time. Shortcuts may appear briefly, then return here. Check Clock to confirm.';
+ $('alarmStatus').textContent='Sending alarm time. Shortcuts may appear briefly, then return to Departure Times. Check Clock to confirm.';
  // Shortcuts expects percent-encoded spaces, not form-encoded plus signs.
  window.location.href=url.href.replace(/\+/g,'%20');
 }
@@ -1821,9 +1838,19 @@ function handleAlarmReturn(){
  let message=status==='success'?'Shortcut finished'+(time?' for '+time:'')+'. Check Clock to confirm the alarm is enabled.':status==='cancel'?'Shortcut cancelled. Check Clock before trying again.':'Shortcuts returned an error or could not report its result. The alarm may still have been created; check Clock before trying again.';
  if(valid&&pending.isTest)message+=' Delete the test alarm after checking.';
  $('alarmStatus').textContent=message;
+ // This handler runs before CrewFocus navigation initialises. Pass a one-use
+ // instruction to that module instead of letting its default Focus routing win.
+ // The callback URL contains a fallback when Safari clears browser storage.
+ const returnToDuty=(valid&&pending.returnPage==='duty')||url.searchParams.get('lfwAlarmPage')==='duty';
+ if(returnToDuty&&!(valid&&pending.isTest)){
+  const queryScroll=Number(url.searchParams.get('lfwAlarmScroll'));
+  const pendingScroll=Number(valid?pending.returnScrollY:NaN);
+  const scroll=Number.isFinite(pendingScroll)?pendingScroll:Number.isFinite(queryScroll)?queryScroll:0;
+  window.__crewFocusAlarmReturn={page:'duty',scrollY:Math.min(Math.max(0,scroll),100000)};
+ }
  if(valid&&pending.isTest){helpStep=8;showHelpStep();$('alarmHelp').showModal();$('alarmHelpStatus').textContent=message;}
  if(valid)try{localStorage.removeItem(ALARM_PENDING_KEY);}catch(e){}
- ['lfwAlarm','lfwAlarmRequest','result','errorCode','errorMessage','errorDomain'].forEach(key=>url.searchParams.delete(key));
+ ['lfwAlarm','lfwAlarmRequest','lfwAlarmPage','lfwAlarmScroll','result','errorCode','errorMessage','errorDomain'].forEach(key=>url.searchParams.delete(key));
  try{window.history.replaceState(null,'',url.href);}catch(e){}
 }
 
@@ -3255,6 +3282,79 @@ function ipadAutoAssign(parsed){
 function ipadRoleLabel(role){const r=String(role||'').toUpperCase().trim();if(/^(CPT|CAPT|CAPTAIN)$/.test(r))return 'CPT';if(/^(FO|F\/O|FIRST OFFICER)$/.test(r))return 'FO';if(/^(CS|CM|CABIN MANAGER)$/.test(r))return 'CM';if(/^(CC|C|CABIN CREW)$/.test(r))return 'C';if(/^(P|PAX|PAXING)$/.test(r))return 'P';return r||'—'}
 function ipadApplyLayout(frame){if(!frame)return;const get=(id,def)=>Number(document.getElementById(id)?.value||def);frame.style.setProperty('--ipad-airport-height',get('ipadAirportHeight',23)+'vh');frame.style.setProperty('--ipad-crew-font',get('ipadCrewFont',16)+'px');frame.style.setProperty('--ipad-airport-font',get('ipadAirportFont',17)+'px');frame.style.setProperty('--ipad-details-width','25%');frame.style.setProperty('--ipad-clock-height',get('ipadClockHeight',15)+'vh')}
 function ipadCrewDisplayName(name){const n=String(name||'').trim();if(!n.includes(','))return n;const parts=n.split(',');return (parts.slice(1).join(',').trim()+' '+parts[0].trim()).trim();}
+/* v241: NAIPS reports are cached by airport, not replaced as one giant email.
+ * A new single-airport briefing cannot erase the other ports of the duty.
+ * Keep source reports intact; allow older TAFs for earlier sector events, while
+ * the event-time selector still enforces validity and issue-time cutoffs.
+ * Original imported email remains stored separately and is never rewritten.
+ */
+const crewWxAirportCacheKey='crewFocusAirportReportsV241';
+function crewWxArchiveFromParsed(parsed,stamp=0){
+ const out={version:1,order:[],airports:{},lastImportAt:stamp||0};
+ if(!parsed?.order?.length)return out;
+ for(const code of parsed.order){
+  const a=parsed.airports.get(code);if(!a)continue;
+  out.order.push(code);out.airports[code]={name:a.name||code,
+    weather:[...(a.weather||[])],notams:[...(a.notams||[])],
+    weatherUpdatedAt:a.weather?.length?stamp:0,notamsUpdatedAt:a.notams?.length?stamp:0};
+ }
+ return out;
+}
+function crewWxArchiveRead(){
+ try{
+  const saved=JSON.parse(localStorage.getItem(crewWxAirportCacheKey)||'null');
+  if(saved&&saved.version===1&&Array.isArray(saved.order)&&saved.airports&&typeof saved.airports==='object')return saved;
+ }catch(e){console.warn('Airport cache unavailable, using original NAIPS briefing',e);}
+ let baseline='';let stamp=0;
+ try{baseline=localStorage.getItem('crewFocusNaipsBriefingV1')||'';stamp=Number(localStorage.getItem('crewFocusWxUpdatedV123')||0);}catch(e){}
+ return crewWxArchiveFromParsed(baseline?flightNaipsParse(baseline):null,stamp);
+}
+function crewWxArchiveMerge(oldCache,incoming,stamp=Date.now()){
+ const cache=JSON.parse(JSON.stringify(oldCache));
+ const norm=t=>String(t||'').replace(/\s+/g,' ').trim();
+ const unique=(incoming,previous,limit)=>{
+  const seen=new Set(),result=[];
+  for(const item of [...(incoming||[]),...(previous||[])]){
+   const raw=String(item||'').trim(),key=norm(raw);
+   if(!key||seen.has(key))continue;
+   seen.add(key);result.push(raw);if(result.length>=limit)break;
+  }
+  return result;
+ };
+ const changed=[],retained=[];
+ for(const code of incoming.order){
+  const next=incoming.airports.get(code);if(!next)continue;
+  if(!cache.order.includes(code))cache.order.push(code);
+  const old=cache.airports[code]||{name:code,weather:[],notams:[],weatherUpdatedAt:0,notamsUpdatedAt:0};
+  old.name=next.name&&next.name!==code?next.name:old.name||code;
+  // Keep up to 18 verbatim weather products per port (TAFs across time,
+  // observations and ATIS); the forecast selector picks by sector UTC.
+  if(next.weather?.length){
+   old.weather=unique(next.weather,old.weather,18);
+   old.weatherUpdatedAt=stamp;changed.push(code);
+  }
+  // A weather-only update must not delete existing manually selected NOTAMs.
+  // Replace a port's NOTAM list only if this import actually supplies one.
+  if(next.notams?.length){old.notams=unique(next.notams,[],500);old.notamsUpdatedAt=stamp;}
+  cache.airports[code]=old;
+ }
+ for(const code of cache.order)if(!changed.includes(code)&&cache.airports[code]?.weather?.length)retained.push(code);
+ cache.lastImportAt=stamp;
+ return {cache,changed,retained};
+}
+function crewWxArchiveParsed(cache=crewWxArchiveRead()){
+ if(!cache.order.length)return null;
+ const airports=new Map();
+ for(const code of cache.order){
+  const a=cache.airports[code];if(!a)continue;
+  airports.set(code,{code,name:a.name||code,weather:[...(a.weather||[])],notams:[...(a.notams||[])],weatherUpdatedAt:a.weatherUpdatedAt||0,notamsUpdatedAt:a.notamsUpdatedAt||0});
+ }
+ let original='';try{original=localStorage.getItem('crewFocusNaipsBriefingV1')||'';}catch(e){}
+ // This is the latest actual original source, NOT a synthetic reconstructed email.
+ const metadata=original?flightNaipsParse(original):null;
+ return {original,airports,order:[...airports.keys()],prepared:metadata?.prepared||'',valid:metadata?.valid||'',airportCache:true};
+}
+function crewWxActiveParsed(){return crewWxArchiveParsed();}
 // Compact latest SPECI observation for each airport in the iPad CBR.
 // SPECI is an observation, never a TAF validity or screening input.
 function crewCompactSpeciReport(report){
@@ -3281,9 +3381,8 @@ function crewCompactSpeciReport(report){
 // Use a newly pasted briefing only if it passes NAIPS structural checks.
 // Otherwise retain the last successfully imported briefing rather than clearing it.
 function ipadRetainedNaipsText(){
- let saved='';try{saved=localStorage.getItem('crewFocusNaipsBriefingV1')||''}catch(e){}
- const draft=(document.getElementById('flightPaste')?.value||'').trim();
- return draft&&flightNaipsParse(draft)?.order?.length?draft:saved;
+ // Kept for legacy source-display code only; forecasts use the committed cache.
+ try{return localStorage.getItem('crewFocusNaipsBriefingV1')||'';}catch(e){return '';}
 }
 function ipadTafNormalize(raw){
  // Email/PDF text sometimes wraps TAF, amendment, airport, issue and validity
@@ -3295,8 +3394,7 @@ function ipadWxICAO(code){
  return aliases[String(code||'').toUpperCase()]||String(code||'').toUpperCase();
 }
 function ipadCompactSpeci(airportCode){
- const raw=ipadRetainedNaipsText();
- const parsed=raw?flightNaipsParse(raw):null;
+ const parsed=crewWxActiveParsed();
  const reports=parsed?.airports?.get(ipadWxICAO(airportCode))?.weather||[];
  const specis=reports.map(crewCompactSpeciReport).filter(Boolean);
  if(!specis.length)return '';
@@ -3329,7 +3427,7 @@ function crewWxChangedFor(code,raw,key){
  return !!(entry&&entry.currentRaw===ipadTafNormalize(raw)&&entry.changed?.includes(String(key||'').toUpperCase().replace(/\s+/g,' ')));
 }
 function crewWxRecordTafUpdates(oldBriefing,newParsed){
- const oldParsed=oldBriefing?flightNaipsParse(oldBriefing):null;
+ const oldParsed=typeof oldBriefing==='string'?(oldBriefing?flightNaipsParse(oldBriefing):null):oldBriefing;
  const window=crewWxDutyWindow();const state=crewWxReadChanges();
  let modified=0;
  for(const code of newParsed.order){
@@ -3373,11 +3471,9 @@ function crewWxRecordTafUpdates(oldBriefing,newParsed){
 function ipadCbrCompactWx(text){
  return String(text||'').replace(/\bSHOWERS? OF LIGHT RAIN\b/gi,'-SHRA').replace(/\bSHOWERS? OF MODERATE RAIN\b/gi,'SHRA').replace(/\bLIGHT RAIN\b/gi,'-RN').replace(/\bMODERATE RAIN\b/gi,'RN').replace(/\bHEAVY RAIN\b/gi,'+RN').replace(/\bNO SIG WX\b/gi,'NSW').replace(/\b(\d{3}|VRB)(\d{2,3})KT\b/gi,(_,dir,spd)=>dir+'/'+Number(spd)).replace(/\s+/g,' ').trim();
 }
-function ipadCbrWeather(visit){
- const source=ipadRetainedNaipsText();
- const parsed=source?flightNaipsParse(source):null;
+function ipadCbrWeather(visit,parsed=crewWxActiveParsed()){
  const reports=parsed?.airports?.get(ipadWxICAO(visit.code))?.weather||[];
- const event=visit.time instanceof Date?visit.time:new Date(visit.time||NaN);
+ const event=ipadWeatherVisitEvent(visit);
  if(!Number.isFinite(event.getTime()))return [];
  const candidates=[];
  for(const rawReport of reports){
@@ -3407,8 +3503,8 @@ function ipadCbrWeather(visit){
  }
  // No eligible TAF: do not invent weather, but show an unambiguous T/Q blank
  // when a TAF was imported and cannot supply valid event-time values.
- if(!candidates.length)return reports.some(r=>/^\s*TAF\b/i.test(ipadTafNormalize(r)))
-  ?[{text:'T: —   Q: —',color:'#17202b'}]:[];
+ if(!candidates.length)return [{text:reports.some(r=>/^\s*TAF\b/i.test(ipadTafNormalize(r)))
+  ?'TAF NOT VALID AT VISIT TIME — VERIFY':'NO TAF IMPORTED — VERIFY',color:'#a45118'}];
  candidates.sort((a,b)=>b.issued-a.issued);
  const {raw,analysis}=candidates[0];
  const layers=crewWxForecastLayers(raw,analysis,event);
@@ -3527,7 +3623,7 @@ function ipadAlternateForecastSummary(code,window,reports){
  const seen=new Set();return result.filter(row=>{const key=row.text+'~'+row.color;if(seen.has(key))return false;seen.add(key);return true;});
 }
 function ipadAlternateAirportWeather(visits){
- const raw=ipadRetainedNaipsText(),parsed=raw?flightNaipsParse(raw):null;
+ const parsed=crewWxActiveParsed();
  if(!parsed?.order?.length)return [];
  const dutyPorts=new Set(visits.map(v=>ipadWxICAO(v.code)));
  // v218: additional airports screen the WHOLE CBR duty, not a manual
@@ -3539,32 +3635,44 @@ function ipadAlternateAirportWeather(visits){
  });
 }
 // v149: explicit, sector/visit-specific weather transfer. Not auto-populated.
+// A turnaround airport has an arrival AND a next departure. Once the arrival
+// has passed, the forecast applicable to the outgoing sector is the relevant one.
+// The displayed visit times and NOTAM screening interval are unchanged.
+function ipadWeatherVisitEvent(visit){
+ const start=visit.time instanceof Date?visit.time:new Date(visit.time||NaN);
+ const end=visit.end instanceof Date?visit.end:new Date(visit.end||NaN);
+ if(visit.kind==='arrival'&&Number.isFinite(start.getTime())&&Number.isFinite(end.getTime())&&
+    end>start&&Date.now()>=start.getTime())return end;
+ return start;
+}
 let ipadWeatherAssignments = {};
+function ipadBuildWeatherAssignments(visits=ipadVisitList(),parsed=crewWxActiveParsed()){
+ const next={};let populated=0,blank=0;const details=[];
+ for(const visit of visits){
+  const event=ipadWeatherVisitEvent(visit);
+  if(!visit.code||!Number.isFinite(event.getTime())){blank++;details.push((visit.code||'?')+': invalid airport time');continue;}
+  let lines=[];try{lines=ipadCbrWeather(visit,parsed)}catch(e){details.push(visit.code+': '+(e.message||'weather parsing error'));console.warn('CBR weather',visit,e);}
+  next[visit.key]={airport:visit.code,utc:event.toISOString(),lines};
+  if(lines.some(line=>line.text&&!/^(?:TAF NOT VALID|NO TAF IMPORTED)/.test(line.text)))populated++;
+  else {blank++;if(!details.some(x=>x.startsWith(visit.code+':'))){
+    const reports=parsed?.airports?.get(ipadWxICAO(visit.code))?.weather||[];
+    const tafFound=reports.some(r=>/^TAF\b/i.test(ipadTafNormalize(r)));
+    details.push(visit.code+': '+(tafFound?'no issued TAF covering visit time':'no imported TAF')+' ('+event.toISOString().slice(0,16).replace('T',' ')+'Z)');
+  }}
+ }
+ ipadWeatherAssignments=next;
+ return {populated,blank,details};
+}
 function ipadAddWeatherToCBR(){
  const status=document.getElementById('ipadCBRWeatherStatus');
  const visits=ipadVisitList();
- const raw=ipadRetainedNaipsText();
- const parsed=raw?flightNaipsParse(raw):null;
+ const parsed=crewWxActiveParsed();
  if(!visits.length){if(status)status.textContent='Import and confirm a CBR with sector times first.';return;}
- if(!parsed?.order?.length){if(status)status.textContent='NAIPS briefing not recognised. Import the full location briefing with WEATHER INFORMATION and NOTAM INFORMATION headings.';return;}
- const next={};let populated=0,blank=0;const details=[];
- for(const visit of visits){
-  const event=visit.time instanceof Date?visit.time:new Date(visit.time||NaN);
-  if(!visit.code||!Number.isFinite(event.getTime())){blank++;details.push((visit.code||'?')+': invalid airport time');continue;}
-  let lines=[];try{lines=ipadCbrWeather(visit)}catch(e){details.push(visit.code+': '+(e.message||'weather parsing error'));console.warn('CBR weather',visit,e);}
-  // Store both airport and exact UTC visit time to prevent assigning one
-  // airport's departure weather to its later arrival or another sector.
-  next[visit.key]={airport:visit.code,utc:event.toISOString(),lines};
-  if(lines.length)populated++;else{blank++;if(!details.some(x=>x.startsWith(visit.code+':'))){
-    const listed=parsed.airports.get(ipadWxICAO(visit.code))?.weather||[];
-    const tafFound=listed.some(r=>/^TAF\b/i.test(ipadTafNormalize(r)));
-    details.push(visit.code+' ('+ipadWxICAO(visit.code)+'): '+(tafFound?'TAF present, but issue/validity does not cover ':'no TAF recognised for ')+event.toISOString().slice(0,16).replace('T',' ')+'Z');
-   }}
- }
- ipadWeatherAssignments=next;
+ if(!parsed?.order?.length){if(status)status.textContent='No saved NAIPS weather. Import a briefing containing WEATHER INFORMATION and NOTAM INFORMATION.';return;}
+ const {populated,blank,details}=ipadBuildWeatherAssignments(visits,parsed);
  ipadCBRRender();
- try{const active=flightNaipsParse(raw);if(active?.order?.length)flightRenderNaips(active);}catch(e){console.warn('SPECI markers refresh',e);}
- if(status)status.textContent='Weather added to '+populated+' airport visit(s); '+blank+' blank. '+(details.length?details.join(' · '):'Check the preview before sharing.');
+ try{flightRenderNaips(parsed);}catch(e){console.warn('SPECI markers refresh',e);}
+ if(status)status.textContent='Forecast available at '+populated+' airport visit(s); '+blank+' require verification. '+(details.length?details.join(' · '):'Check the preview before sharing.');
 }
 /* v172: Sector-driven raster CBR, shared by iPhone preview and PNG export.
    No browser CSS participates in the output geometry. */
@@ -3604,7 +3712,7 @@ function ipadCanvasRender(source){
   alternateText:col.classList.contains('ipad-alternate')?col.querySelector('.ipad-selected')?.textContent?.trim()||'':'',
   sections:[...col.querySelectorAll('.ipad-cbr-section')].map(sec=>({
    name:sec.querySelector('.ipad-visit-heading')?.textContent?.trim()||'',
-   alwaysHeading:sec.classList.contains('ipad-alt-weather-section')||sec.classList.contains('ipad-cbr-section-operational'),
+   alwaysHeading:true, // v241: label each Weather, NOTAMs and Operational block even when populated.
    items:[...sec.querySelectorAll('.ipad-cbr-wx-line,.ipad-selected')].map(el=>({
     text:el.textContent.trim(),
     color:el.dataset.rasterColor|| (el.classList.contains('ipad-cbr-wx-alert')?'#b42318':el.classList.contains('ipad-notam-text')?'#1659ad':'#17202b'),
@@ -3947,7 +4055,9 @@ function ipadCanvasRefresh(){
 function ipadCBRRender(){
  ipadCrewEnsureCurrent();
  const root=document.getElementById('ipadCBRPreview'),status=document.getElementById('ipadCBRStatus');if(!root)return;
- const visits=ipadVisitList();root.replaceChildren();const summary=document.getElementById('ipadCBRSelectionSummary');if(summary){const count=Object.keys(ipadSelections).length;summary.textContent=count+' NOTAM'+(count===1?'':'s')+' selected for the iPad CBR.';}
+ const visits=ipadVisitList();
+ if(visits.length)ipadBuildWeatherAssignments(visits);
+ root.replaceChildren();const summary=document.getElementById('ipadCBRSelectionSummary');if(summary){const count=Object.keys(ipadSelections).length;summary.textContent=count+' NOTAM'+(count===1?'':'s')+' selected for the iPad CBR.';}
  if(!visits.length){const warning=document.createElement('p');warning.className='cbr-warning';warning.textContent='No CBR sectors available yet. Upload a CBR, or open Review / modify imported CBR and enter the sector airports and times. Then return to this preview.';root.append(warning);const placeholder=document.createElement('div');placeholder.className='ipad-wallpaper cbr171';placeholder.innerHTML='<div class="ipad-reserved">iPad Air 5 · clock safe area</div><div class="ipad-upper-info-window" aria-hidden="true"><div class="ipad-upper-duty-heading">TOTAL DUTY</div><div class="ipad-upper-duty-value">—</div></div><div class="ipad-visit-columns"><section class="ipad-visit"><strong>Waiting for imported airports</strong><div class="ipad-visit-heading">WEATHER</div><div class="ipad-visit-heading">NOTAMs</div><div class="ipad-visit-heading">OPERATIONAL</div></section></div>';root.append(placeholder);status.textContent='Waiting for CBR sectors. Preview is visible and will populate after import.';return;}
  const frame=document.createElement('div');frame.className='ipad-wallpaper cbr171';frame.style.setProperty('--ipad-count',String(visits.length));frame.style.setProperty('--ipad-sectors',String((window.crewIpadSchedule?.rows()||[]).length));
  const slider=document.getElementById('ipadLayoutOffset');frame.style.setProperty('--ipad-offset','0px');
@@ -3986,7 +4096,7 @@ function ipadCBRRender(){
    const selected=heading==='NOTAMs'?Object.values(ipadSelections).filter(item=>item.visit===visit.key):[];
    // Section labels are hidden when populated; their content remains visible.
    const section=document.createElement('div');section.className='ipad-cbr-section ipad-cbr-section-'+heading.toLowerCase().replace(/[^a-z]/g,'');col.append(section);const h=document.createElement('div');h.className='ipad-visit-heading';h.textContent=heading;section.append(h);
-   if(heading==='WEATHER')for(const wx of ((ipadWeatherAssignments[visit.key]?.airport===visit.code && ipadWeatherAssignments[visit.key]?.utc===(visit.time instanceof Date&&Number.isFinite(visit.time.getTime())?visit.time.toISOString():''))?ipadWeatherAssignments[visit.key].lines:[])){const line=document.createElement('div');line.className=wx.red?'ipad-cbr-wx-line ipad-cbr-wx-alert':'ipad-cbr-wx-line';line.textContent=wx.text;if(wx.color)line.dataset.rasterColor=wx.color;if(wx.changeBar)line.dataset.wxChangeBar='true';section.append(line);}
+   if(heading==='WEATHER')for(const wx of ((ipadWeatherAssignments[visit.key]?.airport===visit.code && ipadWeatherAssignments[visit.key]?.utc===(Number.isFinite(ipadWeatherVisitEvent(visit).getTime())?ipadWeatherVisitEvent(visit).toISOString():''))?ipadWeatherAssignments[visit.key].lines:[])){const line=document.createElement('div');line.className=wx.red?'ipad-cbr-wx-line ipad-cbr-wx-alert':'ipad-cbr-wx-line';line.textContent=wx.text;if(wx.color)line.dataset.rasterColor=wx.color;if(wx.changeBar)line.dataset.wxChangeBar='true';section.append(line);}
    if(heading==='OPERATIONAL'){
     const sector=ipadOperationalSectorForVisit(visit,scheduleRows);
     const saved=sector>=0?String(ipadOperationalNotes()[String(sector)]||''):'';
@@ -4101,7 +4211,7 @@ function ipadExportHTML(){
  clone.style.removeProperty('zoom');clone.style.removeProperty('position');clone.style.removeProperty('left');clone.style.removeProperty('top');clone.style.removeProperty('width');clone.style.removeProperty('min-width');clone.style.removeProperty('max-width');clone.style.removeProperty('transform');clone.style.removeProperty('height');
  clone.querySelectorAll('button').forEach(b=>{const span=document.createElement('span');span.className=b.className;span.textContent=b.textContent;b.replaceWith(span)});
  clone.querySelectorAll('textarea,input').forEach(el=>{const span=document.createElement('span');span.textContent=el.value||'';el.replaceWith(span)});
- const css='\n/* CrewFocus 171 – isolated, intrinsic CBR renderer. The same rules are used by preview and AirDrop HTML. */\n*{box-sizing:border-box}\nhtml,body{margin:0;padding:0}\n.ipad-wallpaper.cbr171{--cbr-ink:#17202b;width:1474px!important;min-width:1474px!important;max-width:1474px!important;min-height:1024px!important;height:auto!important;max-height:none!important;display:flex!important;flex-direction:column!important;position:relative!important;gap:10px!important;padding:16px!important;margin:0!important;box-sizing:border-box!important;overflow:visible!important;background:#f7f9fc!important;border:0!important;border-radius:0!important;color:var(--cbr-ink)!important;font:13px/1.3 Arial,Helvetica,sans-serif!important;}\n.ipad-wallpaper.cbr171 .ipad-reserved{background:#153b73!important;height:145px!important;min-height:145px!important;max-height:145px!important;flex:0 0 145px!important;margin:0!important;padding:0!important;display:block!important;border:0!important;border-radius:0!important}\n.ipad-wallpaper.cbr171 .ipad-sector-strip{display:none!important}\n.ipad-wallpaper.cbr171 .ipad-visit-columns{display:grid!important;grid-template-columns:repeat(var(--ipad-count),minmax(0,1fr))!important;grid-auto-rows:max-content!important;align-items:stretch!important;gap:7px!important;min-width:0!important;width:100%!important;height:auto!important;min-height:0!important;max-height:none!important;flex:0 0 auto!important;overflow:visible!important;margin:0!important;padding:0!important}\n.ipad-wallpaper.cbr171 .ipad-visit{display:flex!important;flex-direction:column!important;align-self:stretch!important;position:static!important;min-width:0!important;max-width:none!important;width:auto!important;height:auto!important;min-height:0!important;max-height:none!important;padding:7px!important;margin:0!important;overflow:visible!important;border:1px solid #cbd5e1!important;border-radius:5px!important;background:transparent!important;color:#17202b!important;font:13px/1.3 Arial,sans-serif!important;white-space:normal!important;overflow-wrap:anywhere!important}\n.ipad-wallpaper.cbr171 .ipad-visit>strong{display:block!important;min-height:0!important;height:auto!important;max-height:none!important;position:static!important;font:bold 15px/1.2 Arial,sans-serif!important;margin:0 0 4px!important;padding:0 0 2px!important;white-space:normal!important;overflow-wrap:anywhere!important}\n.ipad-wallpaper.cbr171 .ipad-aircraft-details{font:12px/1.25 Arial,sans-serif!important;color:#42546a!important;margin:0 0 4px!important;padding:0 0 3px!important;white-space:normal!important}\n.ipad-wallpaper.cbr171 .ipad-cbr-section{display:block!important;position:static!important;flex:0 0 auto!important;height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important;border-top:1px solid #d7dee8!important;padding:4px 0 6px!important;margin:0!important}\n.ipad-wallpaper.cbr171 .ipad-cbr-section .ipad-visit-heading{display:block!important;font:bold 12px/1.2 Arial,sans-serif!important;position:static!important;min-height:0!important;height:auto!important;border:0!important;padding:0!important;margin:0 0 3px!important}\n.ipad-wallpaper.cbr171 .ipad-cbr-populated>.ipad-visit-heading{display:none!important}\n.ipad-wallpaper.cbr171 .ipad-cbr-section .ipad-cbr-wx-line,.ipad-wallpaper.cbr171 .ipad-cbr-section .ipad-selected{display:block!important;font:13px/1.28 Arial,sans-serif!important;position:static!important;height:auto!important;min-height:0!important;max-height:none!important;flex:0 0 auto!important;overflow:visible!important;white-space:normal!important;overflow-wrap:anywhere!important;word-break:normal!important;margin:2px 0!important;padding:0!important}\n.ipad-wallpaper.cbr171 .ipad-notam-text,.ipad-wallpaper.cbr171 .ipad-notam-text span{color:#1659ad!important;white-space:normal!important;font:inherit!important;overflow-wrap:anywhere!important}\n.ipad-wallpaper.cbr171 .ipad-cbr-wx-alert{color:#bd202c!important;font-weight:700!important}\n.ipad-wallpaper.cbr171 .ipad-cbr-writing{height:auto!important;min-height:0!important;max-height:none!important;flex:0 0 auto!important;overflow:visible!important;padding:0!important;margin:0!important}\n.ipad-wallpaper.cbr171 .ipad-cbr-writing-operational{min-height:20px!important}\n.ipad-wallpaper.cbr171 .ipad-alternate .ipad-selected{font:12px/1.28 Arial,sans-serif!important;white-space:normal!important;overflow-wrap:anywhere!important;margin:0!important;padding:0!important}\n.ipad-wallpaper.cbr171 .ipad-sector-crew-section{display:block!important;position:static!important;width:100%!important;min-width:0!important;height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important;flex:0 0 auto!important;margin:0!important;padding:8px 0 0!important;border-top:1px solid #9aaabd!important}\n.ipad-wallpaper.cbr171 .ipad-crew-matrix{display:grid!important;grid-template-columns:minmax(0,25%) repeat(var(--ipad-crew-columns),minmax(0,1fr))!important;grid-auto-rows:max-content!important;gap:0 7px!important;width:100%!important;min-width:0!important;max-width:100%!important;height:auto!important;align-items:stretch!important;overflow:visible!important;margin:0!important;padding:0!important;font:12px/1.3 Arial,sans-serif!important}\n.ipad-wallpaper.cbr171 .ipad-crew-matrix .ipad-matrix-cell{box-sizing:border-box!important;min-width:0!important;min-height:0!important;height:auto!important;max-height:none!important;position:static!important;overflow:visible!important;white-space:normal!important;overflow-wrap:anywhere!important;word-break:normal!important;margin:0!important;border-radius:0!important;background:transparent!important;color:#17202b!important;box-shadow:none!important}\n.ipad-wallpaper.cbr171 .ipad-crew-matrix .ipad-matrix-header{display:flex!important;align-items:center!important;font:bold 13px/1.3 Arial,sans-serif!important;padding:8px 6px!important;border:1px solid #cbd5e1!important;border-bottom:1px solid #bbc9d6!important;border-radius:5px 5px 0 0!important;min-height:32px!important}\n.ipad-wallpaper.cbr171 .ipad-crew-matrix .ipad-matrix-details{display:grid!important;grid-template-columns:1fr .6fr .7fr 1.5fr .95fr!important;gap:2px!important;align-items:center!important}\n.ipad-wallpaper.cbr171 .ipad-crew-matrix .ipad-matrix-details span{font:11px/1.3 Arial,sans-serif!important;min-width:0!important;overflow-wrap:anywhere!important}\n.ipad-wallpaper.cbr171 .ipad-crew-matrix .ipad-matrix-person{display:flex!important;align-items:center!important;font:12px/1.3 Arial,sans-serif!important;padding:6px!important;border:1px solid #cbd5e1!important;border-top:0!important;border-bottom:1px dotted #cbd5e1!important;text-align:left!important;min-height:26px!important}\n.ipad-wallpaper.cbr171 .ipad-crew-matrix .ipad-matrix-person.ipad-matrix-details{display:grid!important}\n.ipad-wallpaper.cbr171 .ipad-crew-matrix .ipad-matrix-name{font:12px/1.3 Arial,sans-serif!important;appearance:none!important;-webkit-appearance:none!important;cursor:pointer!important;text-overflow:clip!important;white-space:normal!important;overflow-wrap:anywhere!important}\n';
+ const css='\n/* CrewFocus 171 – isolated, intrinsic CBR renderer. The same rules are used by preview and AirDrop HTML. */\n*{box-sizing:border-box}\nhtml,body{margin:0;padding:0}\n.ipad-wallpaper.cbr171{--cbr-ink:#17202b;width:1474px!important;min-width:1474px!important;max-width:1474px!important;min-height:1024px!important;height:auto!important;max-height:none!important;display:flex!important;flex-direction:column!important;position:relative!important;gap:10px!important;padding:16px!important;margin:0!important;box-sizing:border-box!important;overflow:visible!important;background:#f7f9fc!important;border:0!important;border-radius:0!important;color:var(--cbr-ink)!important;font:13px/1.3 Arial,Helvetica,sans-serif!important;}\n.ipad-wallpaper.cbr171 .ipad-reserved{background:#153b73!important;height:145px!important;min-height:145px!important;max-height:145px!important;flex:0 0 145px!important;margin:0!important;padding:0!important;display:block!important;border:0!important;border-radius:0!important}\n.ipad-wallpaper.cbr171 .ipad-sector-strip{display:none!important}\n.ipad-wallpaper.cbr171 .ipad-visit-columns{display:grid!important;grid-template-columns:repeat(var(--ipad-count),minmax(0,1fr))!important;grid-auto-rows:max-content!important;align-items:stretch!important;gap:7px!important;min-width:0!important;width:100%!important;height:auto!important;min-height:0!important;max-height:none!important;flex:0 0 auto!important;overflow:visible!important;margin:0!important;padding:0!important}\n.ipad-wallpaper.cbr171 .ipad-visit{display:flex!important;flex-direction:column!important;align-self:stretch!important;position:static!important;min-width:0!important;max-width:none!important;width:auto!important;height:auto!important;min-height:0!important;max-height:none!important;padding:7px!important;margin:0!important;overflow:visible!important;border:1px solid #cbd5e1!important;border-radius:5px!important;background:transparent!important;color:#17202b!important;font:13px/1.3 Arial,sans-serif!important;white-space:normal!important;overflow-wrap:anywhere!important}\n.ipad-wallpaper.cbr171 .ipad-visit>strong{display:block!important;min-height:0!important;height:auto!important;max-height:none!important;position:static!important;font:bold 15px/1.2 Arial,sans-serif!important;margin:0 0 4px!important;padding:0 0 2px!important;white-space:normal!important;overflow-wrap:anywhere!important}\n.ipad-wallpaper.cbr171 .ipad-aircraft-details{font:12px/1.25 Arial,sans-serif!important;color:#42546a!important;margin:0 0 4px!important;padding:0 0 3px!important;white-space:normal!important}\n.ipad-wallpaper.cbr171 .ipad-cbr-section{display:block!important;position:static!important;flex:0 0 auto!important;height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important;border-top:1px solid #d7dee8!important;padding:4px 0 6px!important;margin:0!important}\n.ipad-wallpaper.cbr171 .ipad-cbr-section .ipad-visit-heading{display:block!important;font:bold 12px/1.2 Arial,sans-serif!important;position:static!important;min-height:0!important;height:auto!important;border:0!important;padding:0!important;margin:0 0 3px!important}\n.ipad-wallpaper.cbr171 .ipad-cbr-populated>.ipad-visit-heading{display:block!important}\n.ipad-wallpaper.cbr171 .ipad-cbr-section .ipad-cbr-wx-line,.ipad-wallpaper.cbr171 .ipad-cbr-section .ipad-selected{display:block!important;font:13px/1.28 Arial,sans-serif!important;position:static!important;height:auto!important;min-height:0!important;max-height:none!important;flex:0 0 auto!important;overflow:visible!important;white-space:normal!important;overflow-wrap:anywhere!important;word-break:normal!important;margin:2px 0!important;padding:0!important}\n.ipad-wallpaper.cbr171 .ipad-notam-text,.ipad-wallpaper.cbr171 .ipad-notam-text span{color:#1659ad!important;white-space:normal!important;font:inherit!important;overflow-wrap:anywhere!important}\n.ipad-wallpaper.cbr171 .ipad-cbr-wx-alert{color:#bd202c!important;font-weight:700!important}\n.ipad-wallpaper.cbr171 .ipad-cbr-writing{height:auto!important;min-height:0!important;max-height:none!important;flex:0 0 auto!important;overflow:visible!important;padding:0!important;margin:0!important}\n.ipad-wallpaper.cbr171 .ipad-cbr-writing-operational{min-height:20px!important}\n.ipad-wallpaper.cbr171 .ipad-alternate .ipad-selected{font:12px/1.28 Arial,sans-serif!important;white-space:normal!important;overflow-wrap:anywhere!important;margin:0!important;padding:0!important}\n.ipad-wallpaper.cbr171 .ipad-sector-crew-section{display:block!important;position:static!important;width:100%!important;min-width:0!important;height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important;flex:0 0 auto!important;margin:0!important;padding:8px 0 0!important;border-top:1px solid #9aaabd!important}\n.ipad-wallpaper.cbr171 .ipad-crew-matrix{display:grid!important;grid-template-columns:minmax(0,25%) repeat(var(--ipad-crew-columns),minmax(0,1fr))!important;grid-auto-rows:max-content!important;gap:0 7px!important;width:100%!important;min-width:0!important;max-width:100%!important;height:auto!important;align-items:stretch!important;overflow:visible!important;margin:0!important;padding:0!important;font:12px/1.3 Arial,sans-serif!important}\n.ipad-wallpaper.cbr171 .ipad-crew-matrix .ipad-matrix-cell{box-sizing:border-box!important;min-width:0!important;min-height:0!important;height:auto!important;max-height:none!important;position:static!important;overflow:visible!important;white-space:normal!important;overflow-wrap:anywhere!important;word-break:normal!important;margin:0!important;border-radius:0!important;background:transparent!important;color:#17202b!important;box-shadow:none!important}\n.ipad-wallpaper.cbr171 .ipad-crew-matrix .ipad-matrix-header{display:flex!important;align-items:center!important;font:bold 13px/1.3 Arial,sans-serif!important;padding:8px 6px!important;border:1px solid #cbd5e1!important;border-bottom:1px solid #bbc9d6!important;border-radius:5px 5px 0 0!important;min-height:32px!important}\n.ipad-wallpaper.cbr171 .ipad-crew-matrix .ipad-matrix-details{display:grid!important;grid-template-columns:1fr .6fr .7fr 1.5fr .95fr!important;gap:2px!important;align-items:center!important}\n.ipad-wallpaper.cbr171 .ipad-crew-matrix .ipad-matrix-details span{font:11px/1.3 Arial,sans-serif!important;min-width:0!important;overflow-wrap:anywhere!important}\n.ipad-wallpaper.cbr171 .ipad-crew-matrix .ipad-matrix-person{display:flex!important;align-items:center!important;font:12px/1.3 Arial,sans-serif!important;padding:6px!important;border:1px solid #cbd5e1!important;border-top:0!important;border-bottom:1px dotted #cbd5e1!important;text-align:left!important;min-height:26px!important}\n.ipad-wallpaper.cbr171 .ipad-crew-matrix .ipad-matrix-person.ipad-matrix-details{display:grid!important}\n.ipad-wallpaper.cbr171 .ipad-crew-matrix .ipad-matrix-name{font:12px/1.3 Arial,sans-serif!important;appearance:none!important;-webkit-appearance:none!important;cursor:pointer!important;text-overflow:clip!important;white-space:normal!important;overflow-wrap:anywhere!important}\n';
  const html='<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=1474,initial-scale=1"><title>CrewFocus iPad Briefing v171</title><style>'+css+'</style></head><body>'+clone.outerHTML+'</body></html>';
  return new File([html],'CrewFocus_iPad_CBR.html',{type:'text/html'});
 }
@@ -4364,10 +4474,9 @@ function crewScreeningUTC(date,time,port){
 }
 function crewManualDutyWindow(){return null;}
 function crewScreeningRefreshWeather(){
- const raw=ipadRetainedNaipsText();
- if(raw&&typeof flightNaipsParse==='function'&&typeof flightRenderNaips==='function'){
-  const parsed=flightNaipsParse(raw);
-  if(parsed?.order?.length){flightRenderNaips(parsed);return true;}
+ const parsed=crewWxActiveParsed();
+ if(parsed?.order?.length&&typeof flightRenderNaips==='function'){
+  flightRenderNaips(parsed);return true;
  }
  return false;
 }
@@ -4772,7 +4881,8 @@ function flightRenderNaips(parsed){
   if(dailyWarning){const advisory=make('p','flight-source',dailyWarning,block);advisory.style.cssText='color:#97510a;font-weight:700;font-size:12px;line-height:1.4;margin:0 0 10px;white-space:normal';}
   {const id=(raw.match(/\b[A-Z]\d{2,5}\/\d{2}\b/)||[])[0]||'NOTAM';const actions=document.createElement('div');actions.className='ipad-notam-actions';actions.setAttribute('data-ipad-notam-id',id);const add=document.createElement('button');add.className='btn small';add.type='button';add.setAttribute('data-ipad-add','');add.textContent='＋ Add to iPad CBR';add.onclick=()=>{if(Object.values(ipadSelections).some(item=>item.id===id)){ipadRemoveNotam(id);return;}const draft=ipadAbbreviate(raw);const code=(block.querySelector('h3')?.textContent.match(/\(([A-Z]{3,4})\)/)||[])[1]||'';ipadOpenNotamEditor(id,raw,draft,edited=>ipadChooseVisit(id,raw,true,code,edited))};actions.append(add);block.append(actions);}
  };
- if(parsed.valid)make('p','flight-source',parsed.valid,sheet);
+ if(parsed.airportCache)make('p','flight-source','COMBINED AIRPORT REPORTS: Weather is retained per airport across imports. Earlier TAFs are available for historical sector times. Check the issue/validity of each original report; retained data is not a live feed.',sheet);
+ if(parsed.valid)make('p','flight-source','Latest imported source: '+parsed.valid,sheet);
  const learningTools=document.createElement('details');learningTools.className='crew-panel';
  const learnHead=document.createElement('summary');learnHead.textContent='NOTAM learning data · Backup / restore';learningTools.append(learnHead);
  const count=document.createElement('p');count.id='crewNotamLearningCount';count.className='note';learningTools.append(count);
@@ -4874,7 +4984,7 @@ function flightRenderNaips(parsed){
   sheet.append(screened);
  }
  const details=document.createElement('details');details.style.marginTop='20px';
- make('summary','','Original NAIPS text (unaltered)',details);
+ make('summary','','Latest imported NAIPS source (unaltered; earlier reports above may be retained)',details);
  const original=make('pre','',parsed.original,details);original.style.whiteSpace='pre-wrap';original.style.overflowWrap='anywhere';
  sheet.append(details);
  make('p','flight-source','Time-based NOTAM screening is advisory only. Verify operational applicability and full original NAIPS briefing.',sheet);
@@ -4906,8 +5016,7 @@ function flightRender(reports,source){
 $('flightPaste').addEventListener('paste',()=>{ $('flightPasteStatus').textContent='Text pasted. Tap Import briefing / Upload to CBR.'; });
 /* Manual shortlist retained internally; import now triggers it automatically. */
 function crewRefreshNotams(){
- const raw=$('flightPaste').value.trim()||localStorage.getItem('crewFocusNaipsBriefingV1')||'';
- const parsed=flightNaipsParse(raw);
+ const parsed=crewWxActiveParsed();
  if(!parsed||!parsed.order.length){$('flightShortlistStatus').textContent='Import a complete NAIPS briefing first.';return;}
  flightRenderNaips(parsed);
 }
@@ -4916,22 +5025,30 @@ $('flightInterpret').addEventListener('click',()=>{
  const parsed=flightNaipsParse(raw);
  if(parsed){
   if(!parsed.order.length){$('flightStatus').textContent='NAIPS headings found, but no airport sections recognised. Check copied text.';return;}
-  const previousBriefing=localStorage.getItem('crewFocusNaipsBriefingV1')||'';
-  const updatedForecastCount=crewWxRecordTafUpdates(previousBriefing,parsed);
-  flightRenderNaips(parsed);
-  ipadAutoAssign(parsed);
-  try{localStorage.setItem('crewFocusNaipsBriefingV1',raw);}catch(e){}
-  // v193: one action imports NAIPS and transfers applicable UTC-screened WX into the CBR.
-  // Retain every imported NOTAM and do not manufacture WX when a TAF is out of validity.
+  const previous=crewWxActiveParsed(),merged=crewWxArchiveMerge(crewWxArchiveRead(),parsed);
+  // Atomic commit: if a device cannot save the airport archive, do NOT
+  // overwrite the only previous briefing with a narrower new one.
+  try{
+   localStorage.setItem(crewWxAirportCacheKey,JSON.stringify(merged.cache));
+   localStorage.setItem('crewFocusNaipsBriefingV1',raw);
+   localStorage.setItem('crewFocusWxUpdatedV123',String(Date.now()));
+  }catch(e){$('flightStatus').textContent='Storage full/unavailable: update not committed. Previous airport weather retained. '+e.message;return;}
+  const updatedForecastCount=crewWxRecordTafUpdates(previous,parsed);
+  const effective=crewWxActiveParsed();
+  flightRenderNaips(effective);
+  ipadAutoAssign(effective);
+  // Retain previously imported forecasts for other ports and earlier sector
+  // times. The iPad visit assignment is rebuilt from confirmed sector UTC.
   try{ipadAddWeatherToCBR();}catch(e){console.warn('CBR weather transfer pending',e);const st=document.getElementById('ipadCBRWeatherStatus');if(st)st.textContent='Briefing imported; CBR weather transfer needs review: '+e.message;}
-  $('flightStatus').textContent='NAIPS imported: '+parsed.order.join(', ')+'. '+(updatedForecastCount?updatedForecastCount+' airport(s) with updated forecast lines (black change bars on iPad CBR only). ':'')+parsed.order.reduce((n,c)=>n+parsed.airports.get(c).notams.length,0)+' NOTAMs in original briefing. Time-based shortlist displayed; uncertain NOTAMs retained. '+($('flightStatus').dataset.ipadShortlist||'');
+  $('flightStatus').textContent='Updated '+(merged.changed.join(', ')||'no recognised weather ports')+'. '+(merged.retained.length?'Retained earlier weather for '+merged.retained.join(', ')+'. ':'')+(updatedForecastCount?updatedForecastCount+' airport(s) with changed forecast groups. ':'')+'Other airport NOTAMs retained; verify issue/validity times before operational use. '+($('flightStatus').dataset.ipadShortlist||'');
+  $('flightPasteStatus').textContent='Airport-by-airport update saved. Original latest NAIPS text is retained separately; reimport any missing airports to populate their forecasts.';
  }else{
   $('flightStatus').textContent='Not a complete NAIPS location briefing. Paste the entire email including WEATHER INFORMATION and NOTAM INFORMATION headings.';
  }
 });
 try{
  const previous=localStorage.getItem('crewFocusNaipsBriefingV1');
- if(previous){$('flightPaste').value=previous;$('flightPasteStatus').textContent='Previous NAIPS briefing restored. Re-import to refresh screening; check its validity.';}
+ if(previous){$('flightPaste').value=previous;$('flightPasteStatus').textContent='Most recent NAIPS source restored for editing. Earlier airport reports are retained separately. Paste a new source and import to update only those ports.';}
 }catch(e){}
 $('flightClear').addEventListener('click',()=>{$('flightPaste').value='';$('flightResults').replaceChildren();$('flightStatus').textContent='Reports cleared.';});
 $('flightFetch').addEventListener('click',async()=>{
@@ -5281,7 +5398,17 @@ $('settingsPlan').addEventListener('click',()=>$('planDialog').showModal());
 for(const key of ['crewRole','crewAirline']){try{$(key).value=localStorage.getItem('crewApp_'+key)||$(key).value;}catch(e){}$(key).addEventListener('change',e=>{try{localStorage.setItem('crewApp_'+key,e.target.value);}catch(e){}});}
 for(const key of focusOrder){const line=document.createElement('label');line.className='focus-check';const check=document.createElement('input');check.type='checkbox';check.checked=focusConfig.enabled.includes(key);check.addEventListener('change',()=>{const chosen=new Set(focusConfig.enabled);if(check.checked)chosen.add(key);else chosen.delete(key);focusConfig.enabled=focusOrder.filter(x=>chosen.has(x));saveFocus();crewRenderFocus();});line.append(check,document.createTextNode(' '+crewFocusInfo[key][0]));$('focusEnabledOptions').appendChild(line);}
 const oldCrewSyncDashboard=syncDashboard;syncDashboard=function(){oldCrewSyncDashboard();crewRefreshHome();};
-crewNavigate('home');
+// v239: resume Duty & departure after a completed/cancelled alarm shortcut,
+// not the default Focus page. Retain the same scroll position for the next alarm.
+const alarmReturn=window.__crewFocusAlarmReturn;
+if(alarmReturn?.page==='duty'){
+ crewNavigate('duty');
+ delete window.__crewFocusAlarmReturn;
+ const restoreY=Math.max(0,Number(alarmReturn.scrollY)||0);
+ const restore=()=>window.scrollTo(0,restoreY);
+ requestAnimationFrame(restore);
+ if(document.readyState==='complete')restore();else window.addEventListener('load',restore,{once:true});
+}else crewNavigate('home');
 })();
 
 // CBR preview module. All times are explicitly converted through IANA airport zones.
@@ -6174,17 +6301,27 @@ try{
  }
  // Today follows the sign-on time zone; selecting another date opens the
  // platform's date picker where available, without changing flight time.
+ function syncFdpDateChoice(){
+  const other=$('fdpDateMode').value==='other';
+  $('fdpOtherDateWrap').classList.toggle('hidden',!other);
+  if(!other)$('fdpSignonDate').value=todayAtSignonZone();
+ }
  $('fdpDateMode').addEventListener('change',()=>{
-  if($('fdpDateMode').value==='today')$('fdpSignonDate').value=todayAtSignonZone();
-  else {try{$('fdpSignonDate').showPicker?.();}catch(e){$('fdpSignonDate').focus();}}
+  syncFdpDateChoice();
+  // Expose the native picker only after choosing Other date, not by default.
+  if($('fdpDateMode').value==='other'){
+   try{$('fdpSignonDate').showPicker?.();}catch(e){$('fdpSignonDate').focus();}
+  }
   $('fdpSignonDate').dispatchEvent(new Event('change',{bubbles:true}));
  });
  $('fdpSignonDate').addEventListener('change',()=>{
   if($('fdpSignonDate').value!==todayAtSignonZone())$('fdpDateMode').value='other';
+  syncFdpDateChoice();
  });
  $('fdpTimeZone').addEventListener('change',()=>{
   if($('fdpDateMode').value==='today')$('fdpSignonDate').value=todayAtSignonZone();
  });
+ syncFdpDateChoice();
  let lastZone=$('fdpTimeZone').value;
  for(const id of inputs){$(id)?.addEventListener('change',()=>{
    if(id==='fdpTimeZone'&&$('fdpReferenceZone').value===lastZone)$('fdpReferenceZone').value=$('fdpTimeZone').value;
@@ -6199,124 +6336,217 @@ try{
  compute();
 })();
 </script>
-<script id="fdpRestCalculator234Script">
-/* v236: stand-alone Required Rest mode, optional link to Maximum FDP inputs.
- * Reference clauses 9.4(f), 13.4 and 13.9. Never equate elapsed rest with full clearance. */
+<script id="fdpRestCalculator240Script">
+/* v240: independent earliest-sign-on estimate. Roster source is read-only;
+   edited actual times stay in this calculator and never change the roster/CBR.
+   EA 2024 18.1: +30m signoff both domestic/int'l; 18.2: +30m rest
+   after an international FINAL sector. This is not dispatch clearance. */
 (() => {
  'use strict';
  const $=id=>document.getElementById(id),t=window.crewFDPTableA;
  if(!t||!$('fdpRestResult'))return;
  const root=$('fdpRestResult');
- const line=(tag,cls,content,parent=root)=>{const el=document.createElement(tag);if(cls)el.className=cls;el.textContent=content;parent.append(el);return el;};
- const months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
- const isoLocal=(d,z)=>{const p=t.parts(d,z);return {date:`${p.year}-${String(p.month).padStart(2,'0')}-${String(p.day).padStart(2,'0')}`,time:`${String(p.hour).padStart(2,'0')}:${String(p.minute).padStart(2,'0')}`};};
- const niceLocal=(d,z)=>{const p=t.parts(d,z);return `${String(p.day).padStart(2,'0')} ${months[p.month-1]} ${String(p.hour).padStart(2,'0')}:${String(p.minute).padStart(2,'0')}`;};
- const linked=()=> $('fdpRestSource').value==='fdp';
- const signZone=()=>linked()?$('fdpTimeZone').value:$('fdpRestSignonZone').value;
- const outZone=()=>linked()?($('fdpOutputZone').value==='same'?$('fdpTimeZone').value:$('fdpOutputZone').value):($('fdpRestOutputZone').value==='same'?signZone():$('fdpRestOutputZone').value);
- const parse=(dateId,timeId,zone)=>{const r=t.zonedToUTC($(dateId).value,$(timeId).value,zone);return r.error||r.ambiguous?null:r.value;};
- const setPair=(prefix,date,zone)=>{const parts=isoLocal(date,zone);$(prefix+'Date').value=parts.date;$(prefix+'Time').value=parts.time;};
- const dur=ms=>t.fmtMinutes(Math.round(ms/60000));
- const numberRow=(label,value,extra='')=>{const outer=line('div','fdp-rest-metric '+extra,'');line('span','',label,outer);line('strong','',value,outer);};
- // The independent form uses its own sign-on/output zones, never the hidden
- // Maximum FDP selectors. Reuse the existing international time-zone choices.
+ const zoneMap={...t.zones,AKL:'Pacific/Auckland',CHC:'Pacific/Auckland',WLG:'Pacific/Auckland',ZQN:'Pacific/Auckland',DPS:'Asia/Makassar',NAN:'Pacific/Fiji',SIN:'Asia/Singapore',PNQ:'Asia/Kolkata',POM:'Pacific/Port_Moresby',AVV:'Australia/Melbourne',WGA:'Australia/Sydney',ABX:'Australia/Sydney',MQL:'Australia/Melbourne',KGI:'Australia/Perth',GET:'Australia/Perth',DPO:'Australia/Hobart',BWT:'Australia/Hobart',KTA:'Australia/Perth',PHE:'Australia/Perth',BME:'Australia/Perth'};
+ const icaoAliases={YMML:'MEL',YSSY:'SYD',YBBN:'BNE',YPPH:'PER',YSCB:'CBR',YPAD:'ADL',YBCG:'OOL',YBCS:'CNS',YBNA:'BNK',YBTL:'TSV',YBRK:'ROK',YMHB:'HBA',YMLT:'LST',YPGV:'GOV',YPPD:'PHE',NZAA:'AKL',NZCH:'CHC',NZWN:'WLG',NZQN:'ZQN',WADD:'DPS',NFFN:'NAN'};
+ const AU=new Set(['MEL','SYD','BNE','PER','CBR','ADL','OOL','CNS','NTL','HBA','LST','MCY','TSV','MKY','ROK','BQB','DRW','AVV','WGA','ABX','MQL','KGI','GET','DPO','BWT','KTA','PHE','BME','BNK','GOV']);
+ const NZ=new Set(['AKL','CHC','WLG','ZQN']);
+ const country=code=>AU.has(code)?'AU':NZ.has(code)?'NZ':code==='DPS'?'ID':code==='NAN'?'FJ':code==='SIN'?'SG':code==='POM'?'PG':null;
+ const port=code=>icaoAliases[String(code||'').trim().toUpperCase()]||String(code||'').trim().toUpperCase();
+ const sectorKind=(from,to)=>{const a=country(port(from)),b=country(port(to));return a&&b?(a===b?'domestic':'international'):'unknown';};
+ const timezone=code=>zoneMap[port(code)]||'';
+ const setText=(id,value)=>{$(id).textContent=value;};
+ const el=(tag,cls,content,parent=root)=>{const e=document.createElement(tag);if(cls)e.className=cls;e.textContent=content;parent.append(e);return e;};
+ const row=(label,value,cls='')=>{const outer=el('div','fdp-rest-metric '+cls,'');el('span','',label,outer);el('strong','',value,outer);};
+ const iso=(date,zone)=>{const p=t.parts(date,zone);return `${p.year}-${String(p.month).padStart(2,'0')}-${String(p.day).padStart(2,'0')}`;};
+ const pair=(date,zone)=>{const p=t.parts(date,zone);return {date:iso(date,zone),time:`${String(p.hour).padStart(2,'0')}:${String(p.minute).padStart(2,'0')}`};};
+ const nice=(date,zone)=>{const a=pair(date,zone);return `${a.date.split('-').reverse().join('/')} ${a.time}`;};
+ const shift=(date,n)=>{const d=new Date(date+'T12:00:00Z');d.setUTCDate(d.getUTCDate()+n);return d.toISOString().slice(0,10);};
+ const parse=(date,time,zone)=>{if(!zone)return null;const v=t.zonedToUTC(date,time,zone);return v.error||v.ambiguous?null:v.value;};
+ const setPair=(prefix,date,zone)=>{const p=pair(date,zone);$(prefix+'Date').value=p.date;$(prefix+'Time').value=p.time;};
+ const signZone=()=> $('fdpRestSignonZone').value;
+ const outZone=()=> $('fdpRestOutputZone').value;
+ const get=(prefix,zone)=>parse($(prefix+'Date').value,$(prefix+'Time').value,zone);
+ let mode='roster',rosterID='',lastSource='',suppress=false;
+ let manualSaved=null,rosterSaved=null,lastAirportCode='';
+ const fields=['fdpRestSignonDate','fdpRestSignonTime','fdpRestSignonZone','fdpRestDutyType','fdpRestStandbyDate','fdpRestStandbyTime','fdpRestArrivalAirport','fdpRestOutputZone','fdpRestSectorType','fdpRestLandingDate','fdpRestLandingTime'];
+ const snapshot=()=>Object.fromEntries(fields.map(id=>[id,$(id).value]));
+ const restore=s=>{if(!s)return;for(const [id,val] of Object.entries(s))if($(id))$(id).value=val;};
+ // Reuse the same time zones as Maximum FDP, then add known roster/CBR ports.
  for(const id of ['fdpRestSignonZone','fdpRestOutputZone']){
-  const target=$(id);
-  for(const sourceOpt of $('fdpTimeZone').options){const opt=document.createElement('option');opt.value=sourceOpt.value;opt.textContent=sourceOpt.textContent;target.append(opt);}
-  if(id==='fdpRestOutputZone'){
-   const same=document.createElement('option');same.value='same';same.textContent='Same as flight sign-on';target.prepend(same);
-  }
+  const target=$(id),options=new Set();
+  for(const opt of $('fdpTimeZone').options){const v=opt.value;if(!v||options.has(v))continue;target.add(new Option(opt.textContent,v));options.add(v);}
+  for(const [code,zone] of Object.entries(zoneMap))if(!options.has(zone)){target.add(new Option(`${code} — ${zone.replaceAll('_',' ')}`,zone));options.add(zone);}
  }
  const device=Intl.DateTimeFormat().resolvedOptions().timeZone||'Australia/Melbourne';
- $('fdpRestSignonZone').value=[...$('fdpRestSignonZone').options].some(o=>o.value===device)?device:'Australia/Melbourne';
- $('fdpRestOutputZone').value='same';
- $('fdpRestSignonDate').value=isoLocal(new Date(),signZone()).date;
- let manualActual=false,autoPlanKey='',lastZone=outZone(),wasLinked=false;
- function sync(){
-  const usePlan=linked(),showSignon=!usePlan||!$('fdpRestSameSignon').checked;
-  $('fdpRestLinkedOptions').classList.toggle('hidden',!usePlan);
-  $('fdpRestDutyTypeWrap').classList.toggle('hidden',usePlan);
-  $('fdpRestSignonZoneWrap').classList.toggle('hidden',usePlan);
-  $('fdpRestSignonDateWrap').classList.toggle('hidden',!showSignon);
-  $('fdpRestSignonTimeWrap').classList.toggle('hidden',!showSignon);
-  $('fdpRestSectorsWrap').classList.toggle('hidden',!usePlan||$('fdpRestSameSectors').checked);
-  const standby=!usePlan&&$('fdpRestDutyType').value==='standby_a';
-  $('fdpRestStandbyDateWrap').classList.toggle('hidden',!standby);
-  $('fdpRestStandbyTimeWrap').classList.toggle('hidden',!standby);
+ const localZone=[...$('fdpRestSignonZone').options].some(o=>o.value===device)?device:'Australia/Melbourne';
+ $('fdpRestSignonZone').value=localZone;$('fdpRestOutputZone').value=localZone;
+ $('fdpRestSignonDate').value=iso(new Date(),localZone);
+ $('fdpRestLandingDate').value=iso(new Date(),localZone);
+ // Returns a final-sector landing instant, not the roster's +30m signoff.
+ function lastArrival(segments,sourceDate,signonInstant){
+  let previous=null,last=null;
+  for(const s of segments){
+   const from=port(s.from),to=port(s.to),dz=timezone(from),az=timezone(to);
+   if(!dz||!az)return null;
+   let departure=null;
+   const start=previous?iso(previous, dz):sourceDate;
+   for(let n=0;n<=3;n++){
+    const d=parse(shift(start,n),s.dep,dz);
+    if(d&&d.getTime()>=(previous||signonInstant||new Date(0)).getTime()-60*60000){departure=d;break;}
+   }
+   if(!departure)return null;
+   const arrivalDate=iso(departure,az);
+   let arrival=null;
+   for(let n=-1;n<=3;n++){
+    const a=parse(shift(arrivalDate,n),s.arr,az);
+    if(a&&a>=departure&&a.getTime()-departure.getTime()<=36*3600000&&(!arrival||a<arrival))arrival=a;
+   }
+   if(!arrival)return null;
+   last={landing:arrival,from,to,zone:az,kind:sectorKind(from,to)};
+   previous=arrival;
+  }
+  return last;
+ }
+ function extractRoster(d){
+  const segments=String(d.raw||'').split(/\n/).map(line=>{
+   const m=line.trim().match(/^\*?\s*VA\s*\d+\s+(\d{4})\s+([A-Z]{3,4})\s+([A-Z]{3,4})\s+(\d{4})/i);
+   if(!m)return null;return {dep:m[1].slice(0,2)+':'+m[1].slice(2),from:m[2],to:m[3],arr:m[4].slice(0,2)+':'+m[4].slice(2)};
+  }).filter(Boolean);
+  if(!segments.length)return null;
+  const sz=d.zone||timezone(d.port),start=parse(d.date,d.time,sz);
+  if(!sz||!start)return null;
+  const last=lastArrival(segments,d.sourceDate||d.date,start);
+  if(!last)return null;
+  return {date:d.date,time:d.time,signzone:sz,source:`Roster ${d.sourceDate||d.date} · ${segments.length} sector${segments.length===1?'':'s'} · ${segments.map(s=>port(s.from)+'–'+port(s.to)).join(' / ')}`,
+   landing:last.landing,arrival: last.to,landingzone:last.zone,kind:last.kind,confirmed:!!d.confirmed,id:d.id};
+ }
+ function extractCBR(c,date){
+  if(!c||!c.confirmed||!Array.isArray(c.rows)||!c.rows.length)return null;
+  const segments=c.rows.map(r=>(Array.isArray(r)&&r[1]&&r[2]&&r[3]&&r[4])?{from:r[1],dep:r[2],to:r[3],arr:r[4]}:null).filter(Boolean);
+  if(!segments.length)return null;
+  const sz=timezone(segments[0].from)||'Australia/Melbourne',start=parse(date,c.signon,sz);
+  if(!start)return null;
+  const last=lastArrival(segments,date,start);
+  if(!last)return null;
+  return {date,time:c.signon,signzone:sz,source:`Confirmed CBR ${date} · ${segments.length} sector${segments.length===1?'':'s'} · ${segments.map(s=>port(s.from)+'–'+port(s.to)).join(' / ')}`,
+   landing:last.landing,arrival:last.to,landingzone:last.zone,kind:last.kind,confirmed:true,id:'cbr-'+date};
+ }
+ function todayDuty(){
+  const base=localStorage.getItem('crewFocusHomeBaseV229')||'MEL';
+  const today=iso(new Date(),timezone(base)||'Australia/Melbourne');
+  let roster=[];try{roster=JSON.parse(localStorage.getItem('leaveForWorkRosterV19')||'[]');}catch(e){}
+  const entries=Array.isArray(roster)?roster.filter(d=>d&&!d.standby&&!d.sim&&(d.date===today||d.sourceDate===today)):[];
+  // Prefer the user-confirmed duty if multiple entries are present.
+  entries.sort((a,b)=>Number(!!b.confirmed)-Number(!!a.confirmed));
+  for(const d of entries){const result=extractRoster(d);if(result)return result;}
+  let c=null;try{c=JSON.parse(localStorage.getItem('crewFocusCBRStateV1')||'null');}catch(e){}
+  const cdate=c?.testDateOverride?today:c?.date;
+  if(cdate===today){const result=extractCBR(c,today);if(result){result.test=!!c.testDateOverride;return result;}}
+  return null;
+ }
+ function refreshRoster(){
+  const duty=todayDuty();
+  if(!duty){rosterID='';lastSource='';setText('fdpRestImportStatus','No flying duty for today was found in the imported roster or confirmed CBR. Select Manual, or import/review your roster.');
+   for(const id of ['fdpRestSignonTime','fdpRestArrivalAirport','fdpRestLandingTime'])$(id).value='';$('fdpRestSectorType').value='unknown';return;
+  }
+  rosterID=duty.id;lastSource=duty.source;
+  $('fdpRestSignonDate').value=duty.date;$('fdpRestSignonTime').value=duty.time;$('fdpRestSignonZone').value=duty.signzone;
+  $('fdpRestArrivalAirport').value=duty.arrival;$('fdpRestOutputZone').value=duty.landingzone;
+  $('fdpRestSectorType').value=duty.kind;
+  setPair('fdpRestLanding',duty.landing,duty.landingzone);
+  $('fdpRestDutyType').value='rostered';
+  const caution=duty.confirmed?'':' (unreviewed roster times — verify)';
+  setText('fdpRestImportStatus',duty.source+caution+(duty.test?' · TEST DATE OVERRIDE':'' )+'. Update landing time to estimate the revised next sign-on.');
+ }
+ function setMode(next){
+  if(next!==mode){if(mode==='manual')manualSaved=snapshot();else if(rosterID)rosterSaved={id:rosterID,fields:snapshot()};}
+  mode=next;
+  for(const [key,id] of [['roster','fdpRestRosteredBtn'],['manual','fdpRestManualBtn']]){
+   const active=mode===key;$(id).classList.toggle('active',active);$(id).setAttribute('aria-pressed',String(active));
+  }
+  const manual=mode==='manual';
+  $('fdpRestDutyTypeWrap').classList.toggle('hidden',!manual);
+  if(manual){
+   if(manualSaved)restore(manualSaved);
+   else {
+    $('fdpRestDutyType').value='rostered';$('fdpRestSignonDate').value=iso(new Date(),localZone);
+    $('fdpRestSignonTime').value='';$('fdpRestSignonZone').value=localZone;
+    $('fdpRestArrivalAirport').value='';$('fdpRestOutputZone').value=localZone;
+    $('fdpRestSectorType').value='unknown';$('fdpRestLandingDate').value=iso(new Date(),localZone);$('fdpRestLandingTime').value='';
+   }
+   setText('fdpRestImportStatus','Manual duty — enter sign-on, final landing airport and landing time. Select whether the final flight crossed an international border.');
+  }else{
+   refreshRoster();
+   if(rosterSaved&&rosterSaved.id===rosterID)restore(rosterSaved.fields);
+  }
+  lastAirportCode=port($('fdpRestArrivalAirport').value);
+  $('fdpRestConfirmed').checked=false;
+  toggleStandby();draw();
+ }
+ function toggleStandby(){
+  const standby=mode==='manual'&&$('fdpRestDutyType').value==='standby_a';
+  for(const id of ['fdpRestStandbyDateWrap','fdpRestStandbyTimeWrap'])$(id).classList.toggle('hidden',!standby);
   if(standby&&!$('fdpRestStandbyDate').value)$('fdpRestStandbyDate').value=$('fdpRestSignonDate').value;
-  $('fdpRestOutputZone').parentElement.classList.toggle('hidden',usePlan);
-  if(usePlan&&$('fdpRestSameSignon').checked){$('fdpRestSignonDate').value=$('fdpSignonDate').value;$('fdpRestSignonTime').value=$('fdpSignonTime').value;}
-  if(usePlan&&$('fdpRestSameSectors').checked)$('fdpRestSectors').value=$('fdpSectors').value;
-  const zone=outZone();$('fdpRestZoneHint').textContent='Local zone: '+zone.split('/').pop().replaceAll('_',' ');
-  const plan=usePlan?window.crewFDPLastPlan:null;
-  const key=plan?`${plan.signonUTC}|${plan.landingUTC}|${plan.signoffUTC}|${zone}`:'';
-  if(plan&&!manualActual&&key!==autoPlanKey){setPair('fdpRestLanding',new Date(plan.landingUTC),zone);setPair('fdpRestSignoff',new Date(plan.signoffUTC),zone);}
-  autoPlanKey=key;
-  lastZone=zone;
-  wasLinked=usePlan;
-  draw();
  }
  function draw(){
   root.replaceChildren();
-  const usePlan=linked(),sz=signZone(),oz=outZone();
-  const mode=usePlan?($('fdpDutyType').value==='standby'?($('fdpStandbyKind').value==='a'?'standby_a':'standby_18'):'rostered'):$('fdpRestDutyType').value;
-  const actualOn=usePlan&&$('fdpRestSameSignon').checked?parse('fdpSignonDate','fdpSignonTime',sz):parse('fdpRestSignonDate','fdpRestSignonTime',sz);
-  if(!actualOn){line('p','fdp-unavailable','Enter the actual flight sign-on date, local time and time zone.');return;}
-  const standbyA=mode==='standby_a';
-  const dutyStart=standbyA?(usePlan?parse('fdpStandbyDate','fdpStandbyTime',sz):parse('fdpRestStandbyDate','fdpRestStandbyTime',sz)):actualOn;
-  if(!dutyStart){line('p','fdp-unavailable','Enter when Standby A began; total duty starts at standby commencement.');return;}
-  const landing=parse('fdpRestLandingDate','fdpRestLandingTime',oz),off=parse('fdpRestSignoffDate','fdpRestSignoffTime',oz);
-  if(!landing||!off){line('p','fdp-unavailable','Enter actual landing and sign-off dates/times.');return;}
-  if(actualOn<dutyStart){line('p','fdp-unavailable','Flight sign-on cannot occur before Standby A begins.');return;}
-  if(landing<=actualOn){line('p','fdp-unavailable','Landing must be after flight sign-on. Check local dates and time zones.');return;}
-  if(off.getTime()<landing.getTime()+15*60000){line('p','fdp-unavailable','Sign-off must be at least 15 minutes after landing for this flying-duty calculation.');return;}
-  if(off.getTime()-dutyStart.getTime()>72*3600000){line('p','fdp-unavailable','Duty is unexpectedly long. Check dates and time zones.');return;}
-  const duty=off.getTime()-dutyStart.getTime(),fdp=landing.getTime()+15*60000-actualOn.getTime();
-  const minRest=Math.max(12*3600000,duty),earliest=new Date(off.getTime()+minRest);
-  numberRow('Actual total duty',dur(duty));numberRow('Flying FDP (+15m)',dur(fdp));
-  if(usePlan)numberRow('Actual sectors',String($('fdpRestSameSectors').checked?$('fdpSectors').value:$('fdpRestSectors').value));
-  numberRow('Minimum elapsed rest',dur(minRest));
-  if(!$('fdpRestConfirmed').checked){line('p','fdp-rest-warning','Confirm the actual landing and sign-off times to calculate the next sign-on.');return;}
-  numberRow(duty>15*3600000?'Earliest by hours only':'Earliest next sign-on',niceLocal(earliest,oz),'fdp-rest-earliest');
-  line('p','fdp-rest-utc',t.fmtUTC(earliest));
-  if(standbyA)line('p','fdp-rest-warning','Standby A: rest is calculated from the start of standby through actual sign-off.');
-  if(mode==='standby_18')line('p','fdp-rest-warning','Standby 18: uses the assigned duty sign-on. Confirm any other credited standby or positioning separately.');
-  if(usePlan&&!$('fdpRestSameSectors').checked)line('p','fdp-rest-warning','Actual sectors changed; recheck any maximum FDP estimate separately.');
-  if(usePlan&&!$('fdpRestSameSignon').checked)line('p','fdp-rest-warning','Sign-on changed; recheck any maximum FDP estimate separately.');
-  if(duty>15*3600000)line('p','fdp-rest-warning','A duty exceeding 15 hours requires a local night within the rest period. The elapsed-time figure alone does not confirm this.');
-  line('p','fdp-rest-warning','Reference calculation only. Reduced rest, travel, accommodation and other restrictions may apply.');
+  const sz=signZone(),oz=outZone();
+  const start=get('fdpRestSignon',sz),landing=get('fdpRestLanding',oz);
+  const airport=port($('fdpRestArrivalAirport').value),kind=$('fdpRestSectorType').value;
+  const destZone=timezone(airport);
+  if(airport&&destZone&&destZone!==oz)setText('fdpRestZoneHint','Check: '+airport+' normally uses '+destZone+'. Your selected landing time zone differs.');
+  else setText('fdpRestZoneHint',airport?'Final landing '+airport+' · local zone '+oz:'Enter the final landing airport and verify its time zone.');
+  if(!start||!landing){setText('fdpRestSignoffInfo','Sign-off is calculated automatically after you enter sign-on and landing.');
+   el('p','fdp-unavailable','Enter valid sign-on and final landing dates/times.');return;}
+  const off=new Date(landing.getTime()+30*60000);
+  setText('fdpRestSignoffInfo',`Calculated sign-off: ${nice(off,oz)} (${airport||'airport not selected'}) · 30 min after landing.`);
+  if(!airport){el('p','fdp-unavailable','Enter a final landing airport.');return;}
+  if(!timezone(airport)){el('p','fdp-unavailable','Unknown airport code: select and verify its local time zone.');return;}
+  if(kind==='unknown'){el('p','fdp-unavailable','Select Domestic or International for the final flight sector.');return;}
+  const dutyType=mode==='manual'?$('fdpRestDutyType').value:'rostered';
+  const dutyStart=dutyType==='standby_a'?get('fdpRestStandby',sz):start;
+  if(!dutyStart){el('p','fdp-unavailable','Enter Standby A commencement date and time.');return;}
+  if(start<dutyStart){el('p','fdp-unavailable','Flying sign-on cannot precede standby commencement.');return;}
+  if(landing<=start){el('p','fdp-unavailable','Landing must be after flight sign-on. Check dates and time zones.');return;}
+  const total=off.getTime()-dutyStart.getTime();
+  if(total>72*3600000){el('p','fdp-unavailable','Total duty exceeds 72 hours. Check the dates and time zones.');return;}
+  const flyingFDP=landing.getTime()+15*60000-start.getTime();
+  const baseRest=Math.max(12*3600000,total);
+  const extra=kind==='international'?30*60000:0;
+  const rest=baseRest+extra,earliest=new Date(off.getTime()+rest);
+  row('Total duty (to sign-off)',t.fmtMinutes(total/60000));
+  row('Flying FDP (+15m)',t.fmtMinutes(flyingFDP/60000));
+  row('Calculated sign-off',nice(off,oz));
+  row('Minimum elapsed rest',t.fmtMinutes(rest/60000));
+  row(total>15*3600000?'Earliest by elapsed hours only':'Estimated earliest next sign-on',nice(earliest,oz),'fdp-rest-earliest');
+  el('p','fdp-rest-utc',t.fmtUTC(earliest));
+  if(kind==='international')el('p','fdp-rest-warning','International final sector: 30 minutes added to the required rest (EA 18.2), not to sign-off.');
+  if(dutyType==='standby_a')el('p','fdp-rest-warning','Standby A: total duty includes standby commencement through post-flight sign-off.');
+  if(dutyType==='standby_18')el('p','fdp-rest-warning','Standby 18: estimate uses the assigned flying duty from sign-on. Verify standby conditions separately.');
+  if(total>15*3600000)el('p','fdp-rest-warning','A duty over 15 hours requires a local night during rest (EA 13.9); the hour-only estimate is not a cleared next sign-on.');
+  if(!$('fdpRestConfirmed').checked)el('p','fdp-rest-warning','Preliminary estimate: verify sign-on, actual landing and final sector before use.');
+  el('p','fdp-rest-warning','Any post-flight duties extending beyond 30 minutes, reduced rest, positioning and accommodation allowances need separate review.');
  }
- function invalidate(){ $('fdpRestConfirmed').checked=false;draw(); }
- const actualFields=['fdpRestSignonDate','fdpRestSignonTime','fdpRestSectors','fdpRestStandbyDate','fdpRestStandbyTime','fdpRestLandingDate','fdpRestLandingTime','fdpRestSignoffDate','fdpRestSignoffTime'];
- for(const id of actualFields)$(id).addEventListener('change',()=>{if(id.startsWith('fdpRestLanding')||id.startsWith('fdpRestSignoff'))manualActual=true;invalidate();});
- for(const id of ['fdpRestDutyType','fdpRestSameSignon','fdpRestSameSectors'])$(id).addEventListener('change',()=>{ $('fdpRestConfirmed').checked=false;sync();});
- $('fdpRestSignonZone').addEventListener('change',()=>{if(!linked()&&$('fdpRestOutputZone').value==='same'){onZoneChange();return;} $('fdpRestConfirmed').checked=false;sync();});
- $('fdpRestSource').addEventListener('change',()=>{
-  if(!linked()&&wasLinked&&!manualActual){for(const p of ['fdpRestLanding','fdpRestSignoff']){$(p+'Date').value='';$(p+'Time').value='';}}
-  // Keep genuine actual times when switching modes; do not overwrite with plan estimates.
-  autoPlanKey='';$('fdpRestConfirmed').checked=false;sync();
- });
+ $('fdpRestRosteredBtn').addEventListener('click',()=>setMode('roster'));
+ $('fdpRestManualBtn').addEventListener('click',()=>setMode('manual'));
+ $('fdpRestDutyType').addEventListener('change',()=>{toggleStandby();$('fdpRestConfirmed').checked=false;draw();});
  $('fdpRestConfirmed').addEventListener('change',draw);
- $('fdpRestUse30').addEventListener('click',()=>{
-  const landing=parse('fdpRestLandingDate','fdpRestLandingTime',outZone());
-  if(!landing){invalidate();return;}
-  setPair('fdpRestSignoff',new Date(landing.getTime()+30*60000),outZone());manualActual=true;invalidate();
- });
- function onZoneChange(){
-  const next=outZone();
-  if(manualActual&&lastZone!==next){
-   const land=parse('fdpRestLandingDate','fdpRestLandingTime',lastZone),off=parse('fdpRestSignoffDate','fdpRestSignoffTime',lastZone);
-   if(land)setPair('fdpRestLanding',land,next);
-   if(off)setPair('fdpRestSignoff',off,next);
-  }
-  $('fdpRestConfirmed').checked=false;sync();
+ for(const id of fields){if(id==='fdpRestDutyType')continue;
+  $(id).addEventListener('change',()=>{
+   if(suppress)return;
+   if(id==='fdpRestArrivalAirport'){
+    const code=port($(id).value);$(id).value=code;
+    if(timezone(code))$('fdpRestOutputZone').value=timezone(code);
+    if(mode==='manual'&&code!==lastAirportCode)$('fdpRestSectorType').value='unknown';
+    lastAirportCode=code;
+   }
+   $('fdpRestConfirmed').checked=false;draw();
+  });
+  if($(id).tagName==='INPUT'&&$(id).type==='time')$(id).addEventListener('input',()=>{$('fdpRestConfirmed').checked=false;draw();});
  }
- $('fdpRestOutputZone').addEventListener('change',onZoneChange);
- for(const id of ['fdpSignonDate','fdpSignonTime','fdpTimeZone','fdpDutyType','fdpStandbyKind','fdpStandbyDate','fdpStandbyTime','fdpSectors','fdpOutputZone']){
-  $(id)?.addEventListener('change',()=>{if(!linked())return;if(id==='fdpOutputZone'||(id==='fdpTimeZone'&&$('fdpOutputZone').value==='same')){onZoneChange();return;} $('fdpRestConfirmed').checked=false;sync();});
- }
- window.crewFDPRestRefresh=sync;
- sync();
+ // Refresh with a new day's duty when the user enters the rostered mode.
+ window.crewFDPRestRefresh=()=>{if(mode==='roster')refreshRoster();draw();};
+ setMode('roster');
 })();
 </script>
 <script id="tripChecklist226Script">
