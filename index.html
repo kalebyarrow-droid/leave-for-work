@@ -5,7 +5,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <meta content="#15283f" name="theme-color"/>
-<title>CrewFocus v237 — Standby & Minimum Rest</title>
+<title>CrewFocus v238 — Reliable iPad CBR Save & Share</title>
 <style>
 :root{color-scheme:light dark;--bg:#f3f6fa;--card:#fff;--ink:#15283f;--muted:#637184;--line:#dce3eb;--accent:#176b87;--soft:#e9f4f7;--danger:#b13e3e}
 @media(prefers-color-scheme:dark){:root{--bg:#101820;--card:#1a2632;--ink:#edf4fb;--muted:#aab8c6;--line:#344454;--accent:#72c7df;--soft:#203a46;--danger:#ff9b9b}}
@@ -607,6 +607,19 @@ html,body{margin:0;padding:0}
 #ipadCBRPreview > img.cbr172-image:not(.ipad-wallpaper):not(.ipad-preview-spacer){display:block!important}
 #ipadCBRPreview > .ipad-preview-spacer{display:block!important}
 #ipadCBRPreview .cbr172-image{border:0!important;border-radius:0!important;box-shadow:none!important;max-width:none!important;user-select:none;-webkit-user-drag:none}
+</style><style id="ipadSavePhotos238">
+/* Export UI only. Does not change the 2360 x 2240 pixel canvas. */
+#ipadPreviewShare238{background:#176b87!important;border-color:#176b87!important;color:#fff!important}
+#ipadPreviewOpen238{background:#eef5fa!important}
+#ipadSaveImageDialog238{max-width:min(96vw,900px);max-height:92dvh;width:95%;overflow:auto;border:1px solid #bfcfdc;border-radius:17px;padding:17px;background:#fff;color:#172a42;box-shadow:0 16px 60px rgba(0,0,0,.28)}
+#ipadSaveImageDialog238::backdrop{background:rgba(14,32,50,.62)}
+#ipadSaveImageDialog238 .ipad-save-image-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+#ipadSaveImageDialog238 .ipad-save-image-head strong{font-size:17px}
+#ipadSaveImageDialog238 .ipad-save-image-photo{display:block;width:100%;height:auto;max-width:100%;border:1px solid #d2dfe8;border-radius:7px;object-fit:contain;user-select:auto!important;-webkit-user-select:auto!important;-webkit-touch-callout:default!important;touch-action:auto!important}
+#ipadSaveImageDialog238 .ipad-save-image-actions{display:flex;flex-wrap:wrap;gap:9px;margin:12px 0}
+#ipadSaveImageDialog238 .ipad-save-image-actions button{flex:1 1 auto}
+#ipadCBRSaveHint{font-size:12px;margin:8px 0}
+#ipadCBRSaveStatus:not(:empty){font-size:12px;font-weight:650;margin:8px 0}
 </style><style id="cbrPhotoDiagnosticV195">
 /* Isolated to screenshot import; no CBR wallpaper/layout modifications. */
 #cbrSourceCheck{margin-top:12px;padding:12px;border:1px solid var(--line);border-radius:13px;background:var(--card)}
@@ -765,7 +778,7 @@ html,body{margin:0;padding:0}
 <div id="cbrImportSchedule"></div>
 <p id="cbrImportWarning" class="note"></p>
 <button id="cbrImportConfirm" class="btn primary" type="button">Confirm imported CBR</button>
-</section><div class="cbr-export-actions"><button class="btn primary" id="cbrPreviewBtn" type="button">Generate original CBR preview</button><button class="btn" id="cbrPrint" type="button">Print / Save PDF</button><button class="btn primary" id="cbrAirDrop" type="button">Share / AirDrop PDF</button></div></div><div id="cbrPreview"></div><div class="crew-panel" id="ipadCBRPanel"><h3>iPad CBR · landscape preview</h3><p class="note">Separate iPad landscape briefing draft. Your original imported CBR and NAIPS briefing remain unchanged. Preview the airport visits before selecting NOTAMs.</p><details class="ipad-layout-controls" style="margin:12px 0"><summary>Alternates &amp; aircraft details</summary><p class="note">The briefing layout fits automatically. Enter alternates and aircraft information here when needed.</p><div class="fields ipad-obsolete-layout"><div class="field"><label>Airport section height <output id="ipadAirportHeightValue"></output></label><input id="ipadAirportHeight" type="range" min="12" max="43" value="23" step="1"></div><div class="field"><label>Crew font size <output id="ipadCrewFontValue"></output></label><input id="ipadCrewFont" type="range" min="10" max="22" value="16" step="1"></div><div class="field"><label>Airport font size <output id="ipadAirportFontValue"></output></label><input id="ipadAirportFont" type="range" min="11" max="23" value="17" step="1"></div><div class="field"><label>Crew details column width <output id="ipadCrewDetailsWidthValue"></output></label><input id="ipadCrewDetailsWidth" type="range" min="15" max="40" value="25" step="1"></div><div class="field"><label>Clock area height <output id="ipadClockHeightValue"></output></label><input id="ipadClockHeight" type="range" min="4" max="28" value="15" step="1"></div></div><div class="field"><label for="ipadAlternateText">Alternates (en-route / destination; manually verified)</label><textarea id="ipadAlternateText" rows="2" placeholder="e.g. ENR: ... | DEST: ..."></textarea></div><div class="field"><label for="ipadFdpRefStatus">CBR FDP — acclimatisation</label><select id="ipadFdpRefStatus"><option value="unconfirmed">Not confirmed — Table A reference only</option><option value="yes">Acclimatised — Table A</option><option value="unknown">Unknown — Table B required</option></select></div><div class="field"><label for="ipadFdpRefZone">CBR FDP — acclimatised reference time zone</label><select id="ipadFdpRefZone"><option value="auto">First departure airport (provisional)</option><option value="Australia/Melbourne">Melbourne / Sydney / Hobart</option><option value="Australia/Brisbane">Brisbane / Gold Coast</option><option value="Australia/Adelaide">Adelaide</option><option value="Australia/Perth">Perth</option><option value="Australia/Darwin">Darwin</option><option value="Pacific/Auckland">Auckland</option><option value="UTC">UTC</option></select></div><div class="field"><label for="ipadAircraftConfig">Aircraft configuration (manual until registration mapping verified)</label><input id="ipadAircraftConfig" placeholder="e.g. B737-800 · 26K · SFP status unverified"></div><p class="note">Aircraft configuration is not inferred without a verified registration database. Alternate data must be reviewed.</p></details><div class="crew-home-actions"><button class="btn" id="ipadCrewReviewBtn" type="button">Review / add crew</button><button class="btn primary" id="ipadCBRShow" type="button">Open iPad landscape preview</button><button class="btn" id="ipadCBRExport" type="button">Share / AirDrop iPad CBR PNG</button><button class="btn" id="ipadCBRClose" type="button" hidden>Close preview</button><button class="btn" id="ipadCBRClear" type="button">Clear selected items</button></div><p class="note" id="ipadCBRWeatherStatus" role="status">Weather is added manually after importing the CBR and NAIPS briefing.</p><p class="note" id="ipadCBRStatus">No items selected yet.</p><div id="ipadCBRSelectionSummary" class="note" aria-live="polite">Selected for generated CBR: none yet</div><div id="ipadCBRPreview"></div></div><h3>Weather &amp; NOTAMs</h3><div class="crew-panel"><label for="flightPaste">Import NAIPS location briefing</label><p class="note">Copy the complete briefing from your NAIPS email and paste it here. Weather, ATIS, warnings and NOTAMs will be grouped by airport.</p><textarea autocapitalize="off" id="flightPaste" placeholder="0911 UTC ... AIRSERVICES AUSTRALIA
+</section><div class="cbr-export-actions"><button class="btn primary" id="cbrPreviewBtn" type="button">Generate original CBR preview</button><button class="btn" id="cbrPrint" type="button">Print / Save PDF</button><button class="btn primary" id="cbrAirDrop" type="button">Share / AirDrop PDF</button></div></div><div id="cbrPreview"></div><div class="crew-panel" id="ipadCBRPanel"><h3>iPad CBR · landscape preview</h3><p class="note">Separate iPad landscape briefing draft. Your original imported CBR and NAIPS briefing remain unchanged. Preview the airport visits before selecting NOTAMs.</p><details class="ipad-layout-controls" style="margin:12px 0"><summary>Alternates &amp; aircraft details</summary><p class="note">The briefing layout fits automatically. Enter alternates and aircraft information here when needed.</p><div class="fields ipad-obsolete-layout"><div class="field"><label>Airport section height <output id="ipadAirportHeightValue"></output></label><input id="ipadAirportHeight" type="range" min="12" max="43" value="23" step="1"></div><div class="field"><label>Crew font size <output id="ipadCrewFontValue"></output></label><input id="ipadCrewFont" type="range" min="10" max="22" value="16" step="1"></div><div class="field"><label>Airport font size <output id="ipadAirportFontValue"></output></label><input id="ipadAirportFont" type="range" min="11" max="23" value="17" step="1"></div><div class="field"><label>Crew details column width <output id="ipadCrewDetailsWidthValue"></output></label><input id="ipadCrewDetailsWidth" type="range" min="15" max="40" value="25" step="1"></div><div class="field"><label>Clock area height <output id="ipadClockHeightValue"></output></label><input id="ipadClockHeight" type="range" min="4" max="28" value="15" step="1"></div></div><div class="field"><label for="ipadAlternateText">Alternates (en-route / destination; manually verified)</label><textarea id="ipadAlternateText" rows="2" placeholder="e.g. ENR: ... | DEST: ..."></textarea></div><div class="field"><label for="ipadFdpRefStatus">CBR FDP — acclimatisation</label><select id="ipadFdpRefStatus"><option value="unconfirmed">Not confirmed — Table A reference only</option><option value="yes">Acclimatised — Table A</option><option value="unknown">Unknown — Table B required</option></select></div><div class="field"><label for="ipadFdpRefZone">CBR FDP — acclimatised reference time zone</label><select id="ipadFdpRefZone"><option value="auto">First departure airport (provisional)</option><option value="Australia/Melbourne">Melbourne / Sydney / Hobart</option><option value="Australia/Brisbane">Brisbane / Gold Coast</option><option value="Australia/Adelaide">Adelaide</option><option value="Australia/Perth">Perth</option><option value="Australia/Darwin">Darwin</option><option value="Pacific/Auckland">Auckland</option><option value="UTC">UTC</option></select></div><div class="field"><label for="ipadAircraftConfig">Aircraft configuration (manual until registration mapping verified)</label><input id="ipadAircraftConfig" placeholder="e.g. B737-800 · 26K · SFP status unverified"></div><p class="note">Aircraft configuration is not inferred without a verified registration database. Alternate data must be reviewed.</p></details><div class="crew-home-actions"><button class="btn" id="ipadCrewReviewBtn" type="button">Review / add crew</button><button class="btn primary" id="ipadCBRShow" type="button">Open iPad landscape preview</button><button class="btn primary" id="ipadCBRExport" type="button">Save / Share CBR PNG</button><button class="btn" id="ipadCBROpenPng" type="button">Open PNG to save</button><button class="btn" id="ipadCBRClose" type="button" hidden>Close preview</button><button class="btn" id="ipadCBRClear" type="button">Clear selected items</button></div><p class="note" id="ipadCBRSaveHint">On iPad, use Save / Share → Save Image. If Save Image is unavailable, open the PNG and touch and hold the image to add it to Photos.</p><p class="note" id="ipadCBRSaveStatus" role="status" aria-live="polite"></p><p class="note" id="ipadCBRWeatherStatus" role="status">Weather is added manually after importing the CBR and NAIPS briefing.</p><p class="note" id="ipadCBRStatus">No items selected yet.</p><div id="ipadCBRSelectionSummary" class="note" aria-live="polite">Selected for generated CBR: none yet</div><div id="ipadCBRPreview"></div></div><h3>Weather &amp; NOTAMs</h3><div class="crew-panel"><label for="flightPaste">Import NAIPS location briefing</label><p class="note">Copy the complete briefing from your NAIPS email and paste it here. Weather, ATIS, warnings and NOTAMs will be grouped by airport.</p><textarea autocapitalize="off" id="flightPaste" placeholder="0911 UTC ... AIRSERVICES AUSTRALIA
 LOCATION BRIEFING
 ... WEATHER INFORMATION ...
 ... NOTAM INFORMATION ..." rows="8" spellcheck="false"></textarea><div class="crew-home-actions"><button class="btn primary" id="flightInterpret" type="button">Import briefing / Upload to CBR</button></div><p class="note" id="flightPasteStatus">On iPhone, tap the box and choose Paste.</p></div><div class="crew-section-heading hidden" style="margin-top:12px"><h3 style="margin:0">Additional airports</h3></div><div class="crew-panel hidden" id="flightAdditionalAirportsPanel"><p class="note">Weather briefing assistant · preliminary interpretation only. Airport names and common 3-letter codes are accepted. Verify all reports, times and operational requirements using approved aviation sources.</p><div class="fields"><div class="field" style="display:none"><label for="flightDeparture">Departure ICAO</label><input autocapitalize="characters" id="flightDeparture" maxlength="40" placeholder="Melbourne / MEL / YMML"/></div><div class="field" style="display:none"><label for="flightDestination">Destination ICAO</label><input autocapitalize="characters" id="flightDestination" maxlength="40" placeholder="Sydney / SYD / YSSY"/></div><div class="field"><label for="flightAlternate">Additional airport / alternate (optional)</label><input autocapitalize="characters" id="flightAlternate" maxlength="40" placeholder="Canberra / CBR / YSCB"/></div><div class="field" style="display:none"><label for="flightDate">Flight date</label><input id="flightDate" type="date"/></div><div class="field" style="display:none"><label for="flightTime">Departure (local)</label><input id="flightTime" type="time"/></div></div><div class="field" style="margin-top:12px"><label>Additional airports</label><div id="flightExtraAirports"></div><button class="btn small" id="flightAddAirport" type="button">+ Add airport</button></div><div class="crew-home-actions"><button class="btn primary" id="flightFetch" type="button">Retrieve weather</button><button class="btn" id="flightClear" type="button">Clear reports</button></div><p class="note" id="flightStatus" role="status">Enter airport codes to begin. Live retrieval requires internet and a source permitting browser access.</p></div><p class="note" id="flightShortlistStatus" role="status">Import a NAIPS briefing to shortlist NOTAMs automatically against the CBR duty window.</p><div aria-live="polite" id="flightResults"></div><div class="crew-panel"><p class="crew-kicker">FLIGHT PLANNING · FUTURE FEATURES</p><div id="flightIdeaList"></div></div></div></section><section class="crew-page hidden" id="crewFDP" aria-label="Standalone FDP Calculator">
@@ -952,7 +965,7 @@ VA 1101 0705 NTL BNE 0720" rows="7"></textarea><p class="note">Check the year, d
 <h2>Calculation notes</h2>
 <p class="note">The sign on date and time are used exactly as entered, including for future planning. The countdown is relative to the current local time. Schedule times use the selected sign-on time zone; the live clock uses your device's local time zone. Your selections are remembered on this device. Past sign-on dates advance to today when reopening.</p>
 <p class="note">Hotel transport times can be saved and updated. This prototype saves them in the browser's local storage; downloaded-file previews may not retain settings. A hosted version can make saving more reliable across sessions and devices.</p>
-</section></details><p class="note" id="planApplyStatus" role="status"></p><button class="btn primary wide" id="applyPlan" type="button">Use this plan</button></div></dialog><dialog aria-labelledby="calendarTitle" id="calendarDialog"><div class="modal-shell"><header><h2 id="calendarTitle">Add to Calendar</h2><button class="btn small" id="closeCalendar" type="button">Close</button></header><label for="calendarScope">Include</label><select id="calendarScope"><option value="current">Accepted duty</option><option value="upcoming">Upcoming roster duties</option><option value="all">Whole roster</option></select><h3 id="calendarCount"></h3><p class="note" id="calendarSkipped" role="status"></p><div id="calendarIssues"></div><p class="note">One event per duty. Titles show local sign-on and sign-off times and finishing location; full sector details remain in Notes. No hotels or reminders.</p><button class="btn primary wide" id="calendarExport" type="button">Add roster to Calendar</button><p class="note" id="calendarStatus" role="status"></p><details id="calendarSetup"><summary>One-time iPhone setup</summary><p class="note">Use a separate shortcut named <strong>Leave for Work Calendar</strong>. Your alarm shortcut stays separate. Shortcuts opens briefly during import and requests a return to this app. No downloading or Siri Suggestions is needed.</p><p class="note">One action at a time. Your progress is saved on this device. “What you should see” describes the checkpoint; if it differs, send that screen before continuing.</p><p class="note" id="calendarGuideProgress"></p><h3 id="calendarGuideTitle"></h3><div class="note" id="calendarGuideInstruction"></div><div class="calendar-issue"><strong>What you should see</strong><p class="note" id="calendarGuideExpected"></p></div><div class="row help-nav"><button class="btn" id="calendarGuideBack" type="button">Back</button><button class="btn primary" id="calendarGuideNext" type="button">Next step</button></div><button class="btn small" id="calendarGuideResume" type="button">Continue from my screenshot</button><p class="note">These controls can vary with iOS. The test checks your phone before sending a full roster. If Calendar opens an editor for every event, check the expanded Add New Event action and turn its compose screen off.</p><button class="btn wide" id="calendarTest" type="button">Test with one event</button><button class="btn wide" id="calendarSetupDone" type="button">I checked the test</button></details><details style="margin-top:16px"><summary>Other options &amp; roster changes</summary><p class="note">This makes a copy, not a live subscription. A completed import is remembered on this device to help prevent duplicates. Changed duties need their previous calendar events removed before you import them again. An interrupted shortcut can leave some events added: check Calendar before retrying.</p><button class="btn wide" id="calendarDownload" type="button">Download .ics file instead</button><p class="note">File import depends on the app opening the file; Safari and Files may only preview it. The shortcut above avoids that route.</p><button class="btn wide" id="calendarResetHistory" type="button">Allow a fresh import</button></details></div></dialog><dialog aria-labelledby="alarmHelpTitle" id="alarmHelp"><div class="help-shell"><header><h2 id="alarmHelpTitle">Set up iPhone alarms</h2><button class="btn small" id="closeAlarmHelp" type="button">Close</button></header><p class="note" id="alarmHelpProgress"></p><div id="alarmHelpContent"></div><p class="note" id="alarmHelpStatus" role="status"></p><div class="row help-nav"><button class="btn" id="alarmHelpBack" type="button">Back</button><button class="btn primary" id="alarmHelpNext" type="button">Next</button></div></div></dialog><footer class="note" style="text-align:center;padding:8px 10px">Version 237 · 18 Nov 2026</footer></main>
+</section></details><p class="note" id="planApplyStatus" role="status"></p><button class="btn primary wide" id="applyPlan" type="button">Use this plan</button></div></dialog><dialog aria-labelledby="calendarTitle" id="calendarDialog"><div class="modal-shell"><header><h2 id="calendarTitle">Add to Calendar</h2><button class="btn small" id="closeCalendar" type="button">Close</button></header><label for="calendarScope">Include</label><select id="calendarScope"><option value="current">Accepted duty</option><option value="upcoming">Upcoming roster duties</option><option value="all">Whole roster</option></select><h3 id="calendarCount"></h3><p class="note" id="calendarSkipped" role="status"></p><div id="calendarIssues"></div><p class="note">One event per duty. Titles show local sign-on and sign-off times and finishing location; full sector details remain in Notes. No hotels or reminders.</p><button class="btn primary wide" id="calendarExport" type="button">Add roster to Calendar</button><p class="note" id="calendarStatus" role="status"></p><details id="calendarSetup"><summary>One-time iPhone setup</summary><p class="note">Use a separate shortcut named <strong>Leave for Work Calendar</strong>. Your alarm shortcut stays separate. Shortcuts opens briefly during import and requests a return to this app. No downloading or Siri Suggestions is needed.</p><p class="note">One action at a time. Your progress is saved on this device. “What you should see” describes the checkpoint; if it differs, send that screen before continuing.</p><p class="note" id="calendarGuideProgress"></p><h3 id="calendarGuideTitle"></h3><div class="note" id="calendarGuideInstruction"></div><div class="calendar-issue"><strong>What you should see</strong><p class="note" id="calendarGuideExpected"></p></div><div class="row help-nav"><button class="btn" id="calendarGuideBack" type="button">Back</button><button class="btn primary" id="calendarGuideNext" type="button">Next step</button></div><button class="btn small" id="calendarGuideResume" type="button">Continue from my screenshot</button><p class="note">These controls can vary with iOS. The test checks your phone before sending a full roster. If Calendar opens an editor for every event, check the expanded Add New Event action and turn its compose screen off.</p><button class="btn wide" id="calendarTest" type="button">Test with one event</button><button class="btn wide" id="calendarSetupDone" type="button">I checked the test</button></details><details style="margin-top:16px"><summary>Other options &amp; roster changes</summary><p class="note">This makes a copy, not a live subscription. A completed import is remembered on this device to help prevent duplicates. Changed duties need their previous calendar events removed before you import them again. An interrupted shortcut can leave some events added: check Calendar before retrying.</p><button class="btn wide" id="calendarDownload" type="button">Download .ics file instead</button><p class="note">File import depends on the app opening the file; Safari and Files may only preview it. The shortcut above avoids that route.</p><button class="btn wide" id="calendarResetHistory" type="button">Allow a fresh import</button></details></div></dialog><dialog aria-labelledby="alarmHelpTitle" id="alarmHelp"><div class="help-shell"><header><h2 id="alarmHelpTitle">Set up iPhone alarms</h2><button class="btn small" id="closeAlarmHelp" type="button">Close</button></header><p class="note" id="alarmHelpProgress"></p><div id="alarmHelpContent"></div><p class="note" id="alarmHelpStatus" role="status"></p><div class="row help-nav"><button class="btn" id="alarmHelpBack" type="button">Back</button><button class="btn primary" id="alarmHelpNext" type="button">Next</button></div></div></dialog><footer class="note" style="text-align:center;padding:8px 10px">Version 238 · 18 Nov 2026</footer></main>
 <dialog id="crewCalloutDialog" aria-labelledby="crewCalloutTitle">
  <div class="crew-callout-inner">
   <h2 id="crewCalloutTitle">Possible roster call-out</h2>
@@ -3556,6 +3569,7 @@ function ipadAddWeatherToCBR(){
 /* v172: Sector-driven raster CBR, shared by iPhone preview and PNG export.
    No browser CSS participates in the output geometry. */
 let ipadImageCanvas=null;
+let ipadPngDataUrl=""; // Cached exact raster from latest successful CBR preview.
 // Approved wallpaper calibration from v181. The coordinates are fixed.
 // The widget guide and the clock guide are EXCLUSION regions, not content-width rules.
 const CREWFOCUS_WALLPAPER_V181=Object.freeze({
@@ -3914,7 +3928,8 @@ function ipadCanvasRefresh(){
  const root=document.getElementById('ipadCBRPreview'),source=root?.querySelector('.ipad-wallpaper');if(!source)return;
  const imageCanvas=ipadCanvasRender(source);ipadImageCanvas=imageCanvas;source.classList.add('cbr172-source');
  let img=root.querySelector('.cbr172-image');if(!img){img=document.createElement('img');img.className='cbr172-image';img.alt='iPad landscape CBR — exact PNG export preview';root.insertBefore(img,source);}
- img.src=imageCanvas.toDataURL('image/png');
+ ipadPngDataUrl=imageCanvas.toDataURL('image/png');
+ img.src=ipadPngDataUrl;
  const old=root.querySelector('#ipadCBROverflow171');if(old)old.remove();
  let warning=root.querySelector('#ipadCBROverflow172');if(warning)warning.remove();
  if(imageCanvas.dataset.overflow==='true'){
@@ -4090,27 +4105,108 @@ function ipadExportHTML(){
  const html='<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=1474,initial-scale=1"><title>CrewFocus iPad Briefing v171</title><style>'+css+'</style></head><body>'+clone.outerHTML+'</body></html>';
  return new File([html],'CrewFocus_iPad_CBR.html',{type:'text/html'});
 }
-async function ipadShareCBR(){
+/* v238: Share on iPad/iPhone must start during the user's original tap.
+ * Safari can reject navigator.share when called AFTER canvas.toBlob(),
+ * since that asynchronous operation can lose the transient user gesture.
+ * Use the already-rendered image synchronously, and provide an image view
+ * that can be saved with the native Safari long-press menu.
+ */
+function ipadCurrentExportImage(){
+ // The preview has already rendered the calibrated PNG. Do not recalculate
+ // its dimensions, scale or CSS. This also catches a stale/rejected export.
+ const sectorRows=window.crewIpadSchedule?.rows()||[];
+ if(!sectorRows.length)throw Error('No CBR duty is loaded. Import and confirm a CBR first.');
+ if(!ipadImageCanvas||!ipadPngDataUrl)ipadCBRRender();
+ const canvas=ipadImageCanvas;
+ if(!canvas||!ipadPngDataUrl)throw Error('Import a CBR and open the generated preview first.');
+ if((window.crewIpadSchedule?.rows()||[]).length&&!ipadCrewEmptyAcknowledged&&!Object.values(ipadCrewRows).some(list=>list?.length)){
+  ipadCrewReview();throw Error('Crew assignments are missing. Review / add crew, or confirm the briefing has no crew, then save.');
+ }
+ if(ipadCrewReviewRequired){
+  ipadCrewReview();throw Error('Some crew assignments require review. Confirm the crew before saving the briefing.');
+ }
+ if(canvas.dataset.overflow==='true')throw Error('Briefing content exceeds the calibrated wallpaper area. Abbreviate selected text before saving.');
+ return ipadPngDataUrl;
+}
+function ipadPngFileNow(dataUrl){
+ // Synchronous conversion avoids the asynchronous toBlob activation failure.
+ const prefix='data:image/png;base64,';
+ if(!dataUrl.startsWith(prefix))throw Error('PNG preview was not encoded correctly. Refresh the preview and try again.');
+ const binary=atob(dataUrl.slice(prefix.length));
+ const bytes=new Uint8Array(binary.length);
+ for(let i=0;i<binary.length;i++)bytes[i]=binary.charCodeAt(i);
+ return new File([bytes],'CrewFocus_iPad_CBR.png',{type:'image/png'});
+}
+function ipadSaveFeedback(message,failed=false){
+ const status=document.getElementById('ipadCBRSaveStatus');
+ if(status){status.textContent=message;status.style.color=failed?'#a9342e':'#166b53';}
+}
+let ipadSaveImageDialog=null;
+function ipadShowImageSaveGuide(dataUrl){
+ // The image itself is accessible to the native iOS image context menu. Using
+ // a body-level dialog also works when the preview is full-screen/moved to body.
+ if(!ipadSaveImageDialog){
+  const dialog=document.createElement('dialog');dialog.id='ipadSaveImageDialog238';
+  dialog.setAttribute('aria-label','Save CBR image to Photos');
+  dialog.innerHTML='<div class="ipad-save-image-head"><strong>Save CBR image to Photos</strong><button type="button" class="btn small" data-ipad-image-close>Close</button></div><p>Touch and hold the image below, then choose <b>Save Image</b> or <b>Add to Photos</b>. You can then use it in Photos or select it as an iPad wallpaper.</p><img alt="Full resolution iPad CBR PNG — touch and hold to save" class="ipad-save-image-photo"/><div class="ipad-save-image-actions"><button type="button" class="btn primary" data-ipad-open-original>Open full-size PNG</button><button type="button" class="btn" data-ipad-download>Download to Files</button></div><p class="note">The PNG is 2360 × 2240 pixels. Safari cannot directly set wallpaper or silently write to Photos.</p>';
+  document.body.append(dialog);
+  dialog.querySelector('[data-ipad-image-close]').onclick=()=>dialog.close();
+  dialog.addEventListener('click',e=>{if(e.target===dialog)dialog.close();});
+  ipadSaveImageDialog=dialog;
+ }
+ ipadSaveImageDialog.querySelector('img').src=dataUrl;
+ ipadSaveImageDialog.querySelector('[data-ipad-open-original]').onclick=()=>ipadOpenPngImage(true);
+ ipadSaveImageDialog.querySelector('[data-ipad-download]').onclick=()=>ipadDownloadPng();
+ if(!ipadSaveImageDialog.open)ipadSaveImageDialog.showModal();
+}
+function ipadDownloadPng(){
  try{
-  ipadCBRRender();
-  const canvas=ipadImageCanvas;
-  if(!canvas)throw Error('Import a CBR before exporting.');
-  if((window.crewIpadSchedule?.rows()||[]).length&&!ipadCrewEmptyAcknowledged&&!Object.values(ipadCrewRows).some(list=>list?.length)){
-   alert('No crew assignments recovered. Please retry the original screenshot in Review / add crew, enter crew manually, or explicitly confirm the current CBR lists no crew (e.g. ferry).');
-   ipadCrewReview();return;
-  }
-  if(ipadCrewReviewRequired){
-   alert('Some names were readable but could not be assigned reliably to a flight. Review the imported crew and confirm every sector before exporting.');
-   ipadCrewReview();return;
-  }
-  if(canvas.dataset.overflow==='true')throw Error('Briefing content exceeds the calibrated wallpaper area. Please reduce or abbreviate the selected briefing text before export.');
-  const blob=await new Promise((resolve,reject)=>canvas.toBlob(b=>b?resolve(b):reject(Error('PNG encoding failed')),'image/png'));
-  const file=new File([blob],'CrewFocus_iPad_CBR.png',{type:'image/png'});
-  if(navigator.canShare?.({files:[file]})&&navigator.share){
-   try{await navigator.share({files:[file],title:'CrewFocus iPad CBR'});return;}catch(e){if(e.name==='AbortError')return;}
-  }
-  const url=URL.createObjectURL(file),a=document.createElement('a');a.href=url;a.download=file.name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30000);
- }catch(e){alert('Could not export iPad CBR PNG: '+e.message)}
+  const url=URL.createObjectURL(ipadPngFileNow(ipadCurrentExportImage()));
+  const a=document.createElement('a');a.href=url;a.download='CrewFocus_iPad_CBR.png';
+  document.body.append(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),120000);
+  ipadSaveFeedback('PNG download requested. On Apple devices, Downloads usually go to Files.');
+ }catch(e){ipadSaveFeedback(e.message,true);alert(e.message);}
+}
+function ipadOpenPngImage(fromDialog=false){
+ try{
+  const dataUrl=ipadCurrentExportImage();
+  const url=URL.createObjectURL(ipadPngFileNow(dataUrl));
+  // Open synchronously from the tap so Safari does not block the new tab.
+  const opened=window.open(url,'_blank');
+  if(!opened){URL.revokeObjectURL(url);ipadShowImageSaveGuide(dataUrl);ipadSaveFeedback('Image is ready below: touch and hold it to Save Image to Photos.');return;}
+  setTimeout(()=>URL.revokeObjectURL(url),300000);
+  ipadSaveFeedback('Full-resolution CBR opened. Touch and hold the image to Save Image to Photos.');
+  if(fromDialog&&ipadSaveImageDialog?.open)ipadSaveImageDialog.close();
+ }catch(e){ipadSaveFeedback(e.message,true);alert(e.message);}
+}
+function ipadShareCBR(){
+ let dataUrl,file;
+ try{
+  dataUrl=ipadCurrentExportImage();
+  file=ipadPngFileNow(dataUrl);
+ }catch(e){ipadSaveFeedback(e.message,true);alert('Could not save iPad CBR: '+e.message);return;}
+ // CRITICAL: No await or promise before navigator.share(). Safari requires
+ // the share-sheet request to happen within the button's original click.
+ let supported=false;
+ try{supported=typeof navigator.share==='function'&&(!navigator.canShare||navigator.canShare({files:[file]}));}catch(e){supported=false;}
+ if(supported){
+  try{
+   const pending=navigator.share({files:[file],title:'CrewFocus iPad CBR'});
+   ipadSaveFeedback('Choose Save Image / Save to Photos in the iPad share sheet.');
+   Promise.resolve(pending).catch(e=>{
+    if(e?.name==='AbortError'){
+     ipadSaveFeedback('Share cancelled. Use Open PNG to save the image to Photos.');
+     return;
+    }
+    ipadShowImageSaveGuide(dataUrl);
+    ipadSaveFeedback('iOS share was unavailable; the full-size PNG is ready to save below.',true);
+   });
+   return;
+  }catch(e){/* Share rejected synchronously; use native image fallback. */}
+ }
+ ipadShowImageSaveGuide(dataUrl);
+ ipadSaveFeedback('Open or touch and hold the image to save it to Photos.');
 }
 
 let ipadPreviewZoom=0; // 0 = fit; otherwise an explicit zoom multiplier
@@ -4140,7 +4236,7 @@ function ipadInit(){
  for(const id of ['ipadAlternateText','ipadAircraftConfig']){const el=document.getElementById(id);if(!el)continue;try{el.value=localStorage.getItem('crewFocus_'+id)||''}catch(e){}el.addEventListener('change',()=>{try{localStorage.setItem('crewFocus_'+id,el.value)}catch(e){}ipadCBRRender()})}
 
 
- const addWx=document.getElementById('ipadCBRAddWeather');if(addWx)addWx.onclick=ipadAddWeatherToCBR;const review=document.getElementById('ipadCrewReviewBtn');if(review)review.onclick=ipadCrewReview;const share=document.getElementById('ipadCBRExport');if(share)share.onclick=ipadShareCBR;for(const [id,def] of [['cbrSectorBefore','1'],['cbrSectorAfter','2']]){const el=document.getElementById(id);if(!el)continue;try{el.value=localStorage.getItem('crewFocus_'+id)||def}catch(e){}el.addEventListener('change',()=>{try{localStorage.setItem('crewFocus_'+id,el.value)}catch(e){}ipadCBRRender()})}
+ const addWx=document.getElementById('ipadCBRAddWeather');if(addWx)addWx.onclick=ipadAddWeatherToCBR;const review=document.getElementById('ipadCrewReviewBtn');if(review)review.onclick=ipadCrewReview;const share=document.getElementById('ipadCBRExport');if(share)share.onclick=ipadShareCBR;const openPng=document.getElementById('ipadCBROpenPng');if(openPng)openPng.onclick=()=>ipadOpenPngImage();for(const [id,def] of [['cbrSectorBefore','1'],['cbrSectorAfter','2']]){const el=document.getElementById(id);if(!el)continue;try{el.value=localStorage.getItem('crewFocus_'+id)||def}catch(e){}el.addEventListener('change',()=>{try{localStorage.setItem('crewFocus_'+id,el.value)}catch(e){}ipadCBRRender()})}
  const show=document.getElementById('ipadCBRShow'),close=document.getElementById('ipadCBRClose'),container=document.getElementById('ipadCBRPanel');
  // The swipeable Focus/Dashboard pages use transforms; fixed-position children of
  // transformed elements are trapped in that element on iOS Safari. Move the
@@ -4160,7 +4256,7 @@ function ipadInit(){
    window.requestAnimationFrame(()=>{window.scrollTo(0,previousScroll);});
  };
  const toolbar=document.createElement('div');toolbar.className='ipad-preview-toolbar';
- toolbar.innerHTML='<button type="button" class="ipad-preview-exit">← Back</button><button type="button" id="ipadPreviewUpdateCBR">Update CBR</button><span class="ipad-preview-title">iPad CBR · landscape</span><button type="button" id="ipadPreviewFit">Fit</button><button type="button" id="ipadPreviewMinus">−</button><span id="ipadPreviewScale">Fit</span><button type="button" id="ipadPreviewPlus">+</button><button type="button" id="ipadPreviewRefresh">Refresh</button>';
+ toolbar.innerHTML='<button type="button" class="ipad-preview-exit">← Back</button><button type="button" id="ipadPreviewUpdateCBR">Update CBR</button><span class="ipad-preview-title">iPad CBR · landscape</span><button type="button" id="ipadPreviewFit">Fit</button><button type="button" id="ipadPreviewMinus">−</button><span id="ipadPreviewScale">Fit</span><button type="button" id="ipadPreviewPlus">+</button><button type="button" id="ipadPreviewRefresh">Refresh</button><button type="button" id="ipadPreviewShare238">Save / Share PNG</button><button type="button" id="ipadPreviewOpen238">Open PNG</button>';
  container.insertBefore(toolbar,container.firstChild);
  toolbar.querySelector('.ipad-preview-exit').onclick=closePreview;
  toolbar.querySelector('#ipadPreviewUpdateCBR').onclick=()=>{closePreview();document.getElementById('flightOpenCBRReview')?.click();};
@@ -4168,6 +4264,8 @@ function ipadInit(){
  toolbar.querySelector('#ipadPreviewMinus').onclick=()=>{const r=document.getElementById('ipadCBRPreview');ipadPreviewZoom=Math.max(.2,(ipadPreviewZoom||Math.min(1,(r.clientWidth-24)/1474))*.8);crewFitIpadPreview();};
  toolbar.querySelector('#ipadPreviewPlus').onclick=()=>{const r=document.getElementById('ipadCBRPreview');ipadPreviewZoom=Math.min(2,(ipadPreviewZoom||Math.min(1,(r.clientWidth-24)/1474))*1.4);crewFitIpadPreview();};
  toolbar.querySelector('#ipadPreviewRefresh').onclick=()=>{ipadCBRRender();requestAnimationFrame(crewFitIpadPreview);};
+ toolbar.querySelector('#ipadPreviewShare238').onclick=ipadShareCBR;
+ toolbar.querySelector('#ipadPreviewOpen238').onclick=()=>ipadOpenPngImage();
  // Two-finger pinch scales the same raster image shown in the exported PNG;
  // never alters the actual bitmap or the approved v181 wallpaper coordinates.
  const pinchSurface=document.getElementById('ipadCBRPreview');
