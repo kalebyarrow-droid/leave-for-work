@@ -5,7 +5,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <meta content="#15283f" name="theme-color"/>
-<title>CrewFocus v236 — Standby & Minimum Rest</title>
+<title>CrewFocus v237 — Standby & Minimum Rest</title>
 <style>
 :root{color-scheme:light dark;--bg:#f3f6fa;--card:#fff;--ink:#15283f;--muted:#637184;--line:#dce3eb;--accent:#176b87;--soft:#e9f4f7;--danger:#b13e3e}
 @media(prefers-color-scheme:dark){:root{--bg:#101820;--card:#1a2632;--ink:#edf4fb;--muted:#aab8c6;--line:#344454;--accent:#72c7df;--soft:#203a46;--danger:#ff9b9b}}
@@ -952,7 +952,7 @@ VA 1101 0705 NTL BNE 0720" rows="7"></textarea><p class="note">Check the year, d
 <h2>Calculation notes</h2>
 <p class="note">The sign on date and time are used exactly as entered, including for future planning. The countdown is relative to the current local time. Schedule times use the selected sign-on time zone; the live clock uses your device's local time zone. Your selections are remembered on this device. Past sign-on dates advance to today when reopening.</p>
 <p class="note">Hotel transport times can be saved and updated. This prototype saves them in the browser's local storage; downloaded-file previews may not retain settings. A hosted version can make saving more reliable across sessions and devices.</p>
-</section></details><p class="note" id="planApplyStatus" role="status"></p><button class="btn primary wide" id="applyPlan" type="button">Use this plan</button></div></dialog><dialog aria-labelledby="calendarTitle" id="calendarDialog"><div class="modal-shell"><header><h2 id="calendarTitle">Add to Calendar</h2><button class="btn small" id="closeCalendar" type="button">Close</button></header><label for="calendarScope">Include</label><select id="calendarScope"><option value="current">Accepted duty</option><option value="upcoming">Upcoming roster duties</option><option value="all">Whole roster</option></select><h3 id="calendarCount"></h3><p class="note" id="calendarSkipped" role="status"></p><div id="calendarIssues"></div><p class="note">One event per duty. Titles show local sign-on and sign-off times and finishing location; full sector details remain in Notes. No hotels or reminders.</p><button class="btn primary wide" id="calendarExport" type="button">Add roster to Calendar</button><p class="note" id="calendarStatus" role="status"></p><details id="calendarSetup"><summary>One-time iPhone setup</summary><p class="note">Use a separate shortcut named <strong>Leave for Work Calendar</strong>. Your alarm shortcut stays separate. Shortcuts opens briefly during import and requests a return to this app. No downloading or Siri Suggestions is needed.</p><p class="note">One action at a time. Your progress is saved on this device. “What you should see” describes the checkpoint; if it differs, send that screen before continuing.</p><p class="note" id="calendarGuideProgress"></p><h3 id="calendarGuideTitle"></h3><div class="note" id="calendarGuideInstruction"></div><div class="calendar-issue"><strong>What you should see</strong><p class="note" id="calendarGuideExpected"></p></div><div class="row help-nav"><button class="btn" id="calendarGuideBack" type="button">Back</button><button class="btn primary" id="calendarGuideNext" type="button">Next step</button></div><button class="btn small" id="calendarGuideResume" type="button">Continue from my screenshot</button><p class="note">These controls can vary with iOS. The test checks your phone before sending a full roster. If Calendar opens an editor for every event, check the expanded Add New Event action and turn its compose screen off.</p><button class="btn wide" id="calendarTest" type="button">Test with one event</button><button class="btn wide" id="calendarSetupDone" type="button">I checked the test</button></details><details style="margin-top:16px"><summary>Other options &amp; roster changes</summary><p class="note">This makes a copy, not a live subscription. A completed import is remembered on this device to help prevent duplicates. Changed duties need their previous calendar events removed before you import them again. An interrupted shortcut can leave some events added: check Calendar before retrying.</p><button class="btn wide" id="calendarDownload" type="button">Download .ics file instead</button><p class="note">File import depends on the app opening the file; Safari and Files may only preview it. The shortcut above avoids that route.</p><button class="btn wide" id="calendarResetHistory" type="button">Allow a fresh import</button></details></div></dialog><dialog aria-labelledby="alarmHelpTitle" id="alarmHelp"><div class="help-shell"><header><h2 id="alarmHelpTitle">Set up iPhone alarms</h2><button class="btn small" id="closeAlarmHelp" type="button">Close</button></header><p class="note" id="alarmHelpProgress"></p><div id="alarmHelpContent"></div><p class="note" id="alarmHelpStatus" role="status"></p><div class="row help-nav"><button class="btn" id="alarmHelpBack" type="button">Back</button><button class="btn primary" id="alarmHelpNext" type="button">Next</button></div></div></dialog><footer class="note" style="text-align:center;padding:8px 10px">Version 236 · 18 Nov 2026</footer></main>
+</section></details><p class="note" id="planApplyStatus" role="status"></p><button class="btn primary wide" id="applyPlan" type="button">Use this plan</button></div></dialog><dialog aria-labelledby="calendarTitle" id="calendarDialog"><div class="modal-shell"><header><h2 id="calendarTitle">Add to Calendar</h2><button class="btn small" id="closeCalendar" type="button">Close</button></header><label for="calendarScope">Include</label><select id="calendarScope"><option value="current">Accepted duty</option><option value="upcoming">Upcoming roster duties</option><option value="all">Whole roster</option></select><h3 id="calendarCount"></h3><p class="note" id="calendarSkipped" role="status"></p><div id="calendarIssues"></div><p class="note">One event per duty. Titles show local sign-on and sign-off times and finishing location; full sector details remain in Notes. No hotels or reminders.</p><button class="btn primary wide" id="calendarExport" type="button">Add roster to Calendar</button><p class="note" id="calendarStatus" role="status"></p><details id="calendarSetup"><summary>One-time iPhone setup</summary><p class="note">Use a separate shortcut named <strong>Leave for Work Calendar</strong>. Your alarm shortcut stays separate. Shortcuts opens briefly during import and requests a return to this app. No downloading or Siri Suggestions is needed.</p><p class="note">One action at a time. Your progress is saved on this device. “What you should see” describes the checkpoint; if it differs, send that screen before continuing.</p><p class="note" id="calendarGuideProgress"></p><h3 id="calendarGuideTitle"></h3><div class="note" id="calendarGuideInstruction"></div><div class="calendar-issue"><strong>What you should see</strong><p class="note" id="calendarGuideExpected"></p></div><div class="row help-nav"><button class="btn" id="calendarGuideBack" type="button">Back</button><button class="btn primary" id="calendarGuideNext" type="button">Next step</button></div><button class="btn small" id="calendarGuideResume" type="button">Continue from my screenshot</button><p class="note">These controls can vary with iOS. The test checks your phone before sending a full roster. If Calendar opens an editor for every event, check the expanded Add New Event action and turn its compose screen off.</p><button class="btn wide" id="calendarTest" type="button">Test with one event</button><button class="btn wide" id="calendarSetupDone" type="button">I checked the test</button></details><details style="margin-top:16px"><summary>Other options &amp; roster changes</summary><p class="note">This makes a copy, not a live subscription. A completed import is remembered on this device to help prevent duplicates. Changed duties need their previous calendar events removed before you import them again. An interrupted shortcut can leave some events added: check Calendar before retrying.</p><button class="btn wide" id="calendarDownload" type="button">Download .ics file instead</button><p class="note">File import depends on the app opening the file; Safari and Files may only preview it. The shortcut above avoids that route.</p><button class="btn wide" id="calendarResetHistory" type="button">Allow a fresh import</button></details></div></dialog><dialog aria-labelledby="alarmHelpTitle" id="alarmHelp"><div class="help-shell"><header><h2 id="alarmHelpTitle">Set up iPhone alarms</h2><button class="btn small" id="closeAlarmHelp" type="button">Close</button></header><p class="note" id="alarmHelpProgress"></p><div id="alarmHelpContent"></div><p class="note" id="alarmHelpStatus" role="status"></p><div class="row help-nav"><button class="btn" id="alarmHelpBack" type="button">Back</button><button class="btn primary" id="alarmHelpNext" type="button">Next</button></div></div></dialog><footer class="note" style="text-align:center;padding:8px 10px">Version 237 · 18 Nov 2026</footer></main>
 <dialog id="crewCalloutDialog" aria-labelledby="crewCalloutTitle">
  <div class="crew-callout-inner">
   <h2 id="crewCalloutTitle">Possible roster call-out</h2>
@@ -2662,7 +2662,7 @@ function ipadAssignmentConfirm(id,raw){
  msg.textContent='Validity: '+ipadValidityLabel(raw)+'\nApplied to '+assigned.length+' airport visit'+(assigned.length===1?'':'s')+':'+(ipadDailyTiming(raw)?'\nIMPORTANT: '+ipadNotamDailyAdvisory(raw,assigned[0]?.code||''):'');
  msg.style.whiteSpace='pre-line';
  const detail=document.createElement('p');detail.style.cssText='font-weight:650;line-height:1.5;margin:0 0 16px';
- detail.textContent=assigned.map(v=>v.label).join(' · ');
+ detail.textContent=assigned.map(v=>v.label).join(' · ')+(selected.some(x=>x.timingReview)?' · TIME VALIDITY NOT CONFIRMED — verify against original NOTAM':'');
  const buttons=document.createElement('div');buttons.style.cssText='display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap';
  const done=document.createElement('button');done.type='button';done.className='btn primary';done.textContent='Done';done.onclick=()=>overlay.remove();
  const modify=document.createElement('button');modify.type='button';modify.className='btn';modify.textContent='Modify visits';
@@ -2679,30 +2679,95 @@ function ipadAssignmentConfirm(id,raw){
  };
  buttons.append(modify,done);panel.append(title,msg,detail,buttons);overlay.append(panel);document.body.append(overlay);
 }
+// v237: User-selected NOTAMs are attached using the actual flight-sector
+// interval (departure - 15 min to arrival + 15 min). This is independent of
+// the broader NOTAM shortlisting/screening buffers in Settings. Airport
+// matching is mandatory: a NOTAM for YBRK must never be sent to another port.
+function ipadManualNotamVisits(code,raw){
+ const candidates=ipadAirportVisits(code),period=ipadNotamValidity(raw),schedule=ipadNotamSchedule(raw);
+ const src=window.crewIpadSchedule,rows=src?.rows?.()||[];
+ const timeline=crewCBRUtcTimeline(src?.sourceDate?.()||src?.date?.());
+ if(!candidates.length)return {matches:[],candidates,period,schedule,reason:'airport not found in the CBR'};
+ if(!period)return {matches:[],candidates,period,schedule,reason:'validity dates could not be confirmed'};
+ if(schedule.type==='review')return {matches:[],candidates,period,schedule,reason:'additional operating hours require review'};
+ const margin=15*60000,dayMs=86400000;
+ function overlaps(lo,hi){
+  lo=Math.max(lo,period[0]);hi=Math.min(hi,period[1]);
+  if(hi<lo)return false;
+  if(schedule.type==='continuous')return true;
+  const first=Math.floor(lo/dayMs)-1,last=Math.floor(hi/dayMs);
+  if(last-first>35)return false;
+  for(let day=first;day<=last;day++){
+   const start=day*dayMs+schedule.from*60000;
+   const end=day*dayMs+(schedule.to<=schedule.from?schedule.to+1440:schedule.to)*60000;
+   if(Math.max(lo,start)<=Math.min(hi,end))return true;
+  }
+  return false;
+ }
+ const matches=candidates.filter(visit=>{
+  const d=/^departure-(\d+)$/.exec(visit.key),a=/^arrival-(\d+)$/.exec(visit.key);
+  if(!d&&!a)return false;
+  const index=d?+d[1]:+a[1];
+  const relevant=[index];
+  // A turnaround visit is shared by the arriving and departing sectors.
+  if(a&&index+1<rows.length&&rows[index+1]?.[1]===visit.code)relevant.push(index+1);
+  return relevant.some(i=>{
+   const dep=timeline[i]?.departure?.instant?.getTime(),arr=timeline[i]?.arrival?.instant?.getTime();
+   return Number.isFinite(dep)&&Number.isFinite(arr)&&arr>=dep&&overlaps(dep-margin,arr+margin);
+  });
+ });
+ return {matches,candidates,period,schedule,reason:matches.length?'':'no overlap with sector departure-to-arrival ±15 min'};
+}
+function ipadOpenNotamEditor(id,raw,initial,onSave){
+ document.getElementById('ipadNotamEditOverlay')?.remove();
+ const overlay=document.createElement('div');overlay.id='ipadNotamEditOverlay';
+ overlay.style.cssText='position:fixed;inset:0;z-index:1000004;background:rgba(13,25,40,.65);display:flex;align-items:center;justify-content:center;padding:12px;box-sizing:border-box';
+ const panel=document.createElement('div');panel.style.cssText='background:#fff;color:#172c3d;border-radius:18px;padding:18px;width:min(740px,100%);max-height:94dvh;overflow:auto;box-sizing:border-box;box-shadow:0 18px 50px #0005';
+ const h=document.createElement('h3');h.textContent='NOTAM summary · '+id;h.style.margin='0 0 8px';
+ const explain=document.createElement('p');explain.className='note';explain.textContent='Edit the abbreviation below. The original NOTAM remains unchanged. You can select all, delete and rewrite multiple lines.';
+ const input=document.createElement('textarea');input.id='ipadNotamEditText';input.rows=14;input.value=String(initial||'');input.spellcheck=false;input.setAttribute('aria-label','Editable NOTAM summary');
+ input.style.cssText='display:block;width:100%;min-height:245px;max-height:48vh;resize:vertical;box-sizing:border-box;padding:13px;font:16px/1.5 ui-monospace,SFMono-Regular,monospace;border:1px solid #aabacb;border-radius:10px;white-space:pre-wrap';
+ const reference=document.createElement('details');reference.style.margin='12px 0';
+ const caption=document.createElement('summary');caption.textContent='Show original NOTAM (reference)';
+ const original=document.createElement('pre');original.textContent=String(raw||'');original.style.cssText='white-space:pre-wrap;overflow-wrap:anywhere;max-height:250px;overflow:auto;font-size:12px;padding:9px;background:#f1f5f9;border-radius:8px';reference.append(caption,original);
+ const buttons=document.createElement('div');buttons.style.cssText='display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap;margin-top:12px';
+ const cancel=document.createElement('button');cancel.type='button';cancel.className='btn';cancel.textContent='Cancel';cancel.onclick=()=>overlay.remove();
+ const save=document.createElement('button');save.type='button';save.className='btn primary';save.textContent='Save summary';
+ save.onclick=()=>{const v=input.value.trim();if(!v){input.focus();alert('Enter a NOTAM summary before adding.');return;}overlay.remove();onSave(v.replace(/\s+/g,' '));};
+ buttons.append(cancel,save);panel.append(h,explain,input,reference,buttons);overlay.append(panel);document.body.append(overlay);
+ requestAnimationFrame(()=>input.focus());
+}
 function ipadChooseVisit(id,raw,abbreviated=false,airport='',displayText=''){
  const visits=ipadVisitList();if(!visits.length){alert('Import a CBR with sectors before assigning NOTAMs.');return;}
- const matches=ipadAirportVisits(airport);const choices=matches.length?matches:visits;
- const period=ipadNotamValidity(raw),schedule=ipadNotamSchedule(raw),eligible=period?ipadAutoVisits(airport,raw):[];
- // Assign only after a verified overlap AND a reliably interpreted schedule.
- // Never silently choose a visit when the additional operating hours are unclear.
- if(period&&schedule.type!=='review'&&eligible.length){
-  for(const visit of eligible)ipadSelections[visit.key+'|'+id]={visit:visit.key,id,raw,abbreviated,display:displayText,auto:false};
-  ipadSave();ipadCBRRender();ipadUpdateButtons();crewNotamLearningPrompt(id,raw,()=>ipadAssignmentConfirm(id,raw));
-  const status=document.getElementById('ipadCBRStatus');if(status)status.textContent=id+' automatically assigned to '+eligible.map(v=>v.label).join('; ')+'. You can change this under Edit / remove selected NOTAMs.';
+ const review=ipadManualNotamVisits(airport,raw);
+ const choices=review.candidates.length?review.candidates:visits;
+ let eligible=review.matches,needsTimingReview=false;
+ if(!eligible.length&&review.candidates.length===1){
+  // Manual selection identifies the airport uniquely, even where an imported
+  // NOTAM has undecodable operating times. Mark as needing time verification.
+  eligible=review.candidates;needsTimingReview=true;
+ }
+ if(eligible.length){
+  for(const visit of eligible)ipadSelections[visit.key+'|'+id]={visit:visit.key,id,raw,abbreviated,display:displayText,auto:false,timingReview:needsTimingReview};
+  ipadSave();ipadCBRRender();ipadUpdateButtons();
+  crewNotamLearningPrompt(id,raw,()=>ipadAssignmentConfirm(id,raw));
+  const status=document.getElementById('ipadCBRStatus');if(status)status.textContent=id+' placed in '+eligible.map(v=>v.label).join('; ')+(needsTimingReview?' — verify published validity/operating hours; the ±15-minute sector window did not confirm applicability.':'. Sector matching: departure −15 min to arrival +15 min.');
   return;
  }
- const validity=ipadValidityLabel(raw);
- const dailyNote=ipadNotamDailyAdvisory(raw,airport);
- const reason=!period?'could not read the NOTAM validity dates.':schedule.type==='review'?'read the date range, but cannot confirm the additional operating schedule.':'found no overlapping airport visit.';
- const testWarning=document.getElementById('cbrTestTop')?.checked?'\nTEST mode shifts CBR duty dates, NOTAM publication dates remain unchanged.\n':'';
- const response=window.prompt('Automatic sector matching '+reason+'\n'+id+' · '+validity+(dailyNote?'\n\n'+dailyNote:'')+testWarning+'\n\n'+choices.map((v,i)=>(i+1)+'. '+v.label+' ('+ipadVisitUtcLabel(v)+')').join('\n')+'\n\nEnter visit number to override, or Cancel to leave unassigned:');
+ // Only a genuinely ambiguous/missing airport or repeat visit needs a manual
+ // choice. Never infer an airport when the briefing name does not match CBR.
+ const warning='Automatic sector matching could not resolve '+(review.reason||'the airport visit')+'.';
+ const response=window.prompt(warning+'\n'+id+' · '+ipadValidityLabel(raw)+'\n\n'+choices.map((v,i)=>(i+1)+'. '+v.label+' ('+ipadVisitUtcLabel(v)+')').join('\n')+'\n\nEnter visit number to override, or Cancel to leave unassigned:');
  if(response===null)return;
  const n=Number(response);if(!Number.isInteger(n)||n<1||n>choices.length){alert('Invalid visit number. NOTAM not added.');return;}
- const visit=choices[n-1];ipadSelections[visit.key+'|'+id]={visit:visit.key,id,raw,abbreviated,display:displayText,auto:false};ipadSave();ipadCBRRender();ipadUpdateButtons();crewNotamLearningPrompt(id,raw,()=>ipadAssignmentConfirm(id,raw));
+ const visit=choices[n-1];ipadSelections[visit.key+'|'+id]={visit:visit.key,id,raw,abbreviated,display:displayText,auto:false,timingReview:true};
+ ipadSave();ipadCBRRender();ipadUpdateButtons();crewNotamLearningPrompt(id,raw,()=>ipadAssignmentConfirm(id,raw));
 }
 function ipadAirportVisits(code){
- const aliases={'YMML':'MEL','YSSY':'SYD','YBBN':'BNE','YSCB':'CBR','YPAD':'ADL','YPPH':'PER','YHBA':'HBA','YBCG':'OOL','YBTL':'TSV','YBCS':'CNS','YPDN':'DRW'};
- return ipadVisitList().filter(x=>!code||x.code===code||aliases[code]===x.code);
+ // v237: NAIPS uses ICAO while the CBR uses IATA; reuse the established
+ // conversion for all ports (including ROK/YBRK, NTL/YWLM and HBA/YMHB).
+ const search=String(code||'').trim().toUpperCase();
+ return ipadVisitList().filter(x=>!search||x.code===search||ipadWxICAO(x.code)===search);
 }
 function ipadVisitUtcLabel(v){const t=v.time instanceof Date?v.time:new Date(v.time);return Number.isFinite(t.getTime())?t.toISOString().slice(0,16).replace('T',' ')+'Z':'UTC unknown';}
 function ipadValidityLabel(raw){
@@ -2760,6 +2825,8 @@ function ipadOperationalSectorForVisit(visit,rows){
  if(arrival){const i=Number(arrival[1])+1;
   // A connected arrival/turnaround column represents the NEXT departure.
   if(i<rows.length&&rows[i]?.[1]===visit.code)return i;
+  // The last arrival has its own operational notes slot, after sector N.
+  if(i===rows.length)return i;
  }
  return -1;
 }
@@ -3984,9 +4051,9 @@ function ipadCBRRender(){
  // A briefing may exceed one wallpaper. Warn explicitly rather than clip or reduce text invisibly.
 
  if(Object.keys(ipadSelections).length){const details=document.createElement('details');details.className='ipad-manage';const summary=document.createElement('summary');summary.textContent='Edit / remove selected NOTAMs';details.append(summary);
- for(const [key,item] of Object.entries(ipadSelections)){const line=document.createElement('div');line.className='ipad-manage-row';const label=document.createElement('span');label.textContent=item.id+' · '+(visits.find(v=>v.key===item.visit)?.label||item.visit);line.append(label);
+ for(const [key,item] of Object.entries(ipadSelections)){const line=document.createElement('div');line.className='ipad-manage-row';const label=document.createElement('span');label.textContent=item.id+' · '+(visits.find(v=>v.key===item.visit)?.label||item.visit)+(item.timingReview?' · CHECK TIME':'');line.append(label);
  const move=document.createElement('button');move.type='button';move.className='btn small';move.textContent='Change visit';move.onclick=()=>{const choices=ipadAirportVisits((visits.find(v=>v.key===item.visit)||{}).code);const response=prompt('Override airport visit for '+item.id+'\nValidity: '+ipadValidityLabel(item.raw)+'\n'+choices.map((v,i)=>(i+1)+'. '+v.label+' ('+ipadVisitUtcLabel(v)+')').join('\n')+'\nEnter visit number:');if(response===null)return;const n=Number(response);if(!Number.isInteger(n)||n<1||n>choices.length)return alert('Invalid visit number');const visit=choices[n-1];delete ipadSelections[key];ipadSelections[visit.key+'|'+item.id]={...item,visit:visit.key};ipadSave();ipadCBRRender();ipadUpdateButtons();};line.append(move);
- const edit=document.createElement('button');edit.type='button';edit.className='btn small';edit.textContent='Edit';edit.onclick=()=>{const current=ipadNotamSummaryWithTiming(item.raw,item.abbreviated?(item.display||item.raw):ipadAbbreviate(item.raw));const revised=prompt('Edit concise NOTAM summary; compare with original. The published daily cutoff will be preserved:',current);if(revised!==null&&revised.trim()){item.display=revised.trim().replace(/\s+/g,' ');item.abbreviated=true;ipadSave();ipadCBRRender()}};line.append(edit);
+ const edit=document.createElement('button');edit.type='button';edit.className='btn small';edit.textContent='Edit';edit.onclick=()=>{const current=ipadNotamSummaryWithTiming(item.raw,item.abbreviated?(item.display||item.raw):ipadAbbreviate(item.raw));ipadOpenNotamEditor(item.id,item.raw,current,revised=>{item.display=revised;item.abbreviated=true;ipadSave();ipadCBRRender()})};line.append(edit);
  const del=document.createElement('button');del.type='button';del.className='btn small';del.textContent='Remove';del.onclick=()=>{delete ipadSelections[key];ipadSave();ipadCBRRender();ipadUpdateButtons()};line.append(del);details.append(line);
  }root.append(details);}
 
@@ -4605,7 +4672,7 @@ function flightRenderNaips(parsed){
   const sectorCode=(block.querySelector('h3')?.textContent.match(/\(([A-Z]{3,4})\)/)||[])[1]||'';
   const dailyWarning=ipadNotamDailyAdvisory(raw,sectorCode);
   if(dailyWarning){const advisory=make('p','flight-source',dailyWarning,block);advisory.style.cssText='color:#97510a;font-weight:700;font-size:12px;line-height:1.4;margin:0 0 10px;white-space:normal';}
-  {const id=(raw.match(/\b[A-Z]\d{2,5}\/\d{2}\b/)||[])[0]||'NOTAM';const actions=document.createElement('div');actions.className='ipad-notam-actions';actions.setAttribute('data-ipad-notam-id',id);const add=document.createElement('button');add.className='btn small';add.type='button';add.setAttribute('data-ipad-add','');add.textContent='＋ Add to iPad CBR';add.onclick=()=>{if(Object.values(ipadSelections).some(item=>item.id===id)){ipadRemoveNotam(id);return;}const draft=ipadAbbreviate(raw);const edited=window.prompt('Suggested SHORT summary — verify all operational details against the full NOTAM. Edit before adding:',draft);if(edited===null)return;if(!edited.trim()){alert('Enter a NOTAM summary before adding.');return;}const code=(block.querySelector('h3')?.textContent.match(/\(([A-Z]{3,4})\)/)||[])[1]||'';ipadChooseVisit(id,raw,true,code,edited.trim().replace(/\s+/g,' '))};actions.append(add);block.append(actions);}
+  {const id=(raw.match(/\b[A-Z]\d{2,5}\/\d{2}\b/)||[])[0]||'NOTAM';const actions=document.createElement('div');actions.className='ipad-notam-actions';actions.setAttribute('data-ipad-notam-id',id);const add=document.createElement('button');add.className='btn small';add.type='button';add.setAttribute('data-ipad-add','');add.textContent='＋ Add to iPad CBR';add.onclick=()=>{if(Object.values(ipadSelections).some(item=>item.id===id)){ipadRemoveNotam(id);return;}const draft=ipadAbbreviate(raw);const code=(block.querySelector('h3')?.textContent.match(/\(([A-Z]{3,4})\)/)||[])[1]||'';ipadOpenNotamEditor(id,raw,draft,edited=>ipadChooseVisit(id,raw,true,code,edited))};actions.append(add);block.append(actions);}
  };
  if(parsed.valid)make('p','flight-source',parsed.valid,sheet);
  const learningTools=document.createElement('details');learningTools.className='crew-panel';
@@ -5596,7 +5663,7 @@ try{
  // Plain text entered per sector is persisted locally and rendered in the
  // matching airport column under the existing OPERATIONAL heading.
  const opIntro=document.createElement('p');opIntro.className='note';
- opIntro.textContent='Enter notes for each flight sector. They will appear in black under OPERATIONAL in the corresponding iPad CBR column. Check notes against approved operational information.';
+ opIntro.textContent='Enter notes for each sector and the final arrival. They appear in black under OPERATIONAL in the matching iPad CBR airport column. Verify against current operational information.';
  const opEditor=document.createElement('div');opEditor.id='flightOperationalNotes';
  operArea.append(opIntro,opEditor);
  function renderOperationalEditor(){
@@ -5605,18 +5672,18 @@ try{
   if(!rows.length){const message=document.createElement('p');message.className='note';message.textContent='Import a CBR to enter sector-specific operational notes.';opEditor.append(message);return;}
   const existing=window.crewOperationalNotesAPI.read();
   const status=document.createElement('p');status.className='note';status.id='flightOperationalSaveStatus';status.setAttribute('role','status');
-  for(let i=0;i<rows.length;i++){
-   const row=rows[i];const field=document.createElement('div');field.className='field';
+  for(let i=0;i<=rows.length;i++){
+   const isFinal=i===rows.length;const row=isFinal?rows[rows.length-1]:rows[i];const field=document.createElement('div');field.className='field';
    const label=document.createElement('label');label.htmlFor='flightOpSector'+i;
-   label.textContent='Sector '+(i+1)+' · '+(row[0]||'Flight')+' · '+(row[1]||'—')+' → '+(row[3]||'—');
+   label.textContent=isFinal?'Final arrival · '+(row[3]||'—')+' · after sector '+rows.length:'Sector '+(i+1)+' · '+(row[0]||'Flight')+' · '+(row[1]||'—')+' → '+(row[3]||'—');
    const box=document.createElement('textarea');box.id=label.htmlFor;box.rows=4;
-   box.placeholder='Enter your operational notes for this sector…';box.value=existing[String(i)]||'';
+   box.placeholder=isFinal?'Notes for the final destination (e.g. tower closure, arrival handling)…':'Enter your operational notes for this sector…';box.value=existing[String(i)]||'';
    box.addEventListener('input',()=>{status.textContent=window.crewOperationalNotesAPI.save(i,box.value)?'Saved locally · CBR preview refreshes when you finish editing.':'Unable to save locally on this device.';});
    box.addEventListener('change',()=>{try{window.crewIpadDraft?.render()}catch(e){console.error('Operational notes preview',e)}});
    field.append(label,box);opEditor.append(field);
   }
   const save=document.createElement('button');save.type='button';save.className='btn primary';save.textContent='Update CBR with operational notes';
-  save.onclick=()=>{let ok=true;for(let i=0;i<rows.length;i++)ok=window.crewOperationalNotesAPI.save(i,opEditor.querySelector('#flightOpSector'+i)?.value||'')&&ok;
+  save.onclick=()=>{let ok=true;for(let i=0;i<=rows.length;i++)ok=window.crewOperationalNotesAPI.save(i,opEditor.querySelector('#flightOpSector'+i)?.value||'')&&ok;
    try{window.crewIpadDraft?.render()}catch(e){ok=false;console.error('Operational notes preview',e)}
    status.textContent=ok?'Operational notes saved and iPad CBR preview updated.':'Unable to update all operational notes. Check local storage and retry.';
   };
