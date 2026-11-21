@@ -5,7 +5,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <meta content="#15283f" name="theme-color"/>
-<title>CrewFocus v274 — Rest Conditions & Clearer BOC Display</title>
+<title>CrewFocus v275 — Compact Maximum FDP</title>
 <style>
 :root{color-scheme:light dark;--bg:#f3f6fa;--card:#fff;--ink:#15283f;--muted:#637184;--line:#dce3eb;--accent:#176b87;--soft:#e9f4f7;--danger:#b13e3e}
 @media(prefers-color-scheme:dark){:root{--bg:#101820;--card:#1a2632;--ink:#edf4fb;--muted:#aab8c6;--line:#344454;--accent:#72c7df;--soft:#203a46;--danger:#ff9b9b}}
@@ -1137,17 +1137,75 @@ html,body{margin:0;padding:0}
 #fdpRestPanel .fdp-rest-conditional-hint274{font-size:12px;line-height:1.45;color:#79521d;margin:7px 0 0}
 #fdpRestPanel .crew-rest-conditions>summary{font-size:14px}
 </style>
-</head>
+<style id="fdpCompact275">
+#fdpDutyAccordion .fdp-fast-inputs{display:none!important}
+#fdpDutyAccordion .fdp-extras{border:0!important;background:transparent!important;margin:0!important;padding:0!important}
+#fdpDutyAccordion .fdp-extras>summary{display:none!important}
+#fdpDutyAccordion .fdp-fast{padding:12px!important}
+#fdpDutyAccordion .fdp-duty-switch275{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:2px 0 11px}
+#fdpDutyAccordion .fdp-duty-switch275 button{min-height:45px;border:1px solid #cbd7df;border-radius:11px;background:#fff;color:#162c44;font-size:15px;font-weight:700}
+#fdpDutyAccordion .fdp-duty-switch275 button.active{background:#e6f2f2;border-color:#1c7780;color:#236575}
+#fdpDutyAccordion .fdp-duty-picker275{margin-bottom:8px}
+#fdpDutyAccordion .fdp-duty-picker275 label{display:block;font-size:12px;font-weight:750;margin:0 0 4px}
+#fdpDutyAccordion .fdp-duty-picker275 select{width:100%;min-height:40px;font-size:14px}
+#fdpDutyAccordion .fdp-duty-status275{color:#536b7a;font-size:12px;line-height:1.35;margin:4px 0 10px}
+#fdpDutyAccordion .fdp-duty-status275:empty{display:none}
+#fdpDutyAccordion .fdp-duty-entries275{display:grid;grid-template-columns:1fr;gap:10px}
+#fdpDutyAccordion .fdp-duty-entry275{border:1px solid #d6e1e7;border-radius:13px;padding:11px;background:#fff;min-width:0}
+#fdpDutyAccordion .fdp-duty-entry275 h3{font-size:16px;line-height:1.2;margin:0 0 10px;color:#20384d;display:flex;align-items:center;gap:8px}
+#fdpDutyAccordion .fdp-duty-entry275 h3 small{font-size:11px;font-weight:500;color:#697d8e}
+#fdpDutyAccordion .fdp-duty-entry-grid275{display:grid;grid-template-columns:1fr 1fr;gap:9px 10px}
+#fdpDutyAccordion .fdp-duty-entry-grid275>.field{min-width:0;margin:0}
+#fdpDutyAccordion .fdp-duty-entry-grid275 label{font-size:12px;font-weight:700;display:block;margin:0 0 4px}
+#fdpDutyAccordion .fdp-duty-entry-grid275 input{width:100%;min-width:0;min-height:42px;font-size:16px;padding:8px}
+#fdpDutyAccordion .fdp-duty-airport275{grid-column:1/-1}
+#fdpDutyAccordion .fdp-duty-statusline275{margin:6px 0 0;min-height:21px;display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:11px;color:#526a78}
+#fdpDutyAccordion .fdp-duty-boc275{display:inline-flex;align-items:center;gap:7px;margin-left:auto;font-size:12px;font-weight:750;white-space:nowrap}
+#fdpDutyAccordion .fdp-duty-boc275 i{display:inline-block;width:11px;height:11px;flex:0 0 11px;border-radius:50%;background:#aeb9c3;box-shadow:0 0 0 1px #8393a4}
+#fdpDutyAccordion .fdp-duty-boc275[data-state="boc"] i{background:#00f56b;box-shadow:0 0 0 1px #087c3b,0 0 7px 2px #00ff78,0 0 13px 3px #00ff7866}
+#fdpDutyAccordion .fdp-duty-boc275[data-state="no"] i{background:#ff2020;box-shadow:0 0 0 1px #b10000,0 0 7px 2px #ff2525,0 0 13px 3px #ff252566}
+#fdpDutyAccordion .fdp-duty-boc275[data-state="verify"] i{background:#e6ac41;box-shadow:0 0 0 1px #9e6d20,0 0 5px #ffc34d}
+#fdpDutyAccordion .fdp-duty-options275{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:10px 0 1px}
+#fdpDutyAccordion .fdp-duty-options275 .field{min-width:0}
+#fdpDutyAccordion .fdp-duty-options275 label{display:block;font-size:12px;margin:0 0 4px;font-weight:700}
+#fdpDutyAccordion .fdp-duty-options275 select{min-height:43px;font-size:14px;width:100%}
+#fdpDutyAccordion .fdp-fast-result{min-height:0;margin:10px 0 0;padding:9px 0 0}
+#fdpDutyAccordion .fdp-fast-primary{grid-template-columns:1fr;gap:7px}
+#fdpDutyAccordion .fdp-fast-limit{flex-direction:row;align-items:center;justify-content:space-between;padding:9px 12px}
+#fdpDutyAccordion .fdp-fast-limit strong{font-size:25px;margin:0}
+#fdpDutyAccordion .fdp-fast-times{gap:5px}
+#fdpDutyAccordion .fdp-fast-time{grid-template-columns:100px 1fr;gap:6px;padding:6px 9px}
+#fdpDutyAccordion .fdp-fast-time>strong{font-size:14px}
+#fdpDutyAccordion .fdp-fast-time>small{display:none}
+#fdpDutyAccordion .fdp-fast-time:nth-child(2){display:none}
+#fdpDutyAccordion .fdp-fast-context{display:none}
+#fdpDutyAccordion .fdp-fast-notes{margin-top:8px;font-size:12px}
+#fdpDutyAccordion .fdp-duty-landing-check275{font-size:12px;line-height:1.35;padding:8px 10px;border-radius:9px;background:#edf5f9;color:#21475b;margin-top:8px}
+#fdpDutyAccordion .fdp-duty-landing-check275[data-state="red"]{background:#ffebed;color:#a52332}
+#fdpDutyAccordion .fdp-duty-landing-check275[data-state="amber"]{background:#ffedcf;color:#79501c}
+#fdpDutyAccordion .fdp-duty-conditions275{border:1px solid #d6e1e7;border-radius:12px;margin:12px 0 0;padding:11px;background:#f9fbfc}
+#fdpDutyAccordion .fdp-duty-conditions275>summary{cursor:pointer;font-size:14px;font-weight:750;color:#294b63}
+#fdpDutyAccordion .fdp-duty-conditions275>summary span{color:#906023;font-size:12px}
+#fdpDutyAccordion .fdp-duty-conditions275 .field{margin:10px 0}
+#fdpDutyAccordion .fdp-duty-conditions275 .fdp-extra-grid{display:block;margin:0}
+#fdpDutyAccordion .fdp-duty-conditions275 #fdpDutyMore275{margin:10px 0 0;border-top:1px solid #e1e8ec;padding:10px 0 0;font-size:13px}
+#fdpDutyAccordion .fdp-duty-conditions275 #fdpDutyMore275>summary{cursor:pointer;font-weight:700;color:#52677a}
+#fdpDutyAccordion .fdp-duty-conditions275 #fdpDutyMore275 .field{margin:8px 0}
+#fdpDutyAccordion .fdp-duty-warning275{font-size:12px;line-height:1.4;color:#895211;margin:10px 0 0;border-left:3px solid #d6a15a;padding:5px 9px;background:#fff9ec}
+#fdpDutyAccordion [hidden]{display:none!important}
+@media(min-width:750px){#fdpDutyAccordion .fdp-duty-entries275{grid-template-columns:1fr 1fr}}
+@media(max-width:410px){#fdpDutyAccordion .fdp-duty-entry-grid275 input{font-size:14px}#fdpDutyAccordion .fdp-duty-options275 select{font-size:12px}}
+</style></head>
 <body>
 <main>
 <span class="hidden" id="dayLabel">Local time</span>
-<div class="crew-topbar"><span class="crew-version-tag" aria-label="CrewFocus version 274">v274</span><nav aria-label="Main navigation" class="crew-tabs"><span class="crew-tab-highlight" aria-hidden="true"></span><button class="crew-tab selected" data-page="home" type="button">Focus</button><button class="crew-tab" data-page="tools" type="button">Dashboard</button></nav><label class="crew-test-control" for="cbrTestTop"><span class="crew-mode-led" id="cbrModeLED" aria-hidden="true"></span><span class="crew-test-text" id="cbrModeText">LIVE</span><input id="cbrTestTop" type="checkbox" role="switch" aria-label="Test mode"/><span class="crew-switch-track" aria-hidden="true"></span></label></div>
+<div class="crew-topbar"><span class="crew-version-tag" aria-label="CrewFocus version 275">v275</span><nav aria-label="Main navigation" class="crew-tabs"><span class="crew-tab-highlight" aria-hidden="true"></span><button class="crew-tab selected" data-page="home" type="button">Focus</button><button class="crew-tab" data-page="tools" type="button">Dashboard</button></nav><label class="crew-test-control" for="cbrTestTop"><span class="crew-mode-led" id="cbrModeLED" aria-hidden="true"></span><span class="crew-test-text" id="cbrModeText">LIVE</span><input id="cbrTestTop" type="checkbox" role="switch" aria-label="Test mode"/><span class="crew-switch-track" aria-hidden="true"></span></label></div>
 <section class="crew-page" id="crewHome">
 <div class="crew-panel" id="homeFocusPanel"><div class="crew-kicker">FOCUS <span class="crew-status" id="focusModeBadge">Automatic</span></div><h2 id="focusName"></h2><p class="note" id="focusDesc"></p><button class="btn primary" id="focusOpen" type="button">Open focus</button></div>
 <div class="crew-panel" id="homeCurrentPanel"><div class="crew-kicker">CURRENT DUTY <span class="crew-status" id="homeAccepted">Needs review</span></div><div class="crew-focus-duty-layout"><div class="crew-focus-duty-original"><h2 id="homeDutyTitle">Today</h2><p class="note" id="homeDutyDate"></p><p class="crew-time" id="homeDutyTime"></p><div id="homeDutySectors"></div><div class="crew-home-actions"><button class="btn primary" id="homeOpenDuty" type="button">Departure times</button><button class="btn" id="homeReview" type="button">Review &amp; accept</button></div></div><div class="crew-focus-duty-metrics" id="homeCurrentMetrics" aria-label="Current duty and rest estimates"></div></div><p class="focus-estimate-disclaimer">Reference estimates only. Confirm against approved duty and rest requirements.</p></div>
 <div class="crew-panel" id="homeNextPanel"><div class="crew-kicker">NEXT DUTY <span class="crew-status" id="homeNextStatus">Upcoming</span></div><div class="crew-focus-duty-layout"><div class="crew-focus-duty-original"><h2 id="homeNextDate"></h2><p class="hidden" id="homeNextCalendarDate"></p><p class="crew-next hidden" id="homeNextDuty"></p><div id="homeNextSectors"></div><button class="btn" id="homeViewNext" type="button">Review &amp; accept</button></div><div class="crew-focus-duty-metrics" id="homeNextMetrics" aria-label="Next duty and rest estimates"></div></div><p class="focus-estimate-disclaimer">Reference estimates only. Confirm against approved duty and rest requirements.</p></div>
 </section>
-<section class="crew-page hidden" id="crewTools"><div class="crew-section-heading"><h2 class="crew-page-title">Dashboard <small style="font-size:11px;font-weight:500;color:var(--muted)">v274</small></h2><button class="btn small" id="dashBack" type="button">← Focus</button></div><div class="crew-dashboard-reorder"><button class="btn small" type="button" id="dashTileEdit" aria-pressed="false">Edit tiles</button><div class="crew-dashboard-reorder-tools hidden" id="dashReorderTools"><span id="dashTileSelected" aria-live="polite">Select a tile or drag it</span><div class="crew-dashboard-arrows"><button class="btn small" type="button" id="dashTileLeft" aria-label="Move selected tile left">←</button><button class="btn small" type="button" id="dashTileUp" aria-label="Move selected tile up">↑</button><button class="btn small" type="button" id="dashTileDown" aria-label="Move selected tile down">↓</button><button class="btn small" type="button" id="dashTileRight" aria-label="Move selected tile right">→</button></div><button class="btn small" type="button" id="dashTileReset">Reset order</button></div></div><button class="crew-dashboard-done-floating244 hidden" type="button" id="dashTileDoneFixed244" aria-label="Finish rearranging Dashboard tiles">Done ✓</button><p class="note" id="dashTileHint">Touch and hold any tile to rearrange it. Your order is saved on this device.</p><p class="note crew-dashboard-ideas-hint">Each tile has its own editable <strong>Things to Come</strong> list. Open a tile and tap <strong>Ideas</strong> to add notes. Existing tools continue to work.</p>
+<section class="crew-page hidden" id="crewTools"><div class="crew-section-heading"><h2 class="crew-page-title">Dashboard <small style="font-size:11px;font-weight:500;color:var(--muted)">v275</small></h2><button class="btn small" id="dashBack" type="button">← Focus</button></div><div class="crew-dashboard-reorder"><button class="btn small" type="button" id="dashTileEdit" aria-pressed="false">Edit tiles</button><div class="crew-dashboard-reorder-tools hidden" id="dashReorderTools"><span id="dashTileSelected" aria-live="polite">Select a tile or drag it</span><div class="crew-dashboard-arrows"><button class="btn small" type="button" id="dashTileLeft" aria-label="Move selected tile left">←</button><button class="btn small" type="button" id="dashTileUp" aria-label="Move selected tile up">↑</button><button class="btn small" type="button" id="dashTileDown" aria-label="Move selected tile down">↓</button><button class="btn small" type="button" id="dashTileRight" aria-label="Move selected tile right">→</button></div><button class="btn small" type="button" id="dashTileReset">Reset order</button></div></div><button class="crew-dashboard-done-floating244 hidden" type="button" id="dashTileDoneFixed244" aria-label="Finish rearranging Dashboard tiles">Done ✓</button><p class="note" id="dashTileHint">Touch and hold any tile to rearrange it. Your order is saved on this device.</p><p class="note crew-dashboard-ideas-hint">Each tile has its own editable <strong>Things to Come</strong> list. Open a tile and tap <strong>Ideas</strong> to add notes. Existing tools continue to work.</p>
 <div class="crew-tool-grid" id="crewTileGrid">
 <button class="crew-tile" data-tool="duty"><span>▤</span><strong>Roster &amp; Duty</strong><small>Available</small></button><button class="crew-tile" data-tool="drive"><span>🚗</span><strong>Travel Times</strong><small>Available</small></button><button class="crew-tile" data-tool="calendar"><span>▣</span><strong>Export to Calendar</strong><small>Available</small></button><button class="crew-tile" data-tool="import"><span>⇧</span><strong>Import Roster</strong><small>Available</small></button><button class="crew-tile" data-tool="help"><span>◷</span><strong>Help</strong><small>Available</small></button><button class="crew-tile" data-tool="flight"><span>✈</span><strong>Flight Planning</strong><small>Beta</small></button><button class="crew-tile" data-tool="commuter"><span>🛫</span><strong>Commuter</strong><small>Planned</small></button><button class="crew-tile" data-tool="hotels"><span>▥</span><strong>Hotels &amp; CATS</strong><small>Planned</small></button><button class="crew-tile" data-tool="eba"><span>⚖</span><strong>EBA &amp; Rest</strong><small>Planned</small></button><button class="crew-tile" data-tool="fdp"><span>✈️⏱️</span><strong>Calculators</strong><small>FDP, rest &amp; fuel</small></button><button class="crew-tile" data-tool="pay"><span>$</span><strong>Pay Calculator</strong><small>Planned</small></button><button class="crew-tile" data-tool="packing"><span>▣</span><strong>Trip Checklist</strong><small>Available</small></button><button class="crew-tile" data-tool="aircraft"><span>✈</span><strong>Aircraft Tracking</strong><small>Planned</small></button><button class="crew-tile" data-tool="logbook" type="button"><span>📖</span><strong>Logbook</strong><small>Ideas</small></button><button class="crew-tile" data-tool="pbs" type="button"><span>🗓️</span><strong>PBS</strong><small>Ideas</small></button><button class="crew-tile" id="dashDocuments" type="button"><span>📁</span><strong>Document Library</strong><small>Available</small></button><button class="crew-tile" id="dashSettings" type="button"><span>⚙</span><strong>Settings</strong><small>Available</small></button></div></section>
 <section class="crew-page hidden" id="crewHelp" aria-label="CrewFocus Help">
@@ -1195,8 +1253,41 @@ LOCATION BRIEFING
 ... NOTAM INFORMATION ..." rows="8" spellcheck="false"></textarea><div class="crew-home-actions"><button class="btn primary" id="flightInterpret" type="button">Import briefing / Upload to CBR</button><button class="btn small" id="flightFreshBriefing248" type="button">Reset all weather &amp; NOTAMs</button></div><p class="note" id="flightPasteStatus">On iPhone, tap the box and choose Paste.</p><p class="note" id="crewBriefingReceipt267" role="status" aria-live="polite">Briefing storage status will appear after import or reset.</p></div><div class="crew-section-heading hidden" style="margin-top:12px"><h3 style="margin:0">Additional airports</h3></div><div class="crew-panel hidden" id="flightAdditionalAirportsPanel"><p class="note">Weather briefing assistant · preliminary interpretation only. Airport names and common 3-letter codes are accepted. Verify all reports, times and operational requirements using approved aviation sources.</p><div class="fields"><div class="field" style="display:none"><label for="flightDeparture">Departure ICAO</label><input autocapitalize="characters" id="flightDeparture" maxlength="40" placeholder="Melbourne / MEL / YMML"/></div><div class="field" style="display:none"><label for="flightDestination">Destination ICAO</label><input autocapitalize="characters" id="flightDestination" maxlength="40" placeholder="Sydney / SYD / YSSY"/></div><div class="field"><label for="flightAlternate">Additional airport / alternate (optional)</label><input autocapitalize="characters" id="flightAlternate" maxlength="40" placeholder="Canberra / CBR / YSCB"/></div><div class="field" style="display:none"><label for="flightDate">Flight date</label><input id="flightDate" type="date"/></div><div class="field" style="display:none"><label for="flightTime">Departure (local)</label><input id="flightTime" type="time"/></div></div><div class="field" style="margin-top:12px"><label>Additional airports</label><div id="flightExtraAirports"></div><button class="btn small" id="flightAddAirport" type="button">+ Add airport</button></div><div class="crew-home-actions"><button class="btn primary" id="flightFetch" type="button">Retrieve weather</button><button class="btn" id="flightClear" type="button">Clear reports</button></div><p class="note" id="flightStatus" role="status">Enter airport codes to begin. Live retrieval requires internet and a source permitting browser access.</p></div><p class="note" id="flightShortlistStatus" role="status">Import a NAIPS briefing to shortlist NOTAMs automatically against the CBR duty window.</p><div aria-live="polite" id="flightResults"></div><div class="crew-panel"><p class="crew-kicker">FLIGHT PLANNING · FUTURE FEATURES</p><div id="flightIdeaList"></div></div></div></section><section class="crew-page hidden" id="crewFDP" aria-label="Standalone FDP Calculator">
  <div class="crew-section-heading"><h2 class="crew-page-title">Calculators</h2><button class="btn small" id="fdpBack" type="button">← Dashboard</button></div>
  <details class="crew-calc-accordion" id="fdpDutyAccordion">
-  <summary><span>Maximum FDP</span><small>Sign-on → latest landing &amp; sign-off</small></summary>
+  <summary><span>Maximum FDP</span><small>Latest landing</small></summary>
  <div class="crew-panel fdp-fast">
+  <div class="fdp-duty-switch275 segment" role="group" aria-label="FDP input mode">
+   <button id="fdpRostered275" class="active" aria-pressed="true" type="button">Rostered duty</button>
+   <button id="fdpManual275" aria-pressed="false" type="button">Manual</button>
+  </div>
+  <div id="fdpRosterPickerWrap275" class="fdp-duty-picker275">
+   <label for="fdpRosterPicker275">Select duty</label><select id="fdpRosterPicker275"></select>
+  </div>
+  <p id="fdpDutyStatus275" class="fdp-duty-status275" role="status" aria-live="polite"></p>
+  <div class="fdp-duty-entries275">
+   <section class="fdp-duty-entry275">
+    <h3>Sign-on <small>Local</small></h3>
+    <div class="fdp-duty-entry-grid275">
+     <div class="field"><label for="fdpStartDate275">Date</label><input id="fdpStartDate275" type="date"/></div>
+     <div class="field"><label for="fdpStartTime275">Time</label><input id="fdpStartTime275" type="time"/></div>
+     <div class="field fdp-duty-airport275"><label for="fdpStartAirport275">Airport</label><input id="fdpStartAirport275" type="text" maxlength="4" placeholder="MEL" autocapitalize="characters" autocorrect="off" spellcheck="false"/></div>
+    </div>
+   </section>
+   <section class="fdp-duty-entry275">
+    <h3>Planned landing <small>Local · optional time</small></h3>
+    <div class="fdp-duty-entry-grid275">
+     <div class="field"><label for="fdpEndDate275">Date</label><input id="fdpEndDate275" type="date"/></div>
+     <div class="field"><label for="fdpEndTime275">Time</label><input id="fdpEndTime275" type="time"/></div>
+     <div class="field fdp-duty-airport275"><label for="fdpEndAirport275">Airport</label><input id="fdpEndAirport275" type="text" maxlength="4" placeholder="BNE" autocapitalize="characters" autocorrect="off" spellcheck="false"/></div>
+    </div>
+    <div class="fdp-duty-statusline275"><span id="fdpRouteType275"></span><span id="fdpBOC275" class="fdp-duty-boc275" data-state="waiting" title="BOC is determined from actual/planned FDP when available"><i aria-hidden="true"></i>BOC</span></div>
+   </section>
+  </div>
+  <div class="fdp-duty-options275">
+   <div class="field"><label for="fdpQuickSectors275">Sectors</label><select id="fdpQuickSectors275"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6 — check approval</option></select></div>
+   <div class="field"><label for="fdpQuickOperation275">Operation</label><select id="fdpQuickOperation275"><option value="normal">Standard flying</option><option value="charter">Charter</option><option value="iot">Augmented — Indian Ocean</option><option value="split">Split duty</option><option value="sim">Simulator / ground</option><option value="standby_a">Standby A</option><option value="standby_18">Standby 18</option></select></div>
+  </div>
+  <p id="fdpDutySafety275" class="fdp-duty-warning275" hidden></p>
+
   <div class="fdp-fast-inputs">
    <div class="field fdp-wide"><label for="fdpDateMode">Sign-on date (local)</label><select id="fdpDateMode" aria-label="Sign-on date selection"><option value="today" selected>Today</option><option value="other">Other date…</option></select><div id="fdpOtherDateWrap" class="hidden" style="margin-top:8px"><label for="fdpSignonDate">Select date</label><input type="date" id="fdpSignonDate"/></div></div>
    <div class="field"><label for="fdpSignonTime">Sign-on time (local)</label><input type="time" id="fdpSignonTime" value="08:00"/></div>
@@ -1218,8 +1309,15 @@ LOCATION BRIEFING
    <div class="field fdp-wide hidden" id="fdpUnknownRestWrap"><label for="fdpUnknownRest">Preceding rest duration (unknown state)</label><select id="fdpUnknownRest"><option value="">Select duration</option><option value="ge30">30 hours or more</option><option value="lt30">Less than 30 hours</option></select></div>
   </div>
   <div id="fdpResult" class="fdp-fast-result" role="status" aria-live="polite"></div>
+  <div id="fdpDutyLandingCheck275" class="fdp-duty-landing-check275" hidden></div>
+  <details id="fdpDutyConditions275" class="fdp-duty-conditions275">
+   <summary>Conditions <span id="fdpConditionCount275"></span></summary>
+   <div id="fdpDutyConditionsFields275"></div>
+   <details id="fdpDutyMore275"><summary>Other exceptions to review</summary><div id="fdpDutyMoreFields275"></div></details>
+  </details>
 
-  <details class="fdp-extras" id="fdpExtras"><summary>Additional rules &amp; exceptions</summary>
+
+  <details class="fdp-extras" id="fdpExtras"><summary>Operation details</summary>
    <div class="fdp-extra-grid">
     <div class="field"><label for="fdpOperation">Operation</label><select id="fdpOperation"><option value="normal">Standard flying duty</option><option value="charter">Charter operation</option><option value="iot">Augmented crew — Indian Ocean</option><option value="split">Split duty — needs further inputs</option><option value="sim">Simulator / ground duty — separate limits</option></select></div>
     <div class="field hidden" id="fdpAdditionalPilotsWrap"><label for="fdpAdditionalPilots">Additional pilots</label><select id="fdpAdditionalPilots"><option value="1">1 additional pilot</option><option value="2">2 additional pilots</option></select></div>
@@ -1231,7 +1329,7 @@ LOCATION BRIEFING
    </div>
    <p class="fdp-footnote">This estimate does not automatically authorise extensions, reduced rest, standby combinations, split duties or a sixth sector. Special operational conditions must be checked separately.</p>
   </details>
-  <div class="fdp-footnote">Standalone calculation: only Auto acclimatisation reads the saved roster history. No current CBR/duty is imported into the FDP inputs. Verify all applicable restrictions before operating.</div>
+  <div class="fdp-fast-disclaimer">FDP figures are preliminary; verify special limits and operational requirements.</div>
  </div>
  </details>
  <details class="crew-calc-accordion" id="fdpRestAccordion">
@@ -1477,7 +1575,7 @@ VA 1101 0705 NTL BNE 0720" rows="7"></textarea><p class="note">Check the year, d
 <h2>Calculation notes</h2>
 <p class="note">The sign on date and time are used exactly as entered, including for future planning. The countdown is relative to the current local time. Schedule times use the selected sign-on time zone; the live clock uses your device's local time zone. Your selections are remembered on this device. Past sign-on dates advance to today when reopening.</p>
 <p class="note">Hotel transport times can be saved and updated. This prototype saves them in the browser's local storage; downloaded-file previews may not retain settings. A hosted version can make saving more reliable across sessions and devices.</p>
-</section></details><p class="note" id="planApplyStatus" role="status"></p><button class="btn primary wide" id="applyPlan" type="button">Use this plan</button></div></dialog><dialog aria-labelledby="calendarTitle" id="calendarDialog"><div class="modal-shell"><header><h2 id="calendarTitle">Add to Calendar</h2><button class="btn small" id="closeCalendar" type="button">Close</button></header><label for="calendarScope">Include</label><select id="calendarScope"><option value="current">Accepted duty</option><option value="upcoming">Upcoming roster duties</option><option value="all">Whole roster</option></select><h3 id="calendarCount"></h3><p class="note" id="calendarSkipped" role="status"></p><div id="calendarIssues"></div><p class="note">One event per duty. Titles show local sign-on and sign-off times and finishing location; full sector details remain in Notes. No hotels or reminders.</p><button class="btn primary wide" id="calendarExport" type="button">Add roster to Calendar</button><p class="note" id="calendarStatus" role="status"></p><details id="calendarSetup"><summary>One-time iPhone setup</summary><p class="note">Use a separate shortcut named <strong>Leave for Work Calendar</strong>. Your alarm shortcut stays separate. Shortcuts opens briefly during import and requests a return to this app. No downloading or Siri Suggestions is needed.</p><p class="note">One action at a time. Your progress is saved on this device. “What you should see” describes the checkpoint; if it differs, send that screen before continuing.</p><p class="note" id="calendarGuideProgress"></p><h3 id="calendarGuideTitle"></h3><div class="note" id="calendarGuideInstruction"></div><div class="calendar-issue"><strong>What you should see</strong><p class="note" id="calendarGuideExpected"></p></div><div class="row help-nav"><button class="btn" id="calendarGuideBack" type="button">Back</button><button class="btn primary" id="calendarGuideNext" type="button">Next step</button></div><button class="btn small" id="calendarGuideResume" type="button">Continue from my screenshot</button><p class="note">These controls can vary with iOS. The test checks your phone before sending a full roster. If Calendar opens an editor for every event, check the expanded Add New Event action and turn its compose screen off.</p><button class="btn wide" id="calendarTest" type="button">Test with one event</button><button class="btn wide" id="calendarSetupDone" type="button">I checked the test</button></details><details style="margin-top:16px"><summary>Other options &amp; roster changes</summary><p class="note">This makes a copy, not a live subscription. A completed import is remembered on this device to help prevent duplicates. Changed duties need their previous calendar events removed before you import them again. An interrupted shortcut can leave some events added: check Calendar before retrying.</p><button class="btn wide" id="calendarDownload" type="button">Download .ics file instead</button><p class="note">File import depends on the app opening the file; Safari and Files may only preview it. The shortcut above avoids that route.</p><button class="btn wide" id="calendarResetHistory" type="button">Allow a fresh import</button></details></div></dialog><dialog aria-labelledby="alarmHelpTitle" id="alarmHelp"><div class="help-shell"><header><h2 id="alarmHelpTitle">Set up iPhone alarms</h2><button class="btn small" id="closeAlarmHelp" type="button">Close</button></header><p class="note" id="alarmHelpProgress"></p><div id="alarmHelpContent"></div><p class="note" id="alarmHelpStatus" role="status"></p><div class="row help-nav"><button class="btn" id="alarmHelpBack" type="button">Back</button><button class="btn primary" id="alarmHelpNext" type="button">Next</button></div></div></dialog><footer class="note" style="text-align:center;padding:8px 10px">Version 274 · 21 Nov 2026</footer></main>
+</section></details><p class="note" id="planApplyStatus" role="status"></p><button class="btn primary wide" id="applyPlan" type="button">Use this plan</button></div></dialog><dialog aria-labelledby="calendarTitle" id="calendarDialog"><div class="modal-shell"><header><h2 id="calendarTitle">Add to Calendar</h2><button class="btn small" id="closeCalendar" type="button">Close</button></header><label for="calendarScope">Include</label><select id="calendarScope"><option value="current">Accepted duty</option><option value="upcoming">Upcoming roster duties</option><option value="all">Whole roster</option></select><h3 id="calendarCount"></h3><p class="note" id="calendarSkipped" role="status"></p><div id="calendarIssues"></div><p class="note">One event per duty. Titles show local sign-on and sign-off times and finishing location; full sector details remain in Notes. No hotels or reminders.</p><button class="btn primary wide" id="calendarExport" type="button">Add roster to Calendar</button><p class="note" id="calendarStatus" role="status"></p><details id="calendarSetup"><summary>One-time iPhone setup</summary><p class="note">Use a separate shortcut named <strong>Leave for Work Calendar</strong>. Your alarm shortcut stays separate. Shortcuts opens briefly during import and requests a return to this app. No downloading or Siri Suggestions is needed.</p><p class="note">One action at a time. Your progress is saved on this device. “What you should see” describes the checkpoint; if it differs, send that screen before continuing.</p><p class="note" id="calendarGuideProgress"></p><h3 id="calendarGuideTitle"></h3><div class="note" id="calendarGuideInstruction"></div><div class="calendar-issue"><strong>What you should see</strong><p class="note" id="calendarGuideExpected"></p></div><div class="row help-nav"><button class="btn" id="calendarGuideBack" type="button">Back</button><button class="btn primary" id="calendarGuideNext" type="button">Next step</button></div><button class="btn small" id="calendarGuideResume" type="button">Continue from my screenshot</button><p class="note">These controls can vary with iOS. The test checks your phone before sending a full roster. If Calendar opens an editor for every event, check the expanded Add New Event action and turn its compose screen off.</p><button class="btn wide" id="calendarTest" type="button">Test with one event</button><button class="btn wide" id="calendarSetupDone" type="button">I checked the test</button></details><details style="margin-top:16px"><summary>Other options &amp; roster changes</summary><p class="note">This makes a copy, not a live subscription. A completed import is remembered on this device to help prevent duplicates. Changed duties need their previous calendar events removed before you import them again. An interrupted shortcut can leave some events added: check Calendar before retrying.</p><button class="btn wide" id="calendarDownload" type="button">Download .ics file instead</button><p class="note">File import depends on the app opening the file; Safari and Files may only preview it. The shortcut above avoids that route.</p><button class="btn wide" id="calendarResetHistory" type="button">Allow a fresh import</button></details></div></dialog><dialog aria-labelledby="alarmHelpTitle" id="alarmHelp"><div class="help-shell"><header><h2 id="alarmHelpTitle">Set up iPhone alarms</h2><button class="btn small" id="closeAlarmHelp" type="button">Close</button></header><p class="note" id="alarmHelpProgress"></p><div id="alarmHelpContent"></div><p class="note" id="alarmHelpStatus" role="status"></p><div class="row help-nav"><button class="btn" id="alarmHelpBack" type="button">Back</button><button class="btn primary" id="alarmHelpNext" type="button">Next</button></div></div></dialog><footer class="note" style="text-align:center;padding:8px 10px">Version 275 · 21 Nov 2026</footer></main>
 <dialog id="crewCalloutDialog" aria-labelledby="crewCalloutTitle">
  <div class="crew-callout-inner">
   <h2 id="crewCalloutTitle">Possible roster call-out</h2>
@@ -7842,7 +7940,7 @@ try{
   if(blocks.length||maximum===null){
    put('div','fdp-fast-block','LIMIT NOT DETERMINED',root);
    for(const b of blocks.length?blocks:['No applicable maximum could be determined.'])put('p','fdp-unavailable',b,root);
-   put('div','fdp-fast-start','Sign-on · '+localOutput(start),root);
+   put('div','fdp-fast-start','Sign-on · '+fmtLocal(start,zone)+' · '+zone.split('/').pop().replaceAll('_',' '),root);
   }else{
    const landing=new Date(start.getTime()+(maximum-15)*60000),fdpEnd=new Date(start.getTime()+maximum*60000),
          signoff=new Date(landing.getTime()+Number($('fdpSignoffBuffer').value)*60000);
@@ -8627,5 +8725,250 @@ try{
  by('crewHelpAlarmGuide').addEventListener('click',()=>by('openAlarmHelp')?.click());
  update();
 })();
+</script>
+<script id="fdpCompact275Script">
+/* v275: FDP visual controller. The existing EA tables and calculation engine
+ * remain the sole source of FDP limits; inputs are normalised into that engine.
+ * Do not claim operational clearance from Table A alone. */
+(()=>{
+ 'use strict';
+ const $=id=>document.getElementById(id), t=window.crewFDPTableA;
+ if(!t||!$('fdpStartDate275')||typeof window.crewFDPRefresh!=='function')return;
+ const STORAGE='crewFocusFdpCompactV275';
+ const zones={...t.zones,AVV:'Australia/Melbourne',WGA:'Australia/Sydney',ABX:'Australia/Sydney',MQL:'Australia/Melbourne',KGI:'Australia/Perth',GET:'Australia/Perth',DPO:'Australia/Hobart',BWT:'Australia/Hobart',KTA:'Australia/Perth',PHE:'Australia/Perth',BME:'Australia/Perth',BNK:'Australia/Sydney',ASP:'Australia/Darwin',AYQ:'Australia/Darwin',CFS:'Australia/Sydney',HTI:'Australia/Brisbane',PQQ:'Australia/Sydney',PPP:'Australia/Brisbane',RMA:'Australia/Brisbane',WOL:'Australia/Sydney',AKL:'Pacific/Auckland',CHC:'Pacific/Auckland',WLG:'Pacific/Auckland',ZQN:'Pacific/Auckland',DPS:'Asia/Makassar',NAN:'Pacific/Fiji',SIN:'Asia/Singapore',POM:'Pacific/Port_Moresby',HKG:'Asia/Hong_Kong',NRT:'Asia/Tokyo',HND:'Asia/Tokyo',BKK:'Asia/Bangkok',KUL:'Asia/Kuala_Lumpur',PNQ:'Asia/Kolkata'};
+ const aliases={YMML:'MEL',YSSY:'SYD',YBBN:'BNE',YPPH:'PER',YSCB:'CBR',YPAD:'ADL',YBCG:'OOL',YBCS:'CNS',YBNA:'BNK',YBTL:'TSV',YBRK:'ROK',YMHB:'HBA',YMLT:'LST',YPGV:'GOV',YPPD:'PHE',NZAA:'AKL',NZCH:'CHC',NZWN:'WLG',NZQN:'ZQN',WADD:'DPS',NFFN:'NAN',WSSS:'SIN',VHHH:'HKG',RJAA:'NRT',RJTT:'HND',WMKK:'KUL'};
+ const abroad=new Set(['AKL','CHC','WLG','ZQN','DPS','NAN','SIN','POM','HKG','NRT','HND','BKK','KUL','PNQ']);
+ const port=s=>aliases[String(s||'').trim().toUpperCase()]||String(s||'').trim().toUpperCase();
+ const zone=s=>zones[port(s)]||'';
+ const country=s=>abroad.has(port(s))?'overseas':zone(s)?'AU':'';
+ const parse=(d,tm,z)=>{if(!d||!tm||!z)return null;try{const a=t.zonedToUTC(d,tm,z);return a.error||a.ambiguous?null:a.value;}catch{return null;}};
+ const dateAt=(dt,z)=>{const a=t.parts(dt,z);return a.year+'-'+String(a.month).padStart(2,'0')+'-'+String(a.day).padStart(2,'0');};
+ const localAt=(dt,z)=>{const a=t.parts(dt,z);return {date:dateAt(dt,z),time:String(a.hour).padStart(2,'0')+':'+String(a.minute).padStart(2,'0')};};
+ const stepDay=(d,n)=>{const dt=new Date(d+'T12:00:00Z');dt.setUTCDate(dt.getUTCDate()+n);return dt.toISOString().slice(0,10);};
+ const normalizeTime=s=>{const m=String(s||'').match(/^(\d\d):?(\d\d)$/);return m?m[1]+':'+m[2]:'';};
+ const fields=['fdpStartDate275','fdpStartTime275','fdpStartAirport275','fdpEndDate275','fdpEndTime275','fdpEndAirport275','fdpQuickSectors275','fdpQuickOperation275'];
+ let saved={};try{saved=JSON.parse(localStorage.getItem(STORAGE)||'{}')||{};}catch(e){}
+ let mode=saved.mode==='manual'?'manual':'roster';
+ const drafts=saved.drafts&&typeof saved.drafts==='object'?saved.drafts:{};
+ let candidates=[],choice='',loaded=false,editing=false;
+ const val=id=>$(id)?.value||'';
+ function show(id,visible){const x=$(id);if(x)x.hidden=!visible;}
+ function notice(str){$('fdpDutyStatus275').textContent=str||'';}
+ function setValue(id,value){const node=$(id);if(node)node.value=value??'';}
+ function snapshot(){return Object.fromEntries(fields.map(id=>[id,val(id)]));}
+ function restore(obj){if(obj)for(const [id,v] of Object.entries(obj))if($(id))setValue(id,v);}
+ function persist(){if(!loaded)return;drafts[mode==='manual'?'manual':choice]=snapshot();try{localStorage.setItem(STORAGE,JSON.stringify({mode,choice,drafts}));}catch(e){} }
+ function dutyRows(raw){return String(raw||'').split(/\r?\n/).map(line=>{
+   const m=line.match(/^\s*\*?\s*(VA\s*\d{2,5})\s+(\d{4})\s+([A-Z]{3,4})\s+([A-Z]{3,4})\s+(\d{4})\b/i);
+   return m?{flight:m[1].replace(/\s+/g,''),dep:normalizeTime(m[2]),from:port(m[3]),to:port(m[4]),arr:normalizeTime(m[5])}:null;
+ }).filter(Boolean);}
+ function lastLanding(rows,date,signonTime,firstAirport){
+  let prev=parse(date,signonTime,zone(firstAirport)),last=null;
+  if(!prev)return null;
+  for(const r of rows){
+   const dz=zone(r.from),az=zone(r.to);if(!dz||!az||!r.dep||!r.arr)return null;
+   const base=dateAt(prev,dz);let dep=null;
+   for(let n=-1;n<=2;n++){const x=parse(stepDay(base,n),r.dep,dz);if(x&&x.getTime()>=prev.getTime()-3600000){dep=x;break;}}
+   if(!dep)return null;
+   const aBase=dateAt(dep,az);let arr=null;
+   for(let n=-1;n<=2;n++){const x=parse(stepDay(aBase,n),r.arr,az);if(x&&x>=dep&&x-dep<36*3600000&&(!arr||x<arr))arr=x;}
+   if(!arr)return null;
+   last=arr;prev=arr;
+  }
+  return last;
+ }
+ function eligibleDuties(){
+  const result=[];let roster=[];
+  try{roster=JSON.parse(localStorage.getItem('leaveForWorkRosterV19')||'[]');}catch(e){}
+  if(Array.isArray(roster))for(const d of roster){
+   if(!d?.date||!d.time||d.sim)continue;
+   const rows=dutyRows(d.raw);if(!rows.length)continue;
+   const p=port(d.port||rows[0].from),z=zone(p);if(!z)continue;
+   result.push({key:'roster:'+String(d.id||d.date+'-'+d.time),source:'Roster',date:d.date,time:normalizeTime(d.time),from:p,to:rows[rows.length-1].to,rows,standby:!!d.standby,route:rows.flatMap(r=>[r.from,r.to])});
+  }
+  const c=window.crewIpadSchedule;
+  try{const rs=c?.rows?.()||[],date=c?.sourceDate?.()||c?.date?.(),rawSign=$('cbrSignon')?.value||'';
+   const rows=rs.filter(r=>Array.isArray(r)&&r[1]&&r[3]).map(r=>({flight:String(r[0]||''),from:port(r[1]),dep:normalizeTime(r[2]),to:port(r[3]),arr:normalizeTime(r[4])}));
+   const signon=normalizeTime(rawSign);
+   if(rows.length&&date&&signon){result.push({key:'cbr:'+date+':'+rows.map(r=>r.flight).join(','),source:'CBR',date,time:signon,from:rows[0].from,to:rows[rows.length-1].to,rows,route:rows.flatMap(r=>[r.from,r.to])});}
+  }catch(e){console.warn('FDP CBR summary',e);}
+  const seen=new Set();return result.filter(x=>{
+   const key=x.date+'|'+x.time+'|'+x.rows.map(r=>r.flight+'-'+r.from+'-'+r.to).join(',');
+   if(seen.has(key))return false;seen.add(key);return true;
+  }).sort((a,b)=>(a.date+'T'+a.time).localeCompare(b.date+'T'+b.time));
+ }
+ function defaultDuty(){
+  const home=zone(localStorage.getItem('crewFocusHomeBaseV229')||'MEL')||'Australia/Melbourne';const today=dateAt(new Date(),home);
+  return candidates.find(d=>d.date===today)||candidates.find(d=>d.date>today)||candidates[candidates.length-1]||null;
+ }
+ function fillDuty(d){
+  setValue('fdpStartDate275',d.date);setValue('fdpStartTime275',d.time);setValue('fdpStartAirport275',d.from);
+  setValue('fdpEndAirport275',d.to);setValue('fdpQuickSectors275',String(Math.max(1,Math.min(6,d.rows.length))));
+  setValue('fdpQuickOperation275',d.standby?'standby_a':'normal');
+  const arrival=lastLanding(d.rows,d.date,d.time,d.from);
+  if(arrival){const pair=localAt(arrival,zone(d.to));setValue('fdpEndDate275',pair.date);setValue('fdpEndTime275',pair.time);}
+  else{setValue('fdpEndDate275','');setValue('fdpEndTime275','');}
+ }
+ function refreshRoster(force=false){
+  candidates=eligibleDuties();const select=$('fdpRosterPicker275');
+  select.replaceChildren();for(const d of candidates){const o=new Option(d.date+' · '+d.rows.map(r=>r.flight).join(' / ')+' · '+d.from+'–'+d.to,d.key);select.add(o);}
+  if(!candidates.length){const o=new Option('No flying duties available','');select.add(o);choice='';if(mode==='roster'){if(force)clear();notice('No rostered flying duty found · choose Manual or import a roster/CBR.');}return;}
+  if(mode!=='roster')return;
+  const preferred=candidates.find(d=>d.key===(choice||saved.choice))||defaultDuty();
+  if(!preferred)return;
+  if(force||choice!==preferred.key){choice=preferred.key;select.value=choice;
+   fillDuty(preferred);if(drafts[choice])restore(drafts[choice]);
+  }else select.value=choice;
+  notice(preferred.source+' · '+preferred.rows.length+' sectors'+(preferred.standby?' · Standby':'')+'.');
+ }
+ function clear(){for(const id of fields)setValue(id,'');setValue('fdpQuickSectors275','2');setValue('fdpQuickOperation275','normal');setValue('fdpStartDate275',dateAt(new Date(),Intl.DateTimeFormat().resolvedOptions().timeZone||'Australia/Melbourne'));}
+ function switchMode(next){
+  if(mode===next)return;
+  persist();mode=next;
+  for(const [id,ofMode] of [['fdpRostered275','roster'],['fdpManual275','manual']]){$(id).classList.toggle('active',mode===ofMode);$(id).setAttribute('aria-pressed',String(mode===ofMode));}
+  show('fdpRosterPickerWrap275',mode==='roster');
+  if(mode==='roster'){choice='';refreshRoster(true);}else{clear();restore(drafts.manual);notice('');}
+  sync();persist();
+ }
+ // Retain all old rule inputs; only their presentation changes.
+ const conditionBox=$('fdpDutyConditionsFields275'),extraBox=$('fdpDutyMoreFields275');
+ function move(field,container){const node=$(field);if(node)container.append(node);}
+ for(const id of ['fdpAcclimatisation','fdpReferenceZoneWrap','fdpAutoNote','fdpUnknownRestWrap','fdpStandbyKindWrap','fdpStandbyDateWrap','fdpStandbyTimeWrap','fdpStandbyFinishWrap','fdpStandby18DateWrap','fdpStandby18TimeWrap','fdpStandby18Note','fdpAdditionalPilotsWrap','fdpSixAgreementWrap']){
+  const node=$(id);if(!node)continue;
+  // The acclimatisation select is inside .field; all other ids already identify wrappers.
+  move(id==='fdpAcclimatisation'?node.closest('.field')?.id: id,conditionBox);
+  if(id==='fdpAcclimatisation'&&node.closest('.field'))conditionBox.append(node.closest('.field'));
+ }
+ // Early-start and unknown-rest qualifiers stay available, but do not fill the default view.
+ if($('fdpEarlySequence'))extraBox.append($('fdpEarlySequence').closest('.field'));
+ for(const id of ['fdpSecondDuty','fdpPriorRest','fdpPreviousDuty','fdpSignoffBuffer']){
+  const n=$(id);if(n?.closest('.field'))extraBox.append(n.closest('.field'));
+ }
+ const special=$('fdpExtras');if(special){$('fdpDutyConditionsFields275').append(special);special.open=true;}
+ const operation=$('fdpOperation');if(operation?.closest('.field'))operation.closest('.field').hidden=true;
+ const extraGrid=special?.querySelector('.fdp-extra-grid');if(extraGrid)extraGrid.style.display='contents';
+ // Preserve the ability to adjust the default signoff allowance, but do not silently
+ // carry a reduced 15-minute post-flight allowance into the new UI.
+ if($('fdpSignoffBuffer'))$('fdpSignoffBuffer').value='30';
+ const extraFoot=special?.querySelector('p.fdp-footnote');if(extraFoot)extraFoot.hidden=true;
+ const via=document.createElement('div');via.className='field';via.id='fdpViaWrap275';via.innerHTML='<label for="fdpVia275">Intermediate airports (if relevant)</label><input id="fdpVia275" type="text" placeholder="e.g. SIN, MEL" autocapitalize="characters" spellcheck="false"/><small class="fdp-hint">Used to identify an overseas leg when both end airports are Australian.</small>';
+ extraBox.prepend(via);
+ const timeInfo=document.createElement('p');timeInfo.id='fdpBasis275';timeInfo.className='fdp-duty-status275';$('fdpDutyLandingCheck275').before(timeInfo);
+ function bocCheck(start,end,z){if(!start||!end||!z||end<start||end-start>36*3600000)return null;
+  try{const fmt=new Intl.DateTimeFormat('en-GB',{timeZone:z,hour:'2-digit',minute:'2-digit',hourCycle:'h23'});
+   for(let p=start.getTime();p<=end.getTime();p+=60000){const match=fmt.format(new Date(p)).match(/^(\d\d):(\d\d)$/);if(match){const n=+match[1]*60+ +match[2];if(n>=46&&n<=299)return true;}}
+   return false;
+  }catch{return null;}
+ }
+ function condShow(){
+  const op=val('fdpQuickOperation275'),standby=op==='standby_a'||op==='standby_18',sectors=Number(val('fdpQuickSectors275'));
+  const time=val('fdpStartTime275'),h=time?+time.slice(0,2):NaN;
+  const accl=val('fdpAcclimatisation');
+  const isSpecial=['charter','iot','split','sim'].includes(op)||standby;
+  const showEarly=Number.isFinite(h)&&h<8;
+  // Keep the applicable conditions surfaced; optional non-triggered exceptions
+  // remain available behind one secondary disclosure.
+  show('fdpDutyConditions275',true);
+  show('fdpDutyMore275',true);
+  show('fdpViaWrap275',mode==='manual'&&sectors>1);
+  const early=$('fdpEarlySequence')?.closest('.field');if(early)early.hidden=!showEarly;
+  const n=$('fdpConditionCount275');if(n)n.textContent=(isSpecial||sectors>=6||accl==='auto'||showEarly?' · review':'');
+  if((standby||sectors===6||accl==='auto'||showEarly)&&!$('fdpDutyConditions275').open){
+   // Open only when a new user decision is required, not after a deliberate close.
+   if(!$('fdpDutyConditions275').dataset.userClosed275)$('fdpDutyConditions275').open=true;
+  }
+ }
+ $('fdpDutyConditions275').addEventListener('toggle',()=>{if(!$('fdpDutyConditions275').open)$('fdpDutyConditions275').dataset.userClosed275='1';});
+ function sync(){
+  if(editing)return;editing=true;
+  const from=port(val('fdpStartAirport275')),to=port(val('fdpEndAirport275'));
+  if(from!==val('fdpStartAirport275'))setValue('fdpStartAirport275',from);
+  if(to!==val('fdpEndAirport275'))setValue('fdpEndAirport275',to);
+  const startZone=zone(from),endZone=zone(to),startDate=val('fdpStartDate275'),startTime=val('fdpStartTime275');
+  const result=$('fdpResult'),alert=$('fdpDutySafety275'),margin=$('fdpDutyLandingCheck275'),boc=$('fdpBOC275');
+  const operation=val('fdpQuickOperation275');
+  const selected=candidates.find(d=>d.key===choice);
+  const via=val('fdpVia275').toUpperCase().split(/[\s,;>\-/]+/).filter(Boolean).map(port);
+  const route=mode==='roster'&&selected?selected.route:[from,...via,to];
+  const intl=route.some(code=>country(code)==='overseas');
+  $('fdpRouteType275').textContent=intl?'International route':'';
+  $('fdpDutySafety275').hidden=true;show('fdpDutyLandingCheck275',false);boc.dataset.state='waiting';
+  const known=startZone&&endZone&&startDate&&startTime;
+  if(!known){result.replaceChildren();const miss=!startZone?'Enter a recognised sign-on airport.':!endZone?'Enter a recognised landing airport.':'Enter sign-on date and time.';
+   alert.textContent=miss;alert.hidden=false;timeInfo.textContent='';editing=false;persist();return;}
+  for(const [id,z] of [['fdpTimeZone',startZone],['fdpOutputZone',endZone],['fdpReferenceZone',startZone]]){
+   const select=$(id);if(select&&!Array.from(select.options).some(o=>o.value===z))select.add(new Option(z,z));
+  }
+  // Keep user-selected acclimatised reference zone once it has been explicitly modified.
+  if(!$('fdpReferenceZone').dataset.userSelected275)$('fdpReferenceZone').value=startZone;
+  setValue('fdpTimeZone',startZone);setValue('fdpOutputZone',endZone);
+  setValue('fdpSignonDate',startDate);setValue('fdpSignonTime',startTime);setValue('fdpDateMode','other');
+  setValue('fdpSectors',val('fdpQuickSectors275'));
+  const standby=operation.startsWith('standby_');setValue('fdpDutyType',standby?'standby':'rostered');
+  if(standby)setValue('fdpStandbyKind',operation==='standby_a'?'a':'18');
+  setValue('fdpOperation',standby?'normal':operation);
+  const signon=parse(startDate,startTime,startZone);
+  if(!signon){result.replaceChildren();alert.textContent='Sign-on time is invalid or ambiguous due to a daylight-saving transition.';alert.hidden=false;timeInfo.textContent='';editing=false;persist();return;}
+  window.crewFDPRefresh();
+  condShow();
+  const plan=window.crewFDPLastPlan;
+  const plannedTime=val('fdpEndTime275'),plannedDate=val('fdpEndDate275');
+  const parsedLanding=(plannedTime&&plannedDate)?parse(plannedDate,plannedTime,endZone):null;
+  const badPlanned=!!(parsedLanding&&(parsedLanding<signon||parsedLanding-signon>36*3600000));
+  const planned=badPlanned?null:parsedLanding;
+  const candidateEnd=planned?new Date(planned.getTime()+15*60000):plan?.signonUTC&&plan?.maxFdpMinutes?new Date(signon.getTime()+plan.maxFdpMinutes*60000):null;
+  const acclState=val('fdpAcclimatisation');
+  const refZone=acclState==='yes'?val('fdpReferenceZone'):startZone;
+  const bocState=bocCheck(signon,candidateEnd,refZone);
+  // Acclimatisation must be confirmed, and the actual/planned FDP end known,
+  // before the LED can assert that a BOC applies.
+  boc.dataset.state=acclState!=='yes'?'verify':planned&&bocState!==null?(bocState?'boc':'no'):bocState===false?'no':'verify';
+  boc.title=planned?'BOC assessed against entered planned landing (+15m). Verify acclimatisation.':'Potential BOC only; enter planned landing to verify actual overlap and confirm acclimatisation.';
+  const options=[$('fdpOperation')?.value==='iot'?'Augmented operation: verify route/crew/rest facility.':'',intl?'International route identified; verify relevant special operating conditions.':''].filter(Boolean);
+  if(plan){
+   timeInfo.textContent='Table reference · '+(t.bandFor(t.minutesAt(signon,$('fdpReferenceZone').value))?.name||'special')+' · '+from+' → '+to+'.';
+   if(planned){
+    const cutoff=new Date(plan.landingUTC),delta=Math.round((cutoff-planned)/60000);
+    margin.hidden=false;margin.dataset.state=delta<0?'red':delta<=30?'amber':'normal';
+    margin.textContent=delta<0?'Planned landing is '+t.fmtMinutes(-delta)+' beyond the reference landing limit.':
+     'Planned landing is '+t.fmtMinutes(delta)+' before the reference landing limit.';
+   }else if(plannedTime&&!planned){
+    alert.textContent=badPlanned?'Planned landing must occur after sign-on and within a credible duty length.':'The planned landing date/time is invalid or ambiguous.';alert.hidden=false;
+   }
+  }else{
+   timeInfo.textContent='';
+   if(!alert.hidden){}else if(result.textContent.includes('LIMIT NOT DETERMINED')){
+    alert.textContent='The FDP cannot be confirmed from these inputs. Review Conditions.';alert.hidden=false;
+   }
+  }
+  // Flag information that cannot be established from only the first and final airports.
+  if(mode==='manual'&&Number(val('fdpQuickSectors275'))>1&&country(from)==='AU'&&country(to)==='AU'&&!via.length){
+   const tip=$('fdpRouteType275');tip.textContent='Add intermediate airports under Conditions if any were overseas.';
+  }else if(options.length){alert.textContent=options.join(' ');alert.hidden=false;}
+  editing=false;persist();
+ }
+ // The actual reference zone must remain user-adjustable if the pilot is
+ // acclimatised to a different time zone than the sign-on airport.
+ $('fdpReferenceZone').addEventListener('change',()=>{$('fdpReferenceZone').dataset.userSelected275='1';sync();});
+ for(const id of fields){const n=$(id);n.addEventListener('change',()=>{if(id==='fdpQuickOperation275'&&val(id).startsWith('standby_')){setValue('fdpStandbyDate','');setValue('fdpStandbyTime','');setValue('fdpStandby18Date','');setValue('fdpStandby18Time','');}sync();});if(n.tagName==='INPUT'&&n.type==='text')n.addEventListener('input',()=>{sync();});}
+ $('fdpVia275').addEventListener('change',sync);
+ $('fdpRosterPicker275').addEventListener('change',()=>{persist();const d=candidates.find(x=>x.key===val('fdpRosterPicker275'));if(!d)return;choice=d.key;fillDuty(d);if(drafts[choice])restore(drafts[choice]);notice(d.source+' · '+d.rows.length+' sectors');sync();});
+ $('fdpRostered275').addEventListener('click',()=>switchMode('roster'));
+ $('fdpManual275').addEventListener('click',()=>switchMode('manual'));
+ for(const id of ['fdpAcclimatisation','fdpUnknownRest','fdpAdditionalPilots','fdpSixAgreement','fdpEarlySequence','fdpSecondDuty','fdpPriorRest','fdpPreviousDuty','fdpSignoffBuffer','fdpStandbyKind','fdpStandbyDate','fdpStandbyTime','fdpStandbyFinishTime','fdpStandby18Date','fdpStandby18Time'])$(id)?.addEventListener('change',sync);
+ loaded=true;
+ // Keep manual values isolated from edits to a rostered duty.
+ for(const [id,which] of [['fdpRostered275','roster'],['fdpManual275','manual']]){$(id).classList.toggle('active',mode===which);$(id).setAttribute('aria-pressed',String(mode===which));}
+ show('fdpRosterPickerWrap275',mode==='roster');
+ if(mode==='manual'){
+  clear();restore(drafts.manual);notice('');
+ }else{
+  refreshRoster(true);
+ }
+ sync();
+ $('fdpDutyAccordion')?.addEventListener('toggle',()=>{if($('fdpDutyAccordion').open&&mode==='roster'){refreshRoster(false);sync();}});
+ document.addEventListener('visibilitychange',()=>{if(!document.hidden&&mode==='roster')refreshRoster(false);});
+})();
+
 </script>
 </body></html>
