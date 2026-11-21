@@ -5,7 +5,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <meta content="#15283f" name="theme-color"/>
-<title>CrewFocus v270 — PBS Ideas Tile</title>
+<title>CrewFocus v272 — Automatic Airport Time Zones</title>
 <style>
 :root{color-scheme:light dark;--bg:#f3f6fa;--card:#fff;--ink:#15283f;--muted:#637184;--line:#dce3eb;--accent:#176b87;--soft:#e9f4f7;--danger:#b13e3e}
 @media(prefers-color-scheme:dark){:root{--bg:#101820;--card:#1a2632;--ink:#edf4fb;--muted:#aab8c6;--line:#344454;--accent:#72c7df;--soft:#203a46;--danger:#ff9b9b}}
@@ -1093,13 +1093,13 @@ html,body{margin:0;padding:0}
 <body>
 <main>
 <span class="hidden" id="dayLabel">Local time</span>
-<div class="crew-topbar"><span class="crew-version-tag" aria-label="CrewFocus version 270">v270</span><nav aria-label="Main navigation" class="crew-tabs"><span class="crew-tab-highlight" aria-hidden="true"></span><button class="crew-tab selected" data-page="home" type="button">Focus</button><button class="crew-tab" data-page="tools" type="button">Dashboard</button></nav><label class="crew-test-control" for="cbrTestTop"><span class="crew-mode-led" id="cbrModeLED" aria-hidden="true"></span><span class="crew-test-text" id="cbrModeText">LIVE</span><input id="cbrTestTop" type="checkbox" role="switch" aria-label="Test mode"/><span class="crew-switch-track" aria-hidden="true"></span></label></div>
+<div class="crew-topbar"><span class="crew-version-tag" aria-label="CrewFocus version 272">v272</span><nav aria-label="Main navigation" class="crew-tabs"><span class="crew-tab-highlight" aria-hidden="true"></span><button class="crew-tab selected" data-page="home" type="button">Focus</button><button class="crew-tab" data-page="tools" type="button">Dashboard</button></nav><label class="crew-test-control" for="cbrTestTop"><span class="crew-mode-led" id="cbrModeLED" aria-hidden="true"></span><span class="crew-test-text" id="cbrModeText">LIVE</span><input id="cbrTestTop" type="checkbox" role="switch" aria-label="Test mode"/><span class="crew-switch-track" aria-hidden="true"></span></label></div>
 <section class="crew-page" id="crewHome">
 <div class="crew-panel" id="homeFocusPanel"><div class="crew-kicker">FOCUS <span class="crew-status" id="focusModeBadge">Automatic</span></div><h2 id="focusName"></h2><p class="note" id="focusDesc"></p><button class="btn primary" id="focusOpen" type="button">Open focus</button></div>
 <div class="crew-panel" id="homeCurrentPanel"><div class="crew-kicker">CURRENT DUTY <span class="crew-status" id="homeAccepted">Needs review</span></div><div class="crew-focus-duty-layout"><div class="crew-focus-duty-original"><h2 id="homeDutyTitle">Today</h2><p class="note" id="homeDutyDate"></p><p class="crew-time" id="homeDutyTime"></p><div id="homeDutySectors"></div><div class="crew-home-actions"><button class="btn primary" id="homeOpenDuty" type="button">Departure times</button><button class="btn" id="homeReview" type="button">Review &amp; accept</button></div></div><div class="crew-focus-duty-metrics" id="homeCurrentMetrics" aria-label="Current duty and rest estimates"></div></div><p class="focus-estimate-disclaimer">Reference estimates only. Confirm against approved duty and rest requirements.</p></div>
 <div class="crew-panel" id="homeNextPanel"><div class="crew-kicker">NEXT DUTY <span class="crew-status" id="homeNextStatus">Upcoming</span></div><div class="crew-focus-duty-layout"><div class="crew-focus-duty-original"><h2 id="homeNextDate"></h2><p class="hidden" id="homeNextCalendarDate"></p><p class="crew-next hidden" id="homeNextDuty"></p><div id="homeNextSectors"></div><button class="btn" id="homeViewNext" type="button">Review &amp; accept</button></div><div class="crew-focus-duty-metrics" id="homeNextMetrics" aria-label="Next duty and rest estimates"></div></div><p class="focus-estimate-disclaimer">Reference estimates only. Confirm against approved duty and rest requirements.</p></div>
 </section>
-<section class="crew-page hidden" id="crewTools"><div class="crew-section-heading"><h2 class="crew-page-title">Dashboard <small style="font-size:11px;font-weight:500;color:var(--muted)">v270</small></h2><button class="btn small" id="dashBack" type="button">← Focus</button></div><div class="crew-dashboard-reorder"><button class="btn small" type="button" id="dashTileEdit" aria-pressed="false">Edit tiles</button><div class="crew-dashboard-reorder-tools hidden" id="dashReorderTools"><span id="dashTileSelected" aria-live="polite">Select a tile or drag it</span><div class="crew-dashboard-arrows"><button class="btn small" type="button" id="dashTileLeft" aria-label="Move selected tile left">←</button><button class="btn small" type="button" id="dashTileUp" aria-label="Move selected tile up">↑</button><button class="btn small" type="button" id="dashTileDown" aria-label="Move selected tile down">↓</button><button class="btn small" type="button" id="dashTileRight" aria-label="Move selected tile right">→</button></div><button class="btn small" type="button" id="dashTileReset">Reset order</button></div></div><button class="crew-dashboard-done-floating244 hidden" type="button" id="dashTileDoneFixed244" aria-label="Finish rearranging Dashboard tiles">Done ✓</button><p class="note" id="dashTileHint">Touch and hold any tile to rearrange it. Your order is saved on this device.</p><p class="note crew-dashboard-ideas-hint">Each tile has its own editable <strong>Things to Come</strong> list. Open a tile and tap <strong>Ideas</strong> to add notes. Existing tools continue to work.</p>
+<section class="crew-page hidden" id="crewTools"><div class="crew-section-heading"><h2 class="crew-page-title">Dashboard <small style="font-size:11px;font-weight:500;color:var(--muted)">v272</small></h2><button class="btn small" id="dashBack" type="button">← Focus</button></div><div class="crew-dashboard-reorder"><button class="btn small" type="button" id="dashTileEdit" aria-pressed="false">Edit tiles</button><div class="crew-dashboard-reorder-tools hidden" id="dashReorderTools"><span id="dashTileSelected" aria-live="polite">Select a tile or drag it</span><div class="crew-dashboard-arrows"><button class="btn small" type="button" id="dashTileLeft" aria-label="Move selected tile left">←</button><button class="btn small" type="button" id="dashTileUp" aria-label="Move selected tile up">↑</button><button class="btn small" type="button" id="dashTileDown" aria-label="Move selected tile down">↓</button><button class="btn small" type="button" id="dashTileRight" aria-label="Move selected tile right">→</button></div><button class="btn small" type="button" id="dashTileReset">Reset order</button></div></div><button class="crew-dashboard-done-floating244 hidden" type="button" id="dashTileDoneFixed244" aria-label="Finish rearranging Dashboard tiles">Done ✓</button><p class="note" id="dashTileHint">Touch and hold any tile to rearrange it. Your order is saved on this device.</p><p class="note crew-dashboard-ideas-hint">Each tile has its own editable <strong>Things to Come</strong> list. Open a tile and tap <strong>Ideas</strong> to add notes. Existing tools continue to work.</p>
 <div class="crew-tool-grid" id="crewTileGrid">
 <button class="crew-tile" data-tool="duty"><span>▤</span><strong>Roster &amp; Duty</strong><small>Available</small></button><button class="crew-tile" data-tool="drive"><span>🚗</span><strong>Travel Times</strong><small>Available</small></button><button class="crew-tile" data-tool="calendar"><span>▣</span><strong>Export to Calendar</strong><small>Available</small></button><button class="crew-tile" data-tool="import"><span>⇧</span><strong>Import Roster</strong><small>Available</small></button><button class="crew-tile" data-tool="help"><span>◷</span><strong>Help</strong><small>Available</small></button><button class="crew-tile" data-tool="flight"><span>✈</span><strong>Flight Planning</strong><small>Beta</small></button><button class="crew-tile" data-tool="commuter"><span>🛫</span><strong>Commuter</strong><small>Planned</small></button><button class="crew-tile" data-tool="hotels"><span>▥</span><strong>Hotels &amp; CATS</strong><small>Planned</small></button><button class="crew-tile" data-tool="eba"><span>⚖</span><strong>EBA &amp; Rest</strong><small>Planned</small></button><button class="crew-tile" data-tool="fdp"><span>✈️⏱️</span><strong>Calculators</strong><small>FDP, rest &amp; fuel</small></button><button class="crew-tile" data-tool="pay"><span>$</span><strong>Pay Calculator</strong><small>Planned</small></button><button class="crew-tile" data-tool="packing"><span>▣</span><strong>Trip Checklist</strong><small>Available</small></button><button class="crew-tile" data-tool="aircraft"><span>✈</span><strong>Aircraft Tracking</strong><small>Planned</small></button><button class="crew-tile" data-tool="logbook" type="button"><span>📖</span><strong>Logbook</strong><small>Ideas</small></button><button class="crew-tile" data-tool="pbs" type="button"><span>🗓️</span><strong>PBS</strong><small>Ideas</small></button><button class="crew-tile" id="dashDocuments" type="button"><span>📁</span><strong>Document Library</strong><small>Available</small></button><button class="crew-tile" id="dashSettings" type="button"><span>⚙</span><strong>Settings</strong><small>Available</small></button></div></section>
 <section class="crew-page hidden" id="crewHelp" aria-label="CrewFocus Help">
@@ -1199,22 +1199,22 @@ LOCATION BRIEFING
     <div class="field fdp-wide hidden" id="fdpRestDutyTypeWrap"><label for="fdpRestDutyType">Manual duty type</label><select id="fdpRestDutyType"><option value="rostered">Flying duty</option><option value="standby_a">Standby A call-out</option><option value="standby_18">Standby 18 assignment</option></select></div>
     <div class="field" id="fdpRestSignonDateWrap"><label for="fdpRestSignonDate">Actual sign-on date (local)</label><input type="date" id="fdpRestSignonDate"/></div>
     <div class="field" id="fdpRestSignonTimeWrap"><label for="fdpRestSignonTime">Actual sign-on time (local)</label><input type="time" id="fdpRestSignonTime"/></div>
-    <div class="field fdp-wide" id="fdpRestSignonZoneWrap"><label for="fdpRestSignonZone">Sign-on time zone</label><select id="fdpRestSignonZone"></select></div>
+    <div class="field fdp-wide"><label for="fdpRestSignonAirport">Sign-on airport (IATA) — sets local time zone</label><input id="fdpRestSignonAirport" maxlength="4" autocapitalize="characters" autocorrect="off" spellcheck="false" placeholder="e.g. MEL"/></div>
+    <div class="field fdp-wide hidden" id="fdpRestSignonZoneWrap" aria-hidden="true" style="display:none!important"><label for="fdpRestSignonZone">Automatic sign-on time zone (internal)</label><select id="fdpRestSignonZone" tabindex="-1"></select></div>
     <div class="field hidden" id="fdpRestStandbyDateWrap"><label for="fdpRestStandbyDate">Standby A started (local date)</label><input id="fdpRestStandbyDate" type="date"/></div>
     <div class="field hidden" id="fdpRestStandbyTimeWrap"><label for="fdpRestStandbyTime">Standby A started (local time)</label><input id="fdpRestStandbyTime" type="time"/></div>
     <div class="field fdp-wide"><label for="fdpRestArrivalAirport">Final landing / sign-off airport (IATA)</label><input id="fdpRestArrivalAirport" maxlength="4" autocapitalize="characters" autocorrect="off" spellcheck="false" placeholder="e.g. MEL"/></div>
-    <div class="field fdp-wide"><label for="fdpRestOutputZone">Final landing airport time zone</label><select id="fdpRestOutputZone"></select></div>
+    <div class="field fdp-wide hidden" id="fdpRestOutputZoneWrap" aria-hidden="true" style="display:none!important"><label for="fdpRestOutputZone">Automatic final landing time zone (internal)</label><select id="fdpRestOutputZone" tabindex="-1"></select></div>
     <div class="field fdp-wide"><label for="fdpRestSectorType">Final flight sector</label><select id="fdpRestSectorType"><option value="unknown">Choose domestic or international</option><option value="domestic">Domestic</option><option value="international">International</option></select></div>
     <div class="field"><label for="fdpRestLandingDate">Final landing date (local)</label><input type="date" id="fdpRestLandingDate"/></div>
     <div class="field"><label for="fdpRestLandingTime">Final landing time (local)</label><input type="time" id="fdpRestLandingTime"/></div>
    </div>
-<p class="fdp-footnote" id="fdpRestZoneHint" role="status"></p>
+<p class="fdp-footnote" id="fdpRestZoneHint" role="status" aria-live="polite">Airport local time zones are determined automatically from the IATA codes.</p>
    <p class="fdp-rest-signoff-note" id="fdpRestSignoffInfo" role="status">Sign-off is calculated as landing +30 minutes.</p>
    <div class="fdp-rest-auto-boc269" id="fdpRestAutoBOC269" data-state="waiting" role="status" aria-live="polite">
     <strong id="fdpRestAutoBOCTitle269">BOC check — waiting for duty times</strong>
     <span id="fdpRestAutoBOCDetail269">CrewFocus checks the FDP against 00:46–04:59 automatically, then assesses the additional rest conditions.</span>
    </div>
-   <label class="fdp-rest-toggle fdp-rest-verified"><input type="checkbox" id="fdpRestConfirmed"/> Actual times and final sector checked</label>
    <div class="fdp-rest-result" id="fdpRestResult" role="status" aria-live="polite"></div>
 <details class="crew-rest-conditions" id="fdpRestAdditional268" aria-label="Sign-off and BOC conditions">
 <summary>Advanced options — sign-off, acclimatisation &amp; special BOC exceptions</summary>
@@ -1229,7 +1229,8 @@ LOCATION BRIEFING
   <div class="field fdp-wide"><label for="fdpRestBOCBid">Special consecutive BOC bid at Home Base</label><select id="fdpRestBOCBid"><option value="no">No special bid confirmed</option><option value="yes">I bid for consecutive BOC duties — verify exception</option></select></div>
   <div class="field fdp-wide"><label for="fdpRestNextDate">Next sign-on date (optional)</label><input id="fdpRestNextDate" type="date"></div>
   <div class="field"><label for="fdpRestNextTime">Next sign-on time (optional)</label><input id="fdpRestNextTime" type="time"></div>
-  <div class="field"><label for="fdpRestNextZone">Next sign-on time zone</label><select id="fdpRestNextZone"></select></div>
+  <div class="field"><label for="fdpRestNextAirport">Next sign-on airport (IATA) — automatic local time</label><input id="fdpRestNextAirport" maxlength="4" autocapitalize="characters" autocorrect="off" spellcheck="false" placeholder="e.g. BNE"/></div>
+  <div class="field hidden" id="fdpRestNextZoneWrap" aria-hidden="true" style="display:none!important"><label for="fdpRestNextZone">Automatic next sign-on time zone (internal)</label><select id="fdpRestNextZone" tabindex="-1"></select></div>
  </div>
  <p class="note" id="fdpRestBOCNotes" role="status"></p>
 </details>
@@ -1416,7 +1417,7 @@ VA 1101 0705 NTL BNE 0720" rows="7"></textarea><p class="note">Check the year, d
 <h2>Calculation notes</h2>
 <p class="note">The sign on date and time are used exactly as entered, including for future planning. The countdown is relative to the current local time. Schedule times use the selected sign-on time zone; the live clock uses your device's local time zone. Your selections are remembered on this device. Past sign-on dates advance to today when reopening.</p>
 <p class="note">Hotel transport times can be saved and updated. This prototype saves them in the browser's local storage; downloaded-file previews may not retain settings. A hosted version can make saving more reliable across sessions and devices.</p>
-</section></details><p class="note" id="planApplyStatus" role="status"></p><button class="btn primary wide" id="applyPlan" type="button">Use this plan</button></div></dialog><dialog aria-labelledby="calendarTitle" id="calendarDialog"><div class="modal-shell"><header><h2 id="calendarTitle">Add to Calendar</h2><button class="btn small" id="closeCalendar" type="button">Close</button></header><label for="calendarScope">Include</label><select id="calendarScope"><option value="current">Accepted duty</option><option value="upcoming">Upcoming roster duties</option><option value="all">Whole roster</option></select><h3 id="calendarCount"></h3><p class="note" id="calendarSkipped" role="status"></p><div id="calendarIssues"></div><p class="note">One event per duty. Titles show local sign-on and sign-off times and finishing location; full sector details remain in Notes. No hotels or reminders.</p><button class="btn primary wide" id="calendarExport" type="button">Add roster to Calendar</button><p class="note" id="calendarStatus" role="status"></p><details id="calendarSetup"><summary>One-time iPhone setup</summary><p class="note">Use a separate shortcut named <strong>Leave for Work Calendar</strong>. Your alarm shortcut stays separate. Shortcuts opens briefly during import and requests a return to this app. No downloading or Siri Suggestions is needed.</p><p class="note">One action at a time. Your progress is saved on this device. “What you should see” describes the checkpoint; if it differs, send that screen before continuing.</p><p class="note" id="calendarGuideProgress"></p><h3 id="calendarGuideTitle"></h3><div class="note" id="calendarGuideInstruction"></div><div class="calendar-issue"><strong>What you should see</strong><p class="note" id="calendarGuideExpected"></p></div><div class="row help-nav"><button class="btn" id="calendarGuideBack" type="button">Back</button><button class="btn primary" id="calendarGuideNext" type="button">Next step</button></div><button class="btn small" id="calendarGuideResume" type="button">Continue from my screenshot</button><p class="note">These controls can vary with iOS. The test checks your phone before sending a full roster. If Calendar opens an editor for every event, check the expanded Add New Event action and turn its compose screen off.</p><button class="btn wide" id="calendarTest" type="button">Test with one event</button><button class="btn wide" id="calendarSetupDone" type="button">I checked the test</button></details><details style="margin-top:16px"><summary>Other options &amp; roster changes</summary><p class="note">This makes a copy, not a live subscription. A completed import is remembered on this device to help prevent duplicates. Changed duties need their previous calendar events removed before you import them again. An interrupted shortcut can leave some events added: check Calendar before retrying.</p><button class="btn wide" id="calendarDownload" type="button">Download .ics file instead</button><p class="note">File import depends on the app opening the file; Safari and Files may only preview it. The shortcut above avoids that route.</p><button class="btn wide" id="calendarResetHistory" type="button">Allow a fresh import</button></details></div></dialog><dialog aria-labelledby="alarmHelpTitle" id="alarmHelp"><div class="help-shell"><header><h2 id="alarmHelpTitle">Set up iPhone alarms</h2><button class="btn small" id="closeAlarmHelp" type="button">Close</button></header><p class="note" id="alarmHelpProgress"></p><div id="alarmHelpContent"></div><p class="note" id="alarmHelpStatus" role="status"></p><div class="row help-nav"><button class="btn" id="alarmHelpBack" type="button">Back</button><button class="btn primary" id="alarmHelpNext" type="button">Next</button></div></div></dialog><footer class="note" style="text-align:center;padding:8px 10px">Version 270 · 21 Nov 2026</footer></main>
+</section></details><p class="note" id="planApplyStatus" role="status"></p><button class="btn primary wide" id="applyPlan" type="button">Use this plan</button></div></dialog><dialog aria-labelledby="calendarTitle" id="calendarDialog"><div class="modal-shell"><header><h2 id="calendarTitle">Add to Calendar</h2><button class="btn small" id="closeCalendar" type="button">Close</button></header><label for="calendarScope">Include</label><select id="calendarScope"><option value="current">Accepted duty</option><option value="upcoming">Upcoming roster duties</option><option value="all">Whole roster</option></select><h3 id="calendarCount"></h3><p class="note" id="calendarSkipped" role="status"></p><div id="calendarIssues"></div><p class="note">One event per duty. Titles show local sign-on and sign-off times and finishing location; full sector details remain in Notes. No hotels or reminders.</p><button class="btn primary wide" id="calendarExport" type="button">Add roster to Calendar</button><p class="note" id="calendarStatus" role="status"></p><details id="calendarSetup"><summary>One-time iPhone setup</summary><p class="note">Use a separate shortcut named <strong>Leave for Work Calendar</strong>. Your alarm shortcut stays separate. Shortcuts opens briefly during import and requests a return to this app. No downloading or Siri Suggestions is needed.</p><p class="note">One action at a time. Your progress is saved on this device. “What you should see” describes the checkpoint; if it differs, send that screen before continuing.</p><p class="note" id="calendarGuideProgress"></p><h3 id="calendarGuideTitle"></h3><div class="note" id="calendarGuideInstruction"></div><div class="calendar-issue"><strong>What you should see</strong><p class="note" id="calendarGuideExpected"></p></div><div class="row help-nav"><button class="btn" id="calendarGuideBack" type="button">Back</button><button class="btn primary" id="calendarGuideNext" type="button">Next step</button></div><button class="btn small" id="calendarGuideResume" type="button">Continue from my screenshot</button><p class="note">These controls can vary with iOS. The test checks your phone before sending a full roster. If Calendar opens an editor for every event, check the expanded Add New Event action and turn its compose screen off.</p><button class="btn wide" id="calendarTest" type="button">Test with one event</button><button class="btn wide" id="calendarSetupDone" type="button">I checked the test</button></details><details style="margin-top:16px"><summary>Other options &amp; roster changes</summary><p class="note">This makes a copy, not a live subscription. A completed import is remembered on this device to help prevent duplicates. Changed duties need their previous calendar events removed before you import them again. An interrupted shortcut can leave some events added: check Calendar before retrying.</p><button class="btn wide" id="calendarDownload" type="button">Download .ics file instead</button><p class="note">File import depends on the app opening the file; Safari and Files may only preview it. The shortcut above avoids that route.</p><button class="btn wide" id="calendarResetHistory" type="button">Allow a fresh import</button></details></div></dialog><dialog aria-labelledby="alarmHelpTitle" id="alarmHelp"><div class="help-shell"><header><h2 id="alarmHelpTitle">Set up iPhone alarms</h2><button class="btn small" id="closeAlarmHelp" type="button">Close</button></header><p class="note" id="alarmHelpProgress"></p><div id="alarmHelpContent"></div><p class="note" id="alarmHelpStatus" role="status"></p><div class="row help-nav"><button class="btn" id="alarmHelpBack" type="button">Back</button><button class="btn primary" id="alarmHelpNext" type="button">Next</button></div></div></dialog><footer class="note" style="text-align:center;padding:8px 10px">Version 272 · 21 Nov 2026</footer></main>
 <dialog id="crewCalloutDialog" aria-labelledby="crewCalloutTitle">
  <div class="crew-callout-inner">
   <h2 id="crewCalloutTitle">Possible roster call-out</h2>
@@ -6402,7 +6403,12 @@ function crewFocusDutySummary(d,ordered){
    &&Number.isFinite(start)&&start-portInstant(previous.date,previous.time,previous.zone||portZones[previous.port])<48*3600000;
   if(!previousSimIsSeries){min=Math.max(min??0,1200);restNote=' 20h before an Australian simulator trainee series (EA 33.2(a)), subject to agreement and special cases.';}
  }
- return {duty,max,rest,min,reason:(max===null?'Maximum FDP requires a verified sector count and start time':'Preliminary Table A reference. Confirm acclimatisation, early starts, standby, local-night and all special rules.')+restNote};
+ // Correct comparison basis: FDP (sign-on through landing + 15 minutes),
+ // not the duty period, which includes the later post-flight sign-off time.
+ // Do not change the displayed Duty value or use an unverified landing time.
+ const fdp=flights.length&&Number.isFinite(final?.arrival)&&final.arrival>=start?
+  Math.round((final.arrival+15*60000-start)/60000):null;
+ return {duty,fdp,max,rest,min,reason:(max===null?'Maximum FDP requires a verified sector count and start time':'Preliminary Table A reference. Confirm acclimatisation, early starts, standby, local-night and all special rules.')+restNote};
 }
 function crewFocusSeverity(value,limit){
  if(!Number.isFinite(value)||!Number.isFinite(limit))return 'missing';
@@ -6417,7 +6423,7 @@ function crewFocusRenderDutyMetrics(node,d,ordered){
  const v=crewFocusDutySummary(d,ordered);
  const fmt=minutes=>Number.isFinite(minutes)?window.crewFDPTableA.fmtMinutes(minutes):'—';
  const groups=[
-  ['CURRENT DUTY',v.duty,crewFocusSeverity(v.duty,v.max),'Scheduled sign-on to estimated sign-off'],
+  ['CURRENT DUTY',v.duty,crewFocusSeverity(v.sim?v.duty:v.fdp,v.max),v.sim?'Sim/ground duty compared with the non-flying duty limit':'Duty shown is sign-on to sign-off; amber/red warning compares actual scheduled FDP (sign-on to last landing +15 minutes) with maximum FDP'],
   [v.sim?'MAX DUTY':'MAX FDP',v.max,Number.isFinite(v.max)?'normal':'missing',v.sim?'Provisional simulator/ground duty 12h maximum under EA App.1 clause 10.12; NOT a flying FDP':'Provisional acclimatised Table A maximum; restrictions not fully verified'],
   ['CURRENT REST',v.rest,crewFocusRestSeverity(v.rest,v.min),'Estimated sign-off to following rostered sign-on'],
   ['MIN REST',v.min,Number.isFinite(v.min)?'normal':'missing',v.sim?'Provisional simulator minimum rest: see EA App.1 clauses 13.4, 33.2 and 33.4':'Preliminary minimum rest; local-night and exceptions not checked']
@@ -7788,9 +7794,17 @@ try{
     const card=put('div','fdp-fast-time',undefined,outputs);
     put('span','',label,card);put('strong','',localOutput(d),card);
     if(outputZone()!=='UTC')put('small','',t.fmtUTC(d),card);
+    if(label==='SIGN-OFF (EST.)'&&Number($('fdpSignoffBuffer').value)<30){
+     const msg=put('small','fdp-signoff-caution271','Sign-off allowance selected: '+$('fdpSignoffBuffer').value+'m. EA Appendix 1 clause 18.1 normally specifies 30m for a domestic flight; reducing it is at pilot discretion.',card);
+     msg.style.color='#9a4b00';msg.style.fontWeight='700';
+    }
    }
    const small=put('div','fdp-fast-context',undefined,root);
-   put('span','','Flight sign-on '+localOutput(start),small);
+   // Always show actual entered reporting-port time first. Converting the
+   // same instant to the destination time zone must not look like sign-on there.
+   const signZoneName=zone.split('/').pop().replaceAll('_',' ');
+   put('span','','Sign-on '+fmtLocal(start,zone)+' · '+signZoneName+' (entered reporting time)',small);
+   if(outputZone()!==zone)put('span','','Same instant in '+outputZone().split('/').pop().replaceAll('_',' ')+': '+localOutput(start)+' (time-zone equivalent only)',small);
    if(isStandby&&standbyKind==='a')put('span','','Total duty begins '+localOutput(dutyStart),small);
    put('span','','Basis: '+source,small);
    if(isStandby&&standbyKind==='a')put('span','','Projected TOTAL DUTY (including standby and post-flight): '+t.fmtMinutes((signoff.getTime()-dutyStart.getTime())/60000),small);
@@ -7869,12 +7883,19 @@ try{
  const shift=(date,n)=>{const d=new Date(date+'T12:00:00Z');d.setUTCDate(d.getUTCDate()+n);return d.toISOString().slice(0,10);};
  const parse=(date,time,zone)=>{if(!zone)return null;const v=t.zonedToUTC(date,time,zone);return v.error||v.ambiguous?null:v.value;};
  const setPair=(prefix,date,zone)=>{const p=pair(date,zone);$(prefix+'Date').value=p.date;$(prefix+'Time').value=p.time;};
- const signZone=()=> $('fdpRestSignonZone').value;
- const outZone=()=> $('fdpRestOutputZone').value;
+ const signZone=()=>timezone($('fdpRestSignonAirport').value);
+ const outZone=()=>timezone($('fdpRestArrivalAirport').value);
+ const nextZone=()=>timezone($('fdpRestNextAirport').value);
+ function syncAirportZones(){
+  for(const [airportInput,zoneSelect] of [['fdpRestSignonAirport','fdpRestSignonZone'],['fdpRestArrivalAirport','fdpRestOutputZone'],['fdpRestNextAirport','fdpRestNextZone']]){
+   const known=timezone($(airportInput).value);
+   $(zoneSelect).value=known||'';
+  }
+ }
  const get=(prefix,zone)=>parse($(prefix+'Date').value,$(prefix+'Time').value,zone);
  let mode='roster',rosterID='',lastSource='',suppress=false;
  let manualSaved=null,rosterSaved=null,lastAirportCode='';
- const fields=['fdpRestSignonDate','fdpRestSignonTime','fdpRestSignonZone','fdpRestDutyType','fdpRestStandbyDate','fdpRestStandbyTime','fdpRestArrivalAirport','fdpRestOutputZone','fdpRestSectorType','fdpRestLandingDate','fdpRestLandingTime','fdpRestSignoffMethod','fdpRestActualSignoffDate','fdpRestActualSignoffTime','fdpRestBOCMode','fdpRestBOCZone269','fdpRestBOCBid','fdpRestNextDate','fdpRestNextTime','fdpRestNextZone'];
+ const fields=['fdpRestSignonDate','fdpRestSignonTime','fdpRestSignonAirport','fdpRestSignonZone','fdpRestDutyType','fdpRestStandbyDate','fdpRestStandbyTime','fdpRestArrivalAirport','fdpRestOutputZone','fdpRestSectorType','fdpRestLandingDate','fdpRestLandingTime','fdpRestSignoffMethod','fdpRestActualSignoffDate','fdpRestActualSignoffTime','fdpRestBOCMode','fdpRestBOCZone269','fdpRestBOCBid','fdpRestNextDate','fdpRestNextTime','fdpRestNextAirport','fdpRestNextZone'];
  const snapshot=()=>Object.fromEntries(fields.map(id=>[id,$(id).value]));
  const restore=s=>{if(!s)return;for(const [id,val] of Object.entries(s))if($(id))$(id).value=val;};
  // Reuse the same time zones as Maximum FDP, then add known roster/CBR ports.
@@ -7919,22 +7940,22 @@ try{
    if(!m)return null;return {dep:m[1].slice(0,2)+':'+m[1].slice(2),from:m[2],to:m[3],arr:m[4].slice(0,2)+':'+m[4].slice(2)};
   }).filter(Boolean);
   if(!segments.length)return null;
-  const sz=d.zone||timezone(d.port),start=parse(d.date,d.time,sz);
+  const signairport=port(d.port||segments[0].from),sz=timezone(signairport),start=parse(d.date,d.time,sz);
   if(!sz||!start)return null;
   const last=lastArrival(segments,d.sourceDate||d.date,start);
   if(!last)return null;
-  return {date:d.date,time:d.time,signzone:sz,source:`Roster ${d.sourceDate||d.date} · ${segments.length} sector${segments.length===1?'':'s'} · ${segments.map(s=>port(s.from)+'–'+port(s.to)).join(' / ')}`,
+  return {date:d.date,time:d.time,signairport,signzone:sz,source:`Roster ${d.sourceDate||d.date} · ${segments.length} sector${segments.length===1?'':'s'} · ${segments.map(s=>port(s.from)+'–'+port(s.to)).join(' / ')}`,
    landing:last.landing,arrival: last.to,landingzone:last.zone,kind:last.kind,confirmed:!!d.confirmed,id:d.id};
  }
  function extractCBR(c,date){
   if(!c||!c.confirmed||!Array.isArray(c.rows)||!c.rows.length)return null;
   const segments=c.rows.map(r=>(Array.isArray(r)&&r[1]&&r[2]&&r[3]&&r[4])?{from:r[1],dep:r[2],to:r[3],arr:r[4]}:null).filter(Boolean);
   if(!segments.length)return null;
-  const sz=timezone(segments[0].from)||'Australia/Melbourne',start=parse(date,c.signon,sz);
+  const signairport=port(segments[0].from),sz=timezone(signairport),start=parse(date,c.signon,sz);
   if(!start)return null;
   const last=lastArrival(segments,date,start);
   if(!last)return null;
-  return {date,time:c.signon,signzone:sz,source:`Confirmed CBR ${date} · ${segments.length} sector${segments.length===1?'':'s'} · ${segments.map(s=>port(s.from)+'–'+port(s.to)).join(' / ')}`,
+  return {date,time:c.signon,signairport,signzone:sz,source:`Confirmed CBR ${date} · ${segments.length} sector${segments.length===1?'':'s'} · ${segments.map(s=>port(s.from)+'–'+port(s.to)).join(' / ')}`,
    landing:last.landing,arrival:last.to,landingzone:last.zone,kind:last.kind,confirmed:true,id:'cbr-'+date};
  }
  function todayDuty(){
@@ -7956,8 +7977,9 @@ try{
    for(const id of ['fdpRestSignonTime','fdpRestArrivalAirport','fdpRestLandingTime'])$(id).value='';$('fdpRestSectorType').value='unknown';return;
   }
   rosterID=duty.id;lastSource=duty.source;
-  $('fdpRestSignonDate').value=duty.date;$('fdpRestSignonTime').value=duty.time;$('fdpRestSignonZone').value=duty.signzone;
-  $('fdpRestArrivalAirport').value=duty.arrival;$('fdpRestOutputZone').value=duty.landingzone;if(!$('fdpRestNextTime').value)$('fdpRestNextZone').value=duty.landingzone;
+  $('fdpRestSignonDate').value=duty.date;$('fdpRestSignonTime').value=duty.time;$('fdpRestSignonAirport').value=duty.signairport;
+  $('fdpRestArrivalAirport').value=duty.arrival;
+  syncAirportZones();
   $('fdpRestSectorType').value=duty.kind;
   setPair('fdpRestLanding',duty.landing,duty.landingzone);
   $('fdpRestDutyType').value='rostered';
@@ -7976,17 +7998,18 @@ try{
    if(manualSaved)restore(manualSaved);
    else {
     $('fdpRestDutyType').value='rostered';$('fdpRestSignonDate').value=iso(new Date(),localZone);
-    $('fdpRestSignonTime').value='';$('fdpRestSignonZone').value=localZone;
-    $('fdpRestArrivalAirport').value='';$('fdpRestOutputZone').value=localZone;
+    $('fdpRestSignonTime').value='';$('fdpRestSignonAirport').value='';
+    $('fdpRestArrivalAirport').value='';syncAirportZones();
     $('fdpRestSectorType').value='unknown';$('fdpRestLandingDate').value=iso(new Date(),localZone);$('fdpRestLandingTime').value='';
    }
-   setText('fdpRestImportStatus','Manual duty — enter sign-on, final landing airport and landing time. Select whether the final flight crossed an international border.');
+   setText('fdpRestImportStatus','Manual duty — enter the sign-on airport, final landing airport and their LOCAL dates/times. CrewFocus automatically applies each airport’s time zone.');
   }else{
    refreshRoster();
    if(rosterSaved&&rosterSaved.id===rosterID)restore(rosterSaved.fields);
   }
   lastAirportCode=port($('fdpRestArrivalAirport').value);
-  $('fdpRestConfirmed').checked=false;
+  syncAirportZones();
+  
   toggleStandby();draw();
  }
  function toggleStandby(){
@@ -8015,12 +8038,16 @@ try{
   const status=$('fdpRestAutoBOC269'),title=$('fdpRestAutoBOCTitle269'),description=$('fdpRestAutoBOCDetail269');
   const setBOC=(kind,label,detail)=>{status.dataset.state=kind;title.textContent=label;description.textContent=detail;};
   setBOC('waiting','BOC check — awaiting complete duty','Enter sign-on, final landing and airport information. BOC will be checked automatically using the FDP, including 15 minutes after landing.');
-  const sz=signZone(),oz=outZone();
-  const start=get('fdpRestSignon',sz),landing=get('fdpRestLanding',oz);
+  syncAirportZones();
+  const sz=signZone(),oz=outZone(),nz=nextZone();
+  const reportingAirport=port($('fdpRestSignonAirport').value);
   const airport=port($('fdpRestArrivalAirport').value),kind=$('fdpRestSectorType').value;
-  const destZone=timezone(airport);
-  if(airport&&destZone&&destZone!==oz)setText('fdpRestZoneHint','Check: '+airport+' normally uses '+destZone+'. Your selected landing time zone differs.');
-  else setText('fdpRestZoneHint',airport?'Final landing '+airport+' · local zone '+oz:'Enter the final landing airport and verify its time zone.');
+  setText('fdpRestZoneHint','Automatic local zones: '+(reportingAirport||'Sign-on airport missing')+' · '+(sz||'unknown')+' → '+(airport||'Landing airport missing')+' · '+(oz||'unknown')+'.');
+  if(!sz||!oz){
+   setText('fdpRestSignoffInfo','Enter recognised sign-on and landing airport codes before calculating.');
+   el('p','fdp-unavailable','Airport time zone unavailable for '+(!sz?(reportingAirport||'sign-on airport'):airport)+'. Check the IATA code; no default time zone is assumed.');return;
+  }
+  const start=get('fdpRestSignon',sz),landing=get('fdpRestLanding',oz);
   if(!start||!landing){setText('fdpRestSignoffInfo','Sign-off is calculated automatically after you enter sign-on and landing.');
    el('p','fdp-unavailable','Enter valid sign-on and final landing dates/times.');return;}
   const actualMethod=$('fdpRestSignoffMethod').value==='actual';
@@ -8029,7 +8056,7 @@ try{
   if(off<landing){setText('fdpRestSignoffInfo','Actual sign-off cannot precede landing.');el('p','fdp-unavailable','Check actual sign-off and landing times.');return;}
   setText('fdpRestSignoffInfo',`${actualMethod?'Recorded actual':'Standard estimated'} sign-off: ${nice(off,oz)} (${airport||'airport not selected'}) · ${actualMethod?'actual entered time':'landing +30 min'}.`);
   if(!airport){el('p','fdp-unavailable','Enter a final landing airport.');return;}
-  if(!timezone(airport)){el('p','fdp-unavailable','Unknown airport code: select and verify its local time zone.');return;}
+  if(!timezone(airport)){el('p','fdp-unavailable','Unknown landing airport code: check its IATA code.');return;}
   if(kind==='unknown'){el('p','fdp-unavailable','Select Domestic or International for the final flight sector.');return;}
   const dutyType=mode==='manual'?$('fdpRestDutyType').value:'rostered';
   const dutyStart=dutyType==='standby_a'?get('fdpRestStandby',sz):start;
@@ -8079,7 +8106,9 @@ try{
   row('Basic rest (EA 13.4 + 18.2)',t.fmtMinutes((baseRest+extra)/60000));
   row(bocApplies30?'Minimum with BOC home-base rule':'Minimum elapsed rest (conditional)',t.fmtMinutes(rest/60000));
   row(total>15*3600000||bocUnknown||conditionalLayover||bid||(bocMode==='not'&&autoBOC===true)?'Earliest by elapsed hours only':'Estimated earliest next sign-on',nice(earliest,oz),'fdp-rest-earliest');
-  const next=$('fdpRestNextDate').value&&$('fdpRestNextTime').value?get('fdpRestNext',$('fdpRestNextZone').value):null;
+  const nextRequested=!!($('fdpRestNextDate').value&&$('fdpRestNextTime').value);
+  const next=nextRequested&&nz?get('fdpRestNext',nz):null;
+  if(nextRequested&&!nz)el('p','fdp-rest-warning','Enter a recognised NEXT sign-on airport to compare rest. Its local time zone will be applied automatically.');
   if(next){
    const available=next.getTime()-off.getTime();
    row('Rest to proposed next sign-on',t.fmtMinutes(available/60000));
@@ -8095,13 +8124,12 @@ try{
   if(dutyType==='standby_a')el('p','fdp-rest-warning','Standby A: total duty includes standby commencement through post-flight sign-off.');
   if(dutyType==='standby_18')el('p','fdp-rest-warning','Standby 18: estimate uses the assigned flying duty from sign-on. Verify standby conditions separately.');
   if(total>15*3600000)el('p','fdp-rest-warning','A duty over 15 hours requires a local night during rest (EA 13.9); the hour-only estimate is not a cleared next sign-on.');
-  if(!$('fdpRestConfirmed').checked)el('p','fdp-rest-warning','Preliminary estimate: verify sign-on, actual landing and final sector before use.');
+  el('p','fdp-rest-warning','Preliminary estimate: verify actual sign-on, final landing and sector details against approved records.');
   el('p','fdp-rest-warning','Any post-flight duties extending beyond 30 minutes, reduced rest, positioning and accommodation allowances need separate review.');
  }
  $('fdpRestRosteredBtn').addEventListener('click',()=>setMode('roster'));
  $('fdpRestManualBtn').addEventListener('click',()=>setMode('manual'));
- $('fdpRestDutyType').addEventListener('change',()=>{toggleStandby();$('fdpRestConfirmed').checked=false;draw();});
- $('fdpRestConfirmed').addEventListener('change',draw);
+ $('fdpRestDutyType').addEventListener('change',()=>{toggleStandby();draw();});
  for(const id of fields){if(id==='fdpRestDutyType')continue;
   $(id).addEventListener('change',()=>{
    if(suppress)return;
@@ -8112,15 +8140,17 @@ try{
      if(land)setPair('fdpRestActualSignoff',new Date(land.getTime()+30*60000),outZone());
     }
    }
-   if(id==='fdpRestArrivalAirport'){
+   if(['fdpRestSignonAirport','fdpRestArrivalAirport','fdpRestNextAirport'].includes(id)){
     const code=port($(id).value);$(id).value=code;
-    if(timezone(code))$('fdpRestOutputZone').value=timezone(code);
-    if(mode==='manual'&&code!==lastAirportCode)$('fdpRestSectorType').value='unknown';
-    lastAirportCode=code;
+    if(id==='fdpRestArrivalAirport'){
+     if(mode==='manual'&&code!==lastAirportCode)$('fdpRestSectorType').value='unknown';
+     lastAirportCode=code;
+    }
+    syncAirportZones();
    }
-   $('fdpRestConfirmed').checked=false;draw();
+   draw();
   });
-  if($(id).tagName==='INPUT'&&$(id).type==='time')$(id).addEventListener('input',()=>{$('fdpRestConfirmed').checked=false;draw();});
+  if($(id).tagName==='INPUT'&&$(id).type==='time')$(id).addEventListener('input',()=>{draw();});
  }
  // Refresh with a new day's duty when the user enters the rostered mode.
  window.crewFDPRestRefresh=()=>{if(mode==='roster')refreshRoster();draw();};
