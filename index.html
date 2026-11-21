@@ -5,7 +5,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <meta content="#15283f" name="theme-color"/>
-<title>CrewFocus v272 — Automatic Airport Time Zones</title>
+<title>CrewFocus v273 — Compact Required Rest & Automatic BOC</title>
 <style>
 :root{color-scheme:light dark;--bg:#f3f6fa;--card:#fff;--ink:#15283f;--muted:#637184;--line:#dce3eb;--accent:#176b87;--soft:#e9f4f7;--danger:#b13e3e}
 @media(prefers-color-scheme:dark){:root{--bg:#101820;--card:#1a2632;--ink:#edf4fb;--muted:#aab8c6;--line:#344454;--accent:#72c7df;--soft:#203a46;--danger:#ff9b9b}}
@@ -1089,17 +1089,54 @@ html,body{margin:0;padding:0}
 #fdpRestPanel .crew-rest-advice .crew-rest-messaging{white-space:pre-wrap;border:1px solid var(--line);background:var(--soft);padding:10px;border-radius:10px;margin:10px 0}
 #fdpRestPanel .crew-rest-warning-268{font-size:12px;font-weight:700;color:#a25b1a;padding:8px 10px;border:1px solid #dfc6a8;border-radius:9px}
 </style>
+
+<style id="crewRestCompact273Style">
+#fdpRestPanel .fdp-rest-mode-switch{margin:3px 0 9px}
+#fdpRestPanel #fdpRestImportStatus{font-size:12px;line-height:1.35;min-height:0;margin:0 0 8px;color:#516b7d}
+#fdpRestPanel #fdpRestImportStatus:empty{display:none}
+#fdpRestPanel .crew-rest-entries273{display:grid;grid-template-columns:1fr;gap:10px}
+#fdpRestPanel .crew-rest-entry273{border:1px solid #d6e1e7;border-radius:13px;padding:12px;background:#fff;min-width:0}
+#fdpRestPanel .crew-rest-entry273 h3{font-size:16px;line-height:1.2;margin:0 0 10px;color:#20384d;display:flex;gap:9px;align-items:center}
+#fdpRestPanel .crew-rest-entry273 h3 small{font-size:11px;font-weight:500;color:#697d8e}
+#fdpRestPanel .crew-rest-entry-grid273{display:grid;grid-template-columns:1fr 1fr;gap:9px 10px;align-items:end}
+#fdpRestPanel .crew-rest-entry-grid273 .crew-rest-airport273{grid-column:1/-1}
+#fdpRestPanel .crew-rest-entry-grid273 .field{margin:0;min-width:0}
+#fdpRestPanel .crew-rest-entry-grid273 label{font-size:12px;margin-bottom:4px;display:block}
+#fdpRestPanel .crew-rest-entry-grid273 input{width:100%;min-width:0;font-size:16px;min-height:42px;box-sizing:border-box;padding:8px}
+#fdpRestPanel .crew-rest-statusline273{display:flex;align-items:center;justify-content:space-between;min-height:25px;gap:5px;margin-top:6px}
+#fdpRestPanel .crew-rest-boc-indicator273{display:inline-flex;align-items:center;gap:5px;white-space:nowrap;font-size:12px;font-weight:800;margin-left:auto;color:#67788a}
+#fdpRestPanel .crew-rest-boc-led273{display:inline-block;width:11px;height:11px;border-radius:50%;background:#aeb9c3;box-shadow:0 0 0 1px #8393a4}
+#fdpRestPanel .crew-rest-boc-indicator273[data-state="boc"]{color:#19683d}
+#fdpRestPanel .crew-rest-boc-indicator273[data-state="boc"] .crew-rest-boc-led273{background:#12cb64;box-shadow:0 0 0 1px #0f9850,0 0 7px #14b95f66}
+#fdpRestPanel .crew-rest-boc-indicator273[data-state="no"]{color:#a62734}
+#fdpRestPanel .crew-rest-boc-indicator273[data-state="no"] .crew-rest-boc-led273{background:#e74754;box-shadow:0 0 0 1px #aa172a}
+#fdpRestPanel .crew-rest-boc-indicator273[data-state="verify"]{color:#86602c}
+#fdpRestPanel .crew-rest-boc-indicator273[data-state="verify"] .crew-rest-boc-led273{background:#e2ac46;box-shadow:0 0 0 1px #9a6d2b}
+#fdpRestPanel .crew-rest-international273{font-size:11px;color:#245b72;font-weight:650}
+#fdpRestPanel #fdpRestResult:empty{display:none}
+#fdpRestPanel #fdpRestResult{margin-top:11px;padding:9px 11px}
+#fdpRestPanel #fdpRestResult .fdp-rest-metric{padding:6px 0}
+#fdpRestPanel #fdpRestResult .fdp-rest-metric span{font-size:12px}
+#fdpRestPanel #fdpRestResult .fdp-rest-metric strong{font-size:15px}
+#fdpRestPanel .fdp-rest-quiet273{font-size:12px;line-height:1.35;color:#79521d;margin:4px 0}
+#fdpRestPanel .crew-rest-conditions{margin:9px 0;padding:10px 12px}
+#fdpRestPanel .crew-rest-conditional273 .note{font-size:12px;line-height:1.4}
+#fdpRestPanel .crew-rest-conditional273 .field{margin:10px 0}
+#fdpRestPanel .crew-rest-minimal-caution273{font-size:11px;color:#73818a;margin:10px 0 0}
+#fdpRestPanel [hidden]{display:none!important}
+@media(min-width:750px){#fdpRestPanel .crew-rest-entries273{grid-template-columns:1fr 1fr}}
+</style>
 </head>
 <body>
 <main>
 <span class="hidden" id="dayLabel">Local time</span>
-<div class="crew-topbar"><span class="crew-version-tag" aria-label="CrewFocus version 272">v272</span><nav aria-label="Main navigation" class="crew-tabs"><span class="crew-tab-highlight" aria-hidden="true"></span><button class="crew-tab selected" data-page="home" type="button">Focus</button><button class="crew-tab" data-page="tools" type="button">Dashboard</button></nav><label class="crew-test-control" for="cbrTestTop"><span class="crew-mode-led" id="cbrModeLED" aria-hidden="true"></span><span class="crew-test-text" id="cbrModeText">LIVE</span><input id="cbrTestTop" type="checkbox" role="switch" aria-label="Test mode"/><span class="crew-switch-track" aria-hidden="true"></span></label></div>
+<div class="crew-topbar"><span class="crew-version-tag" aria-label="CrewFocus version 273">v273</span><nav aria-label="Main navigation" class="crew-tabs"><span class="crew-tab-highlight" aria-hidden="true"></span><button class="crew-tab selected" data-page="home" type="button">Focus</button><button class="crew-tab" data-page="tools" type="button">Dashboard</button></nav><label class="crew-test-control" for="cbrTestTop"><span class="crew-mode-led" id="cbrModeLED" aria-hidden="true"></span><span class="crew-test-text" id="cbrModeText">LIVE</span><input id="cbrTestTop" type="checkbox" role="switch" aria-label="Test mode"/><span class="crew-switch-track" aria-hidden="true"></span></label></div>
 <section class="crew-page" id="crewHome">
 <div class="crew-panel" id="homeFocusPanel"><div class="crew-kicker">FOCUS <span class="crew-status" id="focusModeBadge">Automatic</span></div><h2 id="focusName"></h2><p class="note" id="focusDesc"></p><button class="btn primary" id="focusOpen" type="button">Open focus</button></div>
 <div class="crew-panel" id="homeCurrentPanel"><div class="crew-kicker">CURRENT DUTY <span class="crew-status" id="homeAccepted">Needs review</span></div><div class="crew-focus-duty-layout"><div class="crew-focus-duty-original"><h2 id="homeDutyTitle">Today</h2><p class="note" id="homeDutyDate"></p><p class="crew-time" id="homeDutyTime"></p><div id="homeDutySectors"></div><div class="crew-home-actions"><button class="btn primary" id="homeOpenDuty" type="button">Departure times</button><button class="btn" id="homeReview" type="button">Review &amp; accept</button></div></div><div class="crew-focus-duty-metrics" id="homeCurrentMetrics" aria-label="Current duty and rest estimates"></div></div><p class="focus-estimate-disclaimer">Reference estimates only. Confirm against approved duty and rest requirements.</p></div>
 <div class="crew-panel" id="homeNextPanel"><div class="crew-kicker">NEXT DUTY <span class="crew-status" id="homeNextStatus">Upcoming</span></div><div class="crew-focus-duty-layout"><div class="crew-focus-duty-original"><h2 id="homeNextDate"></h2><p class="hidden" id="homeNextCalendarDate"></p><p class="crew-next hidden" id="homeNextDuty"></p><div id="homeNextSectors"></div><button class="btn" id="homeViewNext" type="button">Review &amp; accept</button></div><div class="crew-focus-duty-metrics" id="homeNextMetrics" aria-label="Next duty and rest estimates"></div></div><p class="focus-estimate-disclaimer">Reference estimates only. Confirm against approved duty and rest requirements.</p></div>
 </section>
-<section class="crew-page hidden" id="crewTools"><div class="crew-section-heading"><h2 class="crew-page-title">Dashboard <small style="font-size:11px;font-weight:500;color:var(--muted)">v272</small></h2><button class="btn small" id="dashBack" type="button">← Focus</button></div><div class="crew-dashboard-reorder"><button class="btn small" type="button" id="dashTileEdit" aria-pressed="false">Edit tiles</button><div class="crew-dashboard-reorder-tools hidden" id="dashReorderTools"><span id="dashTileSelected" aria-live="polite">Select a tile or drag it</span><div class="crew-dashboard-arrows"><button class="btn small" type="button" id="dashTileLeft" aria-label="Move selected tile left">←</button><button class="btn small" type="button" id="dashTileUp" aria-label="Move selected tile up">↑</button><button class="btn small" type="button" id="dashTileDown" aria-label="Move selected tile down">↓</button><button class="btn small" type="button" id="dashTileRight" aria-label="Move selected tile right">→</button></div><button class="btn small" type="button" id="dashTileReset">Reset order</button></div></div><button class="crew-dashboard-done-floating244 hidden" type="button" id="dashTileDoneFixed244" aria-label="Finish rearranging Dashboard tiles">Done ✓</button><p class="note" id="dashTileHint">Touch and hold any tile to rearrange it. Your order is saved on this device.</p><p class="note crew-dashboard-ideas-hint">Each tile has its own editable <strong>Things to Come</strong> list. Open a tile and tap <strong>Ideas</strong> to add notes. Existing tools continue to work.</p>
+<section class="crew-page hidden" id="crewTools"><div class="crew-section-heading"><h2 class="crew-page-title">Dashboard <small style="font-size:11px;font-weight:500;color:var(--muted)">v273</small></h2><button class="btn small" id="dashBack" type="button">← Focus</button></div><div class="crew-dashboard-reorder"><button class="btn small" type="button" id="dashTileEdit" aria-pressed="false">Edit tiles</button><div class="crew-dashboard-reorder-tools hidden" id="dashReorderTools"><span id="dashTileSelected" aria-live="polite">Select a tile or drag it</span><div class="crew-dashboard-arrows"><button class="btn small" type="button" id="dashTileLeft" aria-label="Move selected tile left">←</button><button class="btn small" type="button" id="dashTileUp" aria-label="Move selected tile up">↑</button><button class="btn small" type="button" id="dashTileDown" aria-label="Move selected tile down">↓</button><button class="btn small" type="button" id="dashTileRight" aria-label="Move selected tile right">→</button></div><button class="btn small" type="button" id="dashTileReset">Reset order</button></div></div><button class="crew-dashboard-done-floating244 hidden" type="button" id="dashTileDoneFixed244" aria-label="Finish rearranging Dashboard tiles">Done ✓</button><p class="note" id="dashTileHint">Touch and hold any tile to rearrange it. Your order is saved on this device.</p><p class="note crew-dashboard-ideas-hint">Each tile has its own editable <strong>Things to Come</strong> list. Open a tile and tap <strong>Ideas</strong> to add notes. Existing tools continue to work.</p>
 <div class="crew-tool-grid" id="crewTileGrid">
 <button class="crew-tile" data-tool="duty"><span>▤</span><strong>Roster &amp; Duty</strong><small>Available</small></button><button class="crew-tile" data-tool="drive"><span>🚗</span><strong>Travel Times</strong><small>Available</small></button><button class="crew-tile" data-tool="calendar"><span>▣</span><strong>Export to Calendar</strong><small>Available</small></button><button class="crew-tile" data-tool="import"><span>⇧</span><strong>Import Roster</strong><small>Available</small></button><button class="crew-tile" data-tool="help"><span>◷</span><strong>Help</strong><small>Available</small></button><button class="crew-tile" data-tool="flight"><span>✈</span><strong>Flight Planning</strong><small>Beta</small></button><button class="crew-tile" data-tool="commuter"><span>🛫</span><strong>Commuter</strong><small>Planned</small></button><button class="crew-tile" data-tool="hotels"><span>▥</span><strong>Hotels &amp; CATS</strong><small>Planned</small></button><button class="crew-tile" data-tool="eba"><span>⚖</span><strong>EBA &amp; Rest</strong><small>Planned</small></button><button class="crew-tile" data-tool="fdp"><span>✈️⏱️</span><strong>Calculators</strong><small>FDP, rest &amp; fuel</small></button><button class="crew-tile" data-tool="pay"><span>$</span><strong>Pay Calculator</strong><small>Planned</small></button><button class="crew-tile" data-tool="packing"><span>▣</span><strong>Trip Checklist</strong><small>Available</small></button><button class="crew-tile" data-tool="aircraft"><span>✈</span><strong>Aircraft Tracking</strong><small>Planned</small></button><button class="crew-tile" data-tool="logbook" type="button"><span>📖</span><strong>Logbook</strong><small>Ideas</small></button><button class="crew-tile" data-tool="pbs" type="button"><span>🗓️</span><strong>PBS</strong><small>Ideas</small></button><button class="crew-tile" id="dashDocuments" type="button"><span>📁</span><strong>Document Library</strong><small>Available</small></button><button class="crew-tile" id="dashSettings" type="button"><span>⚙</span><strong>Settings</strong><small>Available</small></button></div></section>
 <section class="crew-page hidden" id="crewHelp" aria-label="CrewFocus Help">
@@ -1187,64 +1224,75 @@ LOCATION BRIEFING
  </div>
  </details>
  <details class="crew-calc-accordion" id="fdpRestAccordion">
-  <summary><span>Required Rest</span><small>Actual duty → next sign-on</small></summary>
+  <summary><span>Required Rest</span><small>Duty → next sign-on</small></summary>
   <div class="crew-panel fdp-fast fdp-rest-panel" id="fdpRestPanel">
    <div class="fdp-rest-mode-switch segment" role="group" aria-label="Required Rest input mode">
     <button type="button" class="active" id="fdpRestRosteredBtn" aria-pressed="true">Rostered duty</button>
     <button type="button" id="fdpRestManualBtn" aria-pressed="false">Manual</button>
    </div>
-   <p class="fdp-footnote" style="margin:3px 0 8px">Sign-off is calculated automatically from the final landing time.</p>
-   <p class="note" id="fdpRestImportStatus" role="status" aria-live="polite"></p>
-   <div class="fdp-fast-inputs fdp-rest-edits">
-    <div class="field fdp-wide hidden" id="fdpRestDutyTypeWrap"><label for="fdpRestDutyType">Manual duty type</label><select id="fdpRestDutyType"><option value="rostered">Flying duty</option><option value="standby_a">Standby A call-out</option><option value="standby_18">Standby 18 assignment</option></select></div>
-    <div class="field" id="fdpRestSignonDateWrap"><label for="fdpRestSignonDate">Actual sign-on date (local)</label><input type="date" id="fdpRestSignonDate"/></div>
-    <div class="field" id="fdpRestSignonTimeWrap"><label for="fdpRestSignonTime">Actual sign-on time (local)</label><input type="time" id="fdpRestSignonTime"/></div>
-    <div class="field fdp-wide"><label for="fdpRestSignonAirport">Sign-on airport (IATA) — sets local time zone</label><input id="fdpRestSignonAirport" maxlength="4" autocapitalize="characters" autocorrect="off" spellcheck="false" placeholder="e.g. MEL"/></div>
-    <div class="field fdp-wide hidden" id="fdpRestSignonZoneWrap" aria-hidden="true" style="display:none!important"><label for="fdpRestSignonZone">Automatic sign-on time zone (internal)</label><select id="fdpRestSignonZone" tabindex="-1"></select></div>
-    <div class="field hidden" id="fdpRestStandbyDateWrap"><label for="fdpRestStandbyDate">Standby A started (local date)</label><input id="fdpRestStandbyDate" type="date"/></div>
-    <div class="field hidden" id="fdpRestStandbyTimeWrap"><label for="fdpRestStandbyTime">Standby A started (local time)</label><input id="fdpRestStandbyTime" type="time"/></div>
-    <div class="field fdp-wide"><label for="fdpRestArrivalAirport">Final landing / sign-off airport (IATA)</label><input id="fdpRestArrivalAirport" maxlength="4" autocapitalize="characters" autocorrect="off" spellcheck="false" placeholder="e.g. MEL"/></div>
-    <div class="field fdp-wide hidden" id="fdpRestOutputZoneWrap" aria-hidden="true" style="display:none!important"><label for="fdpRestOutputZone">Automatic final landing time zone (internal)</label><select id="fdpRestOutputZone" tabindex="-1"></select></div>
-    <div class="field fdp-wide"><label for="fdpRestSectorType">Final flight sector</label><select id="fdpRestSectorType"><option value="unknown">Choose domestic or international</option><option value="domestic">Domestic</option><option value="international">International</option></select></div>
-    <div class="field"><label for="fdpRestLandingDate">Final landing date (local)</label><input type="date" id="fdpRestLandingDate"/></div>
-    <div class="field"><label for="fdpRestLandingTime">Final landing time (local)</label><input type="time" id="fdpRestLandingTime"/></div>
-   </div>
-<p class="fdp-footnote" id="fdpRestZoneHint" role="status" aria-live="polite">Airport local time zones are determined automatically from the IATA codes.</p>
-   <p class="fdp-rest-signoff-note" id="fdpRestSignoffInfo" role="status">Sign-off is calculated as landing +30 minutes.</p>
-   <div class="fdp-rest-auto-boc269" id="fdpRestAutoBOC269" data-state="waiting" role="status" aria-live="polite">
-    <strong id="fdpRestAutoBOCTitle269">BOC check — waiting for duty times</strong>
-    <span id="fdpRestAutoBOCDetail269">CrewFocus checks the FDP against 00:46–04:59 automatically, then assesses the additional rest conditions.</span>
+   <p class="fdp-rest-roster-message273" id="fdpRestImportStatus" role="status" aria-live="polite"></p>
+   <div class="crew-rest-entries273">
+    <section class="crew-rest-entry273" aria-labelledby="fdpRestSignonHeading273">
+     <h3 id="fdpRestSignonHeading273">Sign-on <small>Local</small></h3>
+     <div class="crew-rest-entry-grid273">
+      <div class="field"><label for="fdpRestSignonDate">Date</label><input type="date" id="fdpRestSignonDate"/></div>
+      <div class="field"><label for="fdpRestSignonTime">Time</label><input type="time" id="fdpRestSignonTime"/></div>
+      <div class="field crew-rest-airport273"><label for="fdpRestSignonAirport">Airport</label><input id="fdpRestSignonAirport" maxlength="4" autocapitalize="characters" autocorrect="off" spellcheck="false" placeholder="MEL"/></div>
+     </div>
+    </section>
+    <section class="crew-rest-entry273" aria-labelledby="fdpRestSignoffHeading273">
+     <h3 id="fdpRestSignoffHeading273">Sign-off <small>Local</small></h3>
+     <div class="crew-rest-entry-grid273">
+      <div class="field"><label for="fdpRestLandingDate">Date</label><input type="date" id="fdpRestLandingDate"/></div>
+      <div class="field"><label for="fdpRestLandingTime">Time</label><input type="time" id="fdpRestLandingTime"/></div>
+      <div class="field crew-rest-airport273"><label for="fdpRestArrivalAirport">Airport</label><input id="fdpRestArrivalAirport" maxlength="4" autocapitalize="characters" autocorrect="off" spellcheck="false" placeholder="BNE"/></div>
+     </div>
+     <div class="crew-rest-statusline273">
+      <span id="fdpRestInternational273" class="crew-rest-international273" hidden>International final sector</span>
+      <span id="fdpRestBOCIndicator273" class="crew-rest-boc-indicator273" data-state="waiting" role="status" aria-label="BOC awaiting input"><span class="crew-rest-boc-led273" aria-hidden="true"></span>BOC <span class="crew-rest-boc-symbol273" aria-hidden="true">•</span></span>
+     </div>
+    </section>
    </div>
    <div class="fdp-rest-result" id="fdpRestResult" role="status" aria-live="polite"></div>
-<details class="crew-rest-conditions" id="fdpRestAdditional268" aria-label="Sign-off and BOC conditions">
-<summary>Advanced options — sign-off, acclimatisation &amp; special BOC exceptions</summary>
- <h3>Optional verification and exceptions</h3>
- <p class="fdp-footnote">The EA counts <strong>15 minutes post-flight within FDP</strong> (10.1), but normally <strong>30 minutes before duty sign-off</strong> (18.1). Rest runs from actual sign-off.</p>
- <div class="fdp-fast-inputs">
-  <div class="field fdp-wide"><label for="fdpRestSignoffMethod">Duty sign-off time</label><select id="fdpRestSignoffMethod"><option value="standard">Standard: landing + 30 minutes</option><option value="actual">Actual verified sign-off (manual)</option></select></div>
-  <div class="field hidden" id="fdpRestActualSignoffDateWrap"><label for="fdpRestActualSignoffDate">Actual sign-off date (landing port)</label><input id="fdpRestActualSignoffDate" type="date"></div>
-  <div class="field hidden" id="fdpRestActualSignoffTimeWrap"><label for="fdpRestActualSignoffTime">Actual sign-off time (landing port)</label><input id="fdpRestActualSignoffTime" type="time"></div>
-  <div class="field fdp-wide"><label for="fdpRestBOCZone269">Acclimatised time zone (optional correction)</label><select id="fdpRestBOCZone269"><option value="auto">Automatic — departure port local time (provisional)</option></select><p class="fdp-footnote">The EA measures BOC in acclimatised time. If acclimatisation is unknown, use departure-port local time. Select a different zone only when the actual acclimatised zone is established.</p></div>
-  <div class="field fdp-wide"><label for="fdpRestBOCMode">Correct detected BOC classification (optional)</label><select id="fdpRestBOCMode"><option value="auto">Automatic — recommended</option><option value="confirmed">Confirmed BOC by other verified evidence</option><option value="not">Confirmed NOT a BOC (override)</option><option value="unknown">Unable to establish — needs review</option></select></div>
-  <div class="field fdp-wide"><label for="fdpRestBOCBid">Special consecutive BOC bid at Home Base</label><select id="fdpRestBOCBid"><option value="no">No special bid confirmed</option><option value="yes">I bid for consecutive BOC duties — verify exception</option></select></div>
-  <div class="field fdp-wide"><label for="fdpRestNextDate">Next sign-on date (optional)</label><input id="fdpRestNextDate" type="date"></div>
-  <div class="field"><label for="fdpRestNextTime">Next sign-on time (optional)</label><input id="fdpRestNextTime" type="time"></div>
-  <div class="field"><label for="fdpRestNextAirport">Next sign-on airport (IATA) — automatic local time</label><input id="fdpRestNextAirport" maxlength="4" autocapitalize="characters" autocorrect="off" spellcheck="false" placeholder="e.g. BNE"/></div>
-  <div class="field hidden" id="fdpRestNextZoneWrap" aria-hidden="true" style="display:none!important"><label for="fdpRestNextZone">Automatic next sign-on time zone (internal)</label><select id="fdpRestNextZone" tabindex="-1"></select></div>
- </div>
- <p class="note" id="fdpRestBOCNotes" role="status"></p>
-</details>
-<details id="crewRestCrewing268" class="crew-rest-conditions crew-rest-requests">
- <summary>Crewing requests, pilot options &amp; EA references</summary>
- <p class="fdp-footnote">Select the situation Crewing is asking about. Each explanation distinguishes a pilot's discretion, conditions that must be met, and rules that may apply without consent. Use the clause reference when discussing a proposed change.</p>
- <label for="crewRestCase268">What is Crewing requesting?</label>
- <select id="crewRestCase268"></select>
- <div id="crewRestAdvice268" aria-live="polite"></div>
- <button class="btn" id="crewRestCopy268" type="button">Copy reference for Crewing</button>
- <p class="note" id="crewRestCopyStatus268" role="status"></p>
- <p class="fdp-footnote">References: Virgin Australia Narrow Body Aircraft Pilots’ Enterprise Agreement 2024, Appendix 1. <a href="https://d15k2d11r6t6rl.cloudfront.net/pub/dw7a/z1swde28/30p/fk9/m44/Virgin%20Australia%20Narrow%20Body%20Aircraft%20Pilots%27%20Enterprise%20Agreement%202024.pdf" target="_blank" rel="noopener noreferrer">Read the full EA PDF</a>. The applicable FRMS/updated work rules may be more restrictive; seek professional advice for a disputed interpretation.</p>
-</details>
-   <p class="fdp-footnote">EA Appendix 1: 10.1 (FDP includes 15 min post-flight); 18.1 (normal 30 min sign-off); 13.4 (rest floor); 18.2 (international +30 min); 22.1 (BOC conditions). Verify the applicable FRMS and special duties.</p>
+   <details id="fdpRestContext273" class="crew-rest-conditions crew-rest-conditional273" hidden>
+    <summary>Applicable conditions</summary>
+    <p class="note" id="fdpRestContextText273"></p>
+    <div id="fdpRestBocDetails273" hidden>
+     <div class="field"><label for="fdpRestBOCZone269">Acclimatised time zone (only if different)</label><select id="fdpRestBOCZone269"><option value="auto">Automatic (provisional departure zone)</option></select></div>
+     <div class="field" id="fdpRestBocBidWrap273" hidden><label for="fdpRestBOCBid">Consecutive BOC bid exception</label><select id="fdpRestBOCBid"><option value="no">No confirmed special bid</option><option value="yes">Confirmed special bid — requires verification</option></select></div>
+    </div>
+   </details>
+   <details class="crew-rest-conditions crew-rest-next273">
+    <summary>Compare next sign-on</summary>
+    <div class="crew-rest-entry-grid273">
+     <div class="field"><label for="fdpRestNextDate">Date</label><input id="fdpRestNextDate" type="date"/></div>
+     <div class="field"><label for="fdpRestNextTime">Time</label><input id="fdpRestNextTime" type="time"/></div>
+     <div class="field crew-rest-airport273"><label for="fdpRestNextAirport">Airport</label><input id="fdpRestNextAirport" maxlength="4" autocapitalize="characters" placeholder="MEL"/></div>
+    </div>
+   </details>
+   <details class="crew-rest-conditions crew-rest-other273" id="fdpRestOtherType273" hidden>
+    <summary>Standby / other duties</summary>
+    <div class="field"><label for="fdpRestDutyType">Duty type</label><select id="fdpRestDutyType"><option value="rostered">Flying</option><option value="standby_a">Standby A call-out</option><option value="standby_18">Standby 18 assignment</option></select></div>
+    <div class="crew-rest-entry-grid273" id="fdpRestStandbyWrap273" hidden>
+     <div class="field"><label for="fdpRestStandbyDate">Standby started — date</label><input id="fdpRestStandbyDate" type="date"/></div>
+     <div class="field"><label for="fdpRestStandbyTime">Time</label><input id="fdpRestStandbyTime" type="time"/></div>
+    </div>
+   </details>
+   <details class="crew-rest-conditions crew-rest-route273" id="fdpRestRouteDetails273" hidden>
+    <summary>Multi-sector route (if applicable)</summary>
+    <div class="field"><label for="fdpRestVia273">Intermediate airports, in order</label><input id="fdpRestVia273" type="text" maxlength="120" autocapitalize="characters" placeholder="e.g. AKL, SYD"/></div>
+    <p class="fdp-footnote">For a manual multi-sector duty, the final sector is inferred from the last airport before sign-off. This checks whether international final-sector rest applies.</p>
+   </details>
+   <details id="crewRestCrewing268" class="crew-rest-conditions crew-rest-requests">
+    <summary>Crewing requests, pilot options &amp; EA references</summary>
+    <label for="crewRestCase268">What is Crewing requesting?</label>
+    <select id="crewRestCase268"></select>
+    <div id="crewRestAdvice268" aria-live="polite"></div>
+    <button class="btn" id="crewRestCopy268" type="button">Copy reference for Crewing</button>
+    <p class="note" id="crewRestCopyStatus268" role="status"></p>
+    <p class="fdp-footnote">References: Virgin Australia Narrow Body Aircraft Pilots’ Enterprise Agreement 2024, Appendix 1. <a href="https://d15k2d11r6t6rl.cloudfront.net/pub/dw7a/z1swde28/30p/fk9/m44/Virgin%20Australia%20Narrow%20Body%20Aircraft%20Pilots%27%20Enterprise%20Agreement%202024.pdf" target="_blank" rel="noopener noreferrer">Full EA PDF</a>. Check the applicable FRMS and special duty provisions before acting.</p>
+   </details>
+   <p class="crew-rest-minimal-caution273">Planning estimate only · check the applicable EA and FRMS.</p>
   </div>
  </details>
 
@@ -1417,7 +1465,7 @@ VA 1101 0705 NTL BNE 0720" rows="7"></textarea><p class="note">Check the year, d
 <h2>Calculation notes</h2>
 <p class="note">The sign on date and time are used exactly as entered, including for future planning. The countdown is relative to the current local time. Schedule times use the selected sign-on time zone; the live clock uses your device's local time zone. Your selections are remembered on this device. Past sign-on dates advance to today when reopening.</p>
 <p class="note">Hotel transport times can be saved and updated. This prototype saves them in the browser's local storage; downloaded-file previews may not retain settings. A hosted version can make saving more reliable across sessions and devices.</p>
-</section></details><p class="note" id="planApplyStatus" role="status"></p><button class="btn primary wide" id="applyPlan" type="button">Use this plan</button></div></dialog><dialog aria-labelledby="calendarTitle" id="calendarDialog"><div class="modal-shell"><header><h2 id="calendarTitle">Add to Calendar</h2><button class="btn small" id="closeCalendar" type="button">Close</button></header><label for="calendarScope">Include</label><select id="calendarScope"><option value="current">Accepted duty</option><option value="upcoming">Upcoming roster duties</option><option value="all">Whole roster</option></select><h3 id="calendarCount"></h3><p class="note" id="calendarSkipped" role="status"></p><div id="calendarIssues"></div><p class="note">One event per duty. Titles show local sign-on and sign-off times and finishing location; full sector details remain in Notes. No hotels or reminders.</p><button class="btn primary wide" id="calendarExport" type="button">Add roster to Calendar</button><p class="note" id="calendarStatus" role="status"></p><details id="calendarSetup"><summary>One-time iPhone setup</summary><p class="note">Use a separate shortcut named <strong>Leave for Work Calendar</strong>. Your alarm shortcut stays separate. Shortcuts opens briefly during import and requests a return to this app. No downloading or Siri Suggestions is needed.</p><p class="note">One action at a time. Your progress is saved on this device. “What you should see” describes the checkpoint; if it differs, send that screen before continuing.</p><p class="note" id="calendarGuideProgress"></p><h3 id="calendarGuideTitle"></h3><div class="note" id="calendarGuideInstruction"></div><div class="calendar-issue"><strong>What you should see</strong><p class="note" id="calendarGuideExpected"></p></div><div class="row help-nav"><button class="btn" id="calendarGuideBack" type="button">Back</button><button class="btn primary" id="calendarGuideNext" type="button">Next step</button></div><button class="btn small" id="calendarGuideResume" type="button">Continue from my screenshot</button><p class="note">These controls can vary with iOS. The test checks your phone before sending a full roster. If Calendar opens an editor for every event, check the expanded Add New Event action and turn its compose screen off.</p><button class="btn wide" id="calendarTest" type="button">Test with one event</button><button class="btn wide" id="calendarSetupDone" type="button">I checked the test</button></details><details style="margin-top:16px"><summary>Other options &amp; roster changes</summary><p class="note">This makes a copy, not a live subscription. A completed import is remembered on this device to help prevent duplicates. Changed duties need their previous calendar events removed before you import them again. An interrupted shortcut can leave some events added: check Calendar before retrying.</p><button class="btn wide" id="calendarDownload" type="button">Download .ics file instead</button><p class="note">File import depends on the app opening the file; Safari and Files may only preview it. The shortcut above avoids that route.</p><button class="btn wide" id="calendarResetHistory" type="button">Allow a fresh import</button></details></div></dialog><dialog aria-labelledby="alarmHelpTitle" id="alarmHelp"><div class="help-shell"><header><h2 id="alarmHelpTitle">Set up iPhone alarms</h2><button class="btn small" id="closeAlarmHelp" type="button">Close</button></header><p class="note" id="alarmHelpProgress"></p><div id="alarmHelpContent"></div><p class="note" id="alarmHelpStatus" role="status"></p><div class="row help-nav"><button class="btn" id="alarmHelpBack" type="button">Back</button><button class="btn primary" id="alarmHelpNext" type="button">Next</button></div></div></dialog><footer class="note" style="text-align:center;padding:8px 10px">Version 272 · 21 Nov 2026</footer></main>
+</section></details><p class="note" id="planApplyStatus" role="status"></p><button class="btn primary wide" id="applyPlan" type="button">Use this plan</button></div></dialog><dialog aria-labelledby="calendarTitle" id="calendarDialog"><div class="modal-shell"><header><h2 id="calendarTitle">Add to Calendar</h2><button class="btn small" id="closeCalendar" type="button">Close</button></header><label for="calendarScope">Include</label><select id="calendarScope"><option value="current">Accepted duty</option><option value="upcoming">Upcoming roster duties</option><option value="all">Whole roster</option></select><h3 id="calendarCount"></h3><p class="note" id="calendarSkipped" role="status"></p><div id="calendarIssues"></div><p class="note">One event per duty. Titles show local sign-on and sign-off times and finishing location; full sector details remain in Notes. No hotels or reminders.</p><button class="btn primary wide" id="calendarExport" type="button">Add roster to Calendar</button><p class="note" id="calendarStatus" role="status"></p><details id="calendarSetup"><summary>One-time iPhone setup</summary><p class="note">Use a separate shortcut named <strong>Leave for Work Calendar</strong>. Your alarm shortcut stays separate. Shortcuts opens briefly during import and requests a return to this app. No downloading or Siri Suggestions is needed.</p><p class="note">One action at a time. Your progress is saved on this device. “What you should see” describes the checkpoint; if it differs, send that screen before continuing.</p><p class="note" id="calendarGuideProgress"></p><h3 id="calendarGuideTitle"></h3><div class="note" id="calendarGuideInstruction"></div><div class="calendar-issue"><strong>What you should see</strong><p class="note" id="calendarGuideExpected"></p></div><div class="row help-nav"><button class="btn" id="calendarGuideBack" type="button">Back</button><button class="btn primary" id="calendarGuideNext" type="button">Next step</button></div><button class="btn small" id="calendarGuideResume" type="button">Continue from my screenshot</button><p class="note">These controls can vary with iOS. The test checks your phone before sending a full roster. If Calendar opens an editor for every event, check the expanded Add New Event action and turn its compose screen off.</p><button class="btn wide" id="calendarTest" type="button">Test with one event</button><button class="btn wide" id="calendarSetupDone" type="button">I checked the test</button></details><details style="margin-top:16px"><summary>Other options &amp; roster changes</summary><p class="note">This makes a copy, not a live subscription. A completed import is remembered on this device to help prevent duplicates. Changed duties need their previous calendar events removed before you import them again. An interrupted shortcut can leave some events added: check Calendar before retrying.</p><button class="btn wide" id="calendarDownload" type="button">Download .ics file instead</button><p class="note">File import depends on the app opening the file; Safari and Files may only preview it. The shortcut above avoids that route.</p><button class="btn wide" id="calendarResetHistory" type="button">Allow a fresh import</button></details></div></dialog><dialog aria-labelledby="alarmHelpTitle" id="alarmHelp"><div class="help-shell"><header><h2 id="alarmHelpTitle">Set up iPhone alarms</h2><button class="btn small" id="closeAlarmHelp" type="button">Close</button></header><p class="note" id="alarmHelpProgress"></p><div id="alarmHelpContent"></div><p class="note" id="alarmHelpStatus" role="status"></p><div class="row help-nav"><button class="btn" id="alarmHelpBack" type="button">Back</button><button class="btn primary" id="alarmHelpNext" type="button">Next</button></div></div></dialog><footer class="note" style="text-align:center;padding:8px 10px">Version 273 · 21 Nov 2026</footer></main>
 <dialog id="crewCalloutDialog" aria-labelledby="crewCalloutTitle">
  <div class="crew-callout-inner">
   <h2 id="crewCalloutTitle">Possible roster call-out</h2>
@@ -7856,305 +7904,216 @@ try{
  compute();
 })();
 </script>
-<script id="fdpRestCalculator240Script">
-/* v240: independent earliest-sign-on estimate. Roster source is read-only;
-   edited actual times stay in this calculator and never change the roster/CBR.
-   EA 2024 18.1: +30m signoff both domestic/int'l; 18.2: +30m rest
-   after an international FINAL sector. This is not dispatch clearance. */
-(() => {
+<script id="fdpRestCalculator273Script">
+/* v273: direct local sign-on/sign-off, derived zones and sector classification.
+ * A BOC assessment without a verified landing/acclimatisation is provisional.
+ * Approved EA / FRMS requirements take precedence. */
+(()=>{
  'use strict';
- const $=id=>document.getElementById(id),t=window.crewFDPTableA;
+ const $=id=>document.getElementById(id), t=window.crewFDPTableA;
  if(!t||!$('fdpRestResult'))return;
- const root=$('fdpRestResult');
- const zoneMap={...t.zones,AKL:'Pacific/Auckland',CHC:'Pacific/Auckland',WLG:'Pacific/Auckland',ZQN:'Pacific/Auckland',DPS:'Asia/Makassar',NAN:'Pacific/Fiji',SIN:'Asia/Singapore',PNQ:'Asia/Kolkata',POM:'Pacific/Port_Moresby',AVV:'Australia/Melbourne',WGA:'Australia/Sydney',ABX:'Australia/Sydney',MQL:'Australia/Melbourne',KGI:'Australia/Perth',GET:'Australia/Perth',DPO:'Australia/Hobart',BWT:'Australia/Hobart',KTA:'Australia/Perth',PHE:'Australia/Perth',BME:'Australia/Perth'};
- const icaoAliases={YMML:'MEL',YSSY:'SYD',YBBN:'BNE',YPPH:'PER',YSCB:'CBR',YPAD:'ADL',YBCG:'OOL',YBCS:'CNS',YBNA:'BNK',YBTL:'TSV',YBRK:'ROK',YMHB:'HBA',YMLT:'LST',YPGV:'GOV',YPPD:'PHE',NZAA:'AKL',NZCH:'CHC',NZWN:'WLG',NZQN:'ZQN',WADD:'DPS',NFFN:'NAN'};
- const AU=new Set(['MEL','SYD','BNE','PER','CBR','ADL','OOL','CNS','NTL','HBA','LST','MCY','TSV','MKY','ROK','BQB','DRW','AVV','WGA','ABX','MQL','KGI','GET','DPO','BWT','KTA','PHE','BME','BNK','GOV']);
- const NZ=new Set(['AKL','CHC','WLG','ZQN']);
- const country=code=>AU.has(code)?'AU':NZ.has(code)?'NZ':code==='DPS'?'ID':code==='NAN'?'FJ':code==='SIN'?'SG':code==='POM'?'PG':null;
- const port=code=>icaoAliases[String(code||'').trim().toUpperCase()]||String(code||'').trim().toUpperCase();
- const sectorKind=(from,to)=>{const a=country(port(from)),b=country(port(to));return a&&b?(a===b?'domestic':'international'):'unknown';};
- const timezone=code=>zoneMap[port(code)]||'';
- const setText=(id,value)=>{$(id).textContent=value;};
- const el=(tag,cls,content,parent=root)=>{const e=document.createElement(tag);if(cls)e.className=cls;e.textContent=content;parent.append(e);return e;};
- const row=(label,value,cls='')=>{const outer=el('div','fdp-rest-metric '+cls,'');el('span','',label,outer);el('strong','',value,outer);};
- const iso=(date,zone)=>{const p=t.parts(date,zone);return `${p.year}-${String(p.month).padStart(2,'0')}-${String(p.day).padStart(2,'0')}`;};
- const pair=(date,zone)=>{const p=t.parts(date,zone);return {date:iso(date,zone),time:`${String(p.hour).padStart(2,'0')}:${String(p.minute).padStart(2,'0')}`};};
- const nice=(date,zone)=>{const a=pair(date,zone);return `${a.date.split('-').reverse().join('/')} ${a.time}`;};
- const shift=(date,n)=>{const d=new Date(date+'T12:00:00Z');d.setUTCDate(d.getUTCDate()+n);return d.toISOString().slice(0,10);};
- const parse=(date,time,zone)=>{if(!zone)return null;const v=t.zonedToUTC(date,time,zone);return v.error||v.ambiguous?null:v.value;};
- const setPair=(prefix,date,zone)=>{const p=pair(date,zone);$(prefix+'Date').value=p.date;$(prefix+'Time').value=p.time;};
- const signZone=()=>timezone($('fdpRestSignonAirport').value);
- const outZone=()=>timezone($('fdpRestArrivalAirport').value);
- const nextZone=()=>timezone($('fdpRestNextAirport').value);
- function syncAirportZones(){
-  for(const [airportInput,zoneSelect] of [['fdpRestSignonAirport','fdpRestSignonZone'],['fdpRestArrivalAirport','fdpRestOutputZone'],['fdpRestNextAirport','fdpRestNextZone']]){
-   const known=timezone($(airportInput).value);
-   $(zoneSelect).value=known||'';
-  }
- }
- const get=(prefix,zone)=>parse($(prefix+'Date').value,$(prefix+'Time').value,zone);
- let mode='roster',rosterID='',lastSource='',suppress=false;
- let manualSaved=null,rosterSaved=null,lastAirportCode='';
- const fields=['fdpRestSignonDate','fdpRestSignonTime','fdpRestSignonAirport','fdpRestSignonZone','fdpRestDutyType','fdpRestStandbyDate','fdpRestStandbyTime','fdpRestArrivalAirport','fdpRestOutputZone','fdpRestSectorType','fdpRestLandingDate','fdpRestLandingTime','fdpRestSignoffMethod','fdpRestActualSignoffDate','fdpRestActualSignoffTime','fdpRestBOCMode','fdpRestBOCZone269','fdpRestBOCBid','fdpRestNextDate','fdpRestNextTime','fdpRestNextAirport','fdpRestNextZone'];
- const snapshot=()=>Object.fromEntries(fields.map(id=>[id,$(id).value]));
- const restore=s=>{if(!s)return;for(const [id,val] of Object.entries(s))if($(id))$(id).value=val;};
- // Reuse the same time zones as Maximum FDP, then add known roster/CBR ports.
- for(const id of ['fdpRestSignonZone','fdpRestOutputZone','fdpRestNextZone','fdpRestBOCZone269']){
-  const target=$(id),options=new Set();
-  for(const opt of $('fdpTimeZone').options){const v=opt.value;if(!v||options.has(v))continue;target.add(new Option(opt.textContent,v));options.add(v);}
-  for(const [code,zone] of Object.entries(zoneMap))if(!options.has(zone)){target.add(new Option(`${code} — ${zone.replaceAll('_',' ')}`,zone));options.add(zone);}
- }
- const device=Intl.DateTimeFormat().resolvedOptions().timeZone||'Australia/Melbourne';
- const localZone=[...$('fdpRestSignonZone').options].some(o=>o.value===device)?device:'Australia/Melbourne';
- $('fdpRestSignonZone').value=localZone;$('fdpRestOutputZone').value=localZone;$('fdpRestNextZone').value=localZone;$('fdpRestBOCZone269').value='auto';
- $('fdpRestSignonDate').value=iso(new Date(),localZone);
- $('fdpRestLandingDate').value=iso(new Date(),localZone);
- // Returns a final-sector landing instant, not the roster's +30m signoff.
+ const zMap={...t.zones,AKL:'Pacific/Auckland',CHC:'Pacific/Auckland',WLG:'Pacific/Auckland',ZQN:'Pacific/Auckland',DPS:'Asia/Makassar',NAN:'Pacific/Fiji',SIN:'Asia/Singapore',PNQ:'Asia/Kolkata',POM:'Pacific/Port_Moresby',HKG:'Asia/Hong_Kong',NRT:'Asia/Tokyo',HND:'Asia/Tokyo',BKK:'Asia/Bangkok',KUL:'Asia/Kuala_Lumpur',AVV:'Australia/Melbourne',WGA:'Australia/Sydney',ABX:'Australia/Sydney',MQL:'Australia/Melbourne',KGI:'Australia/Perth',GET:'Australia/Perth',DPO:'Australia/Hobart',BWT:'Australia/Hobart',KTA:'Australia/Perth',PHE:'Australia/Perth',BME:'Australia/Perth'};
+ const aliases={YMML:'MEL',YSSY:'SYD',YBBN:'BNE',YPPH:'PER',YSCB:'CBR',YPAD:'ADL',YBCG:'OOL',YBCS:'CNS',YBNA:'BNK',YBTL:'TSV',YBRK:'ROK',YMHB:'HBA',YMLT:'LST',YPGV:'GOV',YPPD:'PHE',NZAA:'AKL',NZCH:'CHC',NZWN:'WLG',NZQN:'ZQN',WADD:'DPS',NFFN:'NAN',WSSS:'SIN',VHHH:'HKG',RJAA:'NRT',RJTT:'HND',WMKK:'KUL'};
+ const au=new Set(['MEL','SYD','BNE','PER','CBR','ADL','OOL','CNS','NTL','HBA','LST','MCY','TSV','MKY','ROK','BQB','DRW','AVV','WGA','ABX','MQL','KGI','GET','DPO','BWT','KTA','PHE','BME','BNK','GOV','ASP','AYQ','BNE','BWT','CFS','HTI','HVB','KGI','MJB','PQQ','PPP','RMA','WOL']);
+ const overseas={AKL:'NZ',CHC:'NZ',WLG:'NZ',ZQN:'NZ',DPS:'ID',NAN:'FJ',SIN:'SG',PNQ:'IN',POM:'PG',HKG:'HK',NRT:'JP',HND:'JP',BKK:'TH',KUL:'MY'};
+ const port=v=>aliases[String(v||'').trim().toUpperCase()]||String(v||'').trim().toUpperCase();
+ const country=p=>au.has(port(p))?'AU':overseas[port(p)]||null;
+ const zone=p=>zMap[port(p)]||'';
+ const dateAt=(dt,z)=>{const x=t.parts(dt,z);return [x.year,String(x.month).padStart(2,'0'),String(x.day).padStart(2,'0')].join('-');};
+ const textAt=(dt,z)=>{const x=t.parts(dt,z);return dateAt(dt,z)+' '+String(x.hour).padStart(2,'0')+':'+String(x.minute).padStart(2,'0');};
+ const localPair=(dt,z)=>{const x=t.parts(dt,z);return {date:dateAt(dt,z),time:String(x.hour).padStart(2,'0')+':'+String(x.minute).padStart(2,'0')};};
+ const parse=(dt,time,z)=>{if(!dt||!time||!z)return null;const x=t.zonedToUTC(dt,time,z);return x.error||x.ambiguous?null:x.value;};
+ const shift=(d,n)=>{const x=new Date(d+'T12:00:00Z');x.setUTCDate(x.getUTCDate()+n);return x.toISOString().slice(0,10);};
+ const setPair=(prefix,d,z)=>{const v=localPair(d,z);$(prefix+'Date').value=v.date;$(prefix+'Time').value=v.time;};
+ const add=(tag,cls,text,parent)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;(parent||$('fdpRestResult')).append(n);return n;};
+ const row=(label,value,cls='',root=$('fdpRestResult'))=>{const n=add('div','fdp-rest-metric '+cls,'',root);add('span','',label,n);add('strong','',value,n);return n;};
+ const display=($id,val)=>{$($id).textContent=val;};
+ const fields=['fdpRestSignonDate','fdpRestSignonTime','fdpRestSignonAirport','fdpRestLandingDate','fdpRestLandingTime','fdpRestArrivalAirport','fdpRestVia273','fdpRestDutyType','fdpRestStandbyDate','fdpRestStandbyTime','fdpRestBOCZone269','fdpRestBOCBid','fdpRestNextDate','fdpRestNextTime','fdpRestNextAirport'];
+ const snapshot=()=>Object.fromEntries(fields.map(id=>[id,$(id)?.value||'']));
+ const restore=v=>{if(v)for(const [k,x] of Object.entries(v))if($(k))$(k).value=x;};
+ const local=Intl.DateTimeFormat().resolvedOptions().timeZone||'Australia/Melbourne';
+ const homeBase=port(localStorage.getItem('crewFocusHomeBaseV229')||'MEL');
+ let mode='roster', source=null, manualState=null, rosterState=null, rosterID='', lastDutySignature='';
+ const bocZoneSelect=$('fdpRestBOCZone269');
+ const seen=new Set();
+ for(const o of $('fdpTimeZone').options){if(o.value&&!seen.has(o.value)){bocZoneSelect.add(new Option(o.textContent,o.value));seen.add(o.value);}}
+ for(const [code,z] of Object.entries(zMap))if(!seen.has(z)){bocZoneSelect.add(new Option(code+' · '+z,z));seen.add(z);}
+ bocZoneSelect.value='auto';
+ for(const id of ['fdpRestSignonDate','fdpRestLandingDate'])$(id).value=dateAt(new Date(),local);
  function lastArrival(segments,sourceDate,signonInstant){
-  let previous=null,last=null;
+  let prev=null,last=null;
   for(const s of segments){
-   const from=port(s.from),to=port(s.to),dz=timezone(from),az=timezone(to);
+   const from=port(s.from),to=port(s.to),dz=zone(from),az=zone(to);
    if(!dz||!az)return null;
-   let departure=null;
-   const start=previous?iso(previous, dz):sourceDate;
-   for(let n=0;n<=3;n++){
-    const d=parse(shift(start,n),s.dep,dz);
-    if(d&&d.getTime()>=(previous||signonInstant||new Date(0)).getTime()-60*60000){departure=d;break;}
-   }
-   if(!departure)return null;
-   const arrivalDate=iso(departure,az);
-   let arrival=null;
-   for(let n=-1;n<=3;n++){
-    const a=parse(shift(arrivalDate,n),s.arr,az);
-    if(a&&a>=departure&&a.getTime()-departure.getTime()<=36*3600000&&(!arrival||a<arrival))arrival=a;
-   }
-   if(!arrival)return null;
-   last={landing:arrival,from,to,zone:az,kind:sectorKind(from,to)};
-   previous=arrival;
+   let dep=null;const base=prev?dateAt(prev,dz):sourceDate;
+   for(let n=0;n<=3;n++){const x=parse(shift(base,n),s.dep,dz);if(x&&x.getTime()>=(prev||signonInstant).getTime()-60*60000){dep=x;break;}}
+   if(!dep)return null;
+   let arr=null;const baseA=dateAt(dep,az);
+   for(let n=-1;n<=3;n++){const x=parse(shift(baseA,n),s.arr,az);if(x&&x>=dep&&x-dep<=36*3600000&&(!arr||x<arr))arr=x;}
+   if(!arr)return null;
+   last={landing:arr,from,to,kind:country(from)&&country(to)?country(from)===country(to)?'domestic':'international':'unknown',zone:az};prev=arr;
   }
   return last;
  }
  function extractRoster(d){
-  const segments=String(d.raw||'').split(/\n/).map(line=>{
-   const m=line.trim().match(/^\*?\s*VA\s*\d+\s+(\d{4})\s+([A-Z]{3,4})\s+([A-Z]{3,4})\s+(\d{4})/i);
-   if(!m)return null;return {dep:m[1].slice(0,2)+':'+m[1].slice(2),from:m[2],to:m[3],arr:m[4].slice(0,2)+':'+m[4].slice(2)};
-  }).filter(Boolean);
+  const segments=String(d.raw||'').split(/\n/).map(line=>{const m=line.trim().match(/^\*?\s*VA\s*\d+\s+(\d{4})\s+([A-Z]{3,4})\s+([A-Z]{3,4})\s+(\d{4})/i);return m?{dep:m[1].slice(0,2)+':'+m[1].slice(2),from:m[2],to:m[3],arr:m[4].slice(0,2)+':'+m[4].slice(2)}:null;}).filter(Boolean);
   if(!segments.length)return null;
-  const signairport=port(d.port||segments[0].from),sz=timezone(signairport),start=parse(d.date,d.time,sz);
-  if(!sz||!start)return null;
-  const last=lastArrival(segments,d.sourceDate||d.date,start);
-  if(!last)return null;
-  return {date:d.date,time:d.time,signairport,signzone:sz,source:`Roster ${d.sourceDate||d.date} · ${segments.length} sector${segments.length===1?'':'s'} · ${segments.map(s=>port(s.from)+'–'+port(s.to)).join(' / ')}`,
-   landing:last.landing,arrival: last.to,landingzone:last.zone,kind:last.kind,confirmed:!!d.confirmed,id:d.id};
+  const startPort=port(d.port||segments[0].from),sz=zone(startPort),start=parse(d.date,d.time,sz);if(!start)return null;
+  const last=lastArrival(segments,d.sourceDate||d.date,start);if(!last)return null;
+  return {date:d.date,time:d.time,airport:startPort,final:last.to,last,segments,id:d.id,source:'Roster',confirmed:!!d.confirmed};
  }
  function extractCBR(c,date){
   if(!c||!c.confirmed||!Array.isArray(c.rows)||!c.rows.length)return null;
-  const segments=c.rows.map(r=>(Array.isArray(r)&&r[1]&&r[2]&&r[3]&&r[4])?{from:r[1],dep:r[2],to:r[3],arr:r[4]}:null).filter(Boolean);
+  const segments=c.rows.map(r=>Array.isArray(r)&&r[1]&&r[2]&&r[3]&&r[4]?{from:r[1],dep:r[2],to:r[3],arr:r[4]}:null).filter(Boolean);
   if(!segments.length)return null;
-  const signairport=port(segments[0].from),sz=timezone(signairport),start=parse(date,c.signon,sz);
-  if(!start)return null;
-  const last=lastArrival(segments,date,start);
-  if(!last)return null;
-  return {date,time:c.signon,signairport,signzone:sz,source:`Confirmed CBR ${date} · ${segments.length} sector${segments.length===1?'':'s'} · ${segments.map(s=>port(s.from)+'–'+port(s.to)).join(' / ')}`,
-   landing:last.landing,arrival:last.to,landingzone:last.zone,kind:last.kind,confirmed:true,id:'cbr-'+date};
+  const p=port(segments[0].from),start=parse(date,c.signon,zone(p));if(!start)return null;
+  const last=lastArrival(segments,date,start);if(!last)return null;
+  return {date,time:c.signon,airport:p,final:last.to,last,segments,id:'cbr-'+date,source:'CBR',confirmed:true};
  }
- function todayDuty(){
-  const base=localStorage.getItem('crewFocusHomeBaseV229')||'MEL';
-  const today=iso(new Date(),timezone(base)||'Australia/Melbourne');
+ function todaysDuty(){
+  const today=dateAt(new Date(),zone(homeBase)||'Australia/Melbourne');
   let roster=[];try{roster=JSON.parse(localStorage.getItem('leaveForWorkRosterV19')||'[]');}catch(e){}
-  const entries=Array.isArray(roster)?roster.filter(d=>d&&!d.standby&&!d.sim&&(d.date===today||d.sourceDate===today)):[];
-  // Prefer the user-confirmed duty if multiple entries are present.
-  entries.sort((a,b)=>Number(!!b.confirmed)-Number(!!a.confirmed));
-  for(const d of entries){const result=extractRoster(d);if(result)return result;}
+  const items=Array.isArray(roster)?roster.filter(d=>d&&!d.standby&&!d.sim&&(d.date===today||d.sourceDate===today)):[];
+  items.sort((a,b)=>Number(!!b.confirmed)-Number(!!a.confirmed));
+  for(const d of items){const found=extractRoster(d);if(found)return found;}
   let c=null;try{c=JSON.parse(localStorage.getItem('crewFocusCBRStateV1')||'null');}catch(e){}
-  const cdate=c?.testDateOverride?today:c?.date;
-  if(cdate===today){const result=extractCBR(c,today);if(result){result.test=!!c.testDateOverride;return result;}}
+  if((c?.testDateOverride?today:c?.date)===today)return extractCBR(c,today);
   return null;
  }
- function refreshRoster(){
-  const duty=todayDuty();
-  if(!duty){rosterID='';lastSource='';setText('fdpRestImportStatus','No flying duty for today was found in the imported roster or confirmed CBR. Select Manual, or import/review your roster.');
-   for(const id of ['fdpRestSignonTime','fdpRestArrivalAirport','fdpRestLandingTime'])$(id).value='';$('fdpRestSectorType').value='unknown';return;
+ function fillRoster(){
+  const duty=todaysDuty();source=duty;rosterID=duty?.id||'';
+  if(!duty){
+   for(const id of ['fdpRestSignonTime','fdpRestSignonAirport','fdpRestLandingTime','fdpRestArrivalAirport','fdpRestVia273'])$(id).value='';
+   display('fdpRestImportStatus','No flying duty found today · use Manual or import a roster.');return;
   }
-  rosterID=duty.id;lastSource=duty.source;
-  $('fdpRestSignonDate').value=duty.date;$('fdpRestSignonTime').value=duty.time;$('fdpRestSignonAirport').value=duty.signairport;
-  $('fdpRestArrivalAirport').value=duty.arrival;
-  syncAirportZones();
-  $('fdpRestSectorType').value=duty.kind;
-  setPair('fdpRestLanding',duty.landing,duty.landingzone);
-  $('fdpRestDutyType').value='rostered';
-  const caution=duty.confirmed?'':' (unreviewed roster times — verify)';
-  setText('fdpRestImportStatus',duty.source+caution+(duty.test?' · TEST DATE OVERRIDE':'' )+'. Update landing time to estimate the revised next sign-on.');
+  $('fdpRestSignonDate').value=duty.date;$('fdpRestSignonTime').value=duty.time;$('fdpRestSignonAirport').value=duty.airport;
+  $('fdpRestArrivalAirport').value=duty.final;
+  setPair('fdpRestLanding',new Date(duty.last.landing.getTime()+30*60000),zone(duty.final));
+  $('fdpRestVia273').value=duty.segments.slice(0,-1).map(s=>port(s.to)).join(', ');
+  display('fdpRestImportStatus',duty.source+' · '+duty.segments.length+' sectors'+(duty.confirmed?'':' · Check roster times'));
  }
- function setMode(next){
-  if(next!==mode){if(mode==='manual')manualSaved=snapshot();else if(rosterID)rosterSaved={id:rosterID,fields:snapshot()};}
+ function toggleMode(next){
+  if(next!==mode){if(mode==='manual')manualState=snapshot();else if(rosterID)rosterState={id:rosterID,data:snapshot()};}
   mode=next;
-  for(const [key,id] of [['roster','fdpRestRosteredBtn'],['manual','fdpRestManualBtn']]){
-   const active=mode===key;$(id).classList.toggle('active',active);$(id).setAttribute('aria-pressed',String(active));
-  }
-  const manual=mode==='manual';
-  $('fdpRestDutyTypeWrap').classList.toggle('hidden',!manual);
-  if(manual){
-   if(manualSaved)restore(manualSaved);
-   else {
-    $('fdpRestDutyType').value='rostered';$('fdpRestSignonDate').value=iso(new Date(),localZone);
-    $('fdpRestSignonTime').value='';$('fdpRestSignonAirport').value='';
-    $('fdpRestArrivalAirport').value='';syncAirportZones();
-    $('fdpRestSectorType').value='unknown';$('fdpRestLandingDate').value=iso(new Date(),localZone);$('fdpRestLandingTime').value='';
-   }
-   setText('fdpRestImportStatus','Manual duty — enter the sign-on airport, final landing airport and their LOCAL dates/times. CrewFocus automatically applies each airport’s time zone.');
+  for(const [m,id] of [['manual','fdpRestManualBtn'],['roster','fdpRestRosteredBtn']]){$(id).classList.toggle('active',m===mode);$(id).setAttribute('aria-pressed',String(m===mode));}
+  $('fdpRestOtherType273').hidden=mode!=='manual';
+  $('fdpRestRouteDetails273').hidden=mode!=='manual';
+  if(mode==='manual'){
+   source=null;
+   if(manualState)restore(manualState);
+   else {for(const id of ['fdpRestSignonTime','fdpRestSignonAirport','fdpRestLandingTime','fdpRestArrivalAirport','fdpRestVia273','fdpRestNextTime','fdpRestNextAirport'])$(id).value='';$('fdpRestDutyType').value='rostered';$('fdpRestSignonDate').value=dateAt(new Date(),local);$('fdpRestLandingDate').value=dateAt(new Date(),local);}
+   display('fdpRestImportStatus','');
   }else{
-   refreshRoster();
-   if(rosterSaved&&rosterSaved.id===rosterID)restore(rosterSaved.fields);
+   fillRoster();if(rosterState&&rosterState.id===rosterID)restore(rosterState.data);
   }
-  lastAirportCode=port($('fdpRestArrivalAirport').value);
-  syncAirportZones();
-  
-  toggleStandby();draw();
+  conditional();draw();
  }
- function toggleStandby(){
-  const actual=$('fdpRestSignoffMethod').value==='actual';
-  $('fdpRestActualSignoffDateWrap').classList.toggle('hidden',!actual);
-  $('fdpRestActualSignoffTimeWrap').classList.toggle('hidden',!actual);
+ function conditional(){
   const standby=mode==='manual'&&$('fdpRestDutyType').value==='standby_a';
-  for(const id of ['fdpRestStandbyDateWrap','fdpRestStandbyTimeWrap'])$(id).classList.toggle('hidden',!standby);
+  $('fdpRestStandbyWrap273').hidden=!standby;
   if(standby&&!$('fdpRestStandbyDate').value)$('fdpRestStandbyDate').value=$('fdpRestSignonDate').value;
  }
- // BOC: EA definition is FDP touching 00:46–04:59 in acclimatised time.
- // The sign-on zone is only a provisional surrogate until acclimatisation is verified.
- function tentativeBOC(start,finish,zone){
-  if(!start||!finish||finish<start||finish-start>36*3600000)return null;
-  try{
-   const clock=new Intl.DateTimeFormat('en-GB',{timeZone:zone,hour:'2-digit',minute:'2-digit',hourCycle:'h23'});
-   for(let ms=start.getTime();ms<=finish.getTime();ms+=60000){
-    const match=clock.format(new Date(ms)).match(/^(\d{2}):(\d{2})/);
-    if(match){const minute=+match[1]*60 + +match[2];if(minute>=46&&minute<=299)return true;}
-   }
-   return false;
-  }catch(e){return null;}
+ const bocFormatterCache=new Map();
+ function detectBOC(start,finish,z){
+  if(!start||!finish||!z||finish<start||finish-start>36*3600000)return null;
+  let fmt=bocFormatterCache.get(z);if(!fmt){try{fmt=new Intl.DateTimeFormat('en-GB',{timeZone:z,hour:'2-digit',minute:'2-digit',hourCycle:'h23'});bocFormatterCache.set(z,fmt);}catch(e){return null;}}
+  // Cross boundary test minute by minute (covers DST / midnight without date guesses).
+  for(let ms=start.getTime();ms<=finish.getTime();ms+=60000){const m=fmt.format(new Date(ms)).match(/^(\d\d):(\d\d)/);if(m){const x=+m[1]*60 + +m[2];if(x>=46&&x<=299)return true;}}
+  return false;
  }
+ function bocStatus(state,detail=''){
+  const n=$('fdpRestBOCIndicator273');n.dataset.state=state;
+  n.title=detail||({waiting:'BOC cannot be assessed until duty times are complete',boc:'BOC detected',no:'No BOC detected',verify:'BOC requires review'})[state];
+  n.setAttribute('aria-label',n.title);
+  n.querySelector('.crew-rest-boc-symbol273').textContent=state==='boc'?'✓':state==='no'?'×':'•';
+ }
+ function resultClear(text){$('fdpRestResult').replaceChildren();if(text)add('p','fdp-rest-quiet273',text);}
  function draw(){
-  root.replaceChildren();
-  const status=$('fdpRestAutoBOC269'),title=$('fdpRestAutoBOCTitle269'),description=$('fdpRestAutoBOCDetail269');
-  const setBOC=(kind,label,detail)=>{status.dataset.state=kind;title.textContent=label;description.textContent=detail;};
-  setBOC('waiting','BOC check — awaiting complete duty','Enter sign-on, final landing and airport information. BOC will be checked automatically using the FDP, including 15 minutes after landing.');
-  syncAirportZones();
-  const sz=signZone(),oz=outZone(),nz=nextZone();
-  const reportingAirport=port($('fdpRestSignonAirport').value);
-  const airport=port($('fdpRestArrivalAirport').value),kind=$('fdpRestSectorType').value;
-  setText('fdpRestZoneHint','Automatic local zones: '+(reportingAirport||'Sign-on airport missing')+' · '+(sz||'unknown')+' → '+(airport||'Landing airport missing')+' · '+(oz||'unknown')+'.');
-  if(!sz||!oz){
-   setText('fdpRestSignoffInfo','Enter recognised sign-on and landing airport codes before calculating.');
-   el('p','fdp-unavailable','Airport time zone unavailable for '+(!sz?(reportingAirport||'sign-on airport'):airport)+'. Check the IATA code; no default time zone is assumed.');return;
-  }
-  const start=get('fdpRestSignon',sz),landing=get('fdpRestLanding',oz);
-  if(!start||!landing){setText('fdpRestSignoffInfo','Sign-off is calculated automatically after you enter sign-on and landing.');
-   el('p','fdp-unavailable','Enter valid sign-on and final landing dates/times.');return;}
-  const actualMethod=$('fdpRestSignoffMethod').value==='actual';
-  let off=actualMethod?get('fdpRestActualSignoff',oz):new Date(landing.getTime()+30*60000);
-  if(actualMethod&&!off){setText('fdpRestSignoffInfo','Enter the verified actual sign-off date and time.');el('p','fdp-unavailable','Actual sign-off time required.');return;}
-  if(off<landing){setText('fdpRestSignoffInfo','Actual sign-off cannot precede landing.');el('p','fdp-unavailable','Check actual sign-off and landing times.');return;}
-  setText('fdpRestSignoffInfo',`${actualMethod?'Recorded actual':'Standard estimated'} sign-off: ${nice(off,oz)} (${airport||'airport not selected'}) · ${actualMethod?'actual entered time':'landing +30 min'}.`);
-  if(!airport){el('p','fdp-unavailable','Enter a final landing airport.');return;}
-  if(!timezone(airport)){el('p','fdp-unavailable','Unknown landing airport code: check its IATA code.');return;}
-  if(kind==='unknown'){el('p','fdp-unavailable','Select Domestic or International for the final flight sector.');return;}
+  resultClear('');$('fdpRestContext273').hidden=true;$('fdpRestBocDetails273').hidden=true;$('fdpRestInternational273').hidden=true;
+  bocStatus('waiting');conditional();
+  const signP=port($('fdpRestSignonAirport').value),offP=port($('fdpRestArrivalAirport').value),signZ=zone(signP),offZ=zone(offP);
+  const dutySignature=[mode,$('fdpRestSignonDate').value,$('fdpRestSignonTime').value,signP,$('fdpRestLandingDate').value,$('fdpRestLandingTime').value,offP].join('|');
+  // A special BOC bid and acclimatisation correction must never carry into a different duty.
+  if(lastDutySignature&&dutySignature!==lastDutySignature){$('fdpRestBOCBid').value='no';$('fdpRestBOCZone269').value='auto';}
+  lastDutySignature=dutySignature;
+  const sign=getPair('fdpRestSignon',signZ),off=getPair('fdpRestLanding',offZ);
+  if(!signP||!offP||!$('fdpRestSignonTime').value||!$('fdpRestLandingTime').value)return;
+  if(!signZ||!offZ){resultClear('Airport not recognised. Check the airport code.');return;}
+  if(!sign||!off){resultClear('Check the dates and times, including any daylight-saving change.');return;}
+  if(off<=sign){resultClear('Sign-off must be after sign-on.');return;}
   const dutyType=mode==='manual'?$('fdpRestDutyType').value:'rostered';
-  const dutyStart=dutyType==='standby_a'?get('fdpRestStandby',sz):start;
-  if(!dutyStart){el('p','fdp-unavailable','Enter Standby A commencement date and time.');return;}
-  if(start<dutyStart){el('p','fdp-unavailable','Flying sign-on cannot precede standby commencement.');return;}
-  if(landing<=start){el('p','fdp-unavailable','Landing must be after flight sign-on. Check dates and time zones.');return;}
-  const total=off.getTime()-dutyStart.getTime();
-  if(total>72*3600000){el('p','fdp-unavailable','Total duty exceeds 72 hours. Check the dates and time zones.');return;}
-  const flyingFDP=landing.getTime()+15*60000-start.getTime();
-  const baseRest=Math.max(12*3600000,total);
-  const extra=kind==='international'?30*60000:0;
-  let rest=baseRest+extra;
-  const bocMode=$('fdpRestBOCMode').value,homeBase=port(localStorage.getItem('crewFocusHomeBaseV229')||'MEL');
-  const chosenZone=$('fdpRestBOCZone269').value;
-  const referenceZone=chosenZone&&chosenZone!=='auto'?chosenZone:sz;
-  const zoneNote=chosenZone==='auto'?'departure-port local time '+referenceZone+' (acclimatisation not independently established)':'selected acclimatised time zone '+referenceZone;
-  const autoBOC=tentativeBOC(start,new Date(landing.getTime()+15*60000),referenceZone);
-  const isBOC=bocMode==='confirmed'||(bocMode==='auto'&&autoBOC===true);
-  const bocUnknown=bocMode==='unknown'||(bocMode==='auto'&&autoBOC===null);
-  const localStart=t.parts(start,referenceZone);
-  const earlyBOCException=localStart.hour===4&&localStart.minute<=59;
-  const atHome=airport===homeBase,bid=$('fdpRestBOCBid').value==='yes';
-  const bocApplies30=isBOC&&atHome&&!earlyBOCException&&!bid;
-  const conditionalLayover=isBOC&&!atHome&&!earlyBOCException;
-  if(bocApplies30)rest=Math.max(rest,30*3600000);
-  const earliest=new Date(off.getTime()+rest);
-  if(bocUnknown)setBOC('verify','BOC timing cannot be established','Check the departure and landing times and the applicable acclimatised zone. Basic rest is shown provisionally; EA Appendix 6 and clause 22.1 require review.');
-  else if(isBOC){
-   const condition=earlyBOCException?'04:00–04:59 start exception — check other rest rules':atHome&&!bid?'30 hours rostered rest following BOC into Home Base':atHome?'Special consecutive-BOC bid exception — verify':'Layover rest must be under 18 hours or at least 30 hours';
-   setBOC('boc',bocMode==='confirmed'?'BOC confirmed by override':'BOC detected automatically',condition+' (EA Appendix 1, 22.1). Based on '+zoneNote+'.');
-  }else if(bocMode==='not'&&autoBOC===true)setBOC('warning','BOC manually overridden','The automatic timing check overlaps 00:46–04:59, but the manual override says NOT BOC. Verify the evidence and EA Appendix 6 before relying on the rest figure.');
-  else setBOC('no',bocMode==='not'?'BOC excluded by manual override':'No BOC detected','FDP does not overlap 00:46–04:59 using '+zoneNote+'. Check the actual acclimatised zone if different (EA Appendix 6).');
-  const bocNotes=[];
-  if(bocUnknown)bocNotes.push('BOC classification unknown. Earliest time below uses base rest ONLY; verify EA 22.1 before accepting an assignment.');
-  else if(bocMode==='auto')bocNotes.push((isBOC?'BOC time overlap detected':'No BOC time overlap detected')+' using '+zoneNote+'. Check acclimatisation under EA Appendix 6 and the relevant BOC rules (22.1).');
-  else bocNotes.push(bocMode==='confirmed'?'Pilot selected CONFIRMED BOC.':'Pilot selected not BOC; verify classification.');
-  if(isBOC){
-   if(earlyBOCException)bocNotes.push('BOC starting 04:00–04:59: exception to 30-hour home-base / layover rule. Other rest requirements remain (22.1(c),(e)).');
-   else if(atHome&&bid)bocNotes.push('Consecutive BOC bid selected: special roster exception (22.1(d)) requires confirmation; the hours result does not establish compliance.');
-   else if(atHome)bocNotes.push('BOC into Home Base ('+homeBase+'): normally ≥30h rostered rest (22.1(c)); additional local-night/consecutive-BOC rules still apply.');
-   else bocNotes.push('BOC ending away from Home Base: EA 22.1(e) rostered rest must be either <18h or ≥30h. A single basic minimum cannot establish compliance.');
+  const dutyStart=dutyType==='standby_a'?getPair('fdpRestStandby',signZ):sign;
+  if(!dutyStart){resultClear('Enter Standby A commencement.');return;}
+  if(sign<dutyStart){resultClear('Sign-on cannot precede standby commencement.');return;}
+  const elapsed=off.getTime()-dutyStart.getTime();
+  if(elapsed>72*3600000){resultClear('Duty exceeds 72 hours; check dates.');return;}
+  const via=$('fdpRestVia273').value.toUpperCase().split(/[\s,;>\-/]+/).map(port).filter(Boolean);
+  const finalFrom=source?.last?.from||(via.length?via[via.length-1]:signP);
+  const origC=country(finalFrom),destC=country(offP),lastInternational=!!(origC&&destC&&origC!==destC);
+  const routePorts=source?.segments?.length?source.segments.flatMap(s=>[port(s.from),port(s.to)]):[signP,...via,offP];
+  const overseas=routePorts.some(p=>{const c=country(p);return c&&c!=='AU';});
+  const internationalRelevant=lastInternational||overseas;
+  $('fdpRestInternational273').hidden=!internationalRelevant;
+  $('fdpRestInternational273').textContent=lastInternational?'International final sector · +30 min rest (EA 18.2)':'Overseas routing detected · final sector domestic';
+  const internationalUnknown=!origC||!destC;
+  const extra=lastInternational?30*60000:0;
+  const basic=Math.max(12*3600000,elapsed)+extra;
+  const bocZ=$('fdpRestBOCZone269').value;
+  const referenceZ=bocZ==='auto'?signZ:bocZ;
+  // When directly entering sign-off, expected landing is sign-off minus 30m and FDP
+  // ends 15m after that. Use the true CBR/roster landing only if unchanged.
+  const estimatedFdpEnd=new Date(off.getTime()-15*60000);
+  const originalOff=source?.last?.landing?new Date(source.last.landing.getTime()+30*60000):null;
+  const fdpEnd=originalOff&&Math.abs(originalOff-off)<60000?new Date(source.last.landing.getTime()+15*60000):estimatedFdpEnd;
+  const boc=detectBOC(sign,fdpEnd,referenceZ);
+  const initial=referenceZ?t.parts(sign,referenceZ):null;
+  const earlyException=initial?.hour===4&&initial.minute<=59;
+  const atHome=offP===homeBase;
+  const bid=$('fdpRestBOCBid').value==='yes';
+  const isBoc=boc===true,hasBocCaveat=isBoc&&(earlyException||!atHome||bid);
+  let required=basic;
+  if(isBoc&&atHome&&!earlyException&&!bid)required=Math.max(required,30*3600000);
+  const conditionalBoc=isBoc||boc===null;
+  bocStatus(boc===null?'verify':isBoc?'boc':'no',isBoc?'BOC detected against FDP 00:46–04:59 in '+referenceZ+(bocZ==='auto'?' (provisional departure-zone check)':' (selected acclimatised zone)'):boc===false?'No BOC overlap in '+referenceZ+' (check acclimatisation if different)':'BOC status needs time-zone verification');
+  $('fdpRestBocDetails273').hidden=!conditionalBoc;
+  $('fdpRestBocBidWrap273').hidden=!(isBoc&&atHome&&!earlyException);
+  $('fdpRestContext273').hidden=!(conditionalBoc||internationalRelevant||elapsed>15*3600000||internationalUnknown);
+  const ctx=[];
+  if(isBoc){
+   if(earlyException)ctx.push('BOC starting 04:00–04:59: special 30h exception; other rest conditions still apply (22.1).');
+   else if(atHome&&bid)ctx.push('Consecutive-BOC bid exception requires confirmation (22.1).');
+   else if(atHome)ctx.push('BOC returning Home Base: 30h rostered rest provisionally applied (22.1).');
+   else ctx.push('BOC away from Home Base: 22.1(e) requires a qualifying layover pattern (<18h or ≥30h).');
   }
-  setText('fdpRestBOCNotes',bocNotes.join(' '));
-  row('Total duty (to sign-off)',t.fmtMinutes(total/60000));
-  row('Flying FDP (+15m)',t.fmtMinutes(flyingFDP/60000));
-  row('Calculated sign-off',nice(off,oz));
-  row('Basic rest (EA 13.4 + 18.2)',t.fmtMinutes((baseRest+extra)/60000));
-  row(bocApplies30?'Minimum with BOC home-base rule':'Minimum elapsed rest (conditional)',t.fmtMinutes(rest/60000));
-  row(total>15*3600000||bocUnknown||conditionalLayover||bid||(bocMode==='not'&&autoBOC===true)?'Earliest by elapsed hours only':'Estimated earliest next sign-on',nice(earliest,oz),'fdp-rest-earliest');
+  if(internationalRelevant)ctx.push(lastInternational?'International final sector: +30m required rest applied (18.2).':'Overseas route detected. Final sector is not international based on available route data.');
+  if(internationalUnknown)ctx.push('Final-sector origin or destination cannot be classified; international rest may need verification.');
+  if(elapsed>15*3600000)ctx.push('Duty exceeding 15h: local-night rest conditions require review (13.9).');
+  if(boc===null)ctx.push('BOC could not be assessed from the supplied times and zone.');
+  if(bocZ==='auto'&&conditionalBoc)ctx.push('BOC uses departure-port local time provisionally; correct the acclimatised zone only when verified.');
+  display('fdpRestContextText273',ctx.join(' '));
+  const r=$('fdpRestResult');r.replaceChildren();
+  const high=add('div','crew-rest-summary273',undefined,r);
+  row('Duty',t.fmtMinutes(elapsed/60000),'',high);
+  row(hasBocCaveat||internationalUnknown?'Rest requirement (conditional)':'Required rest',t.fmtMinutes(required/60000),'',high);
+  row(hasBocCaveat||internationalUnknown?'Earliest by elapsed hours':'Earliest next sign-on',textAt(new Date(off.getTime()+required),offZ),'fdp-rest-earliest',high);
   const nextRequested=!!($('fdpRestNextDate').value&&$('fdpRestNextTime').value);
-  const next=nextRequested&&nz?get('fdpRestNext',nz):null;
-  if(nextRequested&&!nz)el('p','fdp-rest-warning','Enter a recognised NEXT sign-on airport to compare rest. Its local time zone will be applied automatically.');
+  const nz=zone($('fdpRestNextAirport').value),next=nextRequested?getPair('fdpRestNext',nz):null;
+  if(nextRequested&&!nz)add('p','fdp-rest-quiet273','Enter a recognised next sign-on airport.',r);
   if(next){
-   const available=next.getTime()-off.getTime();
-   row('Rest to proposed next sign-on',t.fmtMinutes(available/60000));
-   row('Margin vs displayed minimum',t.fmtMinutes((available-rest)/60000));
-   if(available<rest)el('p','fdp-rest-warning','Proposed next sign-on is earlier than the displayed minimum (EA 13.4 / 18.2 / 22.1 as applicable).');
-   if(conditionalLayover){const hours=available/3600000;if(hours>=18&&hours<30)el('p','fdp-rest-warning','BOC layover rostered rest of 18–30 hours is outside the special 22.1(e) alternatives (subject to the 04:00 exception).');}
+   const available=next.getTime()-off.getTime();row('Available rest',t.fmtMinutes(available/60000),'',r);
+   const margin=available-required;row('Rest margin',t.fmtMinutes(margin/60000),'',r);
+   if(margin<0)add('p','fdp-rest-warning','The next sign-on is earlier than the displayed required rest.',r);
+   if(isBoc&&!atHome&&!earlyException){const hrs=available/3600000;if(hrs>=18&&hrs<30)add('p','fdp-rest-warning','BOC layover: 18–30h is outside the EA 22.1(e) rest alternatives.',r);}
   }
-  el('p','fdp-rest-utc',t.fmtUTC(earliest));
-  if(actualMethod&&off.getTime()-landing.getTime()<30*60000)el('p','fdp-rest-warning','Sign-off is less than 30 minutes after landing; clause 18.1 permits reduction only at the individual pilot’s discretion. Verify post-flight duties are complete.');
-  if(isBOC)el('p','fdp-rest-warning','BOC assessment: '+(bocApplies30?'30-hour Home Base rostered-rest rule provisionally applied.':conditionalLayover?'Special layover rest-pattern check required.':earlyBOCException?'04:00–04:59 BOC start exception applies to the additional rostered-rest rule.':'Bid / exception requires confirmation.')+' EA 22.1; expand Additional rest conditions to verify.');
-  if(bocUnknown||conditionalLayover||bid||(bocMode==='not'&&autoBOC===true))el('p','crew-rest-warning-268','ADDITIONAL CONDITIONS REQUIRE REVIEW: do not use this elapsed-hours result as an automatically permissible next duty.');
-  if(kind==='international')el('p','fdp-rest-warning','International final sector: 30 minutes added to the required rest (EA 18.2), not to sign-off.');
-  if(dutyType==='standby_a')el('p','fdp-rest-warning','Standby A: total duty includes standby commencement through post-flight sign-off.');
-  if(dutyType==='standby_18')el('p','fdp-rest-warning','Standby 18: estimate uses the assigned flying duty from sign-on. Verify standby conditions separately.');
-  if(total>15*3600000)el('p','fdp-rest-warning','A duty over 15 hours requires a local night during rest (EA 13.9); the hour-only estimate is not a cleared next sign-on.');
-  el('p','fdp-rest-warning','Preliminary estimate: verify actual sign-on, final landing and sector details against approved records.');
-  el('p','fdp-rest-warning','Any post-flight duties extending beyond 30 minutes, reduced rest, positioning and accommodation allowances need separate review.');
+  // Keep material uncertainty visible, but do not flood the main result with text.
+  if(hasBocCaveat||internationalUnknown)add('p','fdp-rest-quiet273','Additional conditions apply. Open Applicable conditions below.',r);
  }
- $('fdpRestRosteredBtn').addEventListener('click',()=>setMode('roster'));
- $('fdpRestManualBtn').addEventListener('click',()=>setMode('manual'));
- $('fdpRestDutyType').addEventListener('change',()=>{toggleStandby();draw();});
- for(const id of fields){if(id==='fdpRestDutyType')continue;
-  $(id).addEventListener('change',()=>{
-   if(suppress)return;
-   if(id==='fdpRestSignoffMethod'){
-    toggleStandby();
-    if($(id).value==='actual'&&!$('fdpRestActualSignoffTime').value){
-     const land=get('fdpRestLanding',outZone());
-     if(land)setPair('fdpRestActualSignoff',new Date(land.getTime()+30*60000),outZone());
-    }
-   }
-   if(['fdpRestSignonAirport','fdpRestArrivalAirport','fdpRestNextAirport'].includes(id)){
-    const code=port($(id).value);$(id).value=code;
-    if(id==='fdpRestArrivalAirport'){
-     if(mode==='manual'&&code!==lastAirportCode)$('fdpRestSectorType').value='unknown';
-     lastAirportCode=code;
-    }
-    syncAirportZones();
-   }
-   draw();
-  });
-  if($(id).tagName==='INPUT'&&$(id).type==='time')$(id).addEventListener('input',()=>{draw();});
- }
- // Refresh with a new day's duty when the user enters the rostered mode.
- window.crewFDPRestRefresh=()=>{if(mode==='roster')refreshRoster();draw();};
- setMode('roster');
+ function getPair(prefix,z){return parse($(prefix+'Date')?.value,$(prefix+'Time')?.value,z);}
+ $('fdpRestRosteredBtn').addEventListener('click',()=>toggleMode('roster'));
+ $('fdpRestManualBtn').addEventListener('click',()=>toggleMode('manual'));
+ for(const id of fields){const e=$(id);if(!e)continue;e.addEventListener('change',()=>{if(e.id==='fdpRestSignonAirport'||e.id==='fdpRestArrivalAirport'||e.id==='fdpRestNextAirport')e.value=port(e.value);draw();});if(e.type==='time')e.addEventListener('input',draw);}
+ window.crewFDPRestRefresh=()=>{if(mode==='roster'){fillRoster();if(rosterState?.id===rosterID)restore(rosterState.data);}draw();};
+ toggleMode('roster');
 })();
 </script>
 <script id="crewRestCrewing268Script">
